@@ -5,17 +5,20 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
+@Table(name= "customer")
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-
+@Setter
 public class Customer implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE) 오라클은 IDENTITY를 지원 안함
     @Column(name = "id")
     private String id;
     @Column(name = "password", nullable = false)
@@ -38,9 +41,13 @@ public class Customer implements UserDetails {
     }
 
     // List.of는 여러개를 반환, singleton은 불변set 반환
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return Collections.singleton(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
+//    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
+        return List.of(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
     }
 
     @Override

@@ -25,7 +25,7 @@ public class CustomerApiController {
     @PostMapping("/signup")
     public String signup(AddCustomerRequest request){
         customerService.save(request);
-        return "redirect:/loginpage";
+        return "redirect:/List";
     }
 
     @GetMapping("/logout")

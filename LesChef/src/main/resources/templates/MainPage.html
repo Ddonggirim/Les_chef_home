@@ -6,7 +6,7 @@
   <link
           href="https://fonts.googleapis.com/css?family=jsMath-cmbx10&display=swap"
           rel="stylesheet" />
-  <link href="../css/main.css" rel="stylesheet" />
+  <link href="/css/main.css" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <title>Les Chef</title>
 </head>
@@ -40,17 +40,17 @@
   <img id="signup-image" src="../image1/MainIcon/Ex6.jpg">
   <div id="signup-box">
     <a href="/main"><img src="../image1/MainIcon/Logo.jpg"></a>
-    <form id="signup">
+    <form action="signup" method="post" id="signup">
       <label>이메일(아이디)</label><br>
-      <input type="email" /><br>
+      <input type="email" name="id" /><br>
       <label>비밀번호</label><br>
-      <input type="password" /><br>
+      <input type="password" name="password"/><br>
       <label>이름</label><br>
-      <input type="text"/><br>
+      <input type="text" name="name"/><br>
       <label>닉네임</label><br>
-      <input type="text" /><br>
+      <input type="text" name="nickname"/><br>
       <label>전화번호</label>
-      <input type="tel" /><br>
+      <input type="tel" name="tel"/><br>
       <button type="submit">회원가입</button>
     </form>
     <p>이미 회원이신가요? <span>로그인</span></p>
@@ -59,7 +59,6 @@
 <ul id="left-sidebar">
   <li id="menu"><img   src="../image1/MainIcon/Menu.png"/></li>
   <li id="loginButton"><img src="../image1/MainIcon/Login.png"/></li> <!---->
-  <li onclick="location.href='/logout'"><img src="../image1/MainIcon/Login.png"></li><!--로그아웃이미지-->
   <li id="myPageButton"><a href="./Rewrite"><img src="../image1/MainIcon/마이페이지 1.png"/></a></li> <!---->
 </ul>
 <div id="under_box"></div>

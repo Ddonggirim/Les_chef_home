@@ -39,6 +39,6 @@ public class LesMainController {
 
 
     @GetMapping("/Login")
-    public String gotoLogin() {return "login/Login";}
+    public String gotoLogin() {return "Mainpage";}
 }
 
