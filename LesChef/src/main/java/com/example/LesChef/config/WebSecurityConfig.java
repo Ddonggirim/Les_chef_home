@@ -22,7 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.security.Provider;
-
+@Slf4j
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -51,32 +51,35 @@ public class WebSecurityConfig {
                         .requestMatchers("/main", "/List", "/NoticeBoardMain").permitAll().anyRequest().authenticated()
                 )
                 .formLogin(login -> login
-                        .loginPage("/loginpage").permitAll()
-                        .loginProcessingUrl("/login")
-                        .usernameParameter("id")
-                        .passwordParameter("password")
-                        .successHandler((request, response, authentication) -> {
-//                                User user = (User)authentication.getPrincipal();
-//                                Customer customer = customerRepository.findById(user.getUsername()).orElse(null);
-//
-////                                if(customer != null){
-////                                    HttpSession session = request.getSession(true);
-////                                    session.setAttribute("customer", customer);
-////                                    session.setMaxInactiveInterval(1800);
-////                                    response.sendRedirect("/List");
-////                                }
-//                                 response.sendRedirect("/List");
-                            response.sendRedirect("/List");
-                        })
-                        .failureHandler((request, response, exception) -> {
-                            request.getSession().setAttribute("errorMessage", "아이디 또는 비밀번호가 일치하지 않습니다.");
-                            response.sendRedirect("/NoticeBoardMain");
-                        })
+                                .loginPage("/loginpage").permitAll()
+                                .loginProcessingUrl("/login")
+                                .usernameParameter("id")
+                                .passwordParameter("password")
+                                .successHandler((request, response, authentication) -> {
+                                    User user = (User)authentication.getPrincipal();
+                                    Customer customer = customerRepository.findById(user.getUsername()).orElse(null);
+                                    if(customer != null){
+                                        HttpSession session = request.getSession(true);
+                                        session.setAttribute("customer", customer);
+                                        session.setMaxInactiveInterval(1800);
+                                        response.sendRedirect("/main");
+                                        log.info("로그인 성공");
+                                    }
+
+                                })
+                                .failureHandler((request, response, exception) -> {
+                                    request.getSession().setAttribute("errorMessage", "아이디 또는 비밀번호가 일치하지 않습니다.");
+                                    request.getSession(false).invalidate();
+                                    response.sendRedirect("/main");
+                                    log.info("로그인실패");
+                                })
                 )
                 .logout(logout -> logout
+                        .logoutUrl("/logout")
                         .deleteCookies("JSESSIONID", "remember-me")
                         .logoutSuccessUrl("/main")
                         .invalidateHttpSession(true)
+
                 ).build();
     }
 

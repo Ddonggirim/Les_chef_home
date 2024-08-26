@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <link
           href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
@@ -58,7 +58,10 @@
 </div>
 <ul id="left-sidebar">
   <li id="menu"><img   src="../image1/MainIcon/Menu.png"/></li>
-  <li id="loginButton"><img src="../image1/MainIcon/Login.png"/></li> <!---->
+<!--  <li id="loginButton"><img src="../image1/MainIcon/Login.png"/></li> &lt;!&ndash;&ndash;&gt;-->
+<!--  <li id="logoutButton"><a href="/logout"><img src="../image1/MainIcon/Menu.png"/></a></li>-->
+  <li th:if="${session.customer}" id="logoutButton"><a href="/logout"><img src="../image1/MainIcon/Logout.png"/></a></li>
+  <li th:unless="${session.customer}" id="loginButton"><img src="../image1/MainIcon/Login.png"/></li>
   <li id="myPageButton"><a href="./Rewrite"><img src="../image1/MainIcon/마이페이지 1.png"/></a></li> <!---->
 </ul>
 <div id="under_box"></div>

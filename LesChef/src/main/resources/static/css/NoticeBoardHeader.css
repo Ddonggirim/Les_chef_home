@@ -21,3 +21,10 @@ a{
   width:3%;
   cursor: pointer;
 }
+#logout{
+  position: absolute;
+  top:4%;
+  right:4%;
+  width:3%;
+  cursor: pointer;
+}

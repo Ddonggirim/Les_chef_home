@@ -18,15 +18,15 @@ public class CustomerDetailService implements UserDetailsService {
 
     private final CustomerRepository customerRepository;
 
-//    @Override
-//    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-//        Customer customer = customerRepository.findById(id)
-//                .orElseThrow(() -> new UsernameNotFoundException("User not found with id: " + id));
-//        return new User(customer.getId(), customer.getPassword(), Collections.singleton(new SimpleGrantedAuthority("ROLE_CUSTOMER")));
-//    }
-
     @Override
-    public UserDetails loadUserByUsername(String id) {
-        return customerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException((id)));
+    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with id: " + id));
+        return new User(customer.getId(), customer.getPassword(), Collections.singleton(new SimpleGrantedAuthority("ROLE_CUSTOMER")));
     }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String id) {
+//        return customerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException((id)));
+//    }
 }
