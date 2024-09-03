@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../css/LIst.css">
   <link rel="stylesheet" href="../css/font.css">
   <link rel="stylesheet" href="../css/LoginModal.css">
-  <title>Les Chef Category</title>
+  <title th:text="${korean_Name}"></title>
 </head>
 <body>
 <header>
@@ -23,17 +23,17 @@
   <!-- 빨간 가로바 텍스트 -->
   <div id="categoryback">
     <div class="name">
-       <a href="/List"><div><span class="categorybox">한식</span></div></a>
-       <a href="/List"><div><span class="categorybox">일식</span></div></a>
-       <a href="/List"><div><span class="categorybox" >중식</span></div></a>
-       <a href="/List"><div><span class="categorybox">양식</span></div></a>
-       <a href="/List"><div><span class="categorybox">공유</span></div></a>
+       <a href="/List/Korean"><div><span class="categorybox">한식</span></div></a>
+       <a href="/List/Japanese"><div><span class="categorybox">일식</span></div></a>
+       <a href="/List/Chinese"><div><span class="categorybox" >중식</span></div></a>
+       <a href="/List/Western"><div><span class="categorybox">양식</span></div></a>
+       <a href="/List/Share"><div><span class="categorybox">공유</span></div></a>
     </div>
   </div>
 </header>
 <main>
   <!-- 이미지, 카테고리 텍스트 -->
-  <div id="onimg"><img src="../image1/ListIcon/한식가로.png"/>
+  <div id="onimg"><img th:src="@{${head_Img}}"/>
     <span id="ontext">Western Food</span>
   </div>
 

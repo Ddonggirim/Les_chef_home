@@ -56,7 +56,7 @@ public class WebSecurityConfig {
                                 .usernameParameter("id")
                                 .passwordParameter("password")
                                 .successHandler((request, response, authentication) -> {
-                                    User user = (User)authentication.getPrincipal();
+                                    User user = (User)authentication.getPrincipal();    //로그인 성공 시 인증 정보를 가져옴
                                     Customer customer = customerRepository.findById(user.getUsername()).orElse(null);
                                     if(customer != null){
                                         HttpSession session = request.getSession(true);
