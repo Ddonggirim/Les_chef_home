@@ -16,16 +16,17 @@ import lombok.NoArgsConstructor;
 @Getter
 public class Recipecategory {
     @Id
+    @Column(name = "KOREAN_NAME")
     private String korean_Name;
-    @Column(nullable = false)
+    @Column(name= "ENGLISH_NAME", nullable = false)
     private String english_Name;
-    @Column(nullable = false)
+    @Column(name= "HEAD_IMG", nullable = false)
     private String head_Img;
-    @Column(nullable = false)
+    @Column(name= "SORT_ONE", nullable = false)
     private String sort_One;
-    @Column(nullable = false)
+    @Column(name= "SORT_TWO", nullable = false)
     private String sort_Two;
-    @Column(nullable = false)
+    @Column(name= "SORT_THREE", nullable = false)
     private String sort_Three;
 
     public RecipecategoryForm toForm(){

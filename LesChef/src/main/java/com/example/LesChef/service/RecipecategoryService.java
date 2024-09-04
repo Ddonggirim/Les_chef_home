@@ -4,17 +4,26 @@ import com.example.LesChef.dto.RecipecategoryForm;
 import com.example.LesChef.entity.Recipecategory;
 import com.example.LesChef.repository.RecipecategoryRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class RecipecategoryService {
     private final RecipecategoryRepository recipecategoryRepository;
 
-    public RecipecategoryForm findCategory(String koreanName){
-        Recipecategory recipeCategory = recipecategoryRepository.findById(koreanName).orElse(null);
-        return recipeCategory != null ? recipeCategory.toForm() : null;
+    public RecipecategoryForm findCategory(String korean_Name){
+        log.info(korean_Name);
+        Recipecategory recipecategory = recipecategoryRepository.findById(korean_Name).orElse(null);
+        if(recipecategory !=null){
+            log.info("레포지토리 ById찾음");
+            return recipecategory.toForm();
+        }
+        log.info("레포지토리 ById못찾음");
+        return null;
     }
 
     public void toModel(RecipecategoryForm recipecategoryForm, Model model){
