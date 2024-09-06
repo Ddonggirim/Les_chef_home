@@ -15,9 +15,9 @@ import org.springframework.ui.Model;
 public class RecipecategoryService {
     private final RecipecategoryRepository recipecategoryRepository;
 
-    public RecipecategoryForm findCategory(String korean_Name){
-        log.info(korean_Name);
-        Recipecategory recipecategory = recipecategoryRepository.findById(korean_Name).orElse(null);
+    public RecipecategoryForm findCategory(String koreanName){
+        log.info(koreanName);
+        Recipecategory recipecategory = recipecategoryRepository.findById(koreanName).orElse(null);
         if(recipecategory !=null){
             log.info("레포지토리 ById찾음");
             return recipecategory.toForm();

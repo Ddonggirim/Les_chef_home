@@ -16,14 +16,38 @@ public class ListcategoryController {
     @GetMapping("/List/Korean")
     public String korean(Model model){
         RecipecategoryForm recipecategoryForm = recipecategoryService.findCategory("한식");
-        if(recipecategoryForm != null){
-            log.info("Form이 들어있음: {}", recipecategoryForm.getKorean_Name());
-            recipecategoryService.toModel(recipecategoryForm, model);
-            return "recipe/List";
-        }else{
-            log.info("Form이 비어있음");
-            return "recipe/List";
-        }
+//        if(recipecategoryForm != null){
+//            log.info("Form이 들어있음: {}", recipecategoryForm.getKorean_Name());
+//            log.info(recipecategoryForm.getEnglish_Name());
+//            log.info(recipecategoryForm.getHead_Img());
+//            recipecategoryService.toModel(recipecategoryForm, model);
+//            return "recipe/List";
+//        }else{
+//            log.info("Form이 비어있음");
+//            return "recipe/List";
+//        }
+        recipecategoryService.toModel(recipecategoryForm, model);
+        return "recipe/List";
+    }
+    @GetMapping("/List/Japanese")
+    public String japanese(Model model){
+        RecipecategoryForm recipecategoryForm = recipecategoryService.findCategory("일식");
+        recipecategoryService.toModel(recipecategoryForm, model);
+        return "recipe/List";
+
+    }
+    @GetMapping("/List/Chinese")
+    public String chinese(Model model){
+        RecipecategoryForm recipecategoryForm = recipecategoryService.findCategory("중식");
+        recipecategoryService.toModel(recipecategoryForm, model);
+        return "recipe/List";
+
+    }
+    @GetMapping("/List/Western")
+    public String western(Model model){
+        RecipecategoryForm recipecategoryForm = recipecategoryService.findCategory("양식");
+        recipecategoryService.toModel(recipecategoryForm, model);
+        return "recipe/List";
 
     }
 }

@@ -2,6 +2,7 @@ package com.example.LesChef.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Slf4j
@@ -11,7 +12,7 @@ public class LesMainController {
     public String gotoMain() {return "MainPage";}
 
     @GetMapping("/List")
-    public String gotoList() {return "recipe/List";}
+    public String gotoList(Model model) {return "redirect:/List/Korean";}
     @GetMapping("/inform")
     public String gotoinform() {return "recipe/inform";}
 
