@@ -26,14 +26,15 @@ public class RecipecategoryService {
         return null;
     }
 
-    public void toModel(RecipecategoryForm recipecategoryForm, Model model){
-        if(recipecategoryForm != null){
-            model.addAttribute("koreanName", recipecategoryForm.getKorean_Name());
-            model.addAttribute("englishName", recipecategoryForm.getEnglish_Name());
-            model.addAttribute("headImg", recipecategoryForm.getHead_Img());
-            model.addAttribute("sortOne", recipecategoryForm.getSort_One());
-            model.addAttribute("sortTwo", recipecategoryForm.getSort_Two());
-            model.addAttribute("sortThree", recipecategoryForm.getSort_Three());
-        }
-    }
+//    public void toModel(RecipecategoryForm recipecategoryForm, Model model){
+//        if(recipecategoryForm != null){
+//            model.addAttribute("koreanName", recipecategoryForm.getKorean_Name());
+//            model.addAttribute("englishName", recipecategoryForm.getEnglish_Name());
+//            model.addAttribute("headImg", recipecategoryForm.getHead_Img());
+//            model.addAttribute("sortOne", recipecategoryForm.getSort_One());
+//            model.addAttribute("sortTwo", recipecategoryForm.getSort_Two());
+//            model.addAttribute("sortThree", recipecategoryForm.getSort_Three());
+//        }
+//    }
+    //이거사용하면 타임리프에서 recipe.korean_Name하지않고 설정한 koreanName으로 타임리프 변수 사용가능
 }
