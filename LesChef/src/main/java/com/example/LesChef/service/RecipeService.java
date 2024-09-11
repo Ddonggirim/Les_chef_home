@@ -23,4 +23,9 @@ public class RecipeService {
                 .collect(Collectors.toList());
 
     }
+
+    public RecipeForm getRecipeInform(Long id){
+        Recipe inform = recipeRepository.findById(id).orElse(null);
+        return inform.toForm();
+    }
 }

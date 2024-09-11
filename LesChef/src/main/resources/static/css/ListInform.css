@@ -24,6 +24,8 @@
   /* width: 924px;
   height: 572px; */
   width:50%;
+  height:65%;
+
 }
 
 #eye{
@@ -58,12 +60,12 @@
   padding-top: 20px;
   overflow: auto;
 }
-#cell > span {
+#cell span {
   font-size: 30px;
   font-family: 'kopub';
   font-weight: 900;
 }
-#cell > p {
+#cell p {
   display: flex;
   justify-content: flex-start;
   font-size: 15px;
@@ -90,8 +92,8 @@
 .allicon{
   display: flex;
   position: relative;
-  top: 725px;
-  padding-left: 56%;
+  top: 826px;
+  padding-left: 62%;
   padding-bottom: 15px;
   }
   .allicon img{
@@ -118,8 +120,8 @@
 }
 #line1{
   position: relative;
-  top: 670px;
-  width:760px;
+  top: 775px;
+  width:952px;
   left: 25%;
 }
 
@@ -129,7 +131,7 @@
   font-family: 'kopub';
   font-weight: 900px;
   position:relative;
-  top: 650px;
+  top: 747px;
   right: 25%;
   font-size: 50px;
 }
@@ -138,13 +140,13 @@
 /* 레시피 설명문 그리드 css*/
 
 .containerwap{
-  padding: 730px 350px 0px 380px;
+  padding: 825px 350px 0px 477px;
 }
 
 .gridcontainer{
   display: grid;
   grid-template-columns: 320px 120px 320px ;
-  grid-template-rows: repeat(2, 50px 350px) ;
+  grid-template-rows: repeat(1, 50px 400px) ;
 }
 /* script 전체 적용 css */
 .script{
