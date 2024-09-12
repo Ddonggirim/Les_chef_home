@@ -48,7 +48,7 @@ public class WebSecurityConfig {
                 .headers(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/signup").permitAll()
-                        .requestMatchers("/main", "/List", "/NoticeBoardMain").permitAll().anyRequest().authenticated()
+                        .requestMatchers("/main", "/List/**", "/NoticeBoardMain").permitAll().anyRequest().authenticated()
                 )
                 .formLogin(login -> login
                                 .loginPage("/loginpage").permitAll()
@@ -77,8 +77,9 @@ public class WebSecurityConfig {
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .deleteCookies("JSESSIONID", "remember-me")
-                        .logoutSuccessUrl("/main")
                         .invalidateHttpSession(true)
+                        .logoutSuccessUrl("/main")
+
 
                 ).build();
     }
