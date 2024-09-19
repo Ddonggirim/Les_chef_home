@@ -5,9 +5,12 @@ import com.example.LesChef.dto.AddCustomerRequest;
 import com.example.LesChef.entity.Customer;
 import com.example.LesChef.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
@@ -23,5 +26,20 @@ private final BCryptPasswordEncoder bCryptPasswordEncoder;
                 .nickname(dto.getNickname())
                 .tel(dto.getTel())
                 .build());
+    }
+    @Transactional
+    public void edit(AddCustomerRequest dto, String id){
+
+        Customer customer = customerRepository.findById(id).orElse(null);
+
+        if(customer != null){
+            customer.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
+            log.info("정보수정됨");
+            customer.setName(dto.getName());
+            customer.setNickname(dto.getNickname());
+            customer.setTel(dto.getTel());
+            customerRepository.save(customer);
+
+        }
     }
 }
