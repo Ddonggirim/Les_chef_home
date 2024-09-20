@@ -28,23 +28,17 @@
             <h2>회원정보</h2>
             <img src="../image1/MypageIcon/profile.png" alt="Click to change image" id="toggleImage" class="clickable-img">
             <input type="file" id="imageInput" style="display: none;" accept="image/*">
-            <form action="/customerRewrite" method="post">
+            <form method="post"><!--action 2개 -->
                 <label>닉네임</label><input type="text" th:value="${session.customer.nickname}" name="nickname" required><br>
                 <label>이름</label><input type="text" th:value="${session.customer.name}" name="name" required><br>
                 <label>비밀번호</label><input type="password" name="password" required><br>
                 <label>연락처</label><input type="text" th:value="${session.customer.tel}" name="tel" required><br>
                 <label>이메일</label><input type="email" th:value="${session.customer.id}" name="id" readonly><br>
                 <div class="buttons">
-                    <button type="submit">수정</button>
-<!--                    <button type="button" href="#">회원 탈퇴</button>-->
+                    <button type="submit" formaction="/customerRewrite">수정</button>
+                    <button type="submit" formaction="/customerDelete">회원 탈퇴</button>
                 </div>
             </form>
-            <form action="/customerDelete" method="post">
-                <div class="buttons">
-                    <button type="sumbit">회원 탈퇴</button>
-                </div>
-            </form>
-
         </div>
     </div>
     <div class="lock">

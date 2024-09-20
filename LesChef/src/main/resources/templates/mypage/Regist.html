@@ -28,9 +28,10 @@
             <form>
                 <div class="info1">
                     <div class="info">
-                        <label>레시피 제목</label><input type="text"><br>
+                        <label>레시피 제목</label>
+                        <input type="text" name="title" required><br>
                         <label>인원</label>
-                        <select>
+                        <select name="portion">
                             <option>1인분</option>
                             <option>2인분</option>
                             <option>3인분</option>
@@ -47,14 +48,14 @@
                         <br> -->
 
                         <label>소요시간</label>
-                        <select>
+                        <select name="runtime">
                             <option>10분</option>
                             <option>20분</option>
                             <option>30분</option>
                         </select> <br>
 
                         <label>난이도</label>
-                        <select>
+                        <select name="cooklevel">
                             <option>쉬움</option>
                             <option>보통</option>
                             <option>어려움</option>
@@ -67,12 +68,11 @@
                     </div>
                 </div>
 
-                <label>요리소개</label><textarea></textarea>
-
                 <div class="ingredients-section">
                     <h3>재료</h3>
                     <div id="box">
-                        <input type="text" placeholder="양파 100g"> <input type="text" placeholder="참기름 2큰술">
+                        <input type="text" name="ingredient[]" placeholder="양파 100g">
+                        <input type="text" name="ingredient[]" placeholder="참기름 2큰술">
                         <input type="button" value="+" onclick="add_textbox()">
                     </div>
                 </div>

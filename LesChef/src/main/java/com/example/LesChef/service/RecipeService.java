@@ -28,4 +28,9 @@ public class RecipeService {
         Recipe inform = recipeRepository.findById(id).orElse(null);
         return inform.toForm();
     }
+
+    public void createRecipe(RecipeForm form){
+        Recipe recipe = form.toEntity();
+        recipeRepository.save(recipe);
+    }
 }

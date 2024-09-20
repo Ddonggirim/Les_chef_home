@@ -18,15 +18,15 @@ public class Recipecategory {
     @Id
     @Column(name = "KOREAN_NAME")
     private String korean_Name;
-    @Column(name= "ENGLISH_NAME", nullable = false)
+    @Column(name= "ENGLISH_NAME")
     private String english_Name;
-    @Column(name= "HEAD_IMG", nullable = false)
+    @Column(name= "HEAD_IMG")
     private String head_Img;
-    @Column(name= "SORT_ONE", nullable = false)
+    @Column(name= "SORT_ONE")
     private String sort_One;
-    @Column(name= "SORT_TWO", nullable = false)
+    @Column(name= "SORT_TWO")
     private String sort_Two;
-    @Column(name= "SORT_THREE", nullable = false)
+    @Column(name= "SORT_THREE")
     private String sort_Three;
 
     public RecipecategoryForm toForm(){

@@ -1,12 +1,11 @@
 package com.example.LesChef.entity;
 
 import com.example.LesChef.dto.RecipeForm;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Date;
 
@@ -14,15 +13,17 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 public class Recipe {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long recipe_Id;
     @Column(nullable = false)
     private String recipe_Name;
     @Column(nullable = false)
     private Long view_Num;
     @Column(nullable = false)
-    private String write_Date; /*Date*/
+    private Date write_Date; /*Date*/
     @Column(nullable = false)
     private String run_Time;
     @Column(nullable = false)
@@ -35,7 +36,6 @@ public class Recipe {
     private String recipe_Img;
     @Column(nullable = false)
     private String majorCategory;
-    @Column(nullable = false)
     private String sub_Category;
 
     public RecipeForm toForm(){
