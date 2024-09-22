@@ -30,6 +30,8 @@ insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, port
 values(9, '감자채볶음', 0, '1', '25분', '4', '하', null, '../image1/ListIcon/예시1.png', '한식', '반찬');
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
 values(10, '쇠고기 미역국', 0, '1', '50분', '4', '하', null, '../image1/ListIcon/예시1.png', '한식', '국/찌개');
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(11, '김치 순두부찌개', 0, '1', '35분', "4", "하", null, '../image1/ListIcon/예시1.png', '한식', '국/찌개');
 
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
 values(41, '스키야키', 0, '1', '25분', '3', '중', null, '../image1/ListIcon/recipePic/41sukiyakiMain.png', '일식', '국/전골');
