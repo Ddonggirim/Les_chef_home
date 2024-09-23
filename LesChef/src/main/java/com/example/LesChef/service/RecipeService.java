@@ -1,8 +1,10 @@
 package com.example.LesChef.service;
 
 import com.example.LesChef.dto.RecipeForm;
+import com.example.LesChef.entity.Customer;
 import com.example.LesChef.entity.Recipe;
 import com.example.LesChef.repository.RecipeRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,8 +31,10 @@ public class RecipeService {
         return inform.toForm();
     }
 
-    public void createRecipe(RecipeForm form){
+    public Long createRecipe(RecipeForm form){
+
         Recipe recipe = form.toEntity();
         recipeRepository.save(recipe);
+        return recipe.getRecipe_Id();
     }
 }

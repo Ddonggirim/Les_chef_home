@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,35 +13,36 @@
 <header>
   <!-- 로고,게시판,로그인, 자물쇠 위치 -->
   <div id="headerspace">
-    <div id="board"> <a href="./NoticeBoardMain"><img src="../image1/ListIcon/게시판아이콘.png"/></div></a>
-    <div id="logo"> <a href="./MainPage"><img src="../image1/ListIcon/로고.png"/></div></a>
+    <div id="board"> <a href="./NoticeBoardMain"><img src="../image1/ListIcon/게시판아이콘.png"/></a></div>
+    <div id="logo"> <a href="./MainPage"><img src="../image1/ListIcon/로고.png"/></a></div>
     <div id="icon2"> <a href="./Rewrite"><img id="mypageicon"src="../image1/ListIcon/마이페이지.png"/></a>
-      <img id="login" src="../image1/ListIcon/자물쇠 1.png" width="55"/>
+      <a th:if="${session.customer}" href="/logout"><img src="../image1/ListIcon/Logout.png"></a>
+      <img th:unless="${session.customer}" id="login" src="../image1/ListIcon/자물쇠 1.png" width="55"/>
     </div>
   </div>
   <!-- 빨간 가로바 텍스트 -->
   <div id="categoryback">
     <div class="name">
-       <a href="/List"><div><span class="categorybox">한식</span></div></a>
-       <a href="/List"><div><span class="categorybox">일식</span></div></a>
-       <a href="/List"><div><span class="categorybox" >중식</span></div></a>
-       <a href="/List"><div><span class="categorybox">양식</span></div></a>
-       <a href="/List"><div><span class="categorybox">공유</span></div></a>
+      <a href="/List/Korean"><span>한식</span></a>
+      <a href="/List/Japanese"><span>일식</span></a>
+      <a href="/List/Chinese"><span>중식</span></a>
+      <a href="/List/Western"><span>양식</span></a>
+      <a href="/List/Share"><span>공유</span></a>
     </div>
   </div>
 </header>
 <main>
   <!-- 메인 사진 윗 부분 -->
-  <span id="sort">한식 > 볶음류</span><br>
-  <span id="title">스팸마요덮밥 한끼식사로 딱이야~!!</span>
+  <span id="sort" th:text="${inform.majorCategory}"></span><br>
+  <span id="title" th:text="${inform.recipe_Name}"></span>
   <div id="user">
-    <img src="../image1/ListIcon/사용자.png" width="40px"/><span id="username">by 엘린맘</span>
+    <img src="../image1/ListIcon/사용자.png" width="40px"/><span id="username" th:text="${inform.user_Id}"></span>
   </div>
 
   <div>
-    <img id="eye" src="../image1/ListIcon/조회수.png"/><p id="eyenum">180</p>
+    <img id="eye" src="../image1/ListIcon/조회수.png"/><p id="eyenum" th:text="${inform.view_Num}"></p>
   </div>
-  <img id="mainimg" src="../image1/ListIcon/세부1.png"/>
+  <img id="mainimg" th:src="@{${inform.recipe_Img}}"/>
 
   <div id="cell">
     <span>재료 준비</span> <p>닭 다리살 500g</p><p>양파 1/2개</p><p>고구마 한개</p><p>고추장 500g</p>

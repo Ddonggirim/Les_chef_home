@@ -71,10 +71,12 @@
                 <div class="ingredients-section">
                     <h3>재료</h3>
                     <div id="box">
-                        <input type="text" name="ingredient[]" placeholder="양파 100g">
-                        <input type="text" name="ingredient[]" placeholder="참기름 2큰술">
-                        <input type="button" value="+" onclick="add_textbox()">
+                        <div id="ingredient">
+                            <input type="text" name="ingredients" placeholder="양파 100g">
+                            <input type="text" name="quantities" placeholder="참기름 2큰술">
+                        </div>
                     </div>
+                    <input type="button" value="+" onclick="add_textbox()">
                 </div>
 
                 <div class="steps-section">

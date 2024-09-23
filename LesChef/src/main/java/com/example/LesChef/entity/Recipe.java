@@ -13,7 +13,8 @@ import java.sql.Date;
 @Setter
 public class Recipe {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "recipe_id_seq")
+    @SequenceGenerator(name = "recipe_id_seq", sequenceName = "recipe_id_seq", initialValue = 500, allocationSize = 1)
     private Long recipe_Id;
     @Column(nullable = false)
     private String recipe_Name;

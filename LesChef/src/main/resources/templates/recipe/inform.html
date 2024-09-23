@@ -42,9 +42,7 @@
   <div id="cell">
       <span>재료 준비</span>
       <div th:each="ingredient : ${ingredients}">
-        <p th:text="${ingredient.ingredient_Volume} != null ?
-         ${ingredient.ingredient_Name} + ' ' +  ${ingredient.ingredient_Volume} + ${ingredient.ingredient_Unit}:
-         ${ingredient.ingredient_Name} + ' ' + ${ingredient.ingredient_Unit}"></p>
+        <p th:text="${ingredient.ingredient_Name} + ' ' +  ${ingredient.ingredient_Volume}"></p>
       </div>
   </div>
   <div class="aside">

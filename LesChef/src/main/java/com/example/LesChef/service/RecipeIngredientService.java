@@ -20,4 +20,14 @@ public class RecipeIngredientService {
                 .map(RecipeIngredient::toForm)
                 .collect(Collectors.toList());
     }
+
+    public void createRecipeIngredient(Long recipeId, List<String> ingredients, List<String> quantities) {
+        for (int i = 0; i < ingredients.size(); i++) {
+            RecipeIngredient recipeIngredient = new RecipeIngredient();
+            recipeIngredient.setRecipe_Id(recipeId);
+            recipeIngredient.setIngredient_Name(ingredients.get(i));
+            recipeIngredient.setIngredient_Volume(i < quantities.size() ? quantities.get(i) : null);
+            recipeIngredientRepository.save(recipeIngredient);
+        }
+    }
 }

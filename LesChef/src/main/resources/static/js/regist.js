@@ -1,7 +1,7 @@
 const add_textbox = () => {
   const box = document.getElementById("box");
   const newP = document.createElement('p');
-  newP.innerHTML = `<input type='text'> <input type='text'> <input type='button' value='-' onclick='remove(this)'>`;
+  newP.innerHTML = `<input type='text'  name='ingredients[]'> <input type='text' name='quantities[]'> <input type='button' value='-' onclick='remove(this)'>`;
   box.appendChild(newP);
 }
 const remove = (obj) => {
@@ -53,44 +53,3 @@ const remove1 = (obj) => {
 
 
 
-function submitData() {
-    const title = document.querySelector('input[name="title"]').value;
-    const portion = document.querySelector('select[name="portion"]').value;
-    const runtime = document.querySelector('select[name="runtime"]').value;
-    const cooklevel = document.querySelector('select[name="cooklevel"]').value;
-    const ingredients = Array.from(document.querySelectorAll('input[name="ingredients[]"]')).map(input => input.value);
-
-    // 각 데이터를 별도로 저장하는 요청을 보냅니다.
-    fetch('/saveTitle', {
-        method: 'POST',
-        body: JSON.stringify({ title }),
-        headers: { 'Content-Type': 'application/json' }
-    });
-
-    fetch('/savePortion', {
-        method: 'POST',
-        body: JSON.stringify({ portion }),
-        headers: { 'Content-Type': 'application/json' }
-    });
-
-    fetch('/saveRuntile', {
-        method: 'POST',
-        body: JSON.stringify({ runtime }),
-        headers: { 'Content-Type': 'application/json' }
-    });
-
-    fetch('/saveCooklevel', {
-        method: 'POST',
-        body: JSON.stringify({ cooklevel }),
-        headers: { 'Content-Type': 'application/json' }
-    });
-
-    // 재료도 저장
-    ingredients.forEach(ingredient => {
-        fetch('/saveIngredient', {
-            method: 'POST',
-            body: JSON.stringify({ ingredient }),
-            headers: { 'Content-Type': 'application/json' }
-        });
-    });
-}

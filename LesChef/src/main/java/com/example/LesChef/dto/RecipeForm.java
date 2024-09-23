@@ -3,12 +3,14 @@ package com.example.LesChef.dto;
 import com.example.LesChef.entity.Recipe;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
 import java.time.LocalDate;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class RecipeForm {
@@ -32,7 +34,7 @@ public class RecipeForm {
                 .run_Time(this.run_Time)
                 .portion(this.portion)
                 .cook_Level(this.cook_Level)
-                .user_Id("a")
+                .user_Id(this.user_Id)
                 .recipe_Img("../image1/ListIcon/recipePic/1seaweedSoupMain.jpg")
                 .majorCategory("공유")
                 .sub_Category(null)
