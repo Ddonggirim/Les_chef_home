@@ -19,7 +19,7 @@
              <a href="/Myrecipe">나의 레시피<span style="font-family: GreateVibes; font-size: 30px;"><u>My Recipe</u></span></a>
         </div>
         <div class="logo">
-            <a href="./main"><img src="../image1/MypageIcon/logoUpdate.png"></a>
+            <a href="/main"><img src="../image1/MypageIcon/logoUpdate.png"></a>
         </div>
     </div>
     <div class="rigcontainer">
@@ -52,6 +52,9 @@
                             <option>10분</option>
                             <option>20분</option>
                             <option>30분</option>
+                            <option>40분</option>
+                            <option>50분</option>
+                            <option>60분</option>
                         </select> <br>
 
                         <label>난이도</label>
@@ -64,7 +67,7 @@
 
                     <div class="recipe-image">
                         <img src="../image1/MypageIcon/bap.png" alt="Click to change image" id="toggleImage1" class="clickable-img">
-                        <input type="file" id="imageInput" style="display: none;" accept="image/*">
+                        <input type="file" id="imageInput" name="image" style="display: none;" accept="image/*">
                     </div>
                 </div>
 
@@ -72,8 +75,8 @@
                     <h3>재료</h3>
                     <div id="box">
                         <div id="ingredient">
-                            <input type="text" name="ingredients" placeholder="양파 100g">
-                            <input type="text" name="quantities" placeholder="참기름 2큰술">
+                            <input type="text" name="ingredients[]" placeholder="재료 이름" required>
+                            <input type="text" name="quantities[]" placeholder="수량" required>
                         </div>
                     </div>
                     <input type="button" value="+" onclick="add_textbox()">

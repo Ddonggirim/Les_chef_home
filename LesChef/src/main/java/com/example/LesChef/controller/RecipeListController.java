@@ -109,27 +109,22 @@ public class RecipeListController {
 
     @PostMapping("/List/create")
     public String createList(@ModelAttribute RecipeForm recipeForm, @ModelAttribute  RecipeRegistForm recipeRegistForm, HttpSession session){
-        log.info("Ingredients: {}", recipeRegistForm.getIngredients());
-        log.info("Quantities: {}", recipeRegistForm.getQuantities());
-
-        if (recipeRegistForm.getIngredients() == null || recipeRegistForm.getQuantities() == null) {
-            log.error("Ingredients or quantities are null");
-            return "redirect:/error"; // 에러 처리
-        }
-
         Customer currentUser = (Customer)session.getAttribute("customer");
         String nickname = currentUser.getNickname();
-        List<String> ingredients = recipeRegistForm.getIngredients();
-        List<String> quantities = recipeRegistForm.getQuantities();
+        List<String> ingredients = recipeRegistForm.getIngredients();   //재료이름들
+        List<String> quantities = recipeRegistForm.getQuantities();     //재료수량들
         log.info("레시피등록요청");
 //        log.info("레시피재료:"+ingredients.isEmpty());
         recipeForm.setUser_Id(nickname);
         Long recipeId = recipeService.createRecipe(recipeForm);
+        log.info("재료이름의 수:" + ingredients.size());
+        log.info("재료수량:" + quantities.size());
         for(int i = 0; i < ingredients.size(); i++){
             RecipeIngredient recipeIngredient = new RecipeIngredient();
+            log.info("재료 이름:"+ingredients.get(i));
             recipeIngredient.setRecipe_Id(recipeId);
             recipeIngredient.setIngredient_Name(ingredients.get(i));
-            recipeIngredient.setIngredient_Volume(ingredients.get(i));
+            recipeIngredient.setIngredient_Volume(quantities.get(i));
             recipeIngredientRepository.save(recipeIngredient);
         }
 //        recipeIngredientService.createRecipeIngredient(recipeId, ingredients, quantities);

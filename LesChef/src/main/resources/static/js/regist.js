@@ -1,7 +1,10 @@
 const add_textbox = () => {
   const box = document.getElementById("box");
   const newP = document.createElement('p');
-  newP.innerHTML = `<input type='text'  name='ingredients[]'> <input type='text' name='quantities[]'> <input type='button' value='-' onclick='remove(this)'>`;
+  newP.innerHTML =
+  `<input type='text'  name='ingredients[]' placeholder="재료 이름" required>
+   <input type='text' name='quantities[]' placeholder="수량" required>
+   <input type='button' value='-' onclick='remove(this)'>`;
   box.appendChild(newP);
 }
 const remove = (obj) => {
@@ -53,3 +56,32 @@ const remove1 = (obj) => {
 
 
 
+
+//이부분 다시 보기
+
+//document.querySelector('form').addEventListener('submit', function(event) {
+//    event.preventDefault(); // 기본 폼 제출 방지
+//
+//    const formData = new FormData(this); // 현재 폼의 데이터를 FormData로 변환
+//    const data = Object.fromEntries(formData.entries()); // FormData를 객체로 변환
+//
+//    fetch('/List/create', {
+//        method: 'POST',
+//        headers: {
+//            'Content-Type': 'application/json',
+//        },
+//        body: JSON.stringify(data), // 객체를 JSON 문자열로 변환
+//    })
+//    .then(response => {
+//        if (!response.ok) {
+//            throw new Error('Network response was not ok');
+//        }
+//        return response.json(); // JSON 응답으로 변환
+//    })
+//    .then(data => {
+//        console.log('Success:', data); // 성공적으로 등록된 데이터 처리
+//    })
+//    .catch(error => {
+//        console.error('Error:', error); // 에러 처리
+//    });
+//});

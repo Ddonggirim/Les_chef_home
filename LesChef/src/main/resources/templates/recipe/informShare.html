@@ -13,9 +13,9 @@
 <header>
   <!-- 로고,게시판,로그인, 자물쇠 위치 -->
   <div id="headerspace">
-    <div id="board"> <a href="./NoticeBoardMain"><img src="../image1/ListIcon/게시판아이콘.png"/></a></div>
-    <div id="logo"> <a href="./MainPage"><img src="../image1/ListIcon/로고.png"/></a></div>
-    <div id="icon2"> <a href="./Rewrite"><img id="mypageicon"src="../image1/ListIcon/마이페이지.png"/></a>
+    <div id="board"> <a href="/NoticeBoardMain"><img src="../image1/ListIcon/게시판아이콘.png"/></a></div>
+    <div id="logo"> <a href="/main"><img src="../image1/ListIcon/로고.png"/></a></div>
+    <div id="icon2"> <a href="/Rewrite"><img id="mypageicon"src="../image1/ListIcon/마이페이지.png"/></a>
       <a th:if="${session.customer}" href="/logout"><img src="../image1/ListIcon/Logout.png"></a>
       <img th:unless="${session.customer}" id="login" src="../image1/ListIcon/자물쇠 1.png" width="55"/>
     </div>
@@ -45,7 +45,10 @@
   <img id="mainimg" th:src="@{${inform.recipe_Img}}"/>
 
   <div id="cell">
-    <span>재료 준비</span> <p>닭 다리살 500g</p><p>양파 1/2개</p><p>고구마 한개</p><p>고추장 500g</p>
+    <span>재료 준비</span>
+    <div th:each="ingredient : ${ingredients}">
+      <p th:text="${ingredient.ingredient_Name} + ' ' + ${ingredient.ingredient_Volume}"></p>
+    </div>
   </div>
 
   <div class="aside">
@@ -55,9 +58,9 @@
 
   <!-- 메인 사진 아랫 부분 -->
   <div class="allicon">
-    <div class="selecticon"><img  src="../image1/ListIcon/인원.png"><span>2~3인</span></div>
-    <div class="selecticon"><img id="selecticon2" src="../image1/ListIcon/시계.png"><span>30분</span></div>
-    <div class="selecticon "><img src="../image1/ListIcon/난이도.png"><span id="selecticon3">쉬움</span></div>
+    <div class="selecticon"><img  src="../image1/ListIcon/인원.png"><span th:text="${inform.portion}"></span></div>
+    <div class="selecticon"><img id="selecticon2" src="../image1/ListIcon/시계.png"><span th:text="${inform.run_Time}"></span></div>
+    <div class="selecticon "><img src="../image1/ListIcon/난이도.png"><span id="selecticon3" th:text="${inform.cook_Level}"></span></div>
   </div>
 
   <img id="line1" src="../image1/ListIcon/인포선.png">

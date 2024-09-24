@@ -39,6 +39,7 @@
     <img id="eye" src="../image1/ListIcon/조회수.png"/><p id="eyenum" th:text="${inform.view_Num}"></p>
   </div>
   <img id="mainimg" th:src="@{${inform.recipe_Img}}">
+
   <div id="cell">
       <span>재료 준비</span>
       <div th:each="ingredient : ${ingredients}">
