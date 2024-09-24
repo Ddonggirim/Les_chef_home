@@ -10,6 +10,10 @@ const add_textbox = () => {
 const remove = (obj) => {
   document.getElementById('box').removeChild(obj.parentNode);
 }
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
   const fileInput = document.getElementById('imageInput');
   let currentImgElement = null;
