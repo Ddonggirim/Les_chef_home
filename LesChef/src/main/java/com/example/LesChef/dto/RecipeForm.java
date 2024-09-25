@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -35,7 +36,7 @@ public class RecipeForm {
                 .portion(this.portion)
                 .cook_Level(this.cook_Level)
                 .user_Id(this.user_Id)
-                .recipe_Img(this.recipe_Img)
+                .recipe_Img("../image1/ListIcon/recipePic/1seaweedSoupMain.jpg")
                 .majorCategory("공유")
                 .sub_Category(null)
                 .build();

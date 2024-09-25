@@ -29,6 +29,7 @@ public class RecipeListController {
     private final RecipeStepService recipeStepService;
     private final RecipeIngredientService recipeIngredientService;
     private final RecipeIngredientRepository recipeIngredientRepository;
+
     @GetMapping("/List/Korean") //한식레시피 모음
     public String korean(Model model){
         RecipecategoryForm recipecategoryForm = recipecategoryService.findCategory("한식");
@@ -108,27 +109,39 @@ public class RecipeListController {
     }
 
     @PostMapping("/List/create")
-    public String createList(@ModelAttribute RecipeForm recipeForm, @ModelAttribute  RecipeRegistForm recipeRegistForm, HttpSession session){
+    public String createList(@ModelAttribute RecipeForm recipeForm, @ModelAttribute RecipeRegistForm recipeRegistForm, HttpSession session){
+        log.info("List/create호출");
         Customer currentUser = (Customer)session.getAttribute("customer");
         String nickname = currentUser.getNickname();
         List<String> ingredients = recipeRegistForm.getIngredients();   //재료이름들
         List<String> quantities = recipeRegistForm.getQuantities();     //재료수량들
+
         log.info("레시피등록요청");
-//        log.info("레시피재료:"+ingredients.isEmpty());
-        recipeForm.setUser_Id(nickname);
+
+//        MultipartFile file = recipeForm.getRecipe_Img();
+//        String originalFilename = file.getOriginalFilename();
+//        String uploadDir = "src/main/resources/static/uploads/";
+//        File destinationFile = new File(uploadDir + originalFilename);
+//        file.transferTo(destinationFile);
+//        log.info("파일 저장 완료: " + destinationFile.getAbsolutePath());
+//        recipeForm.setRecipe_Img_Path("../uploads/");
         Long recipeId = recipeService.createRecipe(recipeForm);
+
         log.info("재료이름의 수:" + ingredients.size());
         log.info("재료수량:" + quantities.size());
-        for(int i = 0; i < ingredients.size(); i++){
-            RecipeIngredient recipeIngredient = new RecipeIngredient();
-            log.info("재료 이름:"+ingredients.get(i));
-            recipeIngredient.setRecipe_Id(recipeId);
-            recipeIngredient.setIngredient_Name(ingredients.get(i));
-            recipeIngredient.setIngredient_Volume(quantities.get(i));
-            recipeIngredientRepository.save(recipeIngredient);
-        }
-//        recipeIngredientService.createRecipeIngredient(recipeId, ingredients, quantities);
 
+            // 파일을 지정된 경로에 저장
+            for(int i = 0; i < ingredients.size(); i++){
+                RecipeIngredient recipeIngredient = new RecipeIngredient();
+                log.info("재료 이름:"+ingredients.get(i));
+                recipeIngredient.setRecipe_Id(recipeId);
+                recipeIngredient.setIngredient_Name(ingredients.get(i));
+                recipeIngredient.setIngredient_Volume(quantities.get(i));
+                recipeIngredientRepository.save(recipeIngredient);
+            }
         return "redirect:/main";
+
+
     }
+
 }
