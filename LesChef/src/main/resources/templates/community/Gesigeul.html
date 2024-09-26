@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,8 @@
   <div  class="logoBackGround">
     <a href="/main"><img src="../image1/NoticeIcon/Logo.jpg"></a>
   </div>
-  <img src="../image1/NoticeIcon/Login.png" id="login">
+  <a href="/Rewrite"><img src="../image1/ListIcon/마이페이지.png" id="mypageicon"/></a>
+  <a th:if="${session.customer}" href="/logout"><img src="../image1/NoticeIcon/Logout.png" id="logout"></a>
 </header>
 <main>
   <div class="gesiTopImg">
@@ -22,30 +23,20 @@
   <!--이전,다음페이지 버튼까지-->
   <img src="../image1/NoticeIcon/LArrow-black.png" class="BeforePage" onclick="location.href='/NoticeBoardMain'">
   <div class="gesiBox">
-    <h1 class="gesiTitle">감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</h1>
+    <h1 class="gesiTitle" th:text="${article.article_Title}"></h1>
     <!--수정 삭제 버튼-->
     <button type="button" onclick="location.href='/GesiEdit'" class="editDelete">수정</button>
     <span>|</span>
     <button type="button"class="editDelete">삭제</button>
     <!--게시글 메인 이미지-->
-    <img src="../image1/NoticeIcon/bibimbab.jpg" class="gesiMainImg">
-    <pre class="gesiContent">
-        아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ
-        아 일단 만든거 올린다
-        개추나 눌러라~아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ
-        아 일단 만든거 올린다
-        개추나 눌러라~아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ
-        아 일단 만든거 올린다
-        개추나 눌러라~아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ
-        아 일단 만든거 올린다
-        개추나 눌러라~
-      </pre>
+    <img th:src="@{${article.article_Img}}" class="gesiMainImg">
+    <span class="gesiContent" th:text="${article.content}"></span>
     <!--작성자 이름, 조회수 gesiWriterName=flex-->
     <div class="gesiWriterName">
       <!--gesiWriterNameContent1,2=inline-flex-->
       <span class="gesiWriterNameContent1">
           <img src="../image1/NoticeIcon/duck.jpg">
-          <span>오리너구리</span>
+          <span th:text="${article.user_nickName}"></span>
         </span>
       <span class="gesiWriterNameContent2">
           <img src="../image1/NoticeIcon/views-black.jpg">
@@ -82,6 +73,7 @@
         <img src="../image1/NoticeIcon/commentWrite.jpg">
       </button>
     </form>
+    <div th:text="${message}"></div>
     <!--댓글 목록 comment,,commentContent=flex-->
     <div class="commentRepeat">
       <div class="card my-3">

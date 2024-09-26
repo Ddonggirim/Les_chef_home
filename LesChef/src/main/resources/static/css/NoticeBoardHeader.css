@@ -16,15 +16,22 @@ a{
 }
 #login{
   position: absolute;
-  top:4%;
+  top:7%;
   right:4%;
   width:3%;
   cursor: pointer;
 }
 #logout{
   position: absolute;
-  top:4%;
+  top:7%;
   right:4%;
   width:3%;
+  cursor: pointer;
+}
+#mypageicon{
+  position: absolute;
+  top: 7%;
+  right: 8%;
+  width: 3%;
   cursor: pointer;
 }

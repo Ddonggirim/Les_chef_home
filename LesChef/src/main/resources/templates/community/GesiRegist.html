@@ -22,20 +22,25 @@
   <a href="/NoticeBoardMain"><img src="../image1/NoticeIcon/LArrow.jpg" class="BeforePage"></a>
   <p class="regi">게시글 등록</p>
   <!--게시글 등록 내용 전송 폼-->
-  <form>
+  <form action="/article/regist" method="post" enctype="multipart/form-data">
     <button type="submit" class="writeBtn">
       <span>게시글 작성</span>
       <img src="../image1/NoticeIcon/commentWrite.jpg">
     </button>
     <div class="registBox">
         <span>
-          <div class="registTitle">제목<br><textarea class="titleName" placeholder="제목을 입력하세요" maxlength="33"></textarea></div>
+          <div class="registTitle"><span>제목</span><br>
+            <textarea class="titleName" name="article_Title" placeholder="제목을 입력하세요" maxlength="33" required></textarea>
+            <span>부제목</span>
+            <textarea class="subtitleName" name="article_Sub_Title" placeholder="부제목을 입력하세요" maxlength="20" required></textarea>
+          </div>
+
           <!--img클릭 시 input열림-->
-          <img src="../image1/NoticeIcon/imgInput.jpg" id="toggleImage" class="click_Img">
-          <input type="file" id="imageInput" style="display:none;" accept="image/*">
+          <img src="../image1/ListIcon/recipePic/1seaweedSoupMain.jpg" id="toggleImage" class="click_Img">
+          <input type="file" id="imageInput" name="file" style="display:none;" accept="image/*" required>
         </span>
       <!--게시글 내용-->
-      <textarea class="gesiContent" placeholder="내용을 입력하세요"></textarea>
+      <textarea class="gesiContent" name="content" placeholder="내용을 입력하세요" maxlength="255" required></textarea>
     </div>
   </form>
   <!--폼-->

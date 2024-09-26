@@ -15,6 +15,7 @@
     <a href="./main"><img src="../image1/NoticeIcon/Logo.jpg"></a>
 
   </div>
+  <a href="/Rewrite"><img src="../image1/ListIcon/마이페이지.png" id="mypageicon"/></a>
   <a th:if="${session.customer}" href="/logout"><img  src="../image1/NoticeIcon/Logout.png" id="logout"></a>
   <img th:unless="${session.customer}" src="../image1/NoticeIcon/Login.png" id="login">
 </header>
@@ -36,23 +37,23 @@
 
   <!--dt-이미지, dd-내용,li반복/borderBox=flex-->
   <ul class="boardBox">
-    <li class="gesigeul" id="for1">
-      <a href="/Gesigeul">
+    <li th:each="articles : ${articles}" class="gesigeul" id="for1">
+      <a th:href="@{/article/{id}(id=${articles.article_Id})}">
         <dl>
 
           <!--게시글 이미지-->
-          <dt><img src="../image1/NoticeIcon/bibimbab.jpg" class="gesigeulImg"></dt>
+          <dt><img th:src="@{${articles.article_Img}}" class="gesigeulImg"></dt>
           <!--게시글 내용-->
           <dd>
             <div class="boardContent">
-              <p><b>가나다라마바사아자차카타파하가나다라마바사</b></p>
-              <p>감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감감</p>
+              <p th:text="${articles.article_Title}"><b></b></p>
+              <p th:text="${articles.article_Sub_Title}"></p>
             </div>
             <!--작성자 및 조회수/writerName/writerNameContent=inline-flex-->
             <div class="writerName">
                 <span class="writerNameContent">
                   <img src="../image1/NoticeIcon/duck.jpg">
-                  <span>by 오리너구리</span>
+                  <span th:text="${articles.user_nickName}"></span>
                 </span>
               <span class="writerNameContent">
                   <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">
@@ -64,255 +65,255 @@
       </a>
     </li>
 
-    <!--타임리프 넣으면 지울 거-->
-    <li class="gesigeul" id="for2">
-      <a href="/Gesigeul">
-        <dl>
-          <dt><img src="../image1/NoticeIcon/a1.jpg" class="gesigeulImg"></dt>
-          <dd>
-            <div class="boardContent">
-              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>
-              <p>오이 소박이 무침 황금 레시피/오이 김치 담그는 법/오이 부추 무침</p>
-            </div>
+<!--    &lt;!&ndash;타임리프 넣으면 지울 거&ndash;&gt;-->
+<!--    <li class="gesigeul" id="for2">-->
+<!--      <a href="/Gesigeul">-->
+<!--        <dl>-->
+<!--          <dt><img src="../image1/NoticeIcon/a1.jpg" class="gesigeulImg"></dt>-->
+<!--          <dd>-->
+<!--            <div class="boardContent">-->
+<!--              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>-->
+<!--              <p>오이 소박이 무침 황금 레시피/오이 김치 담그는 법/오이 부추 무침</p>-->
+<!--            </div>-->
 
-            <div class="writerName">
-                <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/duck.jpg">
-                  <span>by 오리너구리</span>
-                </span>
-              <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">
-                  <span>0.5k</span>
-                </span>
-            </div>
-          </dd>
-        </dl>
-      </a>
-    </li>
-    <li class="gesigeul" id="for3">
-      <a href="/Gesigeul">
-        <dl>
-          <dt>
-            <img src="../image1/NoticeIcon/a2.jpg" class="gesigeulImg">
-          </dt>
-          <dd>
-            <div class="boardContent">
-              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>
-              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ
-                아 일단 만든거 올린다
-                개추나 눌러라~ </p>
-            </div>
+<!--            <div class="writerName">-->
+<!--                <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/duck.jpg">-->
+<!--                  <span>by 오리너구리</span>-->
+<!--                </span>-->
+<!--              <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">-->
+<!--                  <span>0.5k</span>-->
+<!--                </span>-->
+<!--            </div>-->
+<!--          </dd>-->
+<!--        </dl>-->
+<!--      </a>-->
+<!--    </li>-->
+<!--    <li class="gesigeul" id="for3">-->
+<!--      <a href="/Gesigeul">-->
+<!--        <dl>-->
+<!--          <dt>-->
+<!--            <img src="../image1/NoticeIcon/a2.jpg" class="gesigeulImg">-->
+<!--          </dt>-->
+<!--          <dd>-->
+<!--            <div class="boardContent">-->
+<!--              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>-->
+<!--              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ-->
+<!--                아 일단 만든거 올린다-->
+<!--                개추나 눌러라~ </p>-->
+<!--            </div>-->
 
-            <div class="writerName">
-                <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/duck.jpg">
-                  <span>by 오리너구리</span>
-                </span>
-              <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">
-                  <span>0.5k</span>
-                </span>
-            </div>
-          </dd>
-        </dl>
-      </a>
-    </li>
-    <li class="gesigeul" id="for4">
-      <a href="/Gesigeul">
-        <dl>
-          <dt>
-            <img src="../image1/NoticeIcon/a3.jpg" class="gesigeulImg">
-          </dt>
-          <dd>
-            <div class="boardContent">
-              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>
-              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ
-                아 일단 만든거 올린다
-                개추나 눌러라~ </p>
-            </div>
+<!--            <div class="writerName">-->
+<!--                <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/duck.jpg">-->
+<!--                  <span>by 오리너구리</span>-->
+<!--                </span>-->
+<!--              <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">-->
+<!--                  <span>0.5k</span>-->
+<!--                </span>-->
+<!--            </div>-->
+<!--          </dd>-->
+<!--        </dl>-->
+<!--      </a>-->
+<!--    </li>-->
+<!--    <li class="gesigeul" id="for4">-->
+<!--      <a href="/Gesigeul">-->
+<!--        <dl>-->
+<!--          <dt>-->
+<!--            <img src="../image1/NoticeIcon/a3.jpg" class="gesigeulImg">-->
+<!--          </dt>-->
+<!--          <dd>-->
+<!--            <div class="boardContent">-->
+<!--              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>-->
+<!--              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ-->
+<!--                아 일단 만든거 올린다-->
+<!--                개추나 눌러라~ </p>-->
+<!--            </div>-->
 
-            <p class="writerName">
-                <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/duck.jpg">
-                  <span>by 오리너구리</span>
-                </span>
-              <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">
-                  <span>0.5k</span>
-                </span>
-            </p>
-          </dd>
-        </dl>
-      </a>
-    </li>
-    <li class="gesigeul" id="for5">
-      <a href="/Gesigeul">
-        <dl>
-          <dt>
-            <img src="../image1/NoticeIcon/a4.jpg" class="gesigeulImg">
-          </dt>
-          <dd>
-            <div class="boardContent">
-              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>
-              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ
-                아 일단 만든거 올린다
-                개추나 눌러라~ </p>
-            </div>
+<!--            <p class="writerName">-->
+<!--                <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/duck.jpg">-->
+<!--                  <span>by 오리너구리</span>-->
+<!--                </span>-->
+<!--              <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">-->
+<!--                  <span>0.5k</span>-->
+<!--                </span>-->
+<!--            </p>-->
+<!--          </dd>-->
+<!--        </dl>-->
+<!--      </a>-->
+<!--    </li>-->
+<!--    <li class="gesigeul" id="for5">-->
+<!--      <a href="/Gesigeul">-->
+<!--        <dl>-->
+<!--          <dt>-->
+<!--            <img src="../image1/NoticeIcon/a4.jpg" class="gesigeulImg">-->
+<!--          </dt>-->
+<!--          <dd>-->
+<!--            <div class="boardContent">-->
+<!--              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>-->
+<!--              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ-->
+<!--                아 일단 만든거 올린다-->
+<!--                개추나 눌러라~ </p>-->
+<!--            </div>-->
 
-            <div class="writerName">
-                <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/duck.jpg">
-                  <span>by 오리너구리</span>
-                </span>
-              <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">
-                  <span>0.5k</span>
-                </span>
-            </div>
-          </dd>
-        </dl>
-      </a>
-    </li>
-    <li class="gesigeul" id="for6">
-      <a href="/Gesigeul">
-        <dl>
-          <dt>
-            <img src="../image1/NoticeIcon/a5.jpg" class="gesigeulImg">
-          </dt>
-          <dd>
-            <div class="boardContent">
-              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>
-              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ
-                아 일단 만든거 올린다
-                개추나 눌러라~ </p>
-            </div>
+<!--            <div class="writerName">-->
+<!--                <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/duck.jpg">-->
+<!--                  <span>by 오리너구리</span>-->
+<!--                </span>-->
+<!--              <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">-->
+<!--                  <span>0.5k</span>-->
+<!--                </span>-->
+<!--            </div>-->
+<!--          </dd>-->
+<!--        </dl>-->
+<!--      </a>-->
+<!--    </li>-->
+<!--    <li class="gesigeul" id="for6">-->
+<!--      <a href="/Gesigeul">-->
+<!--        <dl>-->
+<!--          <dt>-->
+<!--            <img src="../image1/NoticeIcon/a5.jpg" class="gesigeulImg">-->
+<!--          </dt>-->
+<!--          <dd>-->
+<!--            <div class="boardContent">-->
+<!--              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>-->
+<!--              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ-->
+<!--                아 일단 만든거 올린다-->
+<!--                개추나 눌러라~ </p>-->
+<!--            </div>-->
 
-            <p class="writerName">
-                <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/duck.jpg">
-                  <span>by 오리너구리</span>
-                </span>
-              <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">
-                  <span>0.5k</span>
-                </span>
-            </p>
-          </dd>
-        </dl>
-      </a>
-    </li>
-    <li class="gesigeul" id="for7">
-      <a href="/Gesigeul">
-        <dl>
-          <dt>
-            <img src="../image1/NoticeIcon/a6.jpg" class="gesigeulImg">
-          </dt>
-          <dd>
-            <div class="boardContent">
-              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>
-              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ
-                아 일단 만든거 올린다
-                개추나 눌러라~ </p>
-            </div>
+<!--            <p class="writerName">-->
+<!--                <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/duck.jpg">-->
+<!--                  <span>by 오리너구리</span>-->
+<!--                </span>-->
+<!--              <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">-->
+<!--                  <span>0.5k</span>-->
+<!--                </span>-->
+<!--            </p>-->
+<!--          </dd>-->
+<!--        </dl>-->
+<!--      </a>-->
+<!--    </li>-->
+<!--    <li class="gesigeul" id="for7">-->
+<!--      <a href="/Gesigeul">-->
+<!--        <dl>-->
+<!--          <dt>-->
+<!--            <img src="../image1/NoticeIcon/a6.jpg" class="gesigeulImg">-->
+<!--          </dt>-->
+<!--          <dd>-->
+<!--            <div class="boardContent">-->
+<!--              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>-->
+<!--              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ-->
+<!--                아 일단 만든거 올린다-->
+<!--                개추나 눌러라~ </p>-->
+<!--            </div>-->
 
-            <div class="writerName">
-                <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/duck.jpg">
-                  <span>by 오리너구리</span>
-                </span>
-              <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">
-                  <span>0.5k</span>
-                </span>
-            </div>
-          </dd>
-        </dl>
-      </a>
-    </li>
-    <li class="gesigeul" id="for8">
-      <a href="/Gesigeul">
-        <dl>
-          <dt>
-            <img src="../image1/NoticeIcon/a7.jpg" class="gesigeulImg">
-          </dt>
-          <dd>
-            <div class="boardContent">
-              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>
-              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ
-                아 일단 만든거 올린다
-                개추나 눌러라~ </p>
-            </div>
+<!--            <div class="writerName">-->
+<!--                <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/duck.jpg">-->
+<!--                  <span>by 오리너구리</span>-->
+<!--                </span>-->
+<!--              <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">-->
+<!--                  <span>0.5k</span>-->
+<!--                </span>-->
+<!--            </div>-->
+<!--          </dd>-->
+<!--        </dl>-->
+<!--      </a>-->
+<!--    </li>-->
+<!--    <li class="gesigeul" id="for8">-->
+<!--      <a href="/Gesigeul">-->
+<!--        <dl>-->
+<!--          <dt>-->
+<!--            <img src="../image1/NoticeIcon/a7.jpg" class="gesigeulImg">-->
+<!--          </dt>-->
+<!--          <dd>-->
+<!--            <div class="boardContent">-->
+<!--              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>-->
+<!--              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ-->
+<!--                아 일단 만든거 올린다-->
+<!--                개추나 눌러라~ </p>-->
+<!--            </div>-->
 
-            <p class="writerName">
-                <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/duck.jpg">
-                  <span>by 오리너구리</span>
-                </span>
-              <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">
-                  <span>0.5k</span>
-                </span>
-            </p>
-          </dd>
-        </dl>
-      </a>
-    </li>
-    <li class="gesigeul" id="for9">
-      <a href="/Gesigeul">
-        <dl>
-          <dt>
-            <img src="../image1/NoticeIcon/a7.jpg" class="gesigeulImg">
-          </dt>
-          <dd>
-            <div class="boardContent">
-              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>
-              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ
-                아 일단 만든거 올린다
-                개추나 눌러라~ </p>
-            </div>
+<!--            <p class="writerName">-->
+<!--                <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/duck.jpg">-->
+<!--                  <span>by 오리너구리</span>-->
+<!--                </span>-->
+<!--              <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">-->
+<!--                  <span>0.5k</span>-->
+<!--                </span>-->
+<!--            </p>-->
+<!--          </dd>-->
+<!--        </dl>-->
+<!--      </a>-->
+<!--    </li>-->
+<!--    <li class="gesigeul" id="for9">-->
+<!--      <a href="/Gesigeul">-->
+<!--        <dl>-->
+<!--          <dt>-->
+<!--            <img src="../image1/NoticeIcon/a7.jpg" class="gesigeulImg">-->
+<!--          </dt>-->
+<!--          <dd>-->
+<!--            <div class="boardContent">-->
+<!--              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>-->
+<!--              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ-->
+<!--                아 일단 만든거 올린다-->
+<!--                개추나 눌러라~ </p>-->
+<!--            </div>-->
 
-            <p class="writerName">
-                <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/duck.jpg">
-                  <span>by 오리너구리</span>
-                </span>
-              <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">
-                  <span>0.5k</span>
-                </span>
-            </p>
-          </dd>
-        </dl>
-      </a>
-    </li>
-    <li class="gesigeul" id="for10">
-      <a href="/Gesigeul">
-        <dl>
-          <dt>
-            <img src="../image1/NoticeIcon/a7.jpg" class="gesigeulImg">
-          </dt>
-          <dd>
-            <div class="boardContent">
-              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>
-              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ
-                아 일단 만든거 올린다
-                개추나 눌러라~ </p>
-            </div>
+<!--            <p class="writerName">-->
+<!--                <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/duck.jpg">-->
+<!--                  <span>by 오리너구리</span>-->
+<!--                </span>-->
+<!--              <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">-->
+<!--                  <span>0.5k</span>-->
+<!--                </span>-->
+<!--            </p>-->
+<!--          </dd>-->
+<!--        </dl>-->
+<!--      </a>-->
+<!--    </li>-->
+<!--    <li class="gesigeul" id="for10">-->
+<!--      <a href="/Gesigeul">-->
+<!--        <dl>-->
+<!--          <dt>-->
+<!--            <img src="../image1/NoticeIcon/a7.jpg" class="gesigeulImg">-->
+<!--          </dt>-->
+<!--          <dd>-->
+<!--            <div class="boardContent">-->
+<!--              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>-->
+<!--              <p>아니 만들었는데 황천의 짜글이 될뻔 ㅋㅋㅋ-->
+<!--                아 일단 만든거 올린다-->
+<!--                개추나 눌러라~ </p>-->
+<!--            </div>-->
 
-            <p class="writerName">
-                <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/duck.jpg">
-                  <span>by 오리너구리</span>
-                </span>
-              <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">
-                  <span>0.5k</span>
-                </span>
-            </p>
-          </dd>
-        </dl>
-      </a>
-    </li>
+<!--            <p class="writerName">-->
+<!--                <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/duck.jpg">-->
+<!--                  <span>by 오리너구리</span>-->
+<!--                </span>-->
+<!--              <span class="writerNameContent">-->
+<!--                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">-->
+<!--                  <span>0.5k</span>-->
+<!--                </span>-->
+<!--            </p>-->
+<!--          </dd>-->
+<!--        </dl>-->
+<!--      </a>-->
+<!--    </li>-->
 
     <!--타임리프 넣으면 지울 거 끝-->
   </ul>

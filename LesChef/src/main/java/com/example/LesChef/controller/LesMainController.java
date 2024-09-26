@@ -25,7 +25,7 @@ public class LesMainController {
     @GetMapping("/GesiRegist")
     public String gotoGesiRegist() {return "community/GesiRegist";}
     @GetMapping("/NoticeBoardMain")
-    public String gotoNoticeBoardMain() {return "community/NoticeBoardMain";}
+    public String gotoNoticeBoardMain() {return "redirect:/NoticeBoard";}
 
     @GetMapping("/Rewrite")
     public String gotoRewrite() {return "mypage/Rewrite";}
