@@ -22,7 +22,7 @@ public class RecipeForm {
     private String run_Time;
     private String portion;/*몇인분*/
     private String cook_Level;
-    private String user_Id;
+    private String userId;
     private String recipe_Img;
     private String majorCategory;
     private String sub_Category;
@@ -35,7 +35,7 @@ public class RecipeForm {
                 .run_Time(this.run_Time)
                 .portion(this.portion)
                 .cook_Level(this.cook_Level)
-                .user_Id(this.user_Id)
+                .userId(this.userId)
                 .recipe_Img("../image1/ListIcon/recipePic/1seaweedSoupMain.jpg")
                 .majorCategory("공유")
                 .sub_Category(null)

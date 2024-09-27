@@ -37,4 +37,11 @@ public class RecipeService {
         recipeRepository.save(recipe);
         return recipe.getRecipe_Id();
     }
+
+    public List<RecipeForm> getMyRecipeList(String userId){
+        List<Recipe> myRecipes = recipeRepository.findMyRecipe(userId);
+        return myRecipes.stream()
+                .map(Recipe::toForm)
+                .collect(Collectors.toList());
+    }
 }

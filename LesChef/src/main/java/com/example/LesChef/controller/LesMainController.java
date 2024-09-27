@@ -12,7 +12,7 @@ public class LesMainController {
     public String gotoMain() {return "MainPage";}
 
     @GetMapping("/List")
-    public String gotoList(Model model) {return "redirect:/List/Korean";}
+    public String gotoList() {return "redirect:/List/Korean";}
     @GetMapping("/inform")
     public String gotoinform() {return "recipe/inform";}
 
@@ -36,7 +36,7 @@ public class LesMainController {
     @GetMapping("/Regist")
     public String gotoRegist() {return "mypage/Regist";}
     @GetMapping("/Myrecipe")
-    public String gotoMyrecipe() {return "mypage/Myrecipe";}
+    public String gotoMyrecipe() {return "redirect:/myrecipe";}
 
 
     @GetMapping("/Login")

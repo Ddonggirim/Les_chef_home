@@ -24,10 +24,15 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class RecipeListController {
+
     private final RecipecategoryService recipecategoryService;
+
     private final RecipeService recipeService;
+
     private final RecipeStepService recipeStepService;
+
     private final RecipeIngredientService recipeIngredientService;
+
     private final RecipeIngredientRepository recipeIngredientRepository;
 
     @GetMapping("/List/Korean") //한식레시피 모음
@@ -117,7 +122,7 @@ public class RecipeListController {
         List<String> quantities = recipeRegistForm.getQuantities();     //재료수량들
 
         log.info("레시피등록요청");
-
+        recipeForm.setUserId(nickname);
 //        MultipartFile file = recipeForm.getRecipe_Img();
 //        String originalFilename = file.getOriginalFilename();
 //        String uploadDir = "src/main/resources/static/uploads/";

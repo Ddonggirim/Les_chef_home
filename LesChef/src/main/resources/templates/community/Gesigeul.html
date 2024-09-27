@@ -24,10 +24,6 @@
   <img src="../image1/NoticeIcon/LArrow-black.png" class="BeforePage" onclick="location.href='/NoticeBoardMain'">
   <div class="gesiBox">
     <h1 class="gesiTitle" th:text="${article.article_Title}"></h1>
-    <!--수정 삭제 버튼-->
-    <button type="button" onclick="location.href='/GesiEdit'" class="editDelete">수정</button>
-    <span>|</span>
-    <button type="button"class="editDelete">삭제</button>
     <!--게시글 메인 이미지-->
     <img th:src="@{${article.article_Img}}" class="gesiMainImg">
     <span class="gesiContent" th:text="${article.content}"></span>

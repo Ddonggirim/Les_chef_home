@@ -20,30 +20,34 @@
         </div>
         <div class="logo">
 
-            <a href="./main"><img src="../image1/MypageIcon/logoUpdate.png"></a>
+            <a href="/main"><img src="../image1/MypageIcon/logoUpdate.png"></a>
         </div>
     </div>
     <div class="rigcontainer">
         <div class="right">
             <h2>나의 레시피</h2>
+            <div class="tabs">
+                <a class="tab" href="/myrecipe">레시피</a>
+                <a class="tab" href="/myarticle">게시판</a>
+            </div>
             <div class="comments">
-                <div class="comment">
+                <div th:each="myRecipe : ${myRecipes}" class="comment">
                     <input type="checkbox" class="delete-checkbox">
                     <img src="../image1/MypageIcon/bap.png">
                     <div class="comment-text">
-                        <p><strong></strong> </p>
-                        <p><strong></strong></p>
-                        <p><strong></strong></p>
+                        <p th:text="${myRecipe.recipe_Name}"><strong></strong></p>
+                        <p th:text="'작성일: ' + ${myRecipe.write_Date}"><strong></strong></p>
+                        <p th:text="'조회수:' + ${myRecipe.view_Num}"><strong></strong></p>
                     </div>
                 </div>
-            </div>
-            <div class="comment">
-                <input type="checkbox" class="delete-checkbox">
-                <img src="../image1/MypageIcon/crab.png" href="#">
-                <div class="comment-text">
-                    <p><strong></strong></p>
-                    <p><strong></strong> </p>
-                    <p><strong></strong></p>
+                <div th:each="myArticle : ${myArticles}" class="comment">
+                    <input type="checkbox" class="delete-checkbox">
+                    <img th:src="@{${myArticle.article_Img}}">
+                    <div class="comment-text">
+                        <p th:text="${myArticle.article_Title}"><strong></strong></p>
+<!--                        <p th:text="'작성일: ' + ${myRecipe.write_Date}"><strong></strong></p>-->
+<!--                        <p th:text="'조회수:' + ${myRecipe.view_Num}"><strong></strong></p>-->
+                    </div>
                 </div>
             </div>
         </div>

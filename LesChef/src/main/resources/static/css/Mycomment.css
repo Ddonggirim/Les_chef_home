@@ -112,10 +112,16 @@ input {
   margin-left: 145px; */
   font-size: 18px;
   font-weight: bold;
+  text-align: center;
+  background-color: #fff;
+  color: #000;
 }
 
 .tab.active {
   border-bottom: 1px solid #fff;
+}
+.tab:hover{
+  background-color: #e69550;
 }
 
 .comments {

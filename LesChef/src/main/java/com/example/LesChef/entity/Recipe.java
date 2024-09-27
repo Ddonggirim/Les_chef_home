@@ -30,7 +30,7 @@ public class Recipe {
     @Column(nullable = false)
     private String cook_Level;
 //    @Column(nullable = false)
-    private String user_Id;
+    private String userId;
     @Column(nullable = false)
     private String recipe_Img;
     @Column(nullable = false)
@@ -40,7 +40,7 @@ public class Recipe {
     @Builder
     public Recipe(String recipe_Name, Long view_Num, Date write_Date,
                   String run_Time, String portion, String cook_Level,
-                  String user_Id, String recipe_Img, String majorCategory,
+                  String userId, String recipe_Img, String majorCategory,
                   String sub_Category){
         this.recipe_Name = recipe_Name;
         this.view_Num = view_Num;
@@ -48,7 +48,7 @@ public class Recipe {
         this.run_Time = run_Time;
         this.portion = portion;
         this.cook_Level = cook_Level;
-        this.user_Id = user_Id;
+        this.userId = userId;
         this.recipe_Img = recipe_Img;
         this.majorCategory = majorCategory;
         this.sub_Category = sub_Category;
@@ -58,7 +58,7 @@ public class Recipe {
     public RecipeForm toForm(){
         return new RecipeForm(this.recipe_Id, this.recipe_Name,
                 this.view_Num, this.write_Date, this.run_Time,
-                this.portion, this.cook_Level, this.user_Id, this.recipe_Img,
+                this.portion, this.cook_Level, this.userId, this.recipe_Img,
                 this.majorCategory, this.sub_Category);
     }
 }
