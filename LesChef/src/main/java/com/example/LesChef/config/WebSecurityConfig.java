@@ -48,7 +48,8 @@ public class WebSecurityConfig {
                 .headers(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/signup").permitAll()
-                        .requestMatchers("/main", "/List/**", "/NoticeBoardMain").permitAll().anyRequest().authenticated()
+                        .requestMatchers("/main", "/List", "/List/Korean", "/List/Japanese", "/List/Chinese", "/List/Western")
+                        .permitAll().anyRequest().authenticated()
                 )
                 .formLogin(login -> login
                                 .loginPage("/loginpage").permitAll()

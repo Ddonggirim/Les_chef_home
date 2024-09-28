@@ -2,8 +2,8 @@ const add_textbox = () => {
   const box = document.getElementById("box");
   const newP = document.createElement('p');
   newP.innerHTML =
-  `<input type='text'  name='ingredients[]' placeholder="재료 이름" required>
-   <input type='text' name='quantities[]' placeholder="수량" required>
+  `<input type='text'  name='ingredients[]' placeholder='재료 이름' required>
+   <input type='text' name='quantities[]' placeholder='수량' required>
    <input type='button' value='-' onclick='remove(this)'>`;
   box.appendChild(newP);
 }
@@ -22,32 +22,52 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.addEventListener('click', function(e) {
       if (e.target.classList.contains('clickable-img')) {
           currentImgElement = e.target;
-          fileInput.click();
+          const inputId = e.target.getAttribute('data-input-id'); // 이미지와 연결된 파일 입력 ID 가져오기
+          const fileInput = document.getElementById(inputId);
+          if (fileInput) { // 파일 입력이 존재하는 경우에만 클릭
+              fileInput.click();
+          }
       }
   });
 
   // 파일 입력에 변경 이벤트 리스너 추가
-  fileInput.addEventListener('change', function(event) {
-      const file = event.target.files[0];
-      if (file && currentImgElement) {
-          const reader = new FileReader();
-          reader.onload = function(e) {
-              currentImgElement.src = e.target.result;
-          };
-          reader.readAsDataURL(file);
-      }
-  });
+//  fileInput.addEventListener('change', function(event) {
+//      const file = event.target.files[0];
+//      if (file && currentImgElement) {
+//          const reader = new FileReader();
+//          reader.onload = function(e) {
+//              currentImgElement.src = e.target.result;
+//          };
+//          reader.readAsDataURL(file);
+//      }
+//  });
+    document.body.addEventListener('change', function(event) {
+        if (event.target.matches('input[type="file"]')) { // 파일 입력만 처리
+            const file = event.target.files[0];
+            if (file && currentImgElement) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentImgElement.src = e.target.result; // 이미지 업데이트
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    });
 });
 
-let counter = 1;
-
+let counter = 3;
+let num = 2;
 const add_textbox1 = () => {
   const newId = 'toggleImage' + counter++;
+  const inputId = 'imageInput' + num;
+  const data = 'imageInput' + num++;
+
   const box = document.getElementById("box1");
   const newP = document.createElement('p');
   newP.innerHTML = `
-      <img src='/img/profile.png' alt='Click to change image' id='${newId}' class='clickable-img'>
-      <textarea></textarea>
+      <img src='../image1/MypageIcon/bap.png' alt='Click to change image' id='${newId}' class='clickable-img' data-input-id='${data}'>
+      <input type='file' id='${inputId}' name='stepFiles[]' style='display: none;' accept='image/*' >
+      <textarea name = "stepWays[]"></textarea>
       <input type='button' value='-' onclick='remove1(this)'>
   `;
   box.appendChild(newP);

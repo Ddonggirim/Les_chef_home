@@ -25,7 +25,7 @@
     <div class="rigcontainer">
         <h2>레시피 등록</h2>
         <div class="right">
-            <form action="/List/create" method="post">
+            <form action="/List/create" method="post" enctype="multipart/form-data">
                 <div class="info1">
                     <div class="info">
                         <label>레시피 제목</label>
@@ -66,8 +66,8 @@
                     </div>
 
                     <div class="recipe-image">
-                        <img src="../image1/MypageIcon/bap.png" alt="Click to change image" id="toggleImage1" class="clickable-img">
-                        <input type="file" id="imageInput" name="recipe_Img" style="display: none;" accept="image/*">
+                        <img src="../image1/MypageIcon/bap.png" alt="Click to change image" id="toggleImage1" class="clickable-img" data-input-id="imageInput">
+                        <input type="file" id="imageInput" name="File" style="display: none;" accept="image/*" required>
                     </div>
                 </div>
 
@@ -86,9 +86,12 @@
                     <h3>조리순서</h3>
                     <div class="step">
                         <div id="box1">
-                            <input type="button" value="+" onclick="add_textbox1()">
+                            <img src="../image1/MypageIcon/bap.png" alt="Click to change image" id="toggleImage2" class="clickable-img" data-input-id="imageInput1">
+                            <input type="file" id="imageInput1" name="stepFiles[]" style="display: none;" accept="image/*">
+                            <textarea name = "stepWays[]"></textarea>
                         </div>
                     </div>
+                    <input type="button" value="+" onclick="add_textbox1()">
                 </div>
 
                 <div class="buttons">

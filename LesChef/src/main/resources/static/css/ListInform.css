@@ -92,8 +92,8 @@
 .allicon{
   display: flex;
   position: relative;
-  top: 826px;
-  padding-left: 62%;
+  top: 840px;
+  padding-left: 60%;
   padding-bottom: 15px;
   }
   .allicon img{
@@ -131,7 +131,7 @@
   font-family: 'kopub';
   font-weight: 900px;
   position:relative;
-  top: 747px;
+  top: 760px;
   right: 25%;
   font-size: 50px;
 }

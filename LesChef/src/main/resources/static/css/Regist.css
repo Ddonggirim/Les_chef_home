@@ -141,6 +141,8 @@ input {
   height: auto;
   margin: 37px;
   margin-top: 2px;
+  width: 448px;
+  height: 300px;
 }
 .info1 {
   display: flex;

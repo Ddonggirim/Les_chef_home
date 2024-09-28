@@ -36,9 +36,8 @@
   <span id="sort" th:text="${inform.majorCategory}"></span><br>
   <span id="title" th:text="${inform.recipe_Name}"></span>
   <div id="user">
-    <img src="../image1/ListIcon/사용자.png" width="40px"/><span id="username" th:text="${inform.user_Id}"></span>
+    <img src="../image1/ListIcon/사용자.png" width="40px"/><span id="username" th:text="${inform.userId}"></span>
   </div>
-
   <div>
     <img id="eye" src="../image1/ListIcon/조회수.png"/><p id="eyenum" th:text="${inform.view_Num}"></p>
   </div>
@@ -70,14 +69,14 @@
 
   <!-- 그리드 활용 및 레시피 전체 부분 구현 -->
   <div class="containerwap">
-    <div class="gridcontainer">
-      <img class="script script1"src="../image1/ListIcon/치즈닭갈비1.png"/>
-      <span class="script script2">Step 1</span>
-      <span class="script script3">닭은 껍질을 제거하고, 우유에 30분 정도 담갔다가 물에 헹궈 먹기 좋은 크기로 잘라주세요. 볼에 양념장 재료를 넣고 고루 섞은 후 닭을 넣어 30분 정도 재워주세요.</span>
+    <div class="gridcontainer" th:each="step : ${steps}">
+      <img class="script script1" th:src="@{${step.step_Img}}"/>
+      <span class="script script2" th:text="'Step ' + ${step.step_Num}"></span>
+      <span class="script script3" th:text="${step.step_Way}">닭은 껍질을 제거하고, 우유에 30분 정도 담갔다가 물에 헹궈 먹기 좋은 크기로 잘라주세요. 볼에 양념장 재료를 넣고 고루 섞은 후 닭을 넣어 30분 정도 재워주세요.</span>
 
-      <img class="script script4"src="../image1/ListIcon/치즈닭갈비1.png"/>
-      <span class="script script5">Step 2</span>
-      <span class="script script6">닭은 껍질을 제거하고, 우유에 30분 정도 담갔다가 물에 헹궈 먹기 좋은 크기로 잘라주세요. 볼에 양념장 재료를 넣고 고루 섞은 후 닭을 넣어 30분 정도 재워주세요.</span>
+<!--      <img class="script script4"src="../image1/ListIcon/치즈닭갈비1.png"/>-->
+<!--      <span class="script script5">Step 2</span>-->
+<!--      <span class="script script6">닭은 껍질을 제거하고, 우유에 30분 정도 담갔다가 물에 헹궈 먹기 좋은 크기로 잘라주세요. 볼에 양념장 재료를 넣고 고루 섞은 후 닭을 넣어 30분 정도 재워주세요.</span>-->
     </div>
     <!-- <div class="gridcontainer">     -->
     <!-- <img class="script script1"src="../레시피 아이콘/치즈닭갈비1.png"/>

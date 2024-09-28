@@ -39,7 +39,8 @@ public class NoticeBoardController {
         return "community/Gesigeul";
     }
     @PostMapping("/article/regist")
-    public String uploadImage(@ModelAttribute RecipeArticleForm form, @RequestParam("file")MultipartFile file, HttpSession session, Model model){
+    public String uploadImage(@ModelAttribute RecipeArticleForm form, @RequestParam("file")MultipartFile file,
+                              HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
         String usernickName = currentUser.getNickname();
 //        RecipeArticle article = new RecipeArticle();

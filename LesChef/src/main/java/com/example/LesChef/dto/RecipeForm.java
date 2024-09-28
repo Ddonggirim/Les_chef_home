@@ -36,7 +36,7 @@ public class RecipeForm {
                 .portion(this.portion)
                 .cook_Level(this.cook_Level)
                 .userId(this.userId)
-                .recipe_Img("../image1/ListIcon/recipePic/1seaweedSoupMain.jpg")
+                .recipe_Img(this.recipe_Img)
                 .majorCategory("공유")
                 .sub_Category(null)
                 .build();
