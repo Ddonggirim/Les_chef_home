@@ -38,4 +38,9 @@ public class RecipeArticleService {
         RecipeArticle recipeArticle = form.toEntity();
         recipeArticleRepository.save(recipeArticle);
     }
+
+    public void deleteArticle(Long id){
+        RecipeArticle article_Id = recipeArticleRepository.findById(id).orElse(null);
+        recipeArticleRepository.delete(article_Id);
+    }
 }

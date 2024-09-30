@@ -24,42 +24,64 @@
         </div>
     </div>
     <div class="rigcontainer">
-        <div class="right">
-            <h2>나의 레시피</h2>
-            <div class="tabs">
-                <a class="tab" href="/myrecipe">레시피</a>
-                <a class="tab" href="/myarticle">게시판</a>
-            </div>
-            <div class="comments">
-                <div th:each="myRecipe : ${myRecipes}" class="comment">
-                    <input type="checkbox" class="delete-checkbox">
-                    <a th:href="@{/inform/{id}(id=${myRecipe.recipe_Id})}" id="${myRecipe.article_Id}">
-                        <img src="../image1/MypageIcon/bap.png">
-                    </a>
-                    <div class="comment-text">
-                        <p th:text="${myRecipe.recipe_Name}"><strong></strong></p>
-                        <p th:text="'작성일: ' + ${myRecipe.write_Date}"><strong></strong></p>
-                        <p th:text="'조회수:' + ${myRecipe.view_Num}"><strong></strong></p>
+            <div class="right">
+                <h2>나의 레시피</h2>
+                <div class="tabs">
+                    <a class="tab" href="/myrecipe">레시피</a>
+                    <a class="tab" href="/myarticle">게시판</a>
+                </div>
+                <div class="comments">
+                    <div th:each="myRecipe : ${myRecipes}" class="comment">
+                        <a th:href="@{/inform/{id}(id=${myRecipe.recipe_Id})}">
+                            <img th:src="@{${myRecipe.recipe_Img}}">
+                        </a>
+                        <div class="buttons">
+
+                                <div class="editdeleteBtn">
+                                    <form>
+                                        <button class="editButton">수정 </button>
+                                    </form>
+                                    <span>|</span>
+                                    <form method="post" th:action="@{/recipe/delete/{id}(id=${myRecipe.recipe_Id})}">
+                                        <button type="submit" class="deleteBtn"> 삭제</button>
+                                    </form>
+                                </div>
+                            <div class="comment-text">
+                                <p th:text="'레시피: ' + ${myRecipe.recipe_Name}"><strong></strong></p>
+                                <p th:text="'작성일: ' + ${myRecipe.write_Date}"><strong></strong></p>
+                                <p th:text="'조회수: ' + ${myRecipe.view_Num}"><strong></strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:each="myArticle : ${myArticles}" class="comment">
+                        <a th:href="@{/article/{id}(id=${myArticle.article_Id})}">
+                            <img th:src="@{${myArticle.article_Img}}">
+                        </a>
+                        <div class="buttons">
+                                <div class="editdeleteBtn">
+                                    <form>
+                                        <button class="editButton">수정 </button>
+                                    </form>
+                                    <span>|</span>
+                                    <form method="post" th:action="@{/article/delete/{id}(id=${myArticle.article_Id})}">
+                                        <button type="submit" class="deleteBtn"> 삭제</button>
+                                    </form>
+                                </div>
+                            <div class="comment-text">
+                                <p th:text="'게시글: ' + ${myArticle.article_Title}"><strong></strong></p>
+                                <p th:text="'작성일: ' + ${myArticle.write_Date}"><strong></strong></p>
+                                <p th:text="'조회수: ' + ${myArticle.view_Num}"><strong></strong></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div th:each="myArticle : ${myArticles}" class="comment">
-                    <input type="checkbox" class="delete-checkbox">
-                    <a th:href="@{/article/{id}(id=${myArticle.article_Id})}" id="${myArticle.article_Id}">
-                        <img th:src="@{${myArticle.article_Img}}">
-                    </a>
-                    <div class="comment-text">
-                        <p th:text="${myArticle.article_Title}"><strong></strong></p>
-<!--                        <p th:text="'작성일: ' + ${myRecipe.write_Date}"><strong></strong></p>-->
-<!--                        <p th:text="'조회수:' + ${myRecipe.view_Num}"><strong></strong></p>-->
-                    </div>
-                </div>
             </div>
-        </div>
-        <div class="buttons">
-            <button type="button" href="#">수정</button>
-<!--            <button type="submit" class="delete-button">삭제</button>-->
-            <button type="submit" action>삭제</button>
-        </div>
+<!--            <div class="buttons">-->
+<!--                <button type="button" href="#">수정</button>-->
+<!--    &lt;!&ndash;            <button type="submit" class="delete-button">삭제</button>&ndash;&gt;-->
+<!--                <button type="submit" id="getSelectedIds" onclick="deletePosts()">삭제</button>-->
+<!--                <div id="result"></div>-->
+<!--            </div>-->
     </div>
 </div>
 <div class="lock">

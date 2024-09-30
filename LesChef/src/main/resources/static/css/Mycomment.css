@@ -159,16 +159,31 @@ input {
   margin: 0 0 5px 0;
 }
 
-.buttons {
+.editdeleteBtn{
+  position: absolute;
+  left: 472px;
+  bottom: 93px;
+  width: 70px;
+}
+
+.buttons{
+ position: relative;
+}
+.buttons button{
+ border:0px;
+ background-color: transparent;
+ font-size: 13px;
+}
+/*.buttons {
   display: flex;
-  /* justify-content: space-between; */
-  /* margin-left: 150px; */
+  *//* justify-content: space-between; *//*
+  *//* margin-left: 150px; *//*
 }
 
 .buttons button {
   width: 4vw;
   height: 5vh;
-  /* padding: 10px 20px; */
+  *//* padding: 10px 20px; *//*
   border: none;
   cursor: pointer;
   background-color: #e69550;
@@ -179,7 +194,7 @@ input {
 
 button:hover {
   background-color: #e69550;
-}
+}*/
 
 a {
   text-decoration: none;

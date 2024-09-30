@@ -18,7 +18,7 @@ public class RecipeArticleForm {
     private String article_Sub_Title;
     private String article_Img;
     private String content;
-    private Date wrtie_Date;
+    private Date write_Date;
     private Long view_Num;
 
     public RecipeArticle toEntity(){

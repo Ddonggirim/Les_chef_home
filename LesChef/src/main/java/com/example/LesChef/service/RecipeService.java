@@ -44,4 +44,9 @@ public class RecipeService {
                 .map(Recipe::toForm)
                 .collect(Collectors.toList());
     }
+
+    public void deleteRecipe(Long id){
+        Recipe recipe_Id = recipeRepository.findById(id).orElse(null);
+        recipeRepository.delete(recipe_Id);
+    }
 }

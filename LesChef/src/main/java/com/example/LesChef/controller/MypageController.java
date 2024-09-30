@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -74,5 +75,16 @@ public class MypageController {
         log.info("article요청2");
         model.addAttribute("myArticles", recipeArticleForms);
         return "mypage/Myrecipe";
+    }
+
+    @PostMapping("/recipe/delete/{id}")
+    public String delRecipe(@PathVariable("id") Long id){
+        recipeService.deleteRecipe(id);
+        return "redirect:/myrecipe";
+    }
+    @PostMapping("/article/delete/{id}")
+    public String delArticle(@PathVariable("id") Long id){
+        recipeArticleService.deleteArticle(id);
+        return "redirect:/myarticle";
     }
 }
