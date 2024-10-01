@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../css/ListInform.css">
   <link rel="stylesheet" href="../css/font.css">
   <link rel="stylesheet" href="../css/LoginModal.css">
-  <title th:text="${inform.recipe_Name}"></title>
+  <title th:text="${inform.recipeName}"></title>
 </head>
 <body>
 <header>
@@ -33,17 +33,17 @@
 </header>
 <main>
   <!-- 메인 사진 윗 부분 -->
-  <span id="sort" th:text="${inform.majorCategory} + '>' + ${inform.sub_Category}">한식 > 볶음류</span><br>
-  <span id="title" th:text="${inform.recipe_Name}"></span>
+  <span id="sort" th:text="${inform.majorCategory} + '>' + ${inform.subCategory}">한식 > 볶음류</span><br>
+  <span id="title" th:text="${inform.recipeName}"></span>
   <div>
-    <img id="eye" src="../image1/ListIcon/조회수.png"/><p id="eyenum" th:text="${inform.view_Num}"></p>
+    <img id="eye" src="../image1/ListIcon/조회수.png"/><p id="eyenum" th:text="${inform.viewNum}"></p>
   </div>
-  <img id="mainimg" th:src="@{${inform.recipe_Img}}">
+  <img id="mainimg" th:src="@{${inform.recipeImg}}">
 
   <div id="cell">
       <span>재료 준비</span>
       <div th:each="ingredient : ${ingredients}">
-        <p th:text="${ingredient.ingredient_Name} + ' ' +  ${ingredient.ingredient_Volume}"></p>
+        <p th:text="${ingredient.ingredientName} + ' ' +  ${ingredient.ingredientVolume}"></p>
       </div>
   </div>
   <div class="aside">
@@ -54,8 +54,8 @@
   <!-- 메인 사진 아랫 부분 -->
   <div class="allicon">
     <div class="selecticon"><img  src="../image1/ListIcon/인원.png"><span th:text="${inform.portion}"></span></div>
-    <div class="selecticon"><img id="selecticon2" src="../image1/ListIcon/시계.png"><span th:text="${inform.run_Time}"></span></div>
-    <div class="selecticon "><img src="../image1/ListIcon/난이도.png"><span id="selecticon3" th:text="${inform.cook_Level}"></span></div>
+    <div class="selecticon"><img id="selecticon2" src="../image1/ListIcon/시계.png"><span th:text="${inform.runTime}"></span></div>
+    <div class="selecticon "><img src="../image1/ListIcon/난이도.png"><span id="selecticon3" th:text="${inform.cookLevel}"></span></div>
   </div>
 
   <img id="line1" src="../image1/ListIcon/인포선.png">
@@ -66,41 +66,14 @@
   <!-- 그리드 활용 및 레시피 전체 부분 구현 -->
   <div class="containerwap">
     <div class="gridcontainer" th:each="step : ${steps}">
-      <img class="script script1" th:src="@{${step.step_Img}}"/>
-      <span class="script script2" th:text="'Step ' + ${step.step_Num}"></span>
-      <span class="script script3" th:text="${step.step_Way}"></span>
+      <img class="script script1" th:src="@{${step.stepImg}}"/>
+      <span class="script script2" th:text="'Step ' + ${step.stepNum}"></span>
+      <span class="script script3" th:text="${step.stepWay}"></span>
 
 <!--      <img class="script script4"src="../image1/ListIcon/치즈닭갈비1.png"/>-->
 <!--      <span class="script script5">Step 2</span>-->
 <!--      <span class="script script6">닭은 껍질을 제거하고, 우유에 30분 정도 담갔다가 물에 헹궈 먹기 좋은 크기로 잘라주세요. 볼에 양념장 재료를 넣고 고루 섞은 후 닭을 넣어 30분 정도 재워주세요.</span>-->
     </div>
-    <!-- <div class="gridcontainer">   변수 반복했을 시 연습 용
-      <img class="script script1"src="../레시피 아이콘/치즈닭갈비1.png"/>
-      <span class="script script2">Step 1</span>
-      <span class="script script3">닭은 껍질을 제거하고, 우유에 30분 정도 담갔다가 물에 헹궈 먹기 좋은 크기로 잘라주세요. 볼에 양념장 재료를 넣고 고루 섞은 후 닭을 넣어 30분 정도 재워주세요.</span>
-
-      <img class="script script4"src="../레시피 아이콘/치즈닭갈비1.png"/>
-      <span class="script script5">Step 2</span>
-      <span class="script script6">닭은 껍질을 제거하고, 우유에 30분 정도 담갔다가 물에 헹궈 먹기 좋은 크기로 잘라주세요. 볼에 양념장 재료를 넣고 고루 섞은 후 닭을 넣어 30분 정도 재워주세요.</span>
-    </div>
-    <div class="gridcontainer">
-      <img class="script script1"src="../레시피 아이콘/치즈닭갈비1.png"/>
-      <span class="script script2">Step 1</span>
-      <span class="script script3">닭은 껍질을 제거하고, 우유에 30분 정도 담갔다가 물에 헹궈 먹기 좋은 크기로 잘라주세요. 볼에 양념장 재료를 넣고 고루 섞은 후 닭을 넣어 30분 정도 재워주세요.</span>
-
-      <img class="script script4"src="../레시피 아이콘/치즈닭갈비1.png"/>
-      <span class="script script5">Step 2</span>
-      <span class="script script6">닭은 껍질을 제거하고, 우유에 30분 정도 담갔다가 물에 헹궈 먹기 좋은 크기로 잘라주세요. 볼에 양념장 재료를 넣고 고루 섞은 후 닭을 넣어 30분 정도 재워주세요.</span>
-    </div>
-    <div class="gridcontainer">
-      <img class="script script1"src="../레시피 아이콘/치즈닭갈비1.png"/>
-      <span class="script script2">Step 1</span>
-      <span class="script script3">닭은 껍질을 제거하고, 우유에 30분 정도 담갔다가 물에 헹궈 먹기 좋은 크기로 잘라주세요. 볼에 양념장 재료를 넣고 고루 섞은 후 닭을 넣어 30분 정도 재워주세요.</span>
-
-      <img class="script script4"src="../레시피 아이콘/치즈닭갈비1.png"/>
-      <span class="script script5">Step 2</span>
-      <span class="script script6">닭은 껍질을 제거하고, 우유에 30분 정도 담갔다가 물에 헹궈 먹기 좋은 크기로 잘라주세요. 볼에 양념장 재료를 넣고 고루 섞은 후 닭을 넣어 30분 정도 재워주세요.</span>
-    </div> -->
   </div>
 
   <!-- 댓글 및 평점 기능 -->
@@ -118,14 +91,14 @@
 
   <!-- 댓글 조회 -->
   <div id="comentcontainer">
-    <div class="comentbox">
+    <div th:each="comment : ${comments}" class="comentbox">
       <div class="coment">
-        <img class="comentimg" src="../image1/ListIcon/사용자.png" /><span class="comentnickname">by 사용자1</span>
+        <img class="comentimg" src="../image1/ListIcon/사용자.png" /><span class="comentnickname" th:text="${comment.commenter}"></span>
         <div class="allstar">
-          <img class="comentstar" src="../image1/ListIcon/사용자별.png"/><img class="comentstar" src="../image1/ListIcon/사용자별.png"/><img class="comentstar" src="../image1/ListIcon/사용자별.png"/><img class="comentstar" src="../image1/ListIcon/사용자반별.png"/><img class="comentstar" src="../image1/ListIcon/사용자빈별.png"/> <span>2024-05-28 20:28:55</span>
+          <img class="comentstar" src="../image1/ListIcon/사용자별.png"/><img class="comentstar" src="../image1/ListIcon/사용자별.png"/><img class="comentstar" src="../image1/ListIcon/사용자별.png"/><img class="comentstar" src="../image1/ListIcon/사용자반별.png"/><img class="comentstar" src="../image1/ListIcon/사용자빈별.png"/><span th:text="${comment.writeDate}"></span>
         </div>
       </div>
-      <span class="comenttext">뭐라써야할까 난 잘 몰르겠넹 아 집 가고 싶아</span><hr width="600px">
+      <span th:text="${comment.commentContent}" class="comenttext"></span><hr width="600px">
     </div>
     <!-- 반복시 연습 용 -->
     <!-- <div class="comentbox">
@@ -150,16 +123,18 @@
 
   <!-- 댓글 작성 -->
   <div id="reviewcontainer">
-    <span id="review">후기 작성</span>
-    <div id="starcontainer">
-      <img class="countingstar" star="1" src="../image1/ListIcon/사용자별.png"/>
-      <img class="countingstar" star="2" src="../image1/ListIcon/사용자빈별.png"/>
-      <img class="countingstar" star="3" src="../image1/ListIcon/사용자빈별.png"/>
-      <img class="countingstar" star="4" src="../image1/ListIcon/사용자빈별.png"/>
-      <img class="countingstar" star="5" src="../image1/ListIcon/사용자빈별.png"/>
-      <button id="resist">write</button>
-    </div>
-    <textarea id="areasize"></textarea>
+    <form method="post" th:action="@{/inform/{id}/comment(id=${inform.recipeId})}">
+      <span id="review">후기 작성</span>
+      <div id="starcontainer">
+        <img class="countingstar" star="1" src="../image1/ListIcon/사용자별.png"/>
+        <img class="countingstar" star="2" src="../image1/ListIcon/사용자빈별.png"/>
+        <img class="countingstar" star="3" src="../image1/ListIcon/사용자빈별.png"/>
+        <img class="countingstar" star="4" src="../image1/ListIcon/사용자빈별.png"/>
+        <img class="countingstar" star="5" src="../image1/ListIcon/사용자빈별.png"/>
+        <button type="submit" id="resist">write</button>
+      </div>
+      <textarea id="areasize" name="commentContent" required></textarea>
+    </form>
   </div>
 
 

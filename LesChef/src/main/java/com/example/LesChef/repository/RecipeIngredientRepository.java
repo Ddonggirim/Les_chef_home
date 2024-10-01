@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface RecipeIngredientRepository extends JpaRepository<RecipeIngredient, Long> {
-    @Query(value = "select * from Recipe_Ingredient where Recipe_Id = :recipe_Id", nativeQuery = true)
-    List<RecipeIngredient> findByRecipeId(Long recipe_Id);
+    @Query(value = "select * from Recipe_Ingredient where Recipe_Id = :recipeId", nativeQuery = true)
+    List<RecipeIngredient> findByRecipeId(Long recipeId);
 }
 

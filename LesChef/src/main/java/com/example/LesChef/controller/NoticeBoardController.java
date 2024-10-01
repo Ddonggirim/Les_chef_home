@@ -42,13 +42,13 @@ public class NoticeBoardController {
     public String uploadImage(@ModelAttribute RecipeArticleForm form, @RequestParam("file")MultipartFile file,
                               HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
-        String usernickName = currentUser.getNickname();
+        String userNickName = currentUser.getNickname();
 //        RecipeArticle article = new RecipeArticle();
 //        article.setUser_nickName(usernickName);
 //        article.setArticle_Title(form.getArticle_Title());
 //        article.setArticle_Sub_Title(form.getArticle_Sub_Title());
 //        article.setContent(form.getContent());
-        form.setUser_nickName(usernickName);
+        form.setUserNickName(userNickName);
         log.info("여기까지옴");
         try {
             String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename(); //uploads의 절대경로 (상대경로x)
@@ -57,7 +57,7 @@ public class NoticeBoardController {
             File dest = new File(filePath);
             file.transferTo(dest);
             log.info("여기까지옴2");
-            form.setArticle_Img("../uploads/" + file.getOriginalFilename());
+            form.setArticleImg("../uploads/" + file.getOriginalFilename());
             recipeArticleService.createArticle(form);
 //            recipeArticleRepository.save(form);
         } catch (IOException e) {

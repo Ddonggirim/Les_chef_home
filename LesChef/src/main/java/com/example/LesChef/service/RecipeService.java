@@ -35,7 +35,7 @@ public class RecipeService {
 
         Recipe recipe = form.toEntity();
         recipeRepository.save(recipe);
-        return recipe.getRecipe_Id();
+        return recipe.getRecipeId();
     }
 
     public List<RecipeForm> getMyRecipeList(String userId){
@@ -46,7 +46,7 @@ public class RecipeService {
     }
 
     public void deleteRecipe(Long id){
-        Recipe recipe_Id = recipeRepository.findById(id).orElse(null);
-        recipeRepository.delete(recipe_Id);
+        Recipe recipeId = recipeRepository.findById(id).orElse(null);
+        recipeRepository.delete(recipeId);
     }
 }

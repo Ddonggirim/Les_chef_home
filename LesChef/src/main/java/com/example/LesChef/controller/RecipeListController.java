@@ -1,15 +1,12 @@
 package com.example.LesChef.controller;
 
 import com.example.LesChef.dto.*;
-import com.example.LesChef.entity.Customer;
-import com.example.LesChef.entity.RecipeIngredient;
-import com.example.LesChef.entity.RecipeStep;
+import com.example.LesChef.entity.*;
+import com.example.LesChef.repository.RecipeCommentRepository;
 import com.example.LesChef.repository.RecipeIngredientRepository;
+import com.example.LesChef.repository.RecipeRepository;
 import com.example.LesChef.repository.RecipeStepRepository;
-import com.example.LesChef.service.RecipeIngredientService;
-import com.example.LesChef.service.RecipeService;
-import com.example.LesChef.service.RecipeStepService;
-import com.example.LesChef.service.RecipecategoryService;
+import com.example.LesChef.service.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +36,11 @@ public class RecipeListController {
 
     private final RecipeStepRepository recipeStepRepository;
 
+    private final RecipeRepository recipeRepository;
+
+    private final RecipeCommentService commentService;
+
+    private final RecipeCommentRepository CommentRepository;
     @GetMapping("/List/Korean") //한식레시피 모음
     public String korean(Model model){
         RecipecategoryForm recipecategoryForm = recipecategoryService.findCategory("한식");
@@ -103,17 +105,23 @@ public class RecipeListController {
             RecipeForm recipeInform = recipeService.getRecipeInform(id);
             List<RecipeStepForm> steps = recipeStepService.getRecipeStep(id);
             List<RecipeIngredientForm> ingredients = recipeIngredientService.getIngredient(id);
+            List<RecipeCommentForm> comments = commentService.getCommentList(id);
+            log.info("comments는 " + comments.isEmpty());
             model.addAttribute("inform", recipeInform);
             model.addAttribute("steps", steps);
             model.addAttribute("ingredients", ingredients);
+            model.addAttribute("comments", comments);
             return "recipe/informShare";
         }
         RecipeForm recipeInform = recipeService.getRecipeInform(id);
         List<RecipeStepForm> steps = recipeStepService.getRecipeStep(id);
         List<RecipeIngredientForm> ingredients = recipeIngredientService.getIngredient(id);
+        List<RecipeCommentForm> comments = commentService.getCommentList(id);
+        log.info("comments는 " + comments.isEmpty());
         model.addAttribute("inform", recipeInform);
         model.addAttribute("steps", steps);
         model.addAttribute("ingredients", ingredients);
+        model.addAttribute("comments", comments);
         return "recipe/inform";
     }
 
@@ -140,7 +148,7 @@ public class RecipeListController {
             File dest = new File(filePath);
             file.transferTo(dest);
             log.info("여기까지옴2");
-            recipeForm.setRecipe_Img("../uploads/" + file.getOriginalFilename());
+            recipeForm.setRecipeImg("../uploads/" + file.getOriginalFilename());
 
         } catch (IOException e) {}
         Long recipeId = recipeService.createRecipe(recipeForm);
@@ -152,11 +160,11 @@ public class RecipeListController {
                 log.info("step의 이미지 경로: " + stepFilePath);
                 File stepDest = new File(stepFilePath);
                 stepFile.get(i).transferTo(stepDest);
-                recipeStep.setRecipe_Id(recipeId);
+                recipeStep.setRecipeId(recipeId);
 //                recipeStep.setStep_Img(stepImgs.get(i));
-                recipeStep.setStep_Img("../uploads/" + stepFile.get(i).getOriginalFilename());
-                recipeStep.setStep_Way(stepWays.get(i));
-                recipeStep.setStep_Num(i+1L);
+                recipeStep.setStepImg("../uploads/" + stepFile.get(i).getOriginalFilename());
+                recipeStep.setStepWay(stepWays.get(i));
+                recipeStep.setStepNum(i+1L);
                 recipeStepRepository.save(recipeStep);
             }
         } catch (IOException e) {}
@@ -168,14 +176,28 @@ public class RecipeListController {
             for(int i = 0; i < ingredients.size(); i++){
                 RecipeIngredient recipeIngredient = new RecipeIngredient();
                 log.info("재료 이름:"+ingredients.get(i));
-                recipeIngredient.setRecipe_Id(recipeId);
-                recipeIngredient.setIngredient_Name(ingredients.get(i));
-                recipeIngredient.setIngredient_Volume(quantities.get(i));
+                recipeIngredient.setRecipeId(recipeId);
+                recipeIngredient.setIngredientName(ingredients.get(i));
+                recipeIngredient.setIngredientVolume(quantities.get(i));
                 recipeIngredientRepository.save(recipeIngredient);
             }
         return "redirect:/main";
 
 
+    }
+    @PostMapping("/inform/{id}/comment")
+    public String addComment(@PathVariable("id") Long id, @ModelAttribute RecipeCommentForm commentForm,
+                             HttpSession session){
+        Customer currentUser = (Customer)session.getAttribute("customer");
+        String userNickName = currentUser.getNickname();
+
+        Recipe recipe = recipeRepository.findById(id).orElse(null);
+        commentForm.setRecipe(recipe);
+        commentForm.setCommenter(userNickName);
+        RecipeComment comment = commentForm.toEntity();
+        CommentRepository.save(comment);
+
+        return "redirect:/main";
     }
 
 }

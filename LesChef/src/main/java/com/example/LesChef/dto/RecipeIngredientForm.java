@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class RecipeIngredientForm {
-    private Long recipe_Ingredient_Id;
-    private Long recipe_Id;
-    private String ingredient_Name;
-    private String ingredient_Volume;
+    private Long recipeIngredientId;
+    private Long recipeId;
+    private String ingredientName;
+    private String ingredientVolume;
 
 }

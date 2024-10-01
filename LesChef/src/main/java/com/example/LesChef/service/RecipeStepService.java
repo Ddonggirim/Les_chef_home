@@ -15,7 +15,7 @@ public class RecipeStepService {
     private final RecipeStepRepository recipeStepRepository;
 
     public List<RecipeStepForm> getRecipeStep(Long id){
-        List<RecipeStep> recipeSteps = recipeStepRepository.findByRecipe_Id(id);
+        List<RecipeStep> recipeSteps = recipeStepRepository.findByRecipeId(id);
         return recipeSteps.stream()
                 .map(RecipeStep::toForm)
                 .collect(Collectors.toList());

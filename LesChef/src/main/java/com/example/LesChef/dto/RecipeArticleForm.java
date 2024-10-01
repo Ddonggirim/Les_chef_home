@@ -12,24 +12,24 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class RecipeArticleForm {
-    private Long article_Id;
-    private String user_nickName;
-    private String article_Title;
-    private String article_Sub_Title;
-    private String article_Img;
+    private Long articleId;
+    private String userNickName;
+    private String articleTitle;
+    private String articleSubTitle;
+    private String articleImg;
     private String content;
-    private Date write_Date;
-    private Long view_Num;
+    private Date writeDate;
+    private Long viewNum;
 
     public RecipeArticle toEntity(){
         return RecipeArticle.builder()
-                .user_nickName(this.user_nickName)
-                .article_Title(this.article_Title)
-                .article_Sub_Title(this.article_Sub_Title)
-                .article_Img(this.article_Img)
+                .userNickName(this.userNickName)
+                .articleTitle(this.articleTitle)
+                .articleSubTitle(this.articleSubTitle)
+                .articleImg(this.articleImg)
                 .content(this.content)
-                .write_Date(Date.valueOf(LocalDate.now()))
-                .view_Num(0L)
+                .writeDate(Date.valueOf(LocalDate.now()))
+                .viewNum(0L)
                 .build();
     }
 }

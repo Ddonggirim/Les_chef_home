@@ -17,19 +17,19 @@ import lombok.NoArgsConstructor;
 public class Recipecategory {
     @Id
     @Column(name = "KOREAN_NAME")
-    private String korean_Name;
+    private String koreanName;
     @Column(name= "ENGLISH_NAME")
-    private String english_Name;
+    private String englishName;
     @Column(name= "HEAD_IMG")
-    private String head_Img;
+    private String headImg;
     @Column(name= "SORT_ONE")
-    private String sort_One;
+    private String sortOne;
     @Column(name= "SORT_TWO")
-    private String sort_Two;
+    private String sortTwo;
     @Column(name= "SORT_THREE")
-    private String sort_Three;
+    private String sortThree;
 
     public RecipecategoryForm toForm(){
-        return new RecipecategoryForm(this.korean_Name, this.english_Name, this.head_Img, this.sort_One, this.sort_Two, this.sort_Three);
+        return new RecipecategoryForm(this.koreanName, this.englishName, this.headImg, this.sortOne, this.sortTwo, this.sortThree);
     }
 }

@@ -8,9 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RecipeStepForm {
-    private Long recipe_Step_Id;
-    private Long recipe_Id;
-    private Long step_Num;
-    private String step_Way;
-    private String step_Img;
+    private Long recipeStepId;
+    private Long recipeId;
+    private Long stepNum;
+    private String stepWay;
+    private String stepImg;
 }

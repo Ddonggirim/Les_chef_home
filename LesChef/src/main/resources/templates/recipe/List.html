@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../css/LIst.css">
   <link rel="stylesheet" href="../css/font.css">
   <link rel="stylesheet" href="../css/LoginModal.css">
-  <title th:text="${category.korean_Name}">Recipe List</title>
+  <title th:text="${category.koreanName}">Recipe List</title>
 </head>
 <body>
 <header>
@@ -34,17 +34,17 @@
 <main>
   <!-- 이미지, 카테고리 텍스트 -->
   <div id="onimg">
-    <img th:src="@{${category.head_Img}}" alt="Category Image"/>
-    <span id="ontext" th:text="${category.english_Name}">Western Food</span>
+    <img th:src="@{${category.headImg}}" alt="Category Image"/>
+    <span id="ontext" th:text="${category.englishName}">Western Food</span>
   </div>
 
   <!-- 세부 카테고리 텍스트 및 버튼  -->
   <div id="decategory">
-    <span class="subcategory" style=" color:black" th:if="${category.sort_One != null}">전체보기</span>
-    <span class="subcategory" th:text="${category.sort_One}">국물류 </span>
-    <span class="subcategory" th:text="${category.sort_Two}">볶음류 </span>
-    <span class="subcategory" th:text="${category.sort_Three}">튀김류 </span>
-    <span class="subcategory" th:if="${category.sort_One != null}">기타</span>
+    <span class="subcategory" style=" color:black" th:if="${category.sortOne != null}">전체보기</span>
+    <span class="subcategory" th:text="${category.sortOne}">국물류 </span>
+    <span class="subcategory" th:text="${category.sortTwo}">볶음류 </span>
+    <span class="subcategory" th:text="${category.sortThree}">튀김류 </span>
+    <span class="subcategory" th:if="${category.sortOne != null}">기타</span>
 
     <button class="listbutton">최신순</button>
     <button class="listbutton">조회순</button>
@@ -58,11 +58,11 @@
   <div id="listwrap">
     <!-- ---------------------변수로 바꿀시 밑 부분제외, 이 부분 반복 뿌리기 -------------------------------------------------------- -->
     <div th:each="recipe : ${recipes}" class="listmain">
-      <a th:href="@{/inform/{id}(id=${recipe.recipe_Id})}">
-        <img class="listimg" th:src="@{${recipe.recipe_Img}}">
-        <h3 th:text="${recipe.recipe_Name}"></h3>
-        <ul class="listcontent"><img class="icon" src="../image1/ListIcon/마이페이지.png" width="25"/><li class="nickname">by 닉네임</li><li class="timeset">소요시간</li><li class="runtime" th:text="${recipe.run_Time}"></li></ul>
-        <ul class="submix"> <img class="star" src="../image1/ListIcon/평점.png"><li class="everage">평점 4.5</li><img class="eye" src="../image1/ListIcon/조회수.png"><li class="eyenumber" th:text="${recipe.view_Num}"></li></ul>
+      <a th:href="@{/inform/{id}(id=${recipe.recipeId})}">
+        <img class="listimg" th:src="@{${recipe.recipeImg}}">
+        <h3 th:text="${recipe.recipeName}"></h3>
+        <ul class="listcontent"><img class="icon" src="../image1/ListIcon/마이페이지.png" width="25"/><li class="nickname">by 닉네임</li><li class="timeset">소요시간</li><li class="runtime" th:text="${recipe.runTime}"></li></ul>
+        <ul class="submix"> <img class="star" src="../image1/ListIcon/평점.png"><li class="everage">평점 4.5</li><img class="eye" src="../image1/ListIcon/조회수.png"><li class="eyenumber" th:text="${recipe.viewNum}"></li></ul>
       </a>
     </div>
 

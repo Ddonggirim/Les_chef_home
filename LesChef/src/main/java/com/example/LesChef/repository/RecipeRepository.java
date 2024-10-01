@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
-    List<Recipe> findByMajorCategory(String major_Category);
-    @Query(value = "select * from Recipe where user_Id = :user_Id", nativeQuery = true)
-    List<Recipe> findMyRecipe(String user_Id);
+    List<Recipe> findByMajorCategory(String majorCategory);
+    @Query(value = "select * from Recipe where user_Id = :userId", nativeQuery = true)
+    List<Recipe> findMyRecipe(String userId);
 }

@@ -27,8 +27,8 @@ public class RecipeArticleService {
         return recipeArticle.toForm();
     }
 
-    public List<RecipeArticleForm> getMyArticleList(String usernickName){
-        List<RecipeArticle> myArticles = recipeArticleRepository.findMyArticle(usernickName);
+    public List<RecipeArticleForm> getMyArticleList(String userNickName){
+        List<RecipeArticle> myArticles = recipeArticleRepository.findMyArticle(userNickName);
         return myArticles.stream()
                 .map(RecipeArticle::toForm)
                 .collect(Collectors.toList());
@@ -40,7 +40,7 @@ public class RecipeArticleService {
     }
 
     public void deleteArticle(Long id){
-        RecipeArticle article_Id = recipeArticleRepository.findById(id).orElse(null);
-        recipeArticleRepository.delete(article_Id);
+        RecipeArticle articleId = recipeArticleRepository.findById(id).orElse(null);
+        recipeArticleRepository.delete(articleId);
     }
 }

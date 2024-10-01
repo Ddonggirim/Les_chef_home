@@ -15,30 +15,30 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class RecipeForm {
-    private Long recipe_Id;
-    private String recipe_Name;
-    private Long view_Num;
-    private Date write_Date; /*Date*/
-    private String run_Time;
+    private Long recipeId;
+    private String recipeName;
+    private Long viewNum;
+    private Date writeDate; /*Date*/
+    private String runTime;
     private String portion;/*몇인분*/
-    private String cook_Level;
+    private String cookLevel;
     private String userId;
-    private String recipe_Img;
+    private String recipeImg;
     private String majorCategory;
-    private String sub_Category;
+    private String subCategory;
 
     public Recipe toEntity() {
         return Recipe.builder()
-                .recipe_Name(this.recipe_Name)
-                .view_Num(0L)
-                .write_Date(Date.valueOf(LocalDate.now()))
-                .run_Time(this.run_Time)
+                .recipeName(this.recipeName)
+                .viewNum(0L)
+                .writeDate(Date.valueOf(LocalDate.now()))
+                .runTime(this.runTime)
                 .portion(this.portion)
-                .cook_Level(this.cook_Level)
+                .cookLevel(this.cookLevel)
                 .userId(this.userId)
-                .recipe_Img(this.recipe_Img)
+                .recipeImg(this.recipeImg)
                 .majorCategory("공유")
-                .sub_Category(null)
+                .subCategory(null)
                 .build();
     }
 }

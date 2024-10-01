@@ -7,14 +7,14 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class RecipecategoryForm {
-    private String korean_Name;
-    private String english_Name;
-    private String head_Img;
-    private String sort_One;
-    private String sort_Two;
-    private String sort_Three;
+    private String koreanName;
+    private String englishName;
+    private String headImg;
+    private String sortOne;
+    private String sortTwo;
+    private String sortThree;
 
     public Recipecategory toEntity(){
-        return new Recipecategory(korean_Name, english_Name, head_Img, sort_One, sort_Two, sort_Three);
+        return new Recipecategory(koreanName, englishName, headImg, sortOne, sortTwo, sortThree);
     }
 }

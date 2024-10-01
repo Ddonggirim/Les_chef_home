@@ -16,31 +16,31 @@ public class RecipeArticle {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "article_id_seq")
     @SequenceGenerator(name = "article_id_seq", sequenceName = "article_id_seq", initialValue = 1, allocationSize = 1)
-    private Long article_Id;
-    private String user_nickName;
-    private String article_Title;
-    private String article_Sub_Title;
-    private String article_Img;
+    private Long articleId;
+    private String userNickName;
+    private String articleTitle;
+    private String articleSubTitle;
+    private String articleImg;
     private String content;
-    private Date write_Date;
-    private Long view_Num;
+    private Date writeDate;
+    private Long viewNum;
 
 
     @Builder
-    public RecipeArticle(String user_nickName, String article_Title, String article_Sub_Title,
-                         String article_Img, String content, Date write_Date, Long view_Num){
-        this.user_nickName = user_nickName;
-        this.article_Title = article_Title;
-        this.article_Sub_Title = article_Sub_Title;
-        this.article_Img = article_Img;
+    public RecipeArticle(String userNickName, String articleTitle, String articleSubTitle,
+                         String articleImg, String content, Date writeDate, Long viewNum){
+        this.userNickName = userNickName;
+        this.articleTitle = articleTitle;
+        this.articleSubTitle = articleSubTitle;
+        this.articleImg = articleImg;
         this.content = content;
-        this.write_Date = write_Date;
-        this.view_Num = view_Num;
+        this.writeDate = writeDate;
+        this.viewNum = viewNum;
     }
 
     public RecipeArticleForm toForm(){
-        return new RecipeArticleForm(this.article_Id, this.user_nickName, this.article_Title,
-                this.article_Sub_Title, this.article_Img, this.content, this.write_Date, this.view_Num);
+        return new RecipeArticleForm(this.articleId, this.userNickName, this.articleTitle,
+                this.articleSubTitle, this.articleImg, this.content, this.writeDate, this.viewNum);
     }
 
 }

@@ -32,8 +32,8 @@
                 </div>
                 <div class="comments">
                     <div th:each="myRecipe : ${myRecipes}" class="comment">
-                        <a th:href="@{/inform/{id}(id=${myRecipe.recipe_Id})}">
-                            <img th:src="@{${myRecipe.recipe_Img}}">
+                        <a th:href="@{/inform/{id}(id=${myRecipe.recipeId})}">
+                            <img th:src="@{${myRecipe.recipeImg}}">
                         </a>
                         <div class="buttons">
 
@@ -42,20 +42,20 @@
                                         <button class="editButton">수정 </button>
                                     </form>
                                     <span>|</span>
-                                    <form method="post" th:action="@{/recipe/delete/{id}(id=${myRecipe.recipe_Id})}">
+                                    <form method="post" th:action="@{/recipe/delete/{id}(id=${myRecipe.recipeId})}">
                                         <button type="submit" class="deleteBtn"> 삭제</button>
                                     </form>
                                 </div>
                             <div class="comment-text">
-                                <p th:text="'레시피: ' + ${myRecipe.recipe_Name}"><strong></strong></p>
-                                <p th:text="'작성일: ' + ${myRecipe.write_Date}"><strong></strong></p>
-                                <p th:text="'조회수: ' + ${myRecipe.view_Num}"><strong></strong></p>
+                                <p th:text="'레시피: ' + ${myRecipe.recipeName}"><strong></strong></p>
+                                <p th:text="'작성일: ' + ${myRecipe.writeDate}"><strong></strong></p>
+                                <p th:text="'조회수: ' + ${myRecipe.viewNum}"><strong></strong></p>
                             </div>
                         </div>
                     </div>
                     <div th:each="myArticle : ${myArticles}" class="comment">
-                        <a th:href="@{/article/{id}(id=${myArticle.article_Id})}">
-                            <img th:src="@{${myArticle.article_Img}}">
+                        <a th:href="@{/article/{id}(id=${myArticle.articleId})}">
+                            <img th:src="@{${myArticle.articleImg}}">
                         </a>
                         <div class="buttons">
                                 <div class="editdeleteBtn">
@@ -63,14 +63,14 @@
                                         <button class="editButton">수정 </button>
                                     </form>
                                     <span>|</span>
-                                    <form method="post" th:action="@{/article/delete/{id}(id=${myArticle.article_Id})}">
+                                    <form method="post" th:action="@{/article/delete/{id}(id=${myArticle.articleId})}">
                                         <button type="submit" class="deleteBtn"> 삭제</button>
                                     </form>
                                 </div>
                             <div class="comment-text">
-                                <p th:text="'게시글: ' + ${myArticle.article_Title}"><strong></strong></p>
-                                <p th:text="'작성일: ' + ${myArticle.write_Date}"><strong></strong></p>
-                                <p th:text="'조회수: ' + ${myArticle.view_Num}"><strong></strong></p>
+                                <p th:text="'게시글: ' + ${myArticle.articleTitle}"><strong></strong></p>
+                                <p th:text="'작성일: ' + ${myArticle.writeDate}"><strong></strong></p>
+                                <p th:text="'조회수: ' + ${myArticle.viewNum}"><strong></strong></p>
                             </div>
                         </div>
                     </div>

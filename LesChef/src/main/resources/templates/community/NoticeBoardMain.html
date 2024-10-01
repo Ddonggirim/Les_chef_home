@@ -38,22 +38,22 @@
   <!--dt-이미지, dd-내용,li반복/borderBox=flex-->
   <ul class="boardBox">
     <li th:each="articles : ${articles}" class="gesigeul" id="for1">
-      <a th:href="@{/article/{id}(id=${articles.article_Id})}">
+      <a th:href="@{/article/{id}(id=${articles.articleId})}">
         <dl>
 
           <!--게시글 이미지-->
-          <dt><img th:src="@{${articles.article_Img}}" class="gesigeulImg"></dt>
+          <dt><img th:src="@{${articles.articleImg}}" class="gesigeulImg"></dt>
           <!--게시글 내용-->
           <dd>
             <div class="boardContent">
-              <p th:text="${articles.article_Title}"><b></b></p>
-              <p th:text="${articles.article_Sub_Title}"></p>
+              <p th:text="${articles.articleTitle}"><b></b></p>
+              <p th:text="${articles.articleSubTitle}"></p>
             </div>
             <!--작성자 및 조회수/writerName/writerNameContent=inline-flex-->
             <div class="writerName">
                 <span class="writerNameContent">
                   <img src="../image1/NoticeIcon/duck.jpg">
-                  <span th:text="${articles.user_nickName}"></span>
+                  <span th:text="${articles.userNickName}"></span>
                 </span>
               <span class="writerNameContent">
                   <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">

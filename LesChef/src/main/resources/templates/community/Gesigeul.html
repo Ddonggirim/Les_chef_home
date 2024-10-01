@@ -23,16 +23,16 @@
   <!--이전,다음페이지 버튼까지-->
   <img src="../image1/NoticeIcon/LArrow-black.png" class="BeforePage" onclick="location.href='/NoticeBoardMain'">
   <div class="gesiBox">
-    <h1 class="gesiTitle" th:text="${article.article_Title}"></h1>
+    <h1 class="gesiTitle" th:text="${article.articleTitle}"></h1>
     <!--게시글 메인 이미지-->
-    <img th:src="@{${article.article_Img}}" class="gesiMainImg">
+    <img th:src="@{${article.articleImg}}" class="gesiMainImg">
     <span class="gesiContent" th:text="${article.content}"></span>
     <!--작성자 이름, 조회수 gesiWriterName=flex-->
     <div class="gesiWriterName">
       <!--gesiWriterNameContent1,2=inline-flex-->
       <span class="gesiWriterNameContent1">
           <img src="../image1/NoticeIcon/duck.jpg">
-          <span th:text="${article.user_nickName}"></span>
+          <span th:text="${article.userNickName}"></span>
         </span>
       <span class="gesiWriterNameContent2">
           <img src="../image1/NoticeIcon/views-black.jpg">
