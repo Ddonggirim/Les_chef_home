@@ -27,97 +27,52 @@
             <h2>나의 댓글</h2>
 
             <div class="tabs">
-                <button class="tab active" href="#">레시피</button>
-                <button class="tab active" href="#">게시판</button>
+                <a class="tab" href="/myRecipeComment">레시피</a>
+                <a class="tab" href="/myArticleComment">게시판</a>
             </div>
             <div class="comments">
-                <div class="comment">
-                    <input type="checkbox" class="delete-checkbox">
-                    <img src="../image1/MypageIcon/bap.png">
-                    <div class="comment-text">
-                        <p><strong></strong> </p>
-                        <p><strong></strong></p>
-                        <p><strong></strong></p>
+                <div th:each="comment : ${RecipeComment}" class="comment">
+                    <a th:href="@{/inform/{id}(id=${comment.recipe.recipeId})}">
+                        <img th:src="@{${comment.recipe.recipeImg}}">
+                    </a>
+                    <div class="buttons">
+                        <div class="editdeleteBtn">
+                            <form>
+                                <button class="editButton">수정 </button>
+                            </form>
+                            <span>|</span>
+                            <form method="post" th:action="@{/comment/delete/{id}(id=${comment.commentId})}">
+                                <button type="submit" class="deleteBtn"> 삭제</button>
+                            </form>
+                        </div>
+                        <div class="comment-text">
+                            <p th:text="'레시피: ' + ${comment.recipe.recipeName}"><strong></strong> </p>
+                            <p th:text="'나의 댓글: ' + ${comment.commentContent}"><strong></strong></p>
+                            <p th:text="'작성일: ' + ${#temporals.format(comment.writeDate, 'yyyy-MM-dd HH:mm:ss')}"><strong></strong></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="comment">
-                <input type="checkbox" class="delete-checkbox">
-                <img src="../image1/MypageIcon/crab.png" href="#">
-                <div class="comment-text">
-                    <p><strong></strong></p>
-                    <p><strong></strong> </p>
-                    <p><strong></strong></p>
+                <div th:each="comment : ${ArticleComment}" class="comment">
+                    <a th:href="@{/article/{id}(id=${comment.article.articleId})}">
+                        <img th:src="@{${comment.article.articleImg}}">
+                    </a>
+                    <div class="buttons">
+                        <div class="editdeleteBtn">
+                            <form>
+                                <button class="editButton">수정 </button>
+                            </form>
+                            <span>|</span>
+                            <form method="post" th:action="@{/comment/delete/{id}(id=${comment.commentId})}">
+                                <button type="submit" class="deleteBtn"> 삭제</button>
+                            </form>
+                        </div>
+                        <div class="comment-text">
+                            <p th:text="'게시글: ' + ${comment.article.articleTitle}"><strong></strong></p>
+                            <p th:text="'나의 댓글: ' + ${comment.commentContent}"><strong></strong> </p>
+                            <p th:text="'작성일: ' + ${#temporals.format(comment.writeDate, 'yyyy-MM-dd HH:mm:ss')}"><strong></strong></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="comment">
-                <input type="checkbox" class="delete-checkbox">
-                <img src="../image1/MypageIcon/bap.png">
-                <div class="comment-text">
-                    <p><strong></strong> </p>
-                    <p><strong></strong></p>
-                    <p><strong></strong></p>
-                </div>
-            </div>
-            <div class="comment">
-                <input type="checkbox" class="delete-checkbox">
-                <img src="../image1/MypageIcon/bap.png">
-                <div class="comment-text">
-                    <p><strong></strong> </p>
-                    <p><strong></strong></p>
-                    <p><strong></strong></p>
-                </div>
-            </div>
-            <div class="comment">
-                <input type="checkbox" class="delete-checkbox">
-                <img src="../image1/MypageIcon/bap.png">
-                <div class="comment-text">
-                    <p><strong></strong> </p>
-                    <p><strong></strong></p>
-                    <p><strong></strong></p>
-                </div>
-            </div>
-            <div class="comment">
-                <input type="checkbox" class="delete-checkbox">
-                <img src="../image1/MypageIcon/bap.png">
-                <div class="comment-text">
-                    <p><strong></strong> </p>
-                    <p><strong></strong></p>
-                    <p><strong></strong></p>
-                </div>
-            </div>
-            <div class="comment">
-                <input type="checkbox" class="delete-checkbox">
-                <img src="../image1/MypageIcon/bap.png">
-                <div class="comment-text">
-                    <p><strong></strong> </p>
-                    <p><strong></strong></p>
-                    <p><strong></strong></p>
-                </div>
-            </div>
-            <div class="comment">
-                <input type="checkbox" class="delete-checkbox">
-                <img src="../image1/MypageIcon/bap.png">
-                <div class="comment-text">
-                    <p><strong></strong> </p>
-                    <p><strong></strong></p>
-                    <p><strong></strong></p>
-                </div>
-            </div>
-            <div class="comment">
-                <input type="checkbox" class="delete-checkbox">
-                <img src="../image1/MypageIcon/bap.png">
-                <div class="comment-text">
-                    <p><strong></strong> </p>
-                    <p><strong></strong></p>
-                    <p><strong></strong></p>
-                </div>
-            </div>
-        </div>
-        <div class="tabs">
-            <div class="buttons">
-                <button type="button" href="#">수정</button>
-                <button class="delete-button">삭제</button>
             </div>
         </div>
     </div>

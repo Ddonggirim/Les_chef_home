@@ -1,35 +1,37 @@
 package com.example.LesChef.dto;
 
 import com.example.LesChef.entity.Recipe;
-import com.example.LesChef.entity.RecipeComment;
+import com.example.LesChef.entity.Article;
+import com.example.LesChef.entity.AllComment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class RecipeCommentForm {
+public class CommentForm {
     private Long commentId;
     private String commentContent;
     private String commenter;
-    private Date writeDate;
+    private LocalDateTime writeDate;
     private Recipe recipe;
+    private Article article;
     private Long rating;
 
 
-    public RecipeComment toEntity(){
-        return RecipeComment.builder()
+    public AllComment toEntity(){
+        return AllComment.builder()
                 .commentContent(this.commentContent)
                 .commenter(this.commenter)
-                .writeDate(Date.valueOf(LocalDate.now()))
+                .writeDate(LocalDateTime.now())
                 .recipe(this.recipe)
-                .rating(0L)
+                .article(this.article)
+                .rating(this.rating != null ? this.rating : 0)
                 .build();
     }
 }

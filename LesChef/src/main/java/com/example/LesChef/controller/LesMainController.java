@@ -32,7 +32,7 @@ public class LesMainController {
     @GetMapping("/WishList")
     public String gotoWishList() {return "mypage/WishList";}
     @GetMapping("/Mycomment")
-    public String gotoMycomment() {return "mypage/Mycomment";}
+    public String gotoMycomment() {return "redirect:/myRecipeComment";}
     @GetMapping("/Regist")
     public String gotoRegist() {return "mypage/Regist";}
     @GetMapping("/Myrecipe")

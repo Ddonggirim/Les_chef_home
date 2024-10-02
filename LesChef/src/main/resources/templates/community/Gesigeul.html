@@ -58,10 +58,10 @@
   <!--댓글 및 답글-->
   <div class="commentBox">
     <!--댓글 내용 전송-->
-    <form onsubmit = "addComment(event)">
+    <form method="post" th:action="@{/article/{id}/comment(id=${article.articleId})}">
       <div class="commentInputContainer">
         <div id="hashTag"><b><div id="nameTag"></div></b><img id="closeTag" src="../image1/NoticeIcon/cancel.png"/></div>
-        <textarea type="text" placeholder="댓글을 입력해주세요" class="commentInput" size="105"></textarea>
+        <textarea type="text" name="commentContent" placeholder="댓글을 입력해주세요" class="commentInput" size="105" required></textarea>
       </div>
       <!--전송 버튼 commentWriteBtn=flex-->
       <button type="submit" class="commentWriteBtn">
@@ -73,25 +73,15 @@
     <!--댓글 목록 comment,,commentContent=flex-->
     <div class="commentRepeat">
       <div class="card my-3">
-        <div class="comment">
+        <div th:each="comment : ${comments}" class="comment">
           <img src="../image1/NoticeIcon/fubao.jpg" class="commentWriterImg">
           <div class="commentContent">
             <p>
-              <span class="commentWriterName">푸바오</span>
-              <span class="commentDate">${date}</span>
+              <span th:text="${comment.commenter}"class="commentWriterName" ></span>
+              <span th:text="${#temporals.format(comment.writeDate, 'yyyy-MM-dd HH:mm:ss')}" class="commentDate"></span>
             </p>
-            <p class="commentText">${commentText}</p>
+            <p th:text="${comment.commentContent}" class="commentText"></p>
           </div>
-        </div>
-      </div>
-      <div class="comment">
-        <img src="../image1/NoticeIcon/fubao.jpg" class="commentWriterImg">
-        <div class="commentContent">
-          <p>
-            <span class="commentWriterName">gkgkgkasd</span>
-            <span class="commentDate">${date}</span>
-          </p>
-          <p class="commentText">${commentText}</p>
         </div>
       </div>
     </div>

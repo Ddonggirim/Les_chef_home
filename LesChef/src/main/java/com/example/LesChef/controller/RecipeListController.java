@@ -2,7 +2,7 @@ package com.example.LesChef.controller;
 
 import com.example.LesChef.dto.*;
 import com.example.LesChef.entity.*;
-import com.example.LesChef.repository.RecipeCommentRepository;
+import com.example.LesChef.repository.AllCommentRepository;
 import com.example.LesChef.repository.RecipeIngredientRepository;
 import com.example.LesChef.repository.RecipeRepository;
 import com.example.LesChef.repository.RecipeStepRepository;
@@ -38,9 +38,10 @@ public class RecipeListController {
 
     private final RecipeRepository recipeRepository;
 
-    private final RecipeCommentService commentService;
+    private final AllCommentService allCommentService;
 
-    private final RecipeCommentRepository CommentRepository;
+    private final AllCommentRepository allCommentRepository;
+
     @GetMapping("/List/Korean") //한식레시피 모음
     public String korean(Model model){
         RecipecategoryForm recipecategoryForm = recipecategoryService.findCategory("한식");
@@ -105,7 +106,7 @@ public class RecipeListController {
             RecipeForm recipeInform = recipeService.getRecipeInform(id);
             List<RecipeStepForm> steps = recipeStepService.getRecipeStep(id);
             List<RecipeIngredientForm> ingredients = recipeIngredientService.getIngredient(id);
-            List<RecipeCommentForm> comments = commentService.getCommentList(id);
+            List<CommentForm> comments = allCommentService.getRecipeComment(id);
             log.info("comments는 " + comments.isEmpty());
             model.addAttribute("inform", recipeInform);
             model.addAttribute("steps", steps);
@@ -116,7 +117,7 @@ public class RecipeListController {
         RecipeForm recipeInform = recipeService.getRecipeInform(id);
         List<RecipeStepForm> steps = recipeStepService.getRecipeStep(id);
         List<RecipeIngredientForm> ingredients = recipeIngredientService.getIngredient(id);
-        List<RecipeCommentForm> comments = commentService.getCommentList(id);
+        List<CommentForm> comments = allCommentService.getRecipeComment(id);
         log.info("comments는 " + comments.isEmpty());
         model.addAttribute("inform", recipeInform);
         model.addAttribute("steps", steps);
@@ -186,18 +187,19 @@ public class RecipeListController {
 
     }
     @PostMapping("/inform/{id}/comment")
-    public String addComment(@PathVariable("id") Long id, @ModelAttribute RecipeCommentForm commentForm,
+    public String addComment(@PathVariable("id") Long id, @ModelAttribute CommentForm commentForm,
                              HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
         String userNickName = currentUser.getNickname();
 
         Recipe recipe = recipeRepository.findById(id).orElse(null);
         commentForm.setRecipe(recipe);
+        commentForm.setArticle(null);
         commentForm.setCommenter(userNickName);
-        RecipeComment comment = commentForm.toEntity();
-        CommentRepository.save(comment);
+        AllComment comment = commentForm.toEntity();
+        allCommentRepository.save(comment);
 
-        return "redirect:/main";
+        return "redirect:/inform/{id}";
     }
 
 }

@@ -127,7 +127,10 @@
       <div class="coment">
         <img class="comentimg" src="../image1/ListIcon/사용자.png" /><span class="comentnickname" th:text="${comment.commenter}"></span>
         <div class="allstar">
-          <img class="comentstar" src="../image1/ListIcon/사용자별.png"/><img class="comentstar" src="../image1/ListIcon/사용자별.png"/><img class="comentstar" src="../image1/ListIcon/사용자별.png"/><img class="comentstar" src="../image1/ListIcon/사용자반별.png"/><img class="comentstar" src="../image1/ListIcon/사용자빈별.png"/><span th:text="${comment.writeDate}"></span>
+<!--          <span th:each="i : ${#numbers.range(1, 5)">-->
+<!--            <img class="comentstar" th:src="${i <= comment.rating} ? '../image1/ListIcon/사용자별.png' : '../image1/ListIcon/사용자빈별.png'" alt="star"/>-->
+<!--          </span>-->
+          <span th:text="${#temporals.format(comment.writeDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
         </div>
       </div>
       <span th:text="${comment.commentContent}" class="comenttext"></span><hr width="600px">
@@ -160,14 +163,26 @@
   <!-- 댓글 작성 -->
 
   <div id="reviewcontainer">
-    <form method="post" th:action="@{/inform/{id}/comment(id=${inform.recipeId})}">
+    <form method="post" th:action="@{/inform/{id}/comment(id=${inform.recipeId})}" id="myform">
       <span id="review">후기 작성</span>
       <div id="starcontainer">
-        <img class="countingstar" star="1" src="../image1/ListIcon/사용자별.png"/>
-        <img class="countingstar" star="2" src="../image1/ListIcon/사용자빈별.png"/>
-        <img class="countingstar" star="3" src="../image1/ListIcon/사용자빈별.png"/>
-        <img class="countingstar" star="4" src="../image1/ListIcon/사용자빈별.png"/>
-        <img class="countingstar" star="5" src="../image1/ListIcon/사용자빈별.png"/>
+<!--        <img class="countingstar" star="1" src="../image1/ListIcon/사용자별.png"/>-->
+<!--        <img class="countingstar" star="2" src="../image1/ListIcon/사용자빈별.png"/>-->
+<!--        <img class="countingstar" star="3" src="../image1/ListIcon/사용자빈별.png"/>-->
+<!--        <img class="countingstar" star="4" src="../image1/ListIcon/사용자빈별.png"/>-->
+<!--        <img class="countingstar" star="5" src="../image1/ListIcon/사용자빈별.png"/>-->
+        <fieldset>
+          <input type="radio" name="rating" value="5" id="rate1"><label
+                for="rate1">★</label>
+          <input type="radio" name="rating" value="4" id="rate2"><label
+                for="rate2">★</label>
+          <input type="radio" name="rating" value="3" id="rate3"><label
+                for="rate3">★</label>
+          <input type="radio" name="rating" value="2" id="rate4"><label
+                for="rate4">★</label>
+          <input type="radio" name="rating" value="1" id="rate5"><label
+                for="rate5">★</label>
+        </fieldset>
         <button type="submit" id="resist">write</button>
       </div>
       <textarea id="areasize" name="commentContent"></textarea>

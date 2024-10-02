@@ -1,7 +1,6 @@
 package com.example.LesChef.entity;
 
-import com.example.LesChef.dto.RecipeArticleForm;
-import com.example.LesChef.dto.RecipeForm;
+import com.example.LesChef.dto.ArticleForm;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +11,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @Getter
 @Setter
-public class RecipeArticle {
+public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "article_id_seq")
     @SequenceGenerator(name = "article_id_seq", sequenceName = "article_id_seq", initialValue = 1, allocationSize = 1)
@@ -27,8 +26,8 @@ public class RecipeArticle {
 
 
     @Builder
-    public RecipeArticle(String userNickName, String articleTitle, String articleSubTitle,
-                         String articleImg, String content, Date writeDate, Long viewNum){
+    public Article(String userNickName, String articleTitle, String articleSubTitle,
+                   String articleImg, String content, Date writeDate, Long viewNum){
         this.userNickName = userNickName;
         this.articleTitle = articleTitle;
         this.articleSubTitle = articleSubTitle;
@@ -38,8 +37,8 @@ public class RecipeArticle {
         this.viewNum = viewNum;
     }
 
-    public RecipeArticleForm toForm(){
-        return new RecipeArticleForm(this.articleId, this.userNickName, this.articleTitle,
+    public ArticleForm toForm(){
+        return new ArticleForm(this.articleId, this.userNickName, this.articleTitle,
                 this.articleSubTitle, this.articleImg, this.content, this.writeDate, this.viewNum);
     }
 

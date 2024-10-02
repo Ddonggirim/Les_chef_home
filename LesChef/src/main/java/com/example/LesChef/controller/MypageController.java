@@ -1,17 +1,19 @@
 package com.example.LesChef.controller;
 
 import com.example.LesChef.dto.AddCustomerRequest;
-import com.example.LesChef.dto.RecipeArticleForm;
+import com.example.LesChef.dto.ArticleForm;
+import com.example.LesChef.dto.CommentForm;
 import com.example.LesChef.dto.RecipeForm;
 import com.example.LesChef.entity.Customer;
 import com.example.LesChef.repository.CustomerRepository;
+import com.example.LesChef.service.AllCommentService;
 import com.example.LesChef.service.CustomerService;
-import com.example.LesChef.service.RecipeArticleService;
+import com.example.LesChef.service.ArticleService;
 import com.example.LesChef.service.RecipeService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +33,9 @@ public class MypageController {
 
     private final RecipeService recipeService;
 
-    private final RecipeArticleService recipeArticleService;
+    private final ArticleService articleService;
+
+    private final AllCommentService allCommentService;
 
     // 회원정보 수정
     @PostMapping("/customerRewrite")
@@ -55,7 +59,26 @@ public class MypageController {
         return "redirect:/main";
     }
 
-    //
+    //나의 댓글 가져오기
+    @GetMapping("/myRecipeComment")
+    public String recipeComment(Model model, HttpSession session) {
+        Customer currentUser = (Customer) session.getAttribute("customer");
+        String nickname = currentUser.getNickname();
+        List<CommentForm> commentForms = allCommentService.getMyRecipeComment(nickname);
+        model.addAttribute("RecipeComment", commentForms);
+        return "mypage/Mycomment";
+
+    }
+    @GetMapping("myArticleComment")
+    public String articleComment(Model model, HttpSession session){
+        Customer currentUser = (Customer) session.getAttribute("customer");
+        String nickname = currentUser.getNickname();
+        List<CommentForm> commentForms = allCommentService.getMyArticleComment(nickname);
+        model.addAttribute("ArticleComment", commentForms);
+        return "mypage/Mycomment";
+    }
+
+    //나의 레시피, 게시글 가져오기
     @GetMapping("/myrecipe")
     public String myRecipeList(Model model, HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
@@ -71,9 +94,9 @@ public class MypageController {
         Customer currentUser = (Customer)session.getAttribute("customer");
         String nickname = currentUser.getNickname();
         log.info("article요청");
-        List<RecipeArticleForm> recipeArticleForms = recipeArticleService.getMyArticleList(nickname);
+        List<ArticleForm> articleForms = articleService.getMyArticleList(nickname);
         log.info("article요청2");
-        model.addAttribute("myArticles", recipeArticleForms);
+        model.addAttribute("myArticles", articleForms);
         return "mypage/Myrecipe";
     }
 
@@ -84,7 +107,13 @@ public class MypageController {
     }
     @PostMapping("/article/delete/{id}")
     public String delArticle(@PathVariable("id") Long id){
-        recipeArticleService.deleteArticle(id);
+        articleService.deleteArticle(id);
         return "redirect:/myarticle";
+    }
+
+    @PostMapping("/comment/delete/{id}")
+    public String delComment(@PathVariable("id") Long id){
+        allCommentService.deleteComment(id);
+        return "redirect:/myRecipeComment";
     }
 }

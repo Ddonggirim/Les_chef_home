@@ -1,6 +1,6 @@
 package com.example.LesChef.dto;
 
-import com.example.LesChef.entity.RecipeArticle;
+import com.example.LesChef.entity.Article;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
-public class RecipeArticleForm {
+public class ArticleForm {
     private Long articleId;
     private String userNickName;
     private String articleTitle;
@@ -21,8 +21,8 @@ public class RecipeArticleForm {
     private Date writeDate;
     private Long viewNum;
 
-    public RecipeArticle toEntity(){
-        return RecipeArticle.builder()
+    public Article toEntity(){
+        return Article.builder()
                 .userNickName(this.userNickName)
                 .articleTitle(this.articleTitle)
                 .articleSubTitle(this.articleSubTitle)

@@ -1,10 +1,14 @@
 package com.example.LesChef.controller;
 
-import com.example.LesChef.dto.RecipeArticleForm;
+import com.example.LesChef.dto.ArticleForm;
+import com.example.LesChef.dto.CommentForm;
 import com.example.LesChef.entity.Customer;
-import com.example.LesChef.entity.RecipeArticle;
-import com.example.LesChef.repository.RecipeArticleRepository;
-import com.example.LesChef.service.RecipeArticleService;
+import com.example.LesChef.entity.Article;
+import com.example.LesChef.entity.AllComment;
+import com.example.LesChef.repository.ArticleRepository;
+import com.example.LesChef.repository.AllCommentRepository;
+import com.example.LesChef.service.ArticleService;
+import com.example.LesChef.service.AllCommentService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,24 +26,28 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NoticeBoardController {
 
-    private final RecipeArticleRepository recipeArticleRepository;
-    private final RecipeArticleService recipeArticleService;
+    private final ArticleRepository articleRepository;
+    private final ArticleService articleService;
+    private final AllCommentRepository allCommentRepository;
+    private final AllCommentService allCommentService;
 
     @GetMapping("/NoticeBoard")
     public String NoticeBoard(Model model){
-        List<RecipeArticleForm> articles = recipeArticleService.getArticleList();
+        List<ArticleForm> articles = articleService.getArticleList();
         model.addAttribute("articles", articles);
         return "community/NoticeBoardMain";
     }
 
     @GetMapping("/article/{id}")
     public String getArticle(@PathVariable("id") Long id, Model model){
-        RecipeArticleForm form = recipeArticleService.getArticle(id);
+        ArticleForm form = articleService.getArticle(id);
+        List<CommentForm> comments = allCommentService.getArticleComment(id);
         model.addAttribute("article", form);
+        model.addAttribute("comments", comments);
         return "community/Gesigeul";
     }
     @PostMapping("/article/regist")
-    public String uploadImage(@ModelAttribute RecipeArticleForm form, @RequestParam("file")MultipartFile file,
+    public String uploadImage(@ModelAttribute ArticleForm form, @RequestParam("file")MultipartFile file,
                               HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
         String userNickName = currentUser.getNickname();
@@ -58,11 +66,27 @@ public class NoticeBoardController {
             file.transferTo(dest);
             log.info("여기까지옴2");
             form.setArticleImg("../uploads/" + file.getOriginalFilename());
-            recipeArticleService.createArticle(form);
+            articleService.createArticle(form);
 //            recipeArticleRepository.save(form);
         } catch (IOException e) {
         }
         return "redirect:/main";
+    }
+
+    @PostMapping("article/{id}/comment")
+    public String addComment(@PathVariable("id") Long id, @ModelAttribute CommentForm commentForm,
+                             HttpSession session){
+        Customer currentUser = (Customer)session.getAttribute("customer");
+        String userNickName = currentUser.getNickname();
+
+        Article article = articleRepository.findById(id).orElse(null);
+        commentForm.setRecipe(null);
+        commentForm.setArticle(article);
+        commentForm.setCommenter(userNickName);
+        AllComment comment = commentForm.toEntity();
+        allCommentRepository.save(comment);
+
+        return "redirect:/article/{id}";
     }
 
 }
