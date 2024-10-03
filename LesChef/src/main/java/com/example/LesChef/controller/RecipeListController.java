@@ -46,19 +46,10 @@ public class RecipeListController {
     public String korean(Model model){
         RecipecategoryForm recipecategoryForm = recipecategoryService.findCategory("한식");
         List<RecipeForm> recipes = recipeService.getRecipeList("한식");
-//        if(recipecategoryForm != null){
-//            log.info("Form이 들어있음: {}", recipecategoryForm.getKorean_Name());
-//            log.info(recipecategoryForm.getEnglish_Name());
-//            log.info(recipecategoryForm.getHead_Img());
-//            recipecategoryService.toModel(recipecategoryForm, model);
-//            return "recipe/List";
-//        }else{
-//            log.info("Form이 비어있음");
-//            return "recipe/List";
-//        }
+
+
         model.addAttribute("category", recipecategoryForm);
         model.addAttribute("recipes", recipes);
-//        recipecategoryService.toModel(recipecategoryForm, model);
         return "recipe/List";
     }
     @GetMapping("/List/Japanese") //일식 레시피 모음
@@ -102,27 +93,21 @@ public class RecipeListController {
 
     @GetMapping("/inform/{id}") // 레시피 세부정보
     public String getRecipeInform(@PathVariable("id") Long id, Model model){
-        if(id >= 500){
-            RecipeForm recipeInform = recipeService.getRecipeInform(id);
-            List<RecipeStepForm> steps = recipeStepService.getRecipeStep(id);
-            List<RecipeIngredientForm> ingredients = recipeIngredientService.getIngredient(id);
-            List<CommentForm> comments = allCommentService.getRecipeComment(id);
-            log.info("comments는 " + comments.isEmpty());
-            model.addAttribute("inform", recipeInform);
-            model.addAttribute("steps", steps);
-            model.addAttribute("ingredients", ingredients);
-            model.addAttribute("comments", comments);
-            return "recipe/informShare";
-        }
         RecipeForm recipeInform = recipeService.getRecipeInform(id);
         List<RecipeStepForm> steps = recipeStepService.getRecipeStep(id);
         List<RecipeIngredientForm> ingredients = recipeIngredientService.getIngredient(id);
         List<CommentForm> comments = allCommentService.getRecipeComment(id);
+        List<Double> doubleList = allCommentService.getCommentAvg(id);
         log.info("comments는 " + comments.isEmpty());
         model.addAttribute("inform", recipeInform);
         model.addAttribute("steps", steps);
         model.addAttribute("ingredients", ingredients);
         model.addAttribute("comments", comments);
+        model.addAttribute("ratingList", doubleList);
+
+        if(id >= 500) {
+            return "recipe/informShare";
+        }
         return "recipe/inform";
     }
 
@@ -191,13 +176,13 @@ public class RecipeListController {
                              HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
         String userNickName = currentUser.getNickname();
-
         Recipe recipe = recipeRepository.findById(id).orElse(null);
         commentForm.setRecipe(recipe);
         commentForm.setArticle(null);
         commentForm.setCommenter(userNickName);
         AllComment comment = commentForm.toEntity();
         allCommentRepository.save(comment);
+        recipeService.updateRatingAvg(id);
 
         return "redirect:/inform/{id}";
     }

@@ -80,22 +80,26 @@
   <div id="total">
     <span class="totalnumber totalnumber1">후기</span>
     <div class="totalimg">
-      <img src="../image1/ListIcon/별.png"/>
-      <img src="../image1/ListIcon/별.png"/>
-      <img src="../image1/ListIcon/별.png"/>
-      <img src="../image1/ListIcon/반별.png"/>
-      <img src="../image1/ListIcon/없는별.png"/>
+      <span th:each="num : ${#numbers.sequence(1,5)}">
+        <img th:if="${ratingList[num] == 1.0}" src="../image1/ListIcon/별.png">
+        <img th:if="${ratingList[num] == 0.5}" src="../image1/ListIcon/반별.png">
+        <img th:if="${ratingList[num] == 0.0}" src="../image1/ListIcon/없는별.png">
+      </span>
     </div>
-    <span class="totalnumber totalnumber2">평점 4.5</span>
+    <span class="totalnumber totalnumber2" th:text="'평점 ' + ${ratingList[0]}"></span>
   </div>
 
   <!-- 댓글 조회 -->
   <div id="comentcontainer">
     <div th:each="comment : ${comments}" class="comentbox">
       <div class="coment">
-        <img class="comentimg" src="../image1/ListIcon/사용자.png" /><span class="comentnickname" th:text="${comment.commenter}"></span>
+        <img class="comentimg" src="../image1/ListIcon/사용자.png" />
+        <span class="comentnickname" th:text="${comment.commenter}"></span>
         <div class="allstar">
-          <img class="comentstar" src="../image1/ListIcon/사용자별.png"/><img class="comentstar" src="../image1/ListIcon/사용자별.png"/><img class="comentstar" src="../image1/ListIcon/사용자별.png"/><img class="comentstar" src="../image1/ListIcon/사용자반별.png"/><img class="comentstar" src="../image1/ListIcon/사용자빈별.png"/><span th:text="${#temporals.format(comment.writeDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+          <span th:each="num : ${#numbers.sequence(1,5)}">
+            <img class="comentstar" th:src="${num <= comment.rating} ? '../image1/ListIcon/사용자별.png' : '../image1/ListIcon/사용자빈별.png'" alt="star"/>
+          </span>
+          <span th:text="${#temporals.format(comment.writeDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
         </div>
       </div>
       <span th:text="${comment.commentContent}" class="comenttext"></span><hr width="600px">

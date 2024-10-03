@@ -48,6 +48,11 @@
                         <div class="comment-text">
                             <p th:text="'레시피: ' + ${comment.recipe.recipeName}"><strong></strong> </p>
                             <p th:text="'나의 댓글: ' + ${comment.commentContent}"><strong></strong></p>
+                            <p class="starflex">나의 별점:
+                                <span th:each="num : ${#numbers.sequence(1,5)}">
+                                    <img class="comentstar" th:src="${num <= comment.rating} ? '../image1/ListIcon/사용자별.png' : '../image1/ListIcon/사용자빈별.png'" alt="star"/>
+                                </span>
+                            </p>
                             <p th:text="'작성일: ' + ${#temporals.format(comment.writeDate, 'yyyy-MM-dd HH:mm:ss')}"><strong></strong></p>
                         </div>
                     </div>

@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 public class RecipeService {
     private final RecipeRepository recipeRepository;
 
+    private final AllCommentService allCommentService;
+
     public List<RecipeForm> getRecipeList(String majorCategory){
         List<Recipe> recipes = recipeRepository.findByMajorCategory(majorCategory);
         return recipes.stream()
@@ -48,5 +50,15 @@ public class RecipeService {
     public void deleteRecipe(Long id){
         Recipe recipeId = recipeRepository.findById(id).orElse(null);
         recipeRepository.delete(recipeId);
+    }
+
+    public void updateRatingAvg(Long recipeId){
+        List<Double> ratingAvg = allCommentService.getCommentAvg(recipeId);
+
+
+        Recipe recipe = recipeRepository.findById(recipeId).orElse(null);
+        log.info("평점은: " + ratingAvg.get(0));
+        recipe.setRatingAvg(ratingAvg.get(0));
+        recipeRepository.save(recipe);
     }
 }

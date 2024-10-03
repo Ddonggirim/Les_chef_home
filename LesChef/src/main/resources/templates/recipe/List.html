@@ -62,7 +62,7 @@
         <img class="listimg" th:src="@{${recipe.recipeImg}}">
         <h3 th:text="${recipe.recipeName}"></h3>
         <ul class="listcontent"><img class="icon" src="../image1/ListIcon/마이페이지.png" width="25"/><li class="nickname">by 닉네임</li><li class="timeset">소요시간</li><li class="runtime" th:text="${recipe.runTime}"></li></ul>
-        <ul class="submix"> <img class="star" src="../image1/ListIcon/평점.png"><li class="everage">평점 4.5</li><img class="eye" src="../image1/ListIcon/조회수.png"><li class="eyenumber" th:text="${recipe.viewNum}"></li></ul>
+        <ul class="submix"> <img class="star" src="../image1/ListIcon/평점.png"><li class="everage" th:text="'평점 ' + ${recipe.ratingAvg}"></li><img class="eye" src="../image1/ListIcon/조회수.png"><li class="eyenumber" th:text="${recipe.viewNum}"></li></ul>
       </a>
     </div>
 

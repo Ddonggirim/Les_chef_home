@@ -103,16 +103,16 @@ body::-webkit-scrollbar{
   list-style: none;
 }
 .star{
-  width:96px;
+  width:30px;
   height: 20px;
-  padding: 5px 10px 0px  25px;
+  padding: 6px 0px 0px  25px;
 }
 .everage{
   color:#616161;
-  padding: 5px 10px 0px  5px;
+  padding: 5px 10px 0px  0px;
 }
 .eye{
-  padding-left: 55px;
+  padding-left: 130px;
 }
 .eyenumber{
   color:#616161;

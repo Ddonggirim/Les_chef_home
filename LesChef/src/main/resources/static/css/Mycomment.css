@@ -124,6 +124,12 @@ input {
   background-color: #e69550;
 }
 
+.comentstar{
+  width:20px !important;
+  height:20px !important;
+  margin-right:0px !important;
+}
+
 .comments {
   display: flex;
   flex-direction: column;

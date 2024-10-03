@@ -197,7 +197,7 @@ padding-top: 15px;
   display: flex;
   flex-wrap: nowrap;
   padding-top: 30px;
-  margin-left: 23%;
+  margin-left: 29%;
   width: 790px;
   height: 90px;
   border-top: 1px solid #b8b8b8;
@@ -224,7 +224,7 @@ padding-top: 15px;
 
 /* 댓글 */
 #comentcontainer{
-  margin: 30px 23%;
+  margin: 30px 29%;
   width:790px;
   border-bottom: 1px solid #b8b8b8;
 }
@@ -253,7 +253,6 @@ padding-top: 15px;
 }
 .allstar span{
   color: #4d4d4d;
-  padding-left: 15px;
   font-family: 'sans';
   font-weight: 700;
   font-size: 15px;
@@ -277,7 +276,7 @@ padding-top: 15px;
 
 /* 댓글 작성 */
 #reviewcontainer{
-  margin-left: 23%;
+  margin-left: 27%;
   margin-bottom: 100px;
   padding-left: 5%;
 }
@@ -302,7 +301,7 @@ padding-top: 15px;
   font-size: 15px;
 }
 #resist{
-  margin-left: 430px;
+  margin-left: 335px;
   background-color: #003320;
   border: 1px solid #003320;
   border-radius: 10px;

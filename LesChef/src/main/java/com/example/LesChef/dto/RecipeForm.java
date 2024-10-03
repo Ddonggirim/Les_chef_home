@@ -26,6 +26,7 @@ public class RecipeForm {
     private String recipeImg;
     private String majorCategory;
     private String subCategory;
+    private Double ratingAvg;
 
     public Recipe toEntity() {
         return Recipe.builder()
@@ -39,6 +40,7 @@ public class RecipeForm {
                 .recipeImg(this.recipeImg)
                 .majorCategory("공유")
                 .subCategory(null)
+                .ratingAvg(this.ratingAvg)
                 .build();
     }
 }

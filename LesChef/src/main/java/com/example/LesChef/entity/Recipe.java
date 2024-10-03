@@ -36,12 +36,13 @@ public class Recipe {
     @Column(nullable = false)
     private String majorCategory;
     private String subCategory;
+    private Double ratingAvg;
 
     @Builder
     public Recipe(String recipeName, Long viewNum, Date writeDate,
                   String runTime, String portion, String cookLevel,
                   String userId, String recipeImg, String majorCategory,
-                  String subCategory){
+                  String subCategory, Double ratingAvg){
         this.recipeName = recipeName;
         this.viewNum = viewNum;
         this.writeDate = writeDate;
@@ -52,6 +53,7 @@ public class Recipe {
         this.recipeImg = recipeImg;
         this.majorCategory = majorCategory;
         this.subCategory = subCategory;
+        this.ratingAvg = ratingAvg;
     }
 
 
@@ -59,6 +61,6 @@ public class Recipe {
         return new RecipeForm(this.recipeId, this.recipeName,
                 this.viewNum, this.writeDate, this.runTime,
                 this.portion, this.cookLevel, this.userId, this.recipeImg,
-                this.majorCategory, this.subCategory);
+                this.majorCategory, this.subCategory, this.ratingAvg);
     }
 }
