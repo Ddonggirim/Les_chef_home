@@ -7,6 +7,8 @@ import com.example.LesChef.repository.RecipeIngredientRepository;
 import com.example.LesChef.repository.RecipeRepository;
 import com.example.LesChef.repository.RecipeStepRepository;
 import com.example.LesChef.service.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -92,7 +94,9 @@ public class RecipeListController {
     }
 
     @GetMapping("/inform/{id}") // 레시피 세부정보
-    public String getRecipeInform(@PathVariable("id") Long id, Model model){
+    public String getRecipeInform(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response, Model model){
+        // 쿠키기반 조회수
+        recipeService.increaseViewNum(id, request, response);
         RecipeForm recipeInform = recipeService.getRecipeInform(id);
         List<RecipeStepForm> steps = recipeStepService.getRecipeStep(id);
         List<RecipeIngredientForm> ingredients = recipeIngredientService.getIngredient(id);
@@ -110,6 +114,12 @@ public class RecipeListController {
         }
         return "recipe/inform";
     }
+
+
+
+
+
+
 
     @PostMapping("/List/create")
     public String createList(@ModelAttribute RecipeForm recipeForm, @ModelAttribute RegistIngredientForm registIngredientForm, @ModelAttribute RegistStepForm registStepForm, @RequestParam("File") MultipartFile file,

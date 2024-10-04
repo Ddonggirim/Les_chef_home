@@ -29,7 +29,7 @@ public class ArticleForm {
                 .articleImg(this.articleImg)
                 .content(this.content)
                 .writeDate(Date.valueOf(LocalDate.now()))
-                .viewNum(0L)
+                .viewNum(this.viewNum != null ? this.viewNum : 0)
                 .build();
     }
 }

@@ -171,6 +171,12 @@ input {
   bottom: 93px;
   width: 70px;
 }
+.commentEditdeleteBtn{
+  position: absolute;
+  left: 458px;
+  bottom: 109px;
+  width: 70px;
+}
 
 .buttons{
  position: relative;

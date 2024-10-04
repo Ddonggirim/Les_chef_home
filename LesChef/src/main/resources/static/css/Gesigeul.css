@@ -173,7 +173,7 @@ textarea{
 }
 
 .commentBox{
-  padding:4vh 27vw 0;
+  padding:4vh 27vw 1vh;
   background-color: #FEBEB0;
 }
 .commentInput{
@@ -205,7 +205,6 @@ textarea{
 .commentWriterName{
   font-weight: bold;
   color: #654321;
-  cursor: pointer;
 }
 .commentDate{
   color:gray;

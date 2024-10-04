@@ -4,10 +4,14 @@ import com.example.LesChef.dto.RecipeForm;
 import com.example.LesChef.entity.Customer;
 import com.example.LesChef.entity.Recipe;
 import com.example.LesChef.repository.RecipeRepository;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,5 +64,30 @@ public class RecipeService {
         log.info("평점은: " + ratingAvg.get(0));
         recipe.setRatingAvg(ratingAvg.get(0));
         recipeRepository.save(recipe);
+    }
+
+    @Transactional
+    public void increaseViewNum(Long id, HttpServletRequest request, HttpServletResponse response){
+        String cookieName = "viewNum_" + id;
+
+        Cookie[] cookies = request.getCookies();
+        boolean alreadyViewed = false;
+
+        if(cookies != null){
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals(cookieName)){
+                    alreadyViewed = true;
+                    break;
+                }
+            }
+        }
+
+        if(!alreadyViewed){
+            recipeRepository.updateRecipeView(id);
+
+            Cookie cookie = new Cookie(cookieName, "true");
+            cookie.setMaxAge(30);
+            response.addCookie(cookie);
+        }
     }
 }

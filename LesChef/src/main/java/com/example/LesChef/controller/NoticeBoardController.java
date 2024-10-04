@@ -9,6 +9,8 @@ import com.example.LesChef.repository.ArticleRepository;
 import com.example.LesChef.repository.AllCommentRepository;
 import com.example.LesChef.service.ArticleService;
 import com.example.LesChef.service.AllCommentService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +41,9 @@ public class NoticeBoardController {
     }
 
     @GetMapping("/article/{id}")
-    public String getArticle(@PathVariable("id") Long id, Model model){
+    public String getArticle(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response, Model model){
+        // 쿠키기반 조회수
+        articleService.increaseViewNum(id, request, response);
         ArticleForm form = articleService.getArticle(id);
         List<CommentForm> comments = allCommentService.getArticleComment(id);
         model.addAttribute("article", form);

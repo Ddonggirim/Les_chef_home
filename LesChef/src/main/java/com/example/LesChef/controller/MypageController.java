@@ -102,11 +102,13 @@ public class MypageController {
 
     @PostMapping("/recipe/delete/{id}")
     public String delRecipe(@PathVariable("id") Long id){
+        allCommentService.deleteRecipeParent(id);
         recipeService.deleteRecipe(id);
         return "redirect:/myrecipe";
     }
     @PostMapping("/article/delete/{id}")
     public String delArticle(@PathVariable("id") Long id){
+        allCommentService.deleteArticleParent(id);
         articleService.deleteArticle(id);
         return "redirect:/myarticle";
     }
@@ -114,6 +116,6 @@ public class MypageController {
     @PostMapping("/comment/delete/{id}")
     public String delComment(@PathVariable("id") Long id){
         allCommentService.deleteComment(id);
-        return "redirect:/myRecipeComment";
+        return "redirect:/myArticleComment";
     }
 }
