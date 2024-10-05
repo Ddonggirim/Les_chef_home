@@ -1,15 +1,30 @@
 package com.example.LesChef.controller;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
 @Controller
 public class LesMainController {
     @GetMapping("/main")
-    public String gotoMain() {return "MainPage";}
+    public String gotoMain(Model model) {
+        String myId = (String) model.asMap().get("myId");
+        String message = (String) model.asMap().get("message");
+
+        log.info("메인컨트롤러: " + myId);
+
+        if (myId != null) {
+            model.addAttribute("myId", myId);
+        } else if (message != null) {
+            model.addAttribute("message", message);
+        }
+
+        return "MainPage";
+    }
 
     @GetMapping("/List")
     public String gotoList() {return "redirect:/List/Korean";}

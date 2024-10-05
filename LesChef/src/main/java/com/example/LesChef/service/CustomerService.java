@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -41,5 +43,15 @@ private final BCryptPasswordEncoder bCryptPasswordEncoder;
             customerRepository.save(customer);
 
         }
+    }
+
+    public String findMyId(String name, String tel){
+
+        String myId = customerRepository.findId(name, tel);
+        if(myId != null){
+            return myId;
+        }
+        return null;
+
     }
 }

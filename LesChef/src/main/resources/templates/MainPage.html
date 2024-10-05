@@ -9,6 +9,7 @@
   <link href="/css/main.css" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <title>Les Chef</title>
+
 </head>
 <body>
 <div id="left_box">
@@ -93,16 +94,16 @@
       <button type="submit">로그인</button>
     </form>
 
-    <form class="find-form-container">
+    <form class="find-form-container" method="post" action="/findId">
       <div class="id-pw-button">
         <span class="id-button">아이디</span>
         <span class="pw-button">패스워드</span>
       </div>
       <div class="id-form-container">
         <label>이름</label>
-        <input type="text"/>
+        <input type="text" name="name" required/>
         <label>휴대폰</label>
-        <input type="text"/>
+        <input type="text" name="tel" required/>
       </div>
       <div class="pw-form-container">
         <label>이름</label>
@@ -111,8 +112,9 @@
         <input type="text"/>
         <label>이메일(아이디)</label>
         <input type="text"/>
+
       </div>
-      <button class="find-button">찾기</button>
+      <button type="submit" class="find-button">찾기2</button>
     </form>
 
     <p>아직 아이디가 없으신가요?<br> 회원가입으로 더 많은 요리정보를 얻으세요!</p>
@@ -122,5 +124,20 @@
 </div>
 
 <script src="../js/MainPage.js"></script>
+<script>
+  window.onload = function() {
+      const myId = '[[${myId}]]';
+      const message = '[[${message}]]';
+
+      console.log("myId:", myId);
+      console.log("message:", message);
+
+      if (myId) {
+          alert("Your ID: " + myId);
+      } else if (message) {
+          alert(message);
+      }
+  };
+</script>
 </body>
 </html>

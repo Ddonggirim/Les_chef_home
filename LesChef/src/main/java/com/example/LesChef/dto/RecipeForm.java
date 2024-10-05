@@ -40,7 +40,7 @@ public class RecipeForm {
                 .recipeImg(this.recipeImg)
                 .majorCategory("공유")
                 .subCategory(null)
-                .ratingAvg(this.ratingAvg)
+                .ratingAvg(this.ratingAvg != null ? this.ratingAvg : 0)
                 .build();
     }
 }

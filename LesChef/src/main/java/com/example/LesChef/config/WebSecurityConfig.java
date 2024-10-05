@@ -47,12 +47,12 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .headers(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/signup").permitAll()
+                        .requestMatchers("/signup", "/findId").permitAll()
                         .requestMatchers("/main", "/List", "/List/Korean", "/List/Japanese", "/List/Chinese", "/List/Western")
                         .permitAll().anyRequest().authenticated()
                 )
                 .formLogin(login -> login
-                                .loginPage("/loginpage").permitAll()
+                                .loginPage("/main").permitAll()
                                 .loginProcessingUrl("/login")
                                 .usernameParameter("id")
                                 .passwordParameter("password")
