@@ -12,15 +12,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class LesMainController {
     @GetMapping("/main")
     public String gotoMain(Model model) {
+        String name = (String) model.asMap().get("name1");
         String myId = (String) model.asMap().get("myId");
-        String message = (String) model.asMap().get("message");
+        String message = (String) model.asMap().get("idMessage");
 
         log.info("메인컨트롤러: " + myId);
 
         if (myId != null) {
+            model.addAttribute("name1", name);
             model.addAttribute("myId", myId);
         } else if (message != null) {
-            model.addAttribute("message", message);
+            model.addAttribute("idMessage", message);
         }
 
         return "MainPage";

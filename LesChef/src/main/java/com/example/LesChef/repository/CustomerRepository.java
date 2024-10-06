@@ -12,6 +12,9 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
     Optional<Customer> findById(String id);
 //    Optional<Customer> findByTel(String tel);
 
-    @Query(value = "select id from Customer where name = :name and tel = :tel ")
+    @Query(value = "select id from Customer where name = :name and tel = :tel ", nativeQuery = true)
     String findId(@Param("name") String name, @Param("tel") String tel);
+
+    @Query(value = "select * from Customer where name = :name and tel = :tel and id = :id", nativeQuery = true)
+    Customer findNameTelId(@Param("name") String name, @Param("tel") String tel, @Param("id") String id);
 }

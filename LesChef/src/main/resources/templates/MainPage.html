@@ -94,28 +94,34 @@
       <button type="submit">로그인</button>
     </form>
 
-    <form class="find-form-container" method="post" action="/findId">
+    <div class="find-form-container" method="post">
       <div class="id-pw-button">
         <span class="id-button">아이디</span>
         <span class="pw-button">패스워드</span>
       </div>
-      <div class="id-form-container">
-        <label>이름</label>
-        <input type="text" name="name" required/>
-        <label>휴대폰</label>
-        <input type="text" name="tel" required/>
-      </div>
-      <div class="pw-form-container">
-        <label>이름</label>
-        <input type="text"/>
-        <label>휴대폰</label>
-        <input type="text"/>
-        <label>이메일(아이디)</label>
-        <input type="text"/>
-
-      </div>
-      <button type="submit" class="find-button">찾기2</button>
-    </form>
+      <form method="post" action="/findId">
+        <div class="id-form-container">
+          <label>이름</label>
+          <input type="text" name="name"required/>
+          <label>휴대폰</label>
+          <input type="text" name="tel" required/>
+          <button type="submit" class="find-button">찾기1</button>
+        </div>
+      </form>
+      <form method="post" action="/findPwd">
+        <div class="pw-form-container">
+          <label>이름</label>
+          <input type="text" name="PwName" required/>
+          <label>휴대폰</label>
+          <input type="text" name="PwTel" required/>
+          <label>이메일(아이디)</label>
+          <input type="text" name="PwId" required/>
+          <button type="submit" class="find-button">찾기2</button>
+        </div>
+      </form>
+<!--      <button type="submit" class="find-button" formaction="/findId">찾기1</button>-->
+<!--      <button type="submit" class="find-button" formaction="/findPwd">찾기2</button>-->
+    </div>
 
     <p>아직 아이디가 없으신가요?<br> 회원가입으로 더 많은 요리정보를 얻으세요!</p>
     <button class="go-to-join" type="button">회원가입</button>
@@ -126,16 +132,27 @@
 <script src="../js/MainPage.js"></script>
 <script>
   window.onload = function() {
+      const name1 = '[[${name1}]]';
+      const name2 = '[[${name2}]]';
       const myId = '[[${myId}]]';
-      const message = '[[${message}]]';
+      const tempPwd = '[[${tempPwd}]]';
+      const idMessage = '[[${idMessage}]]';
+      const pwdMessage = '[[${pwdMessage}]]';
 
-      console.log("myId:", myId);
-      console.log("message:", message);
+
+<!--      console.log("myId:", myId);-->
+<!--      console.log("idMessage:", idMessage);-->
+<!--      console.log("tempPwd:", tempPwd);-->
+<!--      console.log("PwdMessage:", PwdMessage);-->
 
       if (myId) {
-          alert("Your ID: " + myId);
-      } else if (message) {
+          alert(name1 + "님의 아이디는 " + myId + " 입니다");
+      } else if (idMessage) {
           alert(message);
+      } else if (tempPwd) {
+          alert(name2 + "님의 임시 비밀번호는 " + tempPwd + "입니다");
+      } else if (pwdMessage) {
+          alert (pwdMessage);
       }
   };
 </script>

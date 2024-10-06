@@ -35,6 +35,7 @@ public class WebSecurityConfig {
     public WebSecurityCustomizer configure() {
         return (web -> web.ignoring()
                 .requestMatchers("/image1/**")
+                .requestMatchers("/uploads/**")
                 .requestMatchers("/font/**")
                 .requestMatchers("/js/**")
                 .requestMatchers("/css/**"))
@@ -47,8 +48,8 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .headers(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/signup", "/findId").permitAll()
-                        .requestMatchers("/main", "/List", "/List/Korean", "/List/Japanese", "/List/Chinese", "/List/Western")
+                        .requestMatchers("/signup", "/findId", "/findPwd").permitAll()
+                        .requestMatchers("/main", "/List", "/List/Korean", "/List/Japanese", "/List/Chinese", "/List/Western", "/NoticeBoard", "/NoticeBoardMain")
                         .permitAll().anyRequest().authenticated()
                 )
                 .formLogin(login -> login
