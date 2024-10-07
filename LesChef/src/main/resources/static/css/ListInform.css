@@ -265,6 +265,9 @@ padding-top: 15px;
   font-family: 'sans';
   font-weight: 900;
   font-size: 16px;
+  display: inline-block;
+  width: 600px;
+  word-wrap: break-word;
   padding-left: 60px;
 }
 .comentbox hr{

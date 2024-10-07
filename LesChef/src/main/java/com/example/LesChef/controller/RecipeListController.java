@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +45,8 @@ public class RecipeListController {
     private final AllCommentService allCommentService;
 
     private final AllCommentRepository allCommentRepository;
+
+    private final WishListService wishListService;
 
     @GetMapping("/List/Korean") //한식레시피 모음
     public String korean(Model model){
@@ -177,7 +181,7 @@ public class RecipeListController {
                 recipeIngredient.setIngredientVolume(quantities.get(i));
                 recipeIngredientRepository.save(recipeIngredient);
             }
-        return "redirect:/main";
+        return "redirect:/myrecipe";
 
 
     }
@@ -195,6 +199,25 @@ public class RecipeListController {
         recipeService.updateRatingAvg(id);
 
         return "redirect:/inform/{id}";
+    }
+
+    @PostMapping("/inform/{id}/wishList")
+    public ResponseEntity<WishList> wishListOn(@PathVariable("id") Long recipeId, HttpSession session){
+        Customer currentUser = (Customer)session.getAttribute("customer");
+        String userId = currentUser.getId();
+        Recipe recipe = recipeService.getRecipe(recipeId);
+        String recipeName = recipe.getRecipeName();
+        WishList wish = wishListService.getWish(recipeId, userId);
+//        if(wish != null){
+//
+//        }else{
+            WishList wishList = new WishList();
+            wishList.setCustomer(currentUser);
+            wishList.setRecipe(recipe);
+            WishList savedWishlist = wishListService.wishSave(wishList);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedWishlist);
+//        }
+
     }
 
 }

@@ -24,6 +24,11 @@ public class RecipeService {
 
     private final AllCommentService allCommentService;
 
+    public Recipe getRecipe(Long recipeId){
+        Recipe recipe = recipeRepository.findById(recipeId).orElse(null);
+        return recipe;
+    }
+
     public List<RecipeForm> getRecipeList(String majorCategory){
         List<Recipe> recipes = recipeRepository.findByMajorCategory(majorCategory);
         return recipes.stream()

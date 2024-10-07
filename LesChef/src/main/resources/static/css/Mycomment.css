@@ -163,6 +163,11 @@ input {
 
 .comment-text p {
   margin: 0 0 5px 0;
+  display: block;
+  width: 330px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .editdeleteBtn{

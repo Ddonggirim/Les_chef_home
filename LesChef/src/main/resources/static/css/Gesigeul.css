@@ -173,11 +173,12 @@ textarea{
 }
 
 .commentBox{
-  padding:4vh 27vw 1vh;
+  padding:4vh 30vw 1vh;
   background-color: #FEBEB0;
 }
 .commentInput{
   width: 100%;
+  height: 120px;
   font-size: 20px;
   color: #fff;
   background-color: #FEBEB0;

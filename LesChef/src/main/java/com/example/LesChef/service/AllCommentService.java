@@ -86,9 +86,17 @@ public class AllCommentService {
     }
 
     //마이페이지 댓글 삭제
-    public void deleteComment(Long id){
-        AllComment commentId = allCommentRepository.findById(id).orElse(null);
-        allCommentRepository.delete(commentId);
+    public String deleteComment(Long id){
+        AllComment comment = allCommentRepository.findById(id).orElse(null);
+        //삭제되는 댓글이 어디의 댓글인지 확인
+        String postType;
+        if(comment.getRecipe() != null){
+            postType = "recipeType";
+        }else{
+            postType = "articleType";
+        }
+        allCommentRepository.delete(comment);
+        return postType;
     }
 
 

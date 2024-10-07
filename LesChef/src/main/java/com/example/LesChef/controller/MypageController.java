@@ -69,7 +69,7 @@ public class MypageController {
         return "mypage/Mycomment";
 
     }
-    @GetMapping("myArticleComment")
+    @GetMapping("/myArticleComment")
     public String articleComment(Model model, HttpSession session){
         Customer currentUser = (Customer) session.getAttribute("customer");
         String nickname = currentUser.getNickname();
@@ -100,6 +100,7 @@ public class MypageController {
         return "mypage/Myrecipe";
     }
 
+    //레시피, 게시글 삭제
     @PostMapping("/recipe/delete/{id}")
     public String delRecipe(@PathVariable("id") Long id){
         allCommentService.deleteRecipeParent(id);
@@ -113,9 +114,15 @@ public class MypageController {
         return "redirect:/myarticle";
     }
 
+    // 댓글 삭제 및 삭제 게시글 종류 확인
     @PostMapping("/comment/delete/{id}")
     public String delComment(@PathVariable("id") Long id){
-        allCommentService.deleteComment(id);
-        return "redirect:/myArticleComment";
+        String postType = allCommentService.deleteComment(id);
+        if(postType != "recipeType"){
+            return "redirect:/myArticleComment";
+        }else{
+            return "redirect:/myRecipeComment";
+        }
+
     }
 }
