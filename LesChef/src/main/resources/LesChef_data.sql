@@ -35,6 +35,10 @@ values(11, '김치 순두부찌개', 0, '1', '35분', "4", "하", null, '../imag
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
 values(12, "떡국", 0, '1', '25분', "2", "하", null, '../image1/ListIcon/예시1.png', "한식", "국/찌개");
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(13, "황태국", 0, '1', '35분', "3", "중", null, '../image1/ListIcon/예시1.png', "한식", "국/찌개");
+
+
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
 values(41, '스키야키', 0, '1', '25분', '3', '중', null, '../image1/ListIcon/recipePic/41sukiyakiMain.png', '일식', '국/전골');
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
 values(42, '미소 시루', 0, '1', '30분', '4', '하', null, '../image1/ListIcon/예시1.png', '일식', '국/전골');
