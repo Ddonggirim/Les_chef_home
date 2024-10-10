@@ -98,7 +98,10 @@ public class RecipeListController {
     }
 
     @GetMapping("/inform/{id}") // 레시피 세부정보
-    public String getRecipeInform(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response, Model model){
+    public String getRecipeInform(@PathVariable("id") Long id, HttpServletRequest request,
+                                  HttpServletResponse response, Model model, HttpSession session){
+        Customer currentUser = (Customer)session.getAttribute("customer");
+        String userId = currentUser.getId();
         // 쿠키기반 조회수
         recipeService.increaseViewNum(id, request, response);
         RecipeForm recipeInform = recipeService.getRecipeInform(id);
@@ -106,7 +109,11 @@ public class RecipeListController {
         List<RecipeIngredientForm> ingredients = recipeIngredientService.getIngredient(id);
         List<CommentForm> comments = allCommentService.getRecipeComment(id);
         List<Double> doubleList = allCommentService.getCommentAvg(id);
+        log.info("getWish전");
+        wishListService.getWish(id, userId, model);
+        log.info("getWish후");
         log.info("comments는 " + comments.isEmpty());
+        //model service로 옮기기
         model.addAttribute("inform", recipeInform);
         model.addAttribute("steps", steps);
         model.addAttribute("ingredients", ingredients);
@@ -201,23 +208,23 @@ public class RecipeListController {
         return "redirect:/inform/{id}";
     }
 
-    @PostMapping("/inform/{id}/wishList")
-    public ResponseEntity<WishList> wishListOn(@PathVariable("id") Long recipeId, HttpSession session){
-        Customer currentUser = (Customer)session.getAttribute("customer");
-        String userId = currentUser.getId();
-        Recipe recipe = recipeService.getRecipe(recipeId);
-        String recipeName = recipe.getRecipeName();
-        WishList wish = wishListService.getWish(recipeId, userId);
-//        if(wish != null){
+//    @PostMapping("/inform/{id}/wishList")
+//    public ResponseEntity<WishList> wishListOn(@PathVariable("id") Long recipeId, HttpSession session){
+//        Customer currentUser = (Customer)session.getAttribute("customer");
+//        String userId = currentUser.getId();
+//        Recipe recipe = recipeService.getRecipe(recipeId);
+//        String recipeName = recipe.getRecipeName();
+//        WishList wish = wishListService.getWish(recipeId, userId);
+////        if(wish != null){
+////
+////        }else{
+//            WishList wishList = new WishList();
+//            wishList.setCustomer(currentUser);
+//            wishList.setRecipe(recipe);
+//            WishList savedWishlist = wishListService.wishSave(wishList);
+//            return ResponseEntity.status(HttpStatus.CREATED).body(savedWishlist);
+////        }
 //
-//        }else{
-            WishList wishList = new WishList();
-            wishList.setCustomer(currentUser);
-            wishList.setRecipe(recipe);
-            WishList savedWishlist = wishListService.wishSave(wishList);
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedWishlist);
-//        }
-
-    }
+//    }
 
 }

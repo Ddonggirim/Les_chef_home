@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface WishListRepository extends JpaRepository<WishList, Long> {
 
-    @Query(value = "select * from Wish_List where recipe_id = :recipeId and id = :Id", nativeQuery = true)
+    @Query(value = "select * from Wish_List where RECIPE_ID = :recipeId and ID = :Id", nativeQuery = true)
     WishList findWish(@Param("recipeId") Long recipeId, @Param("Id") String Id);
+
 }

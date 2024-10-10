@@ -1,18 +1,17 @@
 package com.example.LesChef.entity;
 
 import com.example.LesChef.dto.WishListForm;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class WishList {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long wishListId;
     @ManyToOne
     @JoinColumn(name = "recipe_id")
@@ -21,8 +20,12 @@ public class WishList {
     @JoinColumn(name = "id")
     private Customer customer;
 
-
-//    public WishListForm toForm(){
-//        return new WishListForm(this.wishListId, this.recipe, this.customer);
-//    }
+    @Builder
+    public WishList(Recipe recipe, Customer customer){
+        this.recipe  = recipe;
+        this.customer = customer;
+    }
+    public WishListForm toForm(){
+        return new WishListForm(this.wishListId, this.recipe, this.customer);
+    }
 }
