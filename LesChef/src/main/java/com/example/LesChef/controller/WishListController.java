@@ -9,6 +9,7 @@ import com.example.LesChef.service.WishListService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class WishListController {
     private final WishListService wishListService;
 
     @PostMapping("/wishSave")
-    public String wishSave(@RequestBody WishListForm wishListForm, HttpSession session){
+    public ResponseEntity<String> wishSave(@RequestBody WishListForm wishListForm, HttpSession session){
         log.info("wishSave요청");
         Customer currentUser = (Customer)session.getAttribute("customer");
         String customerId = currentUser.getId();
@@ -36,15 +37,17 @@ public class WishListController {
         log.info("찜목록인데요 레시피아이디는 " + wishListForm.getWishListId());
         log.info("찜목록인데요 유저아이디는 " + wishListForm.getCustomer().getId());
         log.info("찜목록인데요 레시피이름은 " + wishListForm.getRecipe().getRecipeName());
-        return "redirect:/inform/" + recipeId;
+//        return "redirect:/inform/" + recipeId;
+        return ResponseEntity.ok("{\"status\":\"Successful\"}");
     }
 
     @PostMapping("/wishDelete")
-    public void wishDelete(@RequestBody WishListForm wishListForm, HttpSession session){
+    public ResponseEntity<String> wishDelete(@RequestBody WishListForm wishListForm, HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
         String userId = currentUser.getId();
         Long recipeId = wishListForm.getRecipe().getRecipeId();
         wishListService.wishDelete(recipeId, userId);
+        return ResponseEntity.ok("{\"status\":\"Successfully deleted wish\"}");
     }
 
 }

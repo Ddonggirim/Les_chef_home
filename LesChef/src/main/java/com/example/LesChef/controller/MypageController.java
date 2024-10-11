@@ -6,10 +6,7 @@ import com.example.LesChef.dto.CommentForm;
 import com.example.LesChef.dto.RecipeForm;
 import com.example.LesChef.entity.Customer;
 import com.example.LesChef.repository.CustomerRepository;
-import com.example.LesChef.service.AllCommentService;
-import com.example.LesChef.service.CustomerService;
-import com.example.LesChef.service.ArticleService;
-import com.example.LesChef.service.RecipeService;
+import com.example.LesChef.service.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +33,8 @@ public class MypageController {
     private final ArticleService articleService;
 
     private final AllCommentService allCommentService;
+
+    private final WishListService wishListService;
 
     // 회원정보 수정
     @PostMapping("/customerRewrite")
@@ -104,6 +103,7 @@ public class MypageController {
     @PostMapping("/recipe/delete/{id}")
     public String delRecipe(@PathVariable("id") Long id){
         allCommentService.deleteRecipeParent(id);
+        wishListService.recipeDeleteWish(id);
         recipeService.deleteRecipe(id);
         return "redirect:/myrecipe";
     }

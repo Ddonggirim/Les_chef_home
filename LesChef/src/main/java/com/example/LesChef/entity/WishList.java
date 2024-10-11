@@ -11,7 +11,8 @@ import lombok.*;
 @Setter
 public class WishList {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "wish_list_id_seq")
+    @SequenceGenerator(name = "wish_list_id_seq", sequenceName = "wish_list_id_seq", initialValue = 1, allocationSize = 1)
     private Long wishListId;
     @ManyToOne
     @JoinColumn(name = "recipe_id")
