@@ -27,30 +27,34 @@
         <div class="right">
             <h2>찜 목록</h2>
             <div class="comments">
-                <div class="comment">
-                    <input type="checkbox" class="delete-checkbox">
-                    <img src="../image1/MypageIcon/bap.png">
-                    <div class="comment-text">
-                        <p><strong>레시피 제목:</strong> </p>
-                        <p><strong>작성 시간:</strong></p>
-                        <p><strong>내용:</strong></p>
+
+                <div th:each="wish : ${WishList}" class="comment">
+                    <a th:href="@{/inform/{id}(id=${wish.recipe.recipeId})}">
+                        <img th:src="@{${wish.recipe.recipeImg}}">
+                    </a>
+                    <div class="buttonsRelative">
+                            <form method="post" th:action="@{/wish/delete/{id}(id=${wish.wishListId})}" class="deleteForm">
+                                <button type="submit" class="deleteBtn"> 삭제</button>
+                            </form>
+                        <div class="comment-text">
+                            <p th:text="'레시피: ' + ${wish.recipe.recipeName}"></p>
+                            <p th:text="'난이도: ' + ${wish.recipe.cookLevel}"></p>
+                            <p th:text="'인분 정보: ' + ${wish.recipe.portion}"></p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="comment">
-                <input type="checkbox" class="delete-checkbox">
-                <img src="../image1/MypageIcon/crab.png" href="#">
-                <div class="comment-text">
-                    <p><strong>레시피 제목</strong></p>
-                    <p><strong>작성 시간:</strong> </p>
-                    <p><strong>내용:</strong></p>
-                </div>
-            </div>
+<!--            <div class="comment">-->
+<!--                <input type="checkbox" class="delete-checkbox">-->
+<!--                <img src="../image1/MypageIcon/crab.png" href="#">-->
+<!--                <div class="comment-text">-->
+<!--                    <p><strong>레시피 제목</strong></p>-->
+<!--                    <p><strong>작성 시간:</strong> </p>-->
+<!--                    <p><strong>내용:</strong></p>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
-        <div class="buttons">
-            <button type="button" href="#">수정</button>
-            <button class="delete-button">삭제</button>
-        </div>
+
     </div>
 </div>
 <div class="lock">

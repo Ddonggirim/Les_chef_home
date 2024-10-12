@@ -1,9 +1,6 @@
 package com.example.LesChef.controller;
 
-import com.example.LesChef.dto.AddCustomerRequest;
-import com.example.LesChef.dto.ArticleForm;
-import com.example.LesChef.dto.CommentForm;
-import com.example.LesChef.dto.RecipeForm;
+import com.example.LesChef.dto.*;
 import com.example.LesChef.entity.Customer;
 import com.example.LesChef.repository.CustomerRepository;
 import com.example.LesChef.service.*;
@@ -56,6 +53,14 @@ public class MypageController {
         customerRepository.delete(currentUser);
         session.invalidate();
         return "redirect:/main";
+    }
+
+    @GetMapping("myWishList")
+    public String wishList(Model model, HttpSession session){
+        Customer currentUser = (Customer) session.getAttribute("customer");
+        String userId = currentUser.getId();
+        wishListService.getMyWishList(userId, model);
+        return "mypage/WishList";
     }
 
     //나의 댓글 가져오기
@@ -124,5 +129,11 @@ public class MypageController {
             return "redirect:/myRecipeComment";
         }
 
+    }
+
+    @PostMapping("/wish/delete/{id}")
+    public String delWish(@PathVariable("id") Long id){
+        wishListService.deleteWish(id);
+        return "redirect:/myWishList";
     }
 }

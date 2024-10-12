@@ -47,7 +47,7 @@ public class LesMainController {
     @GetMapping("/Rewrite")
     public String gotoRewrite() {return "mypage/Rewrite";}
     @GetMapping("/WishList")
-    public String gotoWishList() {return "mypage/WishList";}
+    public String gotoWishList() {return "redirect:/myWishList";}
     @GetMapping("/Mycomment")
     public String gotoMycomment() {return "redirect:/myRecipeComment";}
     @GetMapping("/Regist")

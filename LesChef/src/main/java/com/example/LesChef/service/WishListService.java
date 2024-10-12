@@ -1,5 +1,6 @@
 package com.example.LesChef.service;
 
+import com.example.LesChef.dto.WishListForm;
 import com.example.LesChef.entity.WishList;
 import com.example.LesChef.repository.WishListRepository;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -41,5 +45,17 @@ public class WishListService {
     @Transactional
     public void recipeDeleteWish(Long recipeId){
         wishListRepository.deleteRecipe(recipeId);
+    }
+
+    public void getMyWishList(String userId, Model model){
+        List<WishList> wishList = wishListRepository.findMyWishList(userId);
+        List<WishListForm> myWishList = wishList.stream().map(WishList::toForm).collect(Collectors.toList());
+        model.addAttribute("WishList", myWishList);
+    }
+
+    @Transactional
+    public void deleteWish(Long id){
+        WishList wish = wishListRepository.findById(id).orElse(null);
+        wishListRepository.delete(wish);
     }
 }
