@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/NoticeBoardHeader.css">
-  <link rel="stylesheet" href="../css/NoticeBoardMain.css">
-  <link rel="stylesheet" href="../css/font.css">
-  <link rel="stylesheet" href="../css/LoginModal.css">
+  <link rel="stylesheet" href="/css/NoticeBoardHeader.css">
+  <link rel="stylesheet" href="/css/NoticeBoardMain.css">
+  <link rel="stylesheet" href="/css/font.css">
+  <link rel="stylesheet" href="/css/LoginModal.css">
   <title>Notice Board</title>
 </head>
 <body><!--게시일자,제작자 이름,제작자 이미지, 조회수, 게시글 제목, 게시글 부제목,게시글 이미지,게시글 url-->
 <header>
   <div  class="logoBackGround">
-    <a href="./main"><img src="../image1/NoticeIcon/Logo.jpg"></a>
+    <a href="./main"><img src="/image1/NoticeIcon/Logo.jpg"></a>
 
   </div>
-  <a href="/Rewrite"><img src="../image1/ListIcon/마이페이지.png" id="mypageicon"/></a>
-  <a th:if="${session.customer}" href="/logout"><img  src="../image1/NoticeIcon/Logout.png" id="logout"></a>
-  <img th:unless="${session.customer}" src="../image1/NoticeIcon/Login.png" id="login">
+  <a href="/Rewrite"><img src="/image1/ListIcon/마이페이지.png" id="mypageicon"/></a>
+  <a th:if="${session.customer}" href="/logout"><img  src="/image1/NoticeIcon/Logout.png" id="logout"></a>
+  <img th:unless="${session.customer}" src="/image1/NoticeIcon/Login.png" id="login">
 </header>
 <main>
   <!--노트북 사진-->
@@ -31,7 +31,7 @@
       <button>조회순</button>
     </div>
     <a href="/GesiRegist" class="write">
-      <img src="../image1/NoticeIcon/write.jpg">
+      <img src="/image1/NoticeIcon/write.jpg">
     </a>
   </div>
 
@@ -52,11 +52,11 @@
             <!--작성자 및 조회수/writerName/writerNameContent=inline-flex-->
             <div class="writerName">
                 <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/duck.jpg">
+                  <img src="/image1/NoticeIcon/duck.jpg">
                   <span th:text="${articles.userNickName}"></span>
                 </span>
               <span class="writerNameContent">
-                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">
+                  <img src="/image1/NoticeIcon/views.jpg" class="viewIcon">
                   <span th:text="${articles.viewNum}"></span>
                 </span>
             </div>
@@ -69,7 +69,7 @@
 <!--    <li class="gesigeul" id="for2">-->
 <!--      <a href="/Gesigeul">-->
 <!--        <dl>-->
-<!--          <dt><img src="../image1/NoticeIcon/a1.jpg" class="gesigeulImg"></dt>-->
+<!--          <dt><img src="/image1/NoticeIcon/a1.jpg" class="gesigeulImg"></dt>-->
 <!--          <dd>-->
 <!--            <div class="boardContent">-->
 <!--              <p><b>감자짜글이 JMT 실화냐? 먹고 뒤질뻔 ㅋㅋ</b></p>-->
@@ -78,11 +78,11 @@
 
 <!--            <div class="writerName">-->
 <!--                <span class="writerNameContent">-->
-<!--                  <img src="../image1/NoticeIcon/duck.jpg">-->
+<!--                  <img src="/image1/NoticeIcon/duck.jpg">-->
 <!--                  <span>by 오리너구리</span>-->
 <!--                </span>-->
 <!--              <span class="writerNameContent">-->
-<!--                  <img src="../image1/NoticeIcon/views.jpg" class="viewIcon">-->
+<!--                  <img src="/image1/NoticeIcon/views.jpg" class="viewIcon">-->
 <!--                  <span>0.5k</span>-->
 <!--                </span>-->
 <!--            </div>-->
@@ -94,7 +94,7 @@
 <!--      <a href="/Gesigeul">-->
 <!--        <dl>-->
 <!--          <dt>-->
-<!--            <img src="../image1/NoticeIcon/a2.jpg" class="gesigeulImg">-->
+<!--            <img src="/image1/NoticeIcon/a2.jpg" class="gesigeulImg">-->
 <!--          </dt>-->
 <!--          <dd>-->
 <!--            <div class="boardContent">-->
@@ -106,7 +106,7 @@
 
 <!--            <div class="writerName">-->
 <!--                <span class="writerNameContent">-->
-<!--                  <img src="../image1/NoticeIcon/duck.jpg">-->
+<!--                  <img src="/image1/NoticeIcon/duck.jpg">-->
 <!--                  <span>by 오리너구리</span>-->
 <!--                </span>-->
 <!--              <span class="writerNameContent">-->

@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -94,5 +95,10 @@ public class RecipeService {
             cookie.setMaxAge(30);
             response.addCookie(cookie);
         }
+    }
+
+    public void getSortRecipe(String categoryName, String sort, Model model){
+            List<Recipe> recipes = recipeRepository.findSortRecipe(categoryName, sort);
+            model.addAttribute("recipes", recipes);
     }
 }

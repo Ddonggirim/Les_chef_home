@@ -58,6 +58,15 @@ public class RecipeListController {
         model.addAttribute("recipes", recipes);
         return "recipe/List";
     }
+
+    @GetMapping("/List/{englishName}/{sort}")
+    public String getRecipeOfKind(@PathVariable("englishName") String englishName, @PathVariable("sort") String sort, Model model){
+        String typeOfSort = recipecategoryService.getTypeOfSort(englishName, sort, model);
+        String categoryName = recipecategoryService.getCategoryName(englishName);
+        recipeService.getSortRecipe(categoryName, typeOfSort, model);
+        return "recipe/List";
+    }
+
     @GetMapping("/List/Japanese") //일식 레시피 모음
     public String japanese(Model model){
         RecipecategoryForm recipecategoryForm = recipecategoryService.findCategory("일식");
@@ -96,6 +105,8 @@ public class RecipeListController {
         model.addAttribute("recipes", recipes);
         return "recipe/List";
     }
+
+
 
     @GetMapping("/inform/{id}") // 레시피 세부정보
     public String getRecipeInform(@PathVariable("id") Long id, HttpServletRequest request,

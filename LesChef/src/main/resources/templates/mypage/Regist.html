@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regist</title>
-    <link rel="stylesheet" href="../css/Regist.css">
-    <link rel="stylesheet" href="../css/font.css">
-<!--    <link rel="stylesheet" href="../css/LoginModal.css">-->
+    <link rel="stylesheet" href="/css/Regist.css">
+    <link rel="stylesheet" href="/css/font.css">
+<!--    <link rel="stylesheet" href="/css/LoginModal.css">-->
 </head>
 <body>
 <div class="container">
@@ -19,7 +19,7 @@
              <a href="/Myrecipe">나의 레시피<span style="font-family: GreateVibes; font-size: 30px;"><u>My Recipe</u></span></a>
         </div>
         <div class="logo">
-            <a href="/main"><img src="../image1/MypageIcon/logoUpdate.png"></a>
+            <a href="/main"><img src="/image1/MypageIcon/logoUpdate.png"></a>
         </div>
     </div>
     <div class="rigcontainer">
@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="recipe-image">
-                        <img src="../image1/MypageIcon/bap.png" alt="Click to change image" id="toggleImage1" class="clickable-img" data-input-id="imageInput">
+                        <img src="/image1/MypageIcon/bap.png" alt="Click to change image" id="toggleImage1" class="clickable-img" data-input-id="imageInput">
                         <input type="file" id="imageInput" name="File" style="display: none;" accept="image/*" required>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     <h3>조리순서</h3>
                     <div class="step">
                         <div id="box1">
-                            <img src="../image1/MypageIcon/bap.png" alt="Click to change image" id="toggleImage2" class="clickable-img" data-input-id="imageInput1">
+                            <img src="/image1/MypageIcon/bap.png" alt="Click to change image" id="toggleImage2" class="clickable-img" data-input-id="imageInput1">
                             <input type="file" id="imageInput1" name="stepFiles[]" style="display: none;" accept="image/*">
                             <textarea name = "stepWays[]"></textarea>
                         </div>
@@ -103,14 +103,14 @@
     </div>
 </div>
 <div class="lock">
-    <a th:if="${session.customer}" href="/logout"><img src="../image1/MypageIcon/Logout.png"></a>
+    <a th:if="${session.customer}" href="/logout"><img src="/image1/MypageIcon/Logout.png"></a>
 </div>
 
 
 <!--로그인 모달-->
 <!--<div class="loginModal">-->
 <!--    <div class="Login-box">-->
-<!--        <a id="Login-box-Logo" href="/main"><img src="../image1/MainIcon/main_logo.png" /></a>-->
+<!--        <a id="Login-box-Logo" href="/main"><img src="/image1/MainIcon/main_logo.png" /></a>-->
 <!--        <form class="login-form-container">-->
 <!--            <label>이메일(아이디)</label><br>-->
 <!--            <input type="email"/><br>-->
@@ -118,9 +118,9 @@
 <!--            <input type="password"/>-->
 <!--            <p id="FindIdPw">아이디 / 비밀번호 찾기</p><br>-->
 <!--            <div id="social-login-block">-->
-<!--                <a class="social-login" href="#"><img src="../image1/MainIcon/Kakao.jpg"/></a>-->
-<!--                <a class="social-login" href="#"><img src="../image1/MainIcon/Google_logo.png"/></a>-->
-<!--                <a class="social-login" href="#"><img src="../image1/MainIcon/Naver_logo.png"/></a>-->
+<!--                <a class="social-login" href="#"><img src="/image1/MainIcon/Kakao.jpg"/></a>-->
+<!--                <a class="social-login" href="#"><img src="/image1/MainIcon/Google_logo.png"/></a>-->
+<!--                <a class="social-login" href="#"><img src="/image1/MainIcon/Naver_logo.png"/></a>-->
 <!--            </div>-->
 <!--            <button class="login-button" type="submit">로그인</button>-->
 <!--        </form>-->
@@ -152,8 +152,8 @@
 <!--    </div>-->
 <!--</div>-->
 
-<script src="../js/regist.js"></script>
-<!-- <script src="../js/profile.js"></script> -->
-<!--<script src="../js/loginModal.js"></script>-->
+<script src="/js/regist.js"></script>
+<!-- <script src="/js/profile.js"></script> -->
+<!--<script src="/js/loginModal.js"></script>-->
 </body>
 </html>

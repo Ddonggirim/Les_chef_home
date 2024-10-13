@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/Categoryheader.css">
-  <link rel="stylesheet" href="../css/ListInform.css">
-  <link rel="stylesheet" href="../css/font.css">
-  <link rel="stylesheet" href="../css/LoginModal.css">
+  <link rel="stylesheet" href="/css/Categoryheader.css">
+  <link rel="stylesheet" href="/css/ListInform.css">
+  <link rel="stylesheet" href="/css/font.css">
+  <link rel="stylesheet" href="/css/LoginModal.css">
   <title th:text="${inform.recipeName}"></title>
 </head>
 <body>
 <header>
   <!-- 로고,게시판,로그인, 자물쇠 위치 -->
   <div id="headerspace">
-    <div id="board"> <a href="/NoticeBoardMain"><img src="../image1/ListIcon/게시판아이콘.png"/></a></div>
-    <div id="logo"> <a href="/main"><img src="../image1/ListIcon/로고.png"/></a></div>
-    <div id="icon2"> <a href="/Rewrite"><img id="mypageicon"src="../image1/ListIcon/마이페이지.png"/></a>
-      <a th:if="${session.customer}" href="/logout"><img src="../image1/ListIcon/Logout.png"></a>
-      <img th:unless="${session.customer}" id="login" src="../image1/ListIcon/자물쇠 1.png" width="55"/>
+    <div id="board"> <a href="/NoticeBoardMain"><img src="/image1/ListIcon/게시판아이콘.png"/></a></div>
+    <div id="logo"> <a href="/main"><img src="/image1/ListIcon/로고.png"/></a></div>
+    <div id="icon2"> <a href="/Rewrite"><img id="mypageicon"src="/image1/ListIcon/마이페이지.png"/></a>
+      <a th:if="${session.customer}" href="/logout"><img src="/image1/ListIcon/Logout.png"></a>
+      <img th:unless="${session.customer}" id="login" src="/image1/ListIcon/자물쇠 1.png" width="55"/>
     </div>
   </div>
   <!-- 빨간 가로바 텍스트 -->
@@ -36,7 +36,7 @@
   <span id="sort" th:text="${inform.majorCategory} + '>' + ${inform.subCategory}">한식 > 볶음류</span><br>
   <span id="title" th:text="${inform.recipeName}"></span>
   <div>
-    <img id="eye" src="../image1/ListIcon/조회수.png"/><p id="eyenum" th:text="${inform.viewNum}"></p>
+    <img id="eye" src="/image1/ListIcon/조회수.png"/><p id="eyenum" th:text="${inform.viewNum}"></p>
   </div>
   <img id="mainimg" th:src="@{${inform.recipeImg}}">
 
@@ -47,18 +47,18 @@
       </div>
   </div>
   <div class="aside">
-    <img id="asideicon1" src="../image1/ListIcon/댓글.png" width="60px">
+    <img id="asideicon1" src="/image1/ListIcon/댓글.png" width="60px">
     <img id="asideicon2" th:src="${heartImg}" width="60px" onclick="wishListClick()">
   </div>
 
   <!-- 메인 사진 아랫 부분 -->
   <div class="allicon">
-    <div class="selecticon"><img  src="../image1/ListIcon/인원.png"><span th:text="${inform.portion}"></span></div>
-    <div class="selecticon"><img id="selecticon2" src="../image1/ListIcon/시계.png"><span th:text="${inform.runTime}"></span></div>
-    <div class="selecticon "><img src="../image1/ListIcon/난이도.png"><span id="selecticon3" th:text="${inform.cookLevel}"></span></div>
+    <div class="selecticon"><img  src="/image1/ListIcon/인원.png"><span th:text="${inform.portion}"></span></div>
+    <div class="selecticon"><img id="selecticon2" src="/image1/ListIcon/시계.png"><span th:text="${inform.runTime}"></span></div>
+    <div class="selecticon "><img src="/image1/ListIcon/난이도.png"><span id="selecticon3" th:text="${inform.cookLevel}"></span></div>
   </div>
 
-  <img id="line1" src="../image1/ListIcon/인포선.png">
+  <img id="line1" src="/image1/ListIcon/인포선.png">
 
   <!-- 초록선 -->
   <span id="descript">RECIPE</span>
@@ -70,7 +70,7 @@
       <span class="script script2" th:text="'Step ' + ${step.stepNum}"></span>
       <span class="script script3" th:text="${step.stepWay}"></span>
 
-<!--      <img class="script script4"src="../image1/ListIcon/치즈닭갈비1.png"/>-->
+<!--      <img class="script script4"src="/image1/ListIcon/치즈닭갈비1.png"/>-->
 <!--      <span class="script script5">Step 2</span>-->
 <!--      <span class="script script6">닭은 껍질을 제거하고, 우유에 30분 정도 담갔다가 물에 헹궈 먹기 좋은 크기로 잘라주세요. 볼에 양념장 재료를 넣고 고루 섞은 후 닭을 넣어 30분 정도 재워주세요.</span>-->
     </div>
@@ -81,9 +81,9 @@
     <span class="totalnumber totalnumber1">후기</span>
     <div class="totalimg">
       <span th:each="num : ${#numbers.sequence(1,5)}">
-        <img th:if="${ratingList[num] == 1.0}" src="../image1/ListIcon/별.png">
-        <img th:if="${ratingList[num] == 0.5}" src="../image1/ListIcon/반별.png">
-        <img th:if="${ratingList[num] == 0.0}" src="../image1/ListIcon/없는별.png">
+        <img th:if="${ratingList[num] == 1.0}" src="/image1/ListIcon/별.png">
+        <img th:if="${ratingList[num] == 0.5}" src="/image1/ListIcon/반별.png">
+        <img th:if="${ratingList[num] == 0.0}" src="/image1/ListIcon/없는별.png">
       </span>
     </div>
     <span class="totalnumber totalnumber2" th:text="'평점 ' + ${ratingList[0]}"></span>
@@ -93,7 +93,7 @@
   <div id="comentcontainer">
     <div th:each="comment : ${comments}" class="comentbox">
       <div class="coment">
-        <img class="comentimg" src="../image1/ListIcon/사용자.png" />
+        <img class="comentimg" src="/image1/ListIcon/사용자.png" />
         <span class="comentnickname" th:text="${comment.commenter}"></span>
         <div class="allstar">
           <span th:each="num : ${#numbers.sequence(1,5)}">

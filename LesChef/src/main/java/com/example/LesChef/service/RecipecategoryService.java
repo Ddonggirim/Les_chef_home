@@ -26,6 +26,34 @@ public class RecipecategoryService {
         return null;
     }
 
+    public String getCategoryName(String englishName){
+        Recipecategory category = recipecategoryRepository.findEngName(englishName);
+        String categoryName = category.getKoreanName();
+
+        return categoryName;
+    }
+
+    public String getTypeOfSort(String englishName, String sort, Model model){
+        String sortName;
+        Recipecategory recipecategory = recipecategoryRepository.findEngName(englishName);
+        model.addAttribute("category", recipecategory);
+        switch(sort){
+            case "1":
+                sortName = recipecategory.getSortOne();
+                break;
+            case "2":
+                sortName = recipecategory.getSortTwo();
+                break;
+            case "3":
+                sortName = recipecategory.getSortThree();
+                break;
+            default:
+                sortName = "기타";
+        }
+
+        return sortName;
+    }
+
 //    public void toModel(RecipecategoryForm recipecategoryForm, Model model){
 //        if(recipecategoryForm != null){
 //            model.addAttribute("koreanName", recipecategoryForm.getKorean_Name());

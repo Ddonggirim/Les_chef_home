@@ -14,33 +14,33 @@
 <body>
 <div id="left_box">
 </div>
- <a href="/main"><img class="Logo" src="../image1/MainIcon/main_logo.png"/></a>
+ <a href="/main"><img class="Logo" src="/image1/MainIcon/main_logo.png"/></a>
 <div class="scroll-area">
   <div class="bg-video">
-    <video class="bg-video__content" src="../image1/MainIcon/mainFirstVideo.mp4" autoplay muted loop></video>
+    <video class="bg-video__content" src="/image1/MainIcon/mainFirstVideo.mp4" autoplay muted loop></video>
   </div>
   <span class="main_phrase1">재료 준비부터<br> 만드는 법, 조리시간</span>
   <span class="main_phrase2">한식부터 일식, 양식까지 <br> 다양하게 </span>
 </div>
 <div class="scroll-area">
-  <img id="page2-image" src="../image1/MainIcon/main_2.png" />
+  <img id="page2-image" src="/image1/MainIcon/main_2.png" />
   <span class="main_phrase1">간단한<br>아침 레시피부터</span>
   <span class="main_phrase2">온가족이 즐길 수 있는<br>저녁 레시피까지</span>
 </div>
 <div class="scroll-area">
-  <img id="page3-image" src="../image1/MainIcon/main_3.png" />
+  <img id="page3-image" src="/image1/MainIcon/main_3.png" />
   <span class="main_phrase1">게시판에서<br>자신의 레시피를</span>
   <span class="main_phrase2">다른사람들과 함께<br>공유해 보세요!</span>
 </div>
 <div class="scroll-area">
-  <img id="page4-image" src="../image1/MainIcon/main_4.png" />
+  <img id="page4-image" src="/image1/MainIcon/main_4.png" />
   <span class="main_phrase1">검색 기능으로<br>남은 재료를 입력해</span>
   <span class="main_phrase2">색다른 방법으로<br>음식을 만들어보세요!</span>
 </div>
 <div class="scroll-area" id="signup-area">
-  <img id="signup-image" src="../image1/MainIcon/Ex6.jpg">
+  <img id="signup-image" src="/image1/MainIcon/Ex6.jpg">
   <div id="signup-box">
-    <a href="/main"><img src="../image1/MainIcon/Logo.jpg"></a>
+    <a href="/main"><img src="/image1/MainIcon/Logo.jpg"></a>
     <form action="signup" method="post" id="signup">
       <label>이메일(아이디)</label><br>
       <input type="email" name="id" /><br>
@@ -58,12 +58,12 @@
   </div>
 </div>
 <ul id="left-sidebar">
-  <li id="menu"><img   src="../image1/MainIcon/Menu.png"/></li>
-<!--  <li id="loginButton"><img src="../image1/MainIcon/Login.png"/></li> &lt;!&ndash;&ndash;&gt;-->
-<!--  <li id="logoutButton"><a href="/logout"><img src="../image1/MainIcon/Menu.png"/></a></li>-->
-  <li th:if="${session.customer}" id="logoutButton"><a href="/logout"><img src="../image1/MainIcon/Logout.png"/></a></li>
-  <li th:unless="${session.customer}" id="loginButton"><img src="../image1/MainIcon/Login.png"/></li>
-  <li id="myPageButton"><a href="./Rewrite"><img src="../image1/MainIcon/마이페이지 1.png"/></a></li> <!---->
+  <li id="menu"><img   src="/image1/MainIcon/Menu.png"/></li>
+<!--  <li id="loginButton"><img src="/image1/MainIcon/Login.png"/></li> &lt;!&ndash;&ndash;&gt;-->
+<!--  <li id="logoutButton"><a href="/logout"><img src="/image1/MainIcon/Menu.png"/></a></li>-->
+  <li th:if="${session.customer}" id="logoutButton"><a href="/logout"><img src="/image1/MainIcon/Logout.png"/></a></li>
+  <li th:unless="${session.customer}" id="loginButton"><img src="/image1/MainIcon/Login.png"/></li>
+  <li id="myPageButton"><a href="./Rewrite"><img src="/image1/MainIcon/마이페이지 1.png"/></a></li> <!---->
 </ul>
 <div id="under_box"></div>
 <div id="select-menu">
@@ -79,7 +79,7 @@
 
 <div class="loginModal">
   <div class="Login-box">
-    <a id="Login-box-Logo" href="/main"><img src="../image1/MainIcon/main_logo.png" /></a>
+    <a id="Login-box-Logo" href="/main"><img src="/image1/MainIcon/main_logo.png" /></a>
     <form action="/login" method="post" class="login-form-container">
       <label>이메일(아이디)</label><br>
       <input type="email" name="id"/><br>
@@ -87,9 +87,9 @@
       <input type="password" name="password"/>
       <p id="FindIdPw" href="FindIdPw.html">아이디 / 비밀번호 찾기</p><br>
       <div id="social-login-block">
-        <a class="social-login" href="#"><img src="../image1/MainIcon/Kakao.jpg"/></a>
-        <a class="social-login" href="#"><img src="../image1/MainIcon/Google_logo.png"/></a>
-        <a class="social-login" href="#"><img src="../image1/MainIcon/Naver_logo.png"/></a>
+        <a class="social-login" href="#"><img src="/image1/MainIcon/Kakao.jpg"/></a>
+        <a class="social-login" href="#"><img src="/image1/MainIcon/Google_logo.png"/></a>
+        <a class="social-login" href="#"><img src="/image1/MainIcon/Naver_logo.png"/></a>
       </div>
       <button type="submit">로그인</button>
     </form>
@@ -129,7 +129,7 @@
   </div>
 </div>
 
-<script src="../js/MainPage.js"></script>
+<script src="/js/MainPage.js"></script>
 <script>
   window.onload = function() {
       const name1 = '[[${name1}]]';

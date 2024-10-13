@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/Categoryheader.css">
-  <link rel="stylesheet" href="../css/LIst.css">
-  <link rel="stylesheet" href="../css/font.css">
-  <link rel="stylesheet" href="../css/LoginModal.css">
+  <link rel="stylesheet" href="/css/Categoryheader.css">
+  <link rel="stylesheet" href="/css/LIst.css">
+  <link rel="stylesheet" href="/css/font.css">
+  <link rel="stylesheet" href="/css/LoginModal.css">
   <title th:text="${category.koreanName}">Recipe List</title>
 </head>
 <body>
 <header>
   <!-- 로고,게시판,로그인, 자물쇠 위치 -->
   <div id="headerspace">
-    <div id="board"> <a href="/NoticeBoardMain"><img src="../image1/ListIcon/게시판아이콘.png"/></a></div>
-    <div id="logo"> <a href="/main"><img src="../image1/ListIcon/로고.png"/></a></div>
-    <div id="icon2"> <a href="/Rewrite"><img id="mypageicon"src="../image1/ListIcon/마이페이지.png"/></a>
-      <a th:if="${session.customer}" href="/logout"><img src="../image1/ListIcon/Logout.png"></a>
-      <img th:unless="${session.customer}" id="login" src="../image1/ListIcon/자물쇠 1.png" width="55"/>
+    <div id="board"> <a href="/NoticeBoardMain"><img src="/image1/ListIcon/게시판아이콘.png"/></a></div>
+    <div id="logo"> <a href="/main"><img src="/image1/ListIcon/로고.png"/></a></div>
+    <div id="icon2"> <a href="/Rewrite"><img id="mypageicon"src="/image1/ListIcon/마이페이지.png"/></a>
+      <a th:if="${session.customer}" href="/logout"><img src="/image1/ListIcon/Logout.png"></a>
+      <img th:unless="${session.customer}" id="login" src="/image1/ListIcon/자물쇠 1.png" width="55"/>
     </div>
   </div>
   <!-- 빨간 가로바 텍스트 -->
@@ -43,16 +43,16 @@
     <a th:href="@{/List/{englishName}(englishName=${category.englishName})}">
       <span class="subcategory" style=" color:black" th:if="${category.sortOne != null}">전체보기</span>
     </a>
-    <a th:href="@{/List/{englishName}/{sortOne}(englishName=${category.englishName}, sortOne=${category.sortOne})}">
+    <a th:href="@{/List/{englishName}/1(englishName=${category.englishName})}">
       <span class="subcategory" th:text="${category.sortOne}">국물류 </span>
     </a>
-    <a th:href="@{/List/{englishName}/{sortTwo}(englishName=${category.englishName}, sortTwo=${category.sortTwo})}">
+    <a th:href="@{/List/{englishName}/2(englishName=${category.englishName})}">
       <span class="subcategory" th:text="${category.sortTwo}">볶음류 </span>
     </a>
-    <a th:href="@{/List/{englishName}/{sortThree}(englishName=${category.englishName}, sortThree=${category.sortThree})}">
+    <a th:href="@{/List/{englishName}/3(englishName=${category.englishName})}">
       <span class="subcategory" th:text="${category.sortThree}">튀김류 </span>
     </a>
-    <a th:href="@{/List/{englishName}/etc(englishName=${category.englishName})}">
+    <a th:href="@{/List/{englishName}/4(englishName=${category.englishName})}">
       <span class="subcategory" th:if="${category.sortOne != null}">기타</span>
     </a>
 
@@ -61,7 +61,7 @@
   </div>
 
   <form action="#" method="#" >
-    <img id="search" src="../image1/ListIcon/search.png" width="55px"/>
+    <img id="search" src="/image1/ListIcon/search.png" width="55px"/>
     <input id="searchtext"></input>
   </form>
   <!-- 리스트 목록 -->
@@ -71,18 +71,18 @@
       <a th:href="@{/inform/{id}(id=${recipe.recipeId})}">
         <img class="listimg" th:src="@{${recipe.recipeImg}}">
         <h3 th:text="${recipe.recipeName}"></h3>
-        <ul class="listcontent"><img class="icon" src="../image1/ListIcon/마이페이지.png" width="25"/><li class="nickname">by 닉네임</li><li class="timeset">소요시간</li><li class="runtime" th:text="${recipe.runTime}"></li></ul>
-        <ul class="submix"> <img class="star" src="../image1/ListIcon/평점.png"><li class="everage" th:text="'평점 ' + ${recipe.ratingAvg}"></li><img class="eye" src="../image1/ListIcon/조회수.png"><li class="eyenumber" th:text="${recipe.viewNum}"></li></ul>
+        <ul class="listcontent"><img class="icon" src="/image1/ListIcon/마이페이지.png" width="25"/><li class="nickname">by 닉네임</li><li class="timeset">소요시간</li><li class="runtime" th:text="${recipe.runTime}"></li></ul>
+        <ul class="submix"> <img class="star" src="/image1/ListIcon/평점.png"><li class="everage" th:text="'평점 ' + ${recipe.ratingAvg}"></li><img class="eye" src="/image1/ListIcon/조회수.png"><li class="eyenumber" th:text="${recipe.viewNum}"></li></ul>
       </a>
     </div>
 
     <!-- ----------------------------------------------------------------------------- -->
 <!--    <div class="listmain">-->
 <!--      <a href="./informShare">-->
-<!--        <img class="listimg"src="../image1/ListIcon/예시1.png">-->
+<!--        <img class="listimg"src="/image1/ListIcon/예시1.png">-->
 <!--        <h3> 공유 레시피 제목</h3>-->
-<!--        <ul class="listcontent"><img class="icon" src="../image1/ListIcon/마이페이지.png" width="25"/><li class="nickname">by 닉네임</li><li class="timeset">소요시간</li><li class="runtime">10-15분</li></ul>-->
-<!--        <ul class="submix"> <img class="star" src="../image1/ListIcon/평점.png"><li class="everage">평점 4.5</li><img class="eye" src="../image1/ListIcon/조회수.png"><li class="eyenumber">800</li></ul>-->
+<!--        <ul class="listcontent"><img class="icon" src="/image1/ListIcon/마이페이지.png" width="25"/><li class="nickname">by 닉네임</li><li class="timeset">소요시간</li><li class="runtime">10-15분</li></ul>-->
+<!--        <ul class="submix"> <img class="star" src="/image1/ListIcon/평점.png"><li class="everage">평점 4.5</li><img class="eye" src="/image1/ListIcon/조회수.png"><li class="eyenumber">800</li></ul>-->
 <!--      </a>-->
 <!--    </div>-->
   </div>

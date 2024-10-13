@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/NoticeBoardHeader.css">
-  <link rel="stylesheet" href="../css/Gesigeul.css">
-  <link rel="stylesheet" href="../css/LoginModal.css">
+  <link rel="stylesheet" href="/css/NoticeBoardHeader.css">
+  <link rel="stylesheet" href="/css/Gesigeul.css">
+  <link rel="stylesheet" href="/css/LoginModal.css">
   <title>게시판</title>
 </head>
 <body><!--작성자 이름,작성자 이미지, 조회수, 게시글 이미지, 작성일자, 작성된 댓글(댓글 작성자 이미지,이름,내용), 이전 다음페이지 url-->
 <header>
   <div  class="logoBackGround">
-    <a href="/main"><img src="../image1/NoticeIcon/Logo.jpg"></a>
+    <a href="/main"><img src="/image1/NoticeIcon/Logo.jpg"></a>
   </div>
-  <a href="/Rewrite"><img src="../image1/ListIcon/마이페이지.png" id="mypageicon"/></a>
-  <a th:if="${session.customer}" href="/logout"><img src="../image1/NoticeIcon/Logout.png" id="logout"></a>
+  <a href="/Rewrite"><img src="/image1/ListIcon/마이페이지.png" id="mypageicon"/></a>
+  <a th:if="${session.customer}" href="/logout"><img src="/image1/NoticeIcon/Logout.png" id="logout"></a>
 </header>
 <main>
   <div class="gesiTopImg">
     <span>게시글</span>
   </div>
   <!--이전,다음페이지 버튼까지-->
-  <img src="../image1/NoticeIcon/LArrow-black.png" class="BeforePage" onclick="location.href='/NoticeBoardMain'">
+  <img src="/image1/NoticeIcon/LArrow-black.png" class="BeforePage" onclick="location.href='/NoticeBoardMain'">
   <div class="gesiBox">
     <h1 class="gesiTitle" th:text="${article.articleTitle}"></h1>
     <!--게시글 메인 이미지-->
@@ -31,11 +31,11 @@
     <div class="gesiWriterName">
       <!--gesiWriterNameContent1,2=inline-flex-->
       <span class="gesiWriterNameContent1">
-          <img src="../image1/NoticeIcon/duck.jpg">
+          <img src="/image1/NoticeIcon/duck.jpg">
           <span th:text="${article.userNickName}"></span>
         </span>
       <span class="gesiWriterNameContent2">
-          <img src="../image1/NoticeIcon/views-black.jpg">
+          <img src="/image1/NoticeIcon/views-black.jpg">
           <span th:text="${article.viewNum}"></span>
         </span>
     </div>
@@ -43,7 +43,7 @@
     <div class="prevNextBtnBox">
       <button>
         <div class="prevNextBtn">
-          <img src="../image1/NoticeIcon/LArrow.jpg" class="prev">
+          <img src="/image1/NoticeIcon/LArrow.jpg" class="prev">
           <span>이전 포스트</span>
         </div>
       </button>

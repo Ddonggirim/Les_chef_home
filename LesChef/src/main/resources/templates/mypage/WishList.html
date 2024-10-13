@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Myrecipe</title>
-    <link rel="stylesheet" href="../css/WishList.css">
-    <link rel="stylesheet" href="../css/font.css">
-<!--    <link rel="stylesheet" href="../css/LoginModal.css">-->
+    <link rel="stylesheet" href="/css/WishList.css">
+    <link rel="stylesheet" href="/css/font.css">
+<!--    <link rel="stylesheet" href="/css/LoginModal.css">-->
 </head>
 <body>
 <div class="container">
@@ -19,7 +19,7 @@
              <a href="/Myrecipe">나의 레시피<span style="font-family: GreateVibes; font-size: 30px;"><u>My Recipe</u></span></a>
         </div>
         <div class="logo">
-            <a href="./main"><img src="../image1/MypageIcon/logoUpdate.png"></a>
+            <a href="./main"><img src="/image1/MypageIcon/logoUpdate.png"></a>
         </div>
     </div>
 
@@ -46,7 +46,7 @@
             </div>
 <!--            <div class="comment">-->
 <!--                <input type="checkbox" class="delete-checkbox">-->
-<!--                <img src="../image1/MypageIcon/crab.png" href="#">-->
+<!--                <img src="/image1/MypageIcon/crab.png" href="#">-->
 <!--                <div class="comment-text">-->
 <!--                    <p><strong>레시피 제목</strong></p>-->
 <!--                    <p><strong>작성 시간:</strong> </p>-->
@@ -58,7 +58,7 @@
     </div>
 </div>
 <div class="lock">
-    <a th:if="${session.customer}" href="/logout"><img src="../image1/MypageIcon/Logout.png"></a>
+    <a th:if="${session.customer}" href="/logout"><img src="/image1/MypageIcon/Logout.png"></a>
 </div>
 </div>
 
@@ -66,7 +66,7 @@
 <!--로그인 모달-->
 <!--<div class="loginModal">-->
 <!--    <div class="Login-box">-->
-<!--        <a id="Login-box-Logo" href="/main"><img src="../image1/MainIcon/main_logo.png" /></a>-->
+<!--        <a id="Login-box-Logo" href="/main"><img src="/image1/MainIcon/main_logo.png" /></a>-->
 <!--        <form class="login-form-container">-->
 <!--            <label>이메일(아이디)</label><br>-->
 <!--            <input type="email"/><br>-->
@@ -74,9 +74,9 @@
 <!--            <input type="password"/>-->
 <!--            <p id="FindIdPw">아이디 / 비밀번호 찾기</p><br>-->
 <!--            <div id="social-login-block">-->
-<!--                <a class="social-login" href="#"><img src="../image1/MainIcon/Kakao.jpg"/></a>-->
-<!--                <a class="social-login" href="#"><img src="../image1/MainIcon/Google_logo.png"/></a>-->
-<!--                <a class="social-login" href="#"><img src="../image1/MainIcon/Naver_logo.png"/></a>-->
+<!--                <a class="social-login" href="#"><img src="/image1/MainIcon/Kakao.jpg"/></a>-->
+<!--                <a class="social-login" href="#"><img src="/image1/MainIcon/Google_logo.png"/></a>-->
+<!--                <a class="social-login" href="#"><img src="/image1/MainIcon/Naver_logo.png"/></a>-->
 <!--            </div>-->
 <!--            <button class="login-button" type="submit">로그인</button>-->
 <!--        </form>-->
@@ -107,7 +107,7 @@
 <!--        <p class="find-to-login">이미 회원이신가요? <span>로그인</span></p>-->
 <!--    </div>-->
 <!--</div>-->
-<script src="../js/delete.js"></script>
-<!--<script src="../js/loginModal.js"></script>-->
+<script src="/js/delete.js"></script>
+<!--<script src="/js/loginModal.js"></script>-->
 </body>
 </html>
