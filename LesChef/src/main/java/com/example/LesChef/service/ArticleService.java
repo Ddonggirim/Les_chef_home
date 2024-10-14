@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,10 +20,21 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
 
     public List<ArticleForm> getArticleList(){
-        List<Article> Articles = articleRepository.findAll();
-        return Articles.stream()
+        List<Article> articles = articleRepository.findAll();
+        return articles.stream()
                 .map(Article::toForm)
                 .collect(Collectors.toList());
+    }
+
+    public void getSortArticleList(String sort, Model model){
+        if("latest".equals(sort)){
+            List<Article> articles = articleRepository.findLatestArticles();
+            model.addAttribute("articles", articles);
+        }else{
+            List<Article> articles = articleRepository.findViewsArticles();
+            model.addAttribute("articles", articles);
+        }
+
     }
 
     public ArticleForm getArticle(Long id){

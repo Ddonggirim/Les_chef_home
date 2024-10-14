@@ -40,6 +40,12 @@ public class NoticeBoardController {
         return "community/NoticeBoardMain";
     }
 
+    @GetMapping("/NoticeBoard/{sort}")
+    public String sortArticle(@PathVariable("sort") String sort, Model model){
+            articleService.getSortArticleList(sort, model);
+        return "community/NoticeBoardMain";
+    }
+
     @GetMapping("/article/{id}")
     public String getArticle(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response, Model model){
         // 쿠키기반 조회수

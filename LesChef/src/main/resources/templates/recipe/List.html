@@ -41,7 +41,7 @@
   <!-- 세부 카테고리 텍스트 및 버튼  -->
   <div id="decategory">
     <a th:href="@{/List/{englishName}(englishName=${category.englishName})}">
-      <span class="subcategory" style=" color:black" th:if="${category.sortOne != null}">전체보기</span>
+      <span class="subcategory" th:if="${category.sortOne != null}">전체보기</span>
     </a>
     <a th:href="@{/List/{englishName}/1(englishName=${category.englishName})}">
       <span class="subcategory" th:text="${category.sortOne}">국물류 </span>
@@ -56,14 +56,14 @@
       <span class="subcategory" th:if="${category.sortOne != null}">기타</span>
     </a>
 
-    <button class="listbutton">최신순</button>
-    <button class="listbutton">조회순</button>
+<!--    <button class="listbutton">최신순</button>-->
+<!--    <button class="listbutton">조회순</button>-->
   </div>
 
-  <form action="#" method="#" >
-    <img id="search" src="/image1/ListIcon/search.png" width="55px"/>
-    <input id="searchtext"></input>
-  </form>
+<!--  <form action="#" method="#" >-->
+<!--    <img id="search" src="/image1/ListIcon/search.png" width="55px"/>-->
+<!--    <input id="searchtext"></input>-->
+<!--  </form>-->
   <!-- 리스트 목록 -->
   <div id="listwrap">
     <!-- ---------------------변수로 바꿀시 밑 부분제외, 이 부분 반복 뿌리기 -------------------------------------------------------- -->

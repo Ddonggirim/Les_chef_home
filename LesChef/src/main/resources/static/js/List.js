@@ -63,3 +63,18 @@ categoryname.forEach((name, index) =>{
         textarea.classList.remove('active');
       }
     });
+
+
+
+//function selectSubcategory(selected) {
+//    // 모든 subcategory span 요소를 선택
+//    const subcategories = document.querySelectorAll('.subcategory');
+//
+//    // 각 subcategory에 대해 스타일을 초기화
+//    subcategories.forEach(function(subcategory) {
+//        subcategory.style.color = 'black'; // 기본 스타일
+//    });
+//
+//    // 클릭된 subcategory만 스타일 변경
+//    selected.style.color = 'red'; // 원하는 스타일로 변경
+//}

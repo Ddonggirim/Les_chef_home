@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -21,13 +23,13 @@ public class Article {
     private String articleSubTitle;
     private String articleImg;
     private String content;
-    private Date writeDate;
+    private LocalDateTime writeDate;
     private Long viewNum;
 
 
     @Builder
     public Article(String userNickName, String articleTitle, String articleSubTitle,
-                   String articleImg, String content, Date writeDate, Long viewNum){
+                   String articleImg, String content, LocalDateTime writeDate, Long viewNum){
         this.userNickName = userNickName;
         this.articleTitle = articleTitle;
         this.articleSubTitle = articleSubTitle;
