@@ -36,6 +36,22 @@ insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, port
 values(12, "떡국", 0, '1', '25분', "2", "하", null, '../image1/ListIcon/예시1.png', "한식", "국/찌개");
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
 values(13, "황태국", 0, '1', '35분', "3", "중", null, '../image1/ListIcon/예시1.png', "한식", "국/찌개");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(14, "오징어뭇국", 0, '1', '30분', "2", "하", null, 이미지, "../image1/ListIcon/예시1.png", "국/찌개");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(15, "콩나물국", 0, '1', '20분', "2", "하", null, "../image1/ListIcon/예시1.png", "한식", "국/찌개");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(16, "참치김치찌개", 0, '1', '25분', "2", "하", null, "../image1/ListIcon/예시1.png", "한식", "국/찌개");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(17, "표고버섯 덮밥", 0, '1', '30분', "2", "하", null, "../image1/ListIcon/예시1.png", "한식", "밥/면");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(18, "스팸마요 덮밥", 0, '1', '20분', "1", "하", null, "../image1/ListIcon/예시1.png", "한식", "밥/면");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(19, "달걀밥", 0, '1', '15분', "2", "하", null, "../image1/ListIcon/예시1.png", "한식", "밥/면");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(20, "콩나물 쫄면", 0, '1', '15분', "2", "하", null, "../image1/ListIcon/예시1.png", "한식", "밥/면");
+
+
 
 
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
