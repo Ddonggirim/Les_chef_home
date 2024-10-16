@@ -74,6 +74,8 @@ insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, port
 values(49, '붓카케우동', 0, '1', '15분', '2', '하', null, '../image1/ListIcon/예시1.png', '일식', '면');
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
 values(50, '된장 버터 옥수수라면', 0, '1', '15분', '2', '하', null, '../image1/ListIcon/예시1.png', '일식', '면');
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(51, "대파 닭고기우동", 0, '1', '20분', "2", "하", null, ../image1/ListIcon/예시1.png, "일식", "면");
 
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
 values(81, '마라탕', 0, '1', '40분', '2', '하', null, '../image1/ListIcon/예시1.png', '중식', '기타');
