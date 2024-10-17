@@ -75,7 +75,30 @@ values(49, '붓카케우동', 0, '1', '15분', '2', '하', null, '../image1/List
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
 values(50, '된장 버터 옥수수라면', 0, '1', '15분', '2', '하', null, '../image1/ListIcon/예시1.png', '일식', '면');
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
-values(51, "대파 닭고기우동", 0, '1', '20분', "2", "하", null, ../image1/ListIcon/예시1.png, "일식", "면");
+values(51, "대파 닭고기우동", 0, '1', '20분', '2', '하', null, '../image1/ListIcon/예시1.png', '일식', '면');
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(52, "야끼스파게티", 0, '1', '40분', "2", "중", null, '../image1/ListIcon/예시1.png', "일식", '면');
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(53, "카레우동", 0, '1', '25분', "2", "중", null, '../image1/ListIcon/예시1.png', "일식", "면");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(54, "새우튀김냉메밀", 0, '1', '50분', "3", "중", null, '../image1/ListIcon/예시1.png', "일식", "면");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(55, "나가사키짬뽕", 0, '1', '30분', "2", "중", null, '../image1/ListIcon/예시1.png', "일식", "면");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(56, "톳 소바", 0, '1', '15분', "1", "하", null, '../image1/ListIcon/예시1.png', "일식", "면");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(57, "아보카도 비프 소바", 0, '1', '40분', "1", "하", null, '../image1/ListIcon/예시1.png', "일식", "면");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(58, "참깨 메밀 소바", 0, '1', '20분', "2", "하", null, '../image1/ListIcon/예시1.png', "일식", "면");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(59, "냉소바", 0, '1', '25분', "1", "하", null, '../image1/ListIcon/예시1.png', "일식", "면");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(60, "연어 아보카도 덮밥", 0, '1', '20분', "2", "하", null, '../image1/ListIcon/예시1.png', "일식", "밥");
+
+
+
+
+
 
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
 values(81, '마라탕', 0, '1', '40분', '2', '하', null, '../image1/ListIcon/예시1.png', '중식', '기타');
