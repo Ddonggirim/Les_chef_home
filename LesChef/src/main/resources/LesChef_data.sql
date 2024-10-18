@@ -120,6 +120,28 @@ insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, port
 values(89, '중국식 냉면', 0, '1', '30분', '2', '중', null, '../image1/ListIcon/예시1.png', '중식', '면');
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
 values(90, '게살덮밥', 0, '1', '20분', '1', '하', null, '../image1/ListIcon/예시1.png', '중식', '밥');
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(91, "짬뽕", 0, '1', '30분', "2", '하', null, '../image1/ListIcon/예시1.png', "중식", "면");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(92, "채식 짜장면", 0, '1', '30분', "3", '중', null, '../image1/ListIcon/예시1.png', "중식", "면");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(93, "깐풍 두부 튀김 덮밥", 0, '1', '35분', "1", '하', null, '../image1/ListIcon/예시1.png', "중식", "밥");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(94, "어향 육사 덮밥", 0, '1', '30분', "1", '하', null, '../image1/ListIcon/예시1.png', "중식", "밥");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(95, "어향 육슬 덮밥", 0, '1', '40분', "2", '중', null, '../image1/ListIcon/예시1.png', "중식", "밥");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(96, "유산슬 덮밥", 0, '1', '30분', "2", '중', null, '../image1/ListIcon/예시1.png', "중식", "밥");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(97, "마파두부", 0, '1', '30분', "2", '중', null, '../image1/ListIcon/예시1.png', "중식", "밥");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(98, "파기름 비빔면", 0, '1', '25분', "1", '하', null, '../image1/ListIcon/예시1.png', "중식", "면");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(99, "사천탕면", 0, '1', '35분', "2", '중', null, '../image1/ListIcon/예시1.png', "중식", "면");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(100, "해물 볶음 짬뽕", 0, '1', '30분', "2", '중', null, '../image1/ListIcon/예시1.png', "중식", "면");
+
+
 
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
 values(121, '달걀 파스타', 0, '1', '20분', '2', '하', null, '../image1/ListIcon/예시1.png', '양식', '면');
