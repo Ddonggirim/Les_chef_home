@@ -163,7 +163,8 @@ insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, port
 values(129, '케일 크림파스타', 0, '1', '30분', '2', '하', null, '../image1/ListIcon/예시1.png', '양식', '면');
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
 values(130, '새우 오일파스타', 0, '1', '30분', '2', '하', null, '../image1/ListIcon/예시1.png', '양식', '면');
-
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(131, "토마토스프", 0, '1', '40분', '4', '하', null, '../image1/ListIcon/예시1.png', "양식", "스프/스튜");
 
 
 
