@@ -169,6 +169,8 @@ insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, port
 values(132, "애플 시나몬 스프", 0, '1', '35분', "3", "하", null, '../image1/ListIcon/예시1.png', "양식", "스프/스튜");
 insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
 values(12, "애플 시나몬 스프", 0, '1', '35분', "3", "하", null, '../image1/ListIcon/예시1.png', "양식", "스프/스튜");
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category)
+values(1212, "애플 시나몬 스프", 0, '1', '35분', "3", "하", null, '../image1/ListIcon/예시1.png', "양식", "스프/스튜");
 
 
 insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (1, 1, 1, '미역은 물에 담가 10분 정도 불려주세요.', '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
