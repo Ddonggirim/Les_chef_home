@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/NoticeBoardHeader.css">
   <link rel="stylesheet" href="/css/GesiRegist.css">
-  <link rel="stylesheet" href="/css/LoginM
-  odal.css">
+  <link rel="stylesheet" href="/css/LoginModal.css">
   <title>게시글 수정</title>
 </head>
 <body><!--등록한 제목, 등록한 이미지, 등록한 내용, 등록한 일자-->
@@ -14,32 +13,38 @@
   <div  class="logoBackGround">
     <a href="/main"><img src="/image1/NoticeIcon/Logo.jpg"></a>
   </div>
-  <img src="/image1/NoticeIcon/Login.png" id="login">
+  <a href="/Rewrite"><img src="/image1/ListIcon/마이페이지.png" id="mypageicon"/></a>
+  <a th:if="${session.customer}" href="/logout"><img  src="/image1/NoticeIcon/Logout.png" id="logout"></a>
+  <img th:unless="${session.customer}" src="/image1/NoticeIcon/Login.png" id="login">
 </header>
 <main>
   <div class="regiTopImg">
     <span>게시판</span>
   </div>
-  <a href="/Gesigeul"><img src="/image1/NoticeIcon/LArrow.jpg" class="BeforePage"></a>
+  <a href="/myarticle"><img src="/image1/NoticeIcon/LArrow.jpg" class="BeforePage"></a>
   <p class="regi">게시글 수정</p>
   <!--수정 내용 전송 폼-->
-  <form>
+  <form method="post" th:action="@{/article/edit/{id}(id=${article.articleId})}" enctype="multipart/form-data">
     <button type="submit" class="writeBtn">
       <span>게시글 수정</span>
       <img src="/image1/NoticeIcon/commentWrite.jpg">
     </button>
     <div class="registBox">
         <span>
-          <div class="registTitle">제목<br><textarea class="titleName" placeholder="제목을 입력하세요" maxlength="20"></textarea></div>
-          <img src="/image1/NoticeIcon/imgInput.jpg" id="toggleImage" class="click_Img">
-          <input type="file" id="imageInput" style="display:none;" accept="image/*">
+          <div class="registTitle"><span>제목</span><br>
+            <textarea class="titleName" name="articleTitle" placeholder="제목을 입력하세요" maxlength="20" th:text="${article.articleTitle}"></textarea>
+            <span>부제목</span>
+            <textarea class="subtitleName" name="articleSubTitle" placeholder="제목을 입력하세요" maxlength="20" th:text="${article.articleSubTitle}"></textarea>
+          </div>
 
+          <img th:src="@{${article.articleImg}}" id="toggleImage" class="click_Img">
+          <input type="file" id="imageInput" name="file" style="display:none;" accept="image/*">
         </span>
-      <textarea class="gesiContent" placeholder="내용을 입력하세요"></textarea>
+      <textarea class="gesiContent" name="content" placeholder="내용을 입력하세요" th:text="${article.content}"></textarea>
     </div>
   </form>
   <!--폼-->
-
+</main>
 
 
   <!--로그인 모달-->
@@ -86,8 +91,7 @@
       <p class="find-to-login">이미 회원이신가요? <span>로그인</span></p>
     </div>
   </div>
-</main>
-<script src="../js/Regist.js"></script>
-<script src="../js/loginModal.js"></script>
+<script src="/js/NoticeRegist.js"></script>
+<script src="/js/loginModal.js"></script>
 </body>
 </html>

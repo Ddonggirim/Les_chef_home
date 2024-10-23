@@ -57,7 +57,7 @@ public class NoticeBoardController {
         return "community/Gesigeul";
     }
     @PostMapping("/article/regist")
-    public String uploadImage(@ModelAttribute ArticleForm form, @RequestParam("file")MultipartFile file,
+    public String uploadImage(ArticleForm form, @RequestParam("file")MultipartFile file,
                               HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
         String userNickName = currentUser.getNickname();
@@ -75,7 +75,7 @@ public class NoticeBoardController {
             File dest = new File(filePath);
             file.transferTo(dest);
             log.info("여기까지옴2");
-            form.setArticleImg("../uploads/" + file.getOriginalFilename());
+            form.setArticleImg("/uploads/" + file.getOriginalFilename());
             articleService.createArticle(form);
 //            recipeArticleRepository.save(form);
         } catch (IOException e) {
@@ -97,6 +97,17 @@ public class NoticeBoardController {
         allCommentRepository.save(comment);
 
         return "redirect:/article/{id}";
+    }
+
+    @PostMapping("/article/editPage/{id}")
+    public String articleEditPage(@PathVariable("id") Long id, Model model){
+        articleService.articleEditPage(id, model);
+        return "community/GesiEdit";
+    }
+    @PostMapping("/article/edit/{id}")
+    public String articleEdit(@PathVariable("id") Long id, ArticleForm articleForm, @RequestParam("file")MultipartFile file){
+        articleService.editArticle(id, articleForm, file);
+        return "redirect:/myarticle";
     }
 
 }

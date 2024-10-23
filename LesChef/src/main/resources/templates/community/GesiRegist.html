@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,9 @@
   <div  class="logoBackGround">
     <a href="./main"><img src="/image1/NoticeIcon/Logo.jpg"></a>
   </div>
-  <img src="/image1/NoticeIcon/Login.png" id="login">
+  <a href="/Rewrite"><img src="/image1/ListIcon/마이페이지.png" id="mypageicon"/></a>
+  <a th:if="${session.customer}" href="/logout"><img  src="/image1/NoticeIcon/Logout.png" id="logout"></a>
+  <img th:unless="${session.customer}" src="/image1/NoticeIcon/Login.png" id="login">
 </header>
 <main>
   <div class="regiTopImg">

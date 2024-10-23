@@ -38,7 +38,7 @@
                         <div class="buttons">
 
                                 <div class="editdeleteBtn">
-                                    <form>
+                                    <form method="post" th:action="@{/recipe/edit/{id}(id=${myRecipe.recipeId})}">
                                         <button class="editButton">수정 </button>
                                     </form>
                                     <span>|</span>
@@ -59,7 +59,7 @@
                         </a>
                         <div class="buttons">
                                 <div class="editdeleteBtn">
-                                    <form>
+                                    <form method="post" th:action="@{/article/editPage/{id}(id=${myArticle.articleId})}">
                                         <button class="editButton">수정 </button>
                                     </form>
                                     <span>|</span>
@@ -69,7 +69,7 @@
                                 </div>
                             <div class="comment-text">
                                 <p th:text="'게시글: ' + ${myArticle.articleTitle}"><strong></strong></p>
-                                <p th:text="'작성일: ' + ${myArticle.writeDate}"><strong></strong></p>
+                                <p th:text="'작성일: ' + ${#temporals.format(myArticle.writeDate, 'yyyy-MM-dd')}"><strong></strong></p>
                                 <p th:text="'조회수: ' + ${myArticle.viewNum}"><strong></strong></p>
                             </div>
                         </div>

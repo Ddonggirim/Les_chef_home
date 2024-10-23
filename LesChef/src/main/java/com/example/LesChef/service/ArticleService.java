@@ -10,7 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,6 +85,27 @@ public class ArticleService {
             Cookie cookie = new Cookie(cookieName, "true");
             cookie.setMaxAge(30);
             response.addCookie(cookie);
+        }
+    }
+    public void articleEditPage(Long articleId, Model model){
+        Article article = articleRepository.findById(articleId).orElse(null);
+        model.addAttribute("article", article);
+    }
+    @Transactional
+    public void editArticle(Long articleId, ArticleForm articleForm, MultipartFile file){
+        Article editArticle = articleRepository.findById(articleId).orElse(null);
+        editArticle.setArticleTitle(articleForm.getArticleTitle());
+        editArticle.setArticleSubTitle(articleForm.getArticleSubTitle());
+        editArticle.setContent(articleForm.getContent());
+        try {
+            String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename(); //uploads의 절대경로 (상대경로x)
+
+            File dest = new File(filePath);
+            file.transferTo(dest);
+
+            editArticle.setArticleImg("/uploads/" + file.getOriginalFilename());
+            articleRepository.save(editArticle);
+        } catch (IOException e) {
         }
     }
 }

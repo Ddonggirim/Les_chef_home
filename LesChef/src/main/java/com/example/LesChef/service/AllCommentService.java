@@ -109,6 +109,8 @@ public class AllCommentService {
     public void deleteArticleParent(Long articleId){
         allCommentRepository.deleteArticleComment(articleId);
     }
+
+
 }
 
 
