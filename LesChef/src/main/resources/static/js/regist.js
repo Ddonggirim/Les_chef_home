@@ -1,6 +1,7 @@
 const add_textbox = () => {
   const box = document.getElementById("box");
-  const newP = document.createElement('p');
+  const newP = document.createElement('div');
+  newP.setAttribute('id', 'ingredient');
   newP.innerHTML =
   `<input type='text'  name='ingredients[]' placeholder='재료 이름' required>
    <input type='text' name='quantities[]' placeholder='수량' required>
@@ -63,7 +64,8 @@ const add_textbox1 = () => {
   const data = 'imageInput' + num++;
 
   const box = document.getElementById("box1");
-  const newP = document.createElement('p');
+  const newP = document.createElement('div');
+  newP.setAttribute('class', 'step');
   newP.innerHTML = `
       <img src='../image1/MypageIcon/bap.png' alt='Click to change image' id='${newId}' class='clickable-img' data-input-id='${data}'>
       <input type='file' id='${inputId}' name='stepFiles[]' style='display: none;' accept='image/*' >

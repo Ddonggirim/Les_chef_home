@@ -17,15 +17,16 @@ public class RecipeIngredient {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "recipe_ingredient_id_seq")
     @SequenceGenerator(name = "recipe_ingredient_id_seq", sequenceName = "recipe_ingredient_id_seq", initialValue = 200, allocationSize = 1)
     private Long recipeIngredientId;
-    @Column(nullable = false)
-    private Long recipeId;
+    @ManyToOne
+    @JoinColumn(name="recipe_id", nullable = false)
+    private Recipe recipe;
     @Column(nullable = false)
     private String ingredientName;
     private String ingredientVolume;
 
 
     public RecipeIngredientForm toForm(){
-        return new RecipeIngredientForm(this.recipeIngredientId, this.recipeId,
+        return new RecipeIngredientForm(this.recipeIngredientId, this.recipe,
                 this.ingredientName, this.ingredientVolume);
     }
 }

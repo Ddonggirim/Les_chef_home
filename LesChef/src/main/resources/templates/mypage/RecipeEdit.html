@@ -3,39 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regist</title>
+    <title>RecipeEdit</title>
     <link rel="stylesheet" href="/css/Regist.css">
     <link rel="stylesheet" href="/css/font.css">
-<!--    <link rel="stylesheet" href="/css/LoginModal.css">-->
+    <!--    <link rel="stylesheet" href="/css/LoginModal.css">-->
 </head>
 <body>
 <div class="container">
     <div class="left">
         <div class="menu">
-             <a href="/Rewrite">회원정보<span style="font-family: GreateVibes;font-size: 30px;"><u>Information</u></span></a><br>
-             <a href="/WishList">찜목록<span style="font-family: GreateVibes;font-size: 30px;"><u>WishList</u></span></a><br>
-             <a href="/Mycomment">나의 댓글<span style="font-family: GreateVibes; font-size: 30px;"><u>My Comment</u></span></a><br>
-             <a href="/Regist">레시피 등록<span style="font-family: GreateVibes; font-size: 30px;"><u>Registration</u></span></a><br>
-             <a href="/Myrecipe">나의 레시피<span style="font-family: GreateVibes; font-size: 30px;"><u>My Recipe</u></span></a>
+            <a href="/Rewrite">회원정보<span style="font-family: GreateVibes;font-size: 30px;"><u>Information</u></span></a><br>
+            <a href="/WishList">찜목록<span style="font-family: GreateVibes;font-size: 30px;"><u>WishList</u></span></a><br>
+            <a href="/Mycomment">나의 댓글<span style="font-family: GreateVibes; font-size: 30px;"><u>My Comment</u></span></a><br>
+            <a href="/Regist">레시피 등록<span style="font-family: GreateVibes; font-size: 30px;"><u>Registration</u></span></a><br>
+            <a href="/Myrecipe">나의 레시피<span style="font-family: GreateVibes; font-size: 30px;"><u>My Recipe</u></span></a>
         </div>
         <div class="logo">
             <a href="/main"><img src="/image1/MypageIcon/logoUpdate.png"></a>
         </div>
     </div>
     <div class="rigcontainer">
-        <h2>레시피 등록</h2>
+        <h2>레시피 수정</h2>
         <div class="right">
-            <form action="/Recipe/create" method="post" enctype="multipart/form-data">
+            <form action="/Recipe/edit" method="post" enctype="multipart/form-data">
                 <div class="info1">
                     <div class="info">
                         <label>레시피 제목</label>
-                        <input type="text" name="recipeName" required><br>
+                        <input type="text" name="recipeName" th:value="${recipe.recipeName}" required><br>
                         <label>인원</label>
                         <select name="portion">
-                            <option>1인분</option>
-                            <option>2인분</option>
-                            <option>3인분</option>
-                            <option>4인분</option>
+                            <option th:selected="${recipe.portion == '1인분'}">1인분</option>
+                            <option th:selected="${recipe.portion == '2인분'}">2인분</option>
+                            <option th:selected="${recipe.portion == '3인분'}">3인분</option>
+                            <option th:selected="${recipe.portion == '4인분'}">4인분</option>
                         </select><br>
 
                         <!-- <label>카테고리</label>
@@ -49,24 +49,24 @@
 
                         <label>소요시간</label>
                         <select name="runTime">
-                            <option>10분</option>
-                            <option>20분</option>
-                            <option>30분</option>
-                            <option>40분</option>
-                            <option>50분</option>
-                            <option>60분</option>
+                            <option th:selected="${recipe.runTime == '10분'}">10분</option>
+                            <option th:selected="${recipe.runTime == '20분'}">20분</option>
+                            <option th:selected="${recipe.runTime == '30분'}">30분</option>
+                            <option th:selected="${recipe.runTime == '40분'}">40분</option>
+                            <option th:selected="${recipe.runTime == '50분'}">50분</option>
+                            <option th:selected="${recipe.runTime == '60분'}">60분</option>
                         </select> <br>
 
                         <label>난이도</label>
                         <select name="cookLevel">
-                            <option>쉬움</option>
-                            <option>보통</option>
-                            <option>어려움</option>
+                            <option th:selected="${recipe.cookLevel == '쉬움'}">쉬움</option>
+                            <option th:selected="${recipe.cookLevel == '보통'}">보통</option>
+                            <option th:selected="${recipe.cookLevel == '어려움'}">어려움</option>
                         </select> <br>
                     </div>
 
                     <div class="recipe-image">
-                        <img src="/image1/MypageIcon/bap.png" alt="Click to change image" id="toggleImage1" class="clickable-img" data-input-id="imageInput">
+                        <img th:src="@{${recipe.recipeImg}}" alt="Click to change image" id="toggleImage1" class="clickable-img" data-input-id="imageInput">
                         <input type="file" id="imageInput" name="File" style="display: none;" accept="image/*" required>
                     </div>
                 </div>
@@ -74,9 +74,10 @@
                 <div class="ingredients-section">
                     <h3>재료</h3>
                     <div id="box">
-                        <div id="ingredient">
-                            <input type="text" name="ingredients[]" placeholder="재료 이름" required>
-                            <input type="text" name="quantities[]" placeholder="수량" required>
+                        <div th:each="ingredient, ingredientIndex : ${ingredients}" id="ingredient">
+                            <input type="text" name="ingredients[]" placeholder="재료 이름" th:value="${ingredient.ingredientName}" required>
+                            <input type="text" name="quantities[]" placeholder="수량" th:value="${ingredient.ingredientVolume}" required>
+                            <input type='button' th:if="${ingredientIndex.index >= 1}" value='-' onclick='remove(this)'>
                         </div>
                     </div>
                     <input type="button" value="+" onclick="add_textbox()">
@@ -85,17 +86,18 @@
                 <div class="steps-section">
                     <h3>조리순서</h3>
                     <div id="box1">
-                        <div class="step">
-                            <img src="/image1/MypageIcon/bap.png" alt="Click to change image" id="toggleImage2" class="clickable-img" data-input-id="imageInput1">
+                        <div th:each="step, stepIndex : ${steps}" class="step">
+                            <img th:src="@{${step.stepImg}}" alt="Click to change image" id="toggleImage2" class="clickable-img" data-input-id="imageInput1">
                             <input type="file" id="imageInput1" name="stepFiles[]" style="display: none;" accept="image/*">
-                            <textarea name = "stepWays[]"></textarea>
+                            <textarea name = "stepWays[]" th:text="${step.stepWay}" ></textarea>
+                            <input type='button' th:if="${stepIndex.index >= 1}" value='-' onclick='remove1(this)'>
                         </div>
                     </div>
                     <input type="button" value="+" onclick="add_textbox1()">
                 </div>
 
                 <div class="buttons">
-                    <button type="submit">등록</button>
+                    <button type="submit">수정</button>
                 </div>
             </form>
         </div>

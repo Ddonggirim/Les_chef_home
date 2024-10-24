@@ -2,7 +2,12 @@ package com.example.LesChef.controller;
 
 import com.example.LesChef.dto.*;
 import com.example.LesChef.entity.Customer;
+import com.example.LesChef.entity.Recipe;
+import com.example.LesChef.entity.RecipeIngredient;
+import com.example.LesChef.entity.RecipeStep;
 import com.example.LesChef.repository.CustomerRepository;
+import com.example.LesChef.repository.RecipeIngredientRepository;
+import com.example.LesChef.repository.RecipeStepRepository;
 import com.example.LesChef.service.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -10,12 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -34,6 +38,10 @@ public class MypageController {
     private final AllCommentService allCommentService;
 
     private final WishListService wishListService;
+
+    private final RecipeStepRepository recipeStepRepository;
+
+    private final RecipeIngredientRepository recipeIngredientRepository;
 
     // 회원정보 수정
     @PostMapping("/customerRewrite")
@@ -139,5 +147,70 @@ public class MypageController {
         return "redirect:/myWishList";
     }
 
+    @PostMapping("/Recipe/create")
+    public String createList(@ModelAttribute RecipeForm recipeForm, @ModelAttribute RegistIngredientForm registIngredientForm, @ModelAttribute RegistStepForm registStepForm, @RequestParam("File") MultipartFile file,
+                             @RequestParam("stepFiles[]") List<MultipartFile> stepFile, HttpSession session){ //mutipartfile로 변환할 수 없는데 input의 name을 form의 이름과 똑같게해서 안됨
+        log.info("Recipe/create호출");
+        Customer currentUser = (Customer)session.getAttribute("customer");
+        String nickname = currentUser.getNickname();
+        List<String> ingredients = registIngredientForm.getIngredients();   //재료이름들
+        List<String> quantities = registIngredientForm.getQuantities();     //재료수량들
+        List<String> stepImgs = registStepForm.getStepImgs();
+        List<String> stepWays = registStepForm.getStepWays();
+        log.info("stepFile의 크기: " + stepFile.get(0).getOriginalFilename());
 
+
+        log.info("레시피등록요청");
+        recipeForm.setUserId(nickname);
+
+        try {
+            String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename();
+            log.info(filePath);
+            log.info("file비어있지않음");
+            File dest = new File(filePath);
+            file.transferTo(dest);
+            log.info("여기까지옴2");
+            recipeForm.setRecipeImg("/uploads/" + file.getOriginalFilename());
+
+        } catch (IOException e) {}
+        Recipe recipe = recipeService.createRecipe(recipeForm);
+        try {
+            for(int i = 0; i < stepWays.size(); i++){
+                RecipeStep recipeStep = new RecipeStep();
+                String stepFilePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + stepFile.get(i).getOriginalFilename();
+                log.info("stepWay의 개수: " + stepWays.size());
+                log.info("step의 이미지 경로: " + stepFilePath);
+                File stepDest = new File(stepFilePath);
+                stepFile.get(i).transferTo(stepDest);
+                recipeStep.setRecipe(recipe);
+//                recipeStep.setStep_Img(stepImgs.get(i));
+                recipeStep.setStepImg("/uploads/" + stepFile.get(i).getOriginalFilename());
+                recipeStep.setStepWay(stepWays.get(i));
+                recipeStep.setStepNum(i+1L);
+                recipeStepRepository.save(recipeStep);
+            }
+        } catch (IOException e) {}
+
+        log.info("재료이름의 수:" + ingredients.size());
+        log.info("재료수량:" + quantities.size());
+
+        // 파일을 지정된 경로에 저장
+        for(int i = 0; i < ingredients.size(); i++){
+            RecipeIngredient recipeIngredient = new RecipeIngredient();
+            log.info("재료 이름:"+ingredients.get(i));
+            recipeIngredient.setRecipe(recipe);
+            recipeIngredient.setIngredientName(ingredients.get(i));
+            recipeIngredient.setIngredientVolume(quantities.get(i));
+            recipeIngredientRepository.save(recipeIngredient);
+        }
+        return "redirect:/myrecipe";
+
+
+    }
+
+    @PostMapping("/recipe/editPage/{id}")
+    public String recipeEditPage(@PathVariable("id") Long id, Model model){
+        recipeService.recipeEditPage(id, model);
+        return "mypage/RecipeEdit";
+    }
 }

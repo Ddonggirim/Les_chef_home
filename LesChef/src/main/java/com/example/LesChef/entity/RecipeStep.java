@@ -18,8 +18,9 @@ public class RecipeStep {
     @SequenceGenerator(name = "recipe_step_id_seq", sequenceName = "recipe_step_id_seq", initialValue = 10, allocationSize = 1)
     @Column(name = "recipeStepId")
     private Long recipeStepId;
-    @Column(name = "recipe_Id", nullable = false)
-    private Long recipeId;
+    @ManyToOne
+    @JoinColumn(name = "recipe_id", nullable = false)
+    private Recipe recipe;
     @Column(name = "step_Num", nullable = false)
     private Long stepNum;
     @Column(name = "stepWay", nullable = false)
@@ -28,7 +29,7 @@ public class RecipeStep {
     private String stepImg;
 
     public RecipeStepForm toForm(){
-        return new RecipeStepForm(this.recipeStepId, this.recipeId,
+        return new RecipeStepForm(this.recipeStepId, this.recipe,
                 this.stepNum, this.stepWay, this.stepImg);
     }
 }

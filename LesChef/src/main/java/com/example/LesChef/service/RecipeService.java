@@ -3,7 +3,11 @@ package com.example.LesChef.service;
 import com.example.LesChef.dto.RecipeForm;
 import com.example.LesChef.entity.Customer;
 import com.example.LesChef.entity.Recipe;
+import com.example.LesChef.entity.RecipeIngredient;
+import com.example.LesChef.entity.RecipeStep;
+import com.example.LesChef.repository.RecipeIngredientRepository;
 import com.example.LesChef.repository.RecipeRepository;
+import com.example.LesChef.repository.RecipeStepRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,6 +29,10 @@ public class RecipeService {
 
     private final AllCommentService allCommentService;
 
+    private final RecipeStepRepository recipeStepRepository;
+
+    private final RecipeIngredientRepository recipeIngredientRepository;
+
     public Recipe getRecipe(Long recipeId){
         Recipe recipe = recipeRepository.findById(recipeId).orElse(null);
         return recipe;
@@ -43,11 +51,11 @@ public class RecipeService {
         return inform.toForm();
     }
 
-    public Long createRecipe(RecipeForm form){
+    public Recipe createRecipe(RecipeForm form){
 
         Recipe recipe = form.toEntity();
         recipeRepository.save(recipe);
-        return recipe.getRecipeId();
+        return recipe;
     }
 
     public List<RecipeForm> getMyRecipeList(String userId){
@@ -100,5 +108,14 @@ public class RecipeService {
     public void getSortRecipe(String categoryName, String sort, Model model){
             List<Recipe> recipes = recipeRepository.findSortRecipe(categoryName, sort);
             model.addAttribute("recipes", recipes);
+    }
+
+    public void recipeEditPage(Long id, Model model){
+        Recipe recipe = recipeRepository.findById(id).orElse(null);
+        List<RecipeStep> steps = recipeStepRepository.findByRecipeId(id);
+        List<RecipeIngredient> ingredients = recipeIngredientRepository.findByRecipeId(id);
+        model.addAttribute("recipe", recipe);
+        model.addAttribute("steps", steps);
+        model.addAttribute("ingredients", ingredients);
     }
 }

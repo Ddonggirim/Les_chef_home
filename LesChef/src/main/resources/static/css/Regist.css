@@ -166,12 +166,12 @@ textarea {
     margin-bottom: 10px;
 }
 
-.ingredient,
+/*.ingredient,
 .step {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-}
+}*/
 
 .ingredient-name,
 .ingredient-quantity,

@@ -21,13 +21,16 @@ public class RecipeIngredientService {
                 .collect(Collectors.toList());
     }
 
-    public void createRecipeIngredient(Long recipeId, List<String> ingredients, List<String> quantities) {
-        for (int i = 0; i < ingredients.size(); i++) {
-            RecipeIngredient recipeIngredient = new RecipeIngredient();
-            recipeIngredient.setRecipeId(recipeId);
-            recipeIngredient.setIngredientName(ingredients.get(i));
-            recipeIngredient.setIngredientVolume(i < quantities.size() ? quantities.get(i) : null);
-            recipeIngredientRepository.save(recipeIngredient);
-        }
-    }
+//    public void createRecipeIngredient(Long recipeId, List<String> ingredients, List<String> quantities) {
+//        for (int i = 0; i < ingredients.size(); i++) {
+//            RecipeIngredient recipeIngredient = new RecipeIngredient();
+//            recipeIngredient.setRecipeId(recipeId);
+//            recipeIngredient.setIngredientName(ingredients.get(i));
+//            recipeIngredient.setIngredientVolume(i < quantities.size() ? quantities.get(i) : null);
+//            recipeIngredientRepository.save(recipeIngredient);
+//        }
+//    }
 }
+
+
+//RecipeService랑 통합
