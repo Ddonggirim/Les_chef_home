@@ -19,13 +19,13 @@ public class RecipeStep {
     @Column(name = "recipeStepId")
     private Long recipeStepId;
     @ManyToOne
-    @JoinColumn(name = "recipe_id", nullable = false)
+    @JoinColumn(name = "recipe_id")
     private Recipe recipe;
-    @Column(name = "step_Num", nullable = false)
+    @Column(name = "step_Num")
     private Long stepNum;
-    @Column(name = "stepWay", nullable = false)
+    @Column(name = "stepWay")
     private String stepWay;
-    @Column(name = "stepImg", nullable = false)
+    @Column(name = "stepImg")
     private String stepImg;
 
     public RecipeStepForm toForm(){

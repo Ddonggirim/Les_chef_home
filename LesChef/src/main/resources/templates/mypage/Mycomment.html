@@ -53,7 +53,7 @@
                                     <img class="comentstar" th:src="${num <= comment.rating} ? '/image1/ListIcon/사용자별.png' : '/image1/ListIcon/사용자빈별.png'" alt="star"/>
                                 </span>
                             </p>
-                            <p th:text="'작성일: ' + ${#temporals.format(comment.writeDate, 'yyyy-MM-dd HH:mm:ss')}"><strong></strong></p>
+                            <p th:text="'작성일: ' + ${#temporals.format(comment.writeDate, 'yyyy-MM-dd')}"><strong></strong></p>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                         <div class="comment-text">
                             <p th:text="'게시글: ' + ${comment.article.articleTitle}"><strong></strong></p>
                             <p th:text="'나의 댓글: ' + ${comment.commentContent}"><strong></strong> </p>
-                            <p th:text="'작성일: ' + ${#temporals.format(comment.writeDate, 'yyyy-MM-dd HH:mm:ss')}"><strong></strong></p>
+                            <p th:text="'작성일: ' + ${#temporals.format(comment.writeDate, 'yyyy-MM-dd')}"><strong></strong></p>
                         </div>
                     </div>
                 </div>

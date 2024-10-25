@@ -58,9 +58,10 @@ public class ArticleService {
         articleRepository.save(article);
     }
 
+    @Transactional
     public void deleteArticle(Long id){
-        Article articleId = articleRepository.findById(id).orElse(null);
-        articleRepository.delete(articleId);
+        Article article = articleRepository.findById(id).orElse(null);
+        articleRepository.delete(article);
     }
 
     @Transactional

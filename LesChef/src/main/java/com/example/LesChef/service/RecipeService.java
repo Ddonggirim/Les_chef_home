@@ -1,6 +1,6 @@
 package com.example.LesChef.service;
 
-import com.example.LesChef.dto.RecipeForm;
+import com.example.LesChef.dto.*;
 import com.example.LesChef.entity.Customer;
 import com.example.LesChef.entity.Recipe;
 import com.example.LesChef.entity.RecipeIngredient;
@@ -17,7 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +49,20 @@ public class RecipeService {
 
     }
 
+    public List<RecipeIngredientForm> getIngredient(Long id){
+        List<RecipeIngredient> ingredients = recipeIngredientRepository.findByRecipeId(id);
+        return ingredients.stream()
+                .map(RecipeIngredient::toForm)
+                .collect(Collectors.toList());
+    }
+
+    public List<RecipeStepForm> getRecipeStep(Long id){
+        List<RecipeStep> recipeSteps = recipeStepRepository.findByRecipeId(id);
+        return recipeSteps.stream()
+                .map(RecipeStep::toForm)
+                .collect(Collectors.toList());
+    }
+
     public RecipeForm getRecipeInform(Long id){
         Recipe inform = recipeRepository.findById(id).orElse(null);
         return inform.toForm();
@@ -65,9 +82,12 @@ public class RecipeService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void deleteRecipe(Long id){
-        Recipe recipeId = recipeRepository.findById(id).orElse(null);
-        recipeRepository.delete(recipeId);
+        Recipe recipe = recipeRepository.findById(id).orElse(null);
+        recipeStepRepository.deleteStep(recipe.getRecipeId());
+        recipeIngredientRepository.deleteIngredient(recipe.getRecipeId());
+        recipeRepository.delete(recipe);
     }
 
     public void updateRatingAvg(Long recipeId){
@@ -117,5 +137,85 @@ public class RecipeService {
         model.addAttribute("recipe", recipe);
         model.addAttribute("steps", steps);
         model.addAttribute("ingredients", ingredients);
+    }
+
+    @Transactional
+    public void editRecipe(Long recipeId, RecipeForm recipeForm, RegistIngredientForm registIngredientForm, RegistStepForm registStepForm, MultipartFile file, List<MultipartFile> stepFile){
+        Recipe editRecipe = recipeRepository.findById(recipeId).orElse(null);
+        List<RecipeStep> editRecipeStep = recipeStepRepository.findByRecipeId(editRecipe.getRecipeId());
+        List<RecipeIngredient> editRecipeIngredient = recipeIngredientRepository.findByRecipeId(editRecipe.getRecipeId());
+        editRecipe.setRecipeName(recipeForm.getRecipeName());
+        editRecipe.setPortion(recipeForm.getPortion());
+        editRecipe.setRunTime(recipeForm.getRunTime());
+        editRecipe.setCookLevel(recipeForm.getCookLevel());
+        List<String> ingredients = registIngredientForm.getIngredients();
+        List<String> quantities = registIngredientForm.getQuantities();
+        List<String> stepWays = registStepForm.getStepWays();
+        Long stepCount = recipeStepRepository.findStepCount(recipeId);
+        Long ingredientCount = recipeIngredientRepository.findIngredientCount(recipeId);
+        try {
+            String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename();
+            log.info(filePath);
+            log.info("file비어있지않음");
+            File dest = new File(filePath);
+            file.transferTo(dest);
+            log.info("여기까지옴2");
+            editRecipe.setRecipeImg("/uploads/" + file.getOriginalFilename());
+
+        } catch (IOException e) {}
+        recipeRepository.save(editRecipe).getRecipeId();
+
+        try {
+            if(stepCount > stepWays.size()){
+                for(int i = stepWays.size(); i < stepCount; i++){
+                    recipeStepRepository.delete(editRecipeStep.get(i));
+                }
+            }else if(stepCount < stepWays.size()){
+                for(int i = stepCount.intValue(); i < stepWays.size(); i++){
+                    RecipeStep newStep = new RecipeStep();
+                    newStep.setRecipe(editRecipe);
+                    recipeStepRepository.save(newStep);
+                }
+            }
+            List<RecipeStep> newEditRecipeStep = recipeStepRepository.findByRecipeId(editRecipe.getRecipeId());
+            for(int i = 0; i < stepWays.size(); i++){
+                RecipeStep editStep = newEditRecipeStep.get(i);
+                Long stepId = editStep.getRecipeStepId();
+                Long stepNum = i+1L;
+                String stepWay = stepWays.get(i);
+                String stepFilePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + stepFile.get(i).getOriginalFilename();
+                log.info("stepWay의 개수: " + stepWays.size());
+                log.info("step의 이미지 경로: " + stepFilePath);
+                File stepDest = new File(stepFilePath);
+                stepFile.get(i).transferTo(stepDest);
+                String stepImg = "/uploads/" + stepFile.get(i).getOriginalFilename();
+//                editStep.setRecipe(recipe);
+//                editStep.setStepImg("/uploads/" + stepFile.get(i).getOriginalFilename());
+//                editStep.setStepWay(stepWays.get(i));
+//                editStep.setStepNum(i+1L);
+                recipeStepRepository.updateStep(stepId, recipeId, stepNum, stepWay, stepImg);
+//                recipeStepRepository.save(recipeStep); //Update사용
+            }
+        } catch (IOException e) {}
+
+        if(ingredientCount > ingredients.size()){
+            for(int i = ingredients.size(); i < ingredientCount; i++){
+                recipeIngredientRepository.delete(editRecipeIngredient.get(i));
+            }
+        }else if(ingredientCount < ingredients.size()){
+            for(int i = ingredientCount.intValue(); i < ingredients.size(); i++){
+                RecipeIngredient newIngredient = new RecipeIngredient();
+                newIngredient.setRecipe(editRecipe);
+                recipeIngredientRepository.save(newIngredient);
+            }
+        }
+        List<RecipeIngredient> newEditRecipeIngredient = recipeIngredientRepository.findByRecipeId(editRecipe.getRecipeId());
+        for(int i = 0; i < ingredients.size(); i++){
+            RecipeIngredient editIngredient = newEditRecipeIngredient.get(i);
+            Long ingredientId = editIngredient.getRecipeIngredientId();
+            String ingredientName = ingredients.get(i);
+            String ingredientVolume = quantities.get(i);
+            recipeIngredientRepository.updateIngredient(ingredientId, ingredientName, ingredientVolume, recipeId);
+        }
     }
 }

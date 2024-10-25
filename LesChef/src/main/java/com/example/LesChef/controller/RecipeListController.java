@@ -32,9 +32,7 @@ public class RecipeListController {
 
     private final RecipeService recipeService;
 
-    private final RecipeStepService recipeStepService;
 
-    private final RecipeIngredientService recipeIngredientService;
 
     private final RecipeIngredientRepository recipeIngredientRepository;
 
@@ -116,8 +114,8 @@ public class RecipeListController {
         // 쿠키기반 조회수
         recipeService.increaseViewNum(id, request, response);
         RecipeForm recipeInform = recipeService.getRecipeInform(id);
-        List<RecipeStepForm> steps = recipeStepService.getRecipeStep(id);
-        List<RecipeIngredientForm> ingredients = recipeIngredientService.getIngredient(id);
+        List<RecipeStepForm> steps = recipeService.getRecipeStep(id);
+        List<RecipeIngredientForm> ingredients = recipeService.getIngredient(id);
         List<CommentForm> comments = allCommentService.getRecipeComment(id);
         List<Double> doubleList = allCommentService.getCommentAvg(id);
         log.info("getWish전");

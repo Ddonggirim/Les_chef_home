@@ -213,4 +213,12 @@ public class MypageController {
         recipeService.recipeEditPage(id, model);
         return "mypage/RecipeEdit";
     }
+
+    @PostMapping("/recipe/edit/{id}")
+    public String recipeEdit(@PathVariable("id") Long id, RecipeForm recipeForm, RegistIngredientForm registIngredientForm,
+                             RegistStepForm registStepForm, @RequestParam("File") MultipartFile file,
+                             @RequestParam("stepFiles[]") List<MultipartFile> stepFile){
+        recipeService.editRecipe(id, recipeForm, registIngredientForm, registStepForm, file, stepFile);
+        return "redirect:/myrecipe";
+    }
 }

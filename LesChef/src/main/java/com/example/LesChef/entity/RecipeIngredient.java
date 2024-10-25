@@ -18,9 +18,9 @@ public class RecipeIngredient {
     @SequenceGenerator(name = "recipe_ingredient_id_seq", sequenceName = "recipe_ingredient_id_seq", initialValue = 200, allocationSize = 1)
     private Long recipeIngredientId;
     @ManyToOne
-    @JoinColumn(name="recipe_id", nullable = false)
+    @JoinColumn(name="recipe_id")
     private Recipe recipe;
-    @Column(nullable = false)
+    @Column()
     private String ingredientName;
     private String ingredientVolume;
 

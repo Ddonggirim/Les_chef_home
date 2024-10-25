@@ -25,11 +25,11 @@
     <div class="rigcontainer">
         <h2>레시피 수정</h2>
         <div class="right">
-            <form action="/Recipe/edit" method="post" enctype="multipart/form-data">
+            <form th:action="@{/recipe/edit/{id}(id=${recipe.recipeId})}" method="post" enctype="multipart/form-data">
                 <div class="info1">
                     <div class="info">
                         <label>레시피 제목</label>
-                        <input type="text" name="recipeName" th:value="${recipe.recipeName}" required><br>
+                        <input type="text" name="recipeName" th:value="${recipe.recipeName}" ><br>
                         <label>인원</label>
                         <select name="portion">
                             <option th:selected="${recipe.portion == '1인분'}">1인분</option>
@@ -67,7 +67,7 @@
 
                     <div class="recipe-image">
                         <img th:src="@{${recipe.recipeImg}}" alt="Click to change image" id="toggleImage1" class="clickable-img" data-input-id="imageInput">
-                        <input type="file" id="imageInput" name="File" style="display: none;" accept="image/*" required>
+                        <input type="file" id="imageInput" name="File" style="display: none;" accept="image/*" >
                     </div>
                 </div>
 
@@ -75,8 +75,8 @@
                     <h3>재료</h3>
                     <div id="box">
                         <div th:each="ingredient, ingredientIndex : ${ingredients}" id="ingredient">
-                            <input type="text" name="ingredients[]" placeholder="재료 이름" th:value="${ingredient.ingredientName}" required>
-                            <input type="text" name="quantities[]" placeholder="수량" th:value="${ingredient.ingredientVolume}" required>
+                            <input type="text" name="ingredients[]" placeholder="재료 이름" th:value="${ingredient.ingredientName}" >
+                            <input type="text" name="quantities[]" placeholder="수량" th:value="${ingredient.ingredientVolume}" >
                             <input type='button' th:if="${ingredientIndex.index >= 1}" value='-' onclick='remove(this)'>
                         </div>
                     </div>
