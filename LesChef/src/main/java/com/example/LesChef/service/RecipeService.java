@@ -138,32 +138,58 @@ public class RecipeService {
         model.addAttribute("steps", steps);
         model.addAttribute("ingredients", ingredients);
     }
-
+//step부분에서 입력칸 생성, 삭제는 되는데 multipartfile에서 이미지를 잘못 받아오는거같음
     @Transactional
-    public void editRecipe(Long recipeId, RecipeForm recipeForm, RegistIngredientForm registIngredientForm, RegistStepForm registStepForm, MultipartFile file, List<MultipartFile> stepFile){
+    public void editRecipe(Long recipeId, RecipeForm recipeForm, RegistIngredientForm registIngredientForm,
+                           RegistStepForm registStepForm, MultipartFile file, List<MultipartFile> stepFile){
         Recipe editRecipe = recipeRepository.findById(recipeId).orElse(null);
+
         List<RecipeStep> editRecipeStep = recipeStepRepository.findByRecipeId(editRecipe.getRecipeId());
         List<RecipeIngredient> editRecipeIngredient = recipeIngredientRepository.findByRecipeId(editRecipe.getRecipeId());
+
         editRecipe.setRecipeName(recipeForm.getRecipeName());
         editRecipe.setPortion(recipeForm.getPortion());
         editRecipe.setRunTime(recipeForm.getRunTime());
         editRecipe.setCookLevel(recipeForm.getCookLevel());
+        //UPDATE문으로 변경
+
         List<String> ingredients = registIngredientForm.getIngredients();
         List<String> quantities = registIngredientForm.getQuantities();
-        List<String> stepWays = registStepForm.getStepWays();
-        Long stepCount = recipeStepRepository.findStepCount(recipeId);
-        Long ingredientCount = recipeIngredientRepository.findIngredientCount(recipeId);
-        try {
-            String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename();
-            log.info(filePath);
-            log.info("file비어있지않음");
-            File dest = new File(filePath);
-            file.transferTo(dest);
-            log.info("여기까지옴2");
-            editRecipe.setRecipeImg("/uploads/" + file.getOriginalFilename());
 
-        } catch (IOException e) {}
+        List<String> stepWays = registStepForm.getStepWays();
+
+        Long stepCount = recipeStepRepository.findStepCount(recipeId);
+
+        Long ingredientCount = recipeIngredientRepository.findIngredientCount(recipeId);
+
+        // 레시피 수정
+        String filePath = null;
+        try {
+            if("".equals(file.getOriginalFilename())) {
+
+                String fileName = editRecipe.getRecipeImg();
+                filePath = "C:/LesChef_note/LesChef/src/main/resources/static" + fileName;
+                log.info(filePath);
+                log.info("기존 이미지 사용");
+                File dest = new File(filePath);
+                file.transferTo(dest);
+                editRecipe.setRecipeImg(fileName);
+
+            }else{
+                filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename();
+                log.info(filePath);
+                log.info("새로운 이미지로 변경");
+                File dest = new File(filePath);
+                file.transferTo(dest);
+                editRecipe.setRecipeImg("/uploads/" + file.getOriginalFilename());
+            }
+
+        } catch (IOException e) {
+            log.info("레시피 오류발생");
+        }
         recipeRepository.save(editRecipe).getRecipeId();
+
+        // 조리순서 수정
 
         try {
             if(stepCount > stepWays.size()){
@@ -177,27 +203,46 @@ public class RecipeService {
                     recipeStepRepository.save(newStep);
                 }
             }
+            log.info("step의 이미지 이름: " + stepFile.get(0).getOriginalFilename());
+            log.info("step의 이미지 이름: " + stepFile.get(1).getOriginalFilename());
+            log.info("step의 이미지 이름: " + stepFile.get(2).getOriginalFilename());
             List<RecipeStep> newEditRecipeStep = recipeStepRepository.findByRecipeId(editRecipe.getRecipeId());
+            log.info("newEditRecipeStep의 크기는 " + newEditRecipeStep.size());
             for(int i = 0; i < stepWays.size(); i++){
                 RecipeStep editStep = newEditRecipeStep.get(i);
                 Long stepId = editStep.getRecipeStepId();
                 Long stepNum = i+1L;
                 String stepWay = stepWays.get(i);
+
+
                 String stepFilePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + stepFile.get(i).getOriginalFilename();
                 log.info("stepWay의 개수: " + stepWays.size());
-                log.info("step의 이미지 경로: " + stepFilePath);
+                log.info("stepFile의 개수:" + stepFile.size());
+                log.info("a");
                 File stepDest = new File(stepFilePath);
+                log.info("b");
+
                 stepFile.get(i).transferTo(stepDest);
+
                 String stepImg = "/uploads/" + stepFile.get(i).getOriginalFilename();
+                log.info("c");
 //                editStep.setRecipe(recipe);
 //                editStep.setStepImg("/uploads/" + stepFile.get(i).getOriginalFilename());
 //                editStep.setStepWay(stepWays.get(i));
 //                editStep.setStepNum(i+1L);
+                log.info("step의 stepFile의 크기는" + stepFile.size());
+                log.info("step의 Num은 " + stepNum);
+                log.info("step의 Way는 " + stepWay);
+                log.info("step의 Img는 " + stepImg);
                 recipeStepRepository.updateStep(stepId, recipeId, stepNum, stepWay, stepImg);
 //                recipeStepRepository.save(recipeStep); //Update사용
             }
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            log.info("예외발생");
+        }
 
+
+        //재료 수정
         if(ingredientCount > ingredients.size()){
             for(int i = ingredients.size(); i < ingredientCount; i++){
                 recipeIngredientRepository.delete(editRecipeIngredient.get(i));
