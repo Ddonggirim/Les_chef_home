@@ -147,7 +147,7 @@ public class MypageController {
         return "redirect:/myWishList";
     }
 
-    @PostMapping("/Recipe/create")
+    @PostMapping("/recipe/create")
     public String createList(@ModelAttribute RecipeForm recipeForm, @ModelAttribute RegistIngredientForm registIngredientForm, @ModelAttribute RegistStepForm registStepForm, @RequestParam("File") MultipartFile file,
                              @RequestParam("stepFiles[]") List<MultipartFile> stepFile, HttpSession session){ //mutipartfile로 변환할 수 없는데 input의 name을 form의 이름과 똑같게해서 안됨
         log.info("Recipe/create호출");
@@ -217,8 +217,14 @@ public class MypageController {
     @PostMapping("/recipe/edit/{id}")
     public String recipeEdit(@PathVariable("id") Long id, RecipeForm recipeForm, RegistIngredientForm registIngredientForm,
                              RegistStepForm registStepForm, @RequestParam("File") MultipartFile file,
-                             @RequestParam("stepFiles[]") List<MultipartFile> stepFile){
-        recipeService.editRecipe(id, recipeForm, registIngredientForm, registStepForm, file, stepFile);
+                             @RequestParam("stepFiles[]") List<MultipartFile> stepFile, @RequestParam("firstImage[]") List<String> firstImage){
+        recipeService.editRecipe(id, recipeForm, registIngredientForm, registStepForm, file, stepFile, firstImage);
+        log.info("stepFile의 1번째: /uploads/" + stepFile.get(0).getOriginalFilename());
+        log.info("stepFile의 2번째: /uploads/" + stepFile.get(1).getOriginalFilename());
+//        log.info("stepFile의 3번째: /uploads/" + stepFile.get(2).getOriginalFilename());
+        log.info("기존이미지의 이름은: " + firstImage.get(0));
+        log.info("기존이미지의 이름은: " + firstImage.get(1));
+//        log.info("기존이미지의 이름은: " + firstImage.get(2));
         return "redirect:/myrecipe";
     }
 }

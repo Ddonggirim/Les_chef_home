@@ -56,28 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-const add_textbox1 = () => {
-  const currentStepImg = document.querySelectorAll('[id^="imageInput"]');
-  const nextImgId = currentStepImg.length + 1;
-  const newId = 'toggleImage' + nextImgId+1;
-  const inputId = 'imageInput' + nextImgId;
 
-  const box = document.getElementById("box1");
-  const newP = document.createElement('div');
-  newP.setAttribute('class', 'step');
-  newP.innerHTML = `
-      <img src='../image1/MypageIcon/bap.png' alt='Click to change image' id='${newId}' class='clickable-img' data-input-id='${inputId}'>
-      <input type='file' id='${inputId}' name='stepFiles[]' style='display: none;' accept='image/*' required>
-      <input type="hidden" name="firstImage[]"/>
-      <textarea name = "stepWays[]" required></textarea>
-      <input type='button' value='-' onclick='remove1(this)'>
-  `;
-  box.appendChild(newP);
-};
-
-const remove1 = (obj) => {
-  document.getElementById('box1').removeChild(obj.parentNode);
-};
 
 
 

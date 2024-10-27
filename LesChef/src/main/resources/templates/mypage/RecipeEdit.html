@@ -9,6 +9,30 @@
     <!--    <link rel="stylesheet" href="/css/LoginModal.css">-->
 </head>
 <body>
+<!--<script th:inline="javascript">-->
+<!--    const add_textbox1 = () => {-->
+<!--      const currentStepImg = document.querySelectorAll('[id^="imageInput"]');-->
+<!--      const nextImgId = currentStepImg.length + 1;-->
+<!--      const newId = 'toggleImage' + nextImgId+1;-->
+<!--      const inputId = 'imageInput' + nextImgId;-->
+
+<!--      const box = document.getElementById("box1");-->
+<!--      const newP = document.createElement('div');-->
+<!--      newP.setAttribute('class', 'step');-->
+<!--      newP.innerHTML = `-->
+<!--          <img src='../image1/MypageIcon/bap.png' alt='Click to change image' id='${newId}' class='clickable-img' data-input-id='${inputId}'>-->
+<!--          <input type='file' id='${inputId}' name='stepFiles[]' style='display: none;' accept='image/*'>-->
+<!--          <input type="hidden" name="firstImage[]" th:value="${step.stepImg}" />-->
+<!--          <textarea name = "stepWays[]"></textarea>-->
+<!--          <input type='button' value='-' onclick='remove1(this)'>-->
+<!--      `;-->
+<!--      box.appendChild(newP);-->
+<!--    };-->
+
+<!--    const remove1 = (obj) => {-->
+<!--      document.getElementById('box1').removeChild(obj.parentNode);-->
+<!--    };-->
+<!--</script>-->
 <div class="container">
     <div class="left">
         <div class="menu">
@@ -87,11 +111,15 @@
                     <h3>조리순서</h3>
                     <div id="box1">
                         <div th:each="step, stepIndex : ${steps}" class="step">
-                            <img th:src="@{${step.stepImg}}" alt="Click to change image" id="toggleImage2" class="clickable-img" data-input-id="imageInput1">
-                            <input type="file" id="imageInput1" name="stepFiles[]" style="display: none;" accept="image/*">
-                            <textarea name = "stepWays[]" th:text="${step.stepWay}" ></textarea>
+                            <img th:src="@{${step.stepImg}}" alt="Click to change image"
+                                 th:attr="id='toggleImage' + (${stepIndex.index} + 2), data-input-id='imageInput' + (${stepIndex.index} + 1)"
+                                 class="clickable-img">
+                            <input type="file" th:attr="id='imageInput' + (${stepIndex.index} + 1)" name="stepFiles[]" style="display: none;" accept="image/*">
+                            <input type="hidden" name="firstImage[]" th:value="${step.stepImg}" />
+                            <textarea name="stepWays[]" th:text="${step.stepWay}"></textarea>
                             <input type='button' th:if="${stepIndex.index >= 1}" value='-' onclick='remove1(this)'>
                         </div>
+
                     </div>
                     <input type="button" value="+" onclick="add_textbox1()">
                 </div>
@@ -154,6 +182,7 @@
 <!--</div>-->
 
 <script src="/js/regist.js"></script>
+
 <!-- <script src="/js/profile.js"></script> -->
 <!--<script src="/js/loginModal.js"></script>-->
 </body>
