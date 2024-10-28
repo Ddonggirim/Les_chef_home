@@ -18,7 +18,9 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "article_id_seq")
     @SequenceGenerator(name = "article_id_seq", sequenceName = "article_id_seq", initialValue = 1, allocationSize = 1)
     private Long articleId;
-    private String userNickName;
+    @ManyToOne
+    @JoinColumn(name = "nickname", referencedColumnName = "nickname")
+    private Customer userNickName;
     private String articleTitle;
     private String articleSubTitle;
     private String articleImg;
@@ -28,7 +30,7 @@ public class Article {
 
 
     @Builder
-    public Article(String userNickName, String articleTitle, String articleSubTitle,
+    public Article(Customer userNickName, String articleTitle, String articleSubTitle,
                    String articleImg, String content, LocalDateTime writeDate, Long viewNum){
         this.userNickName = userNickName;
         this.articleTitle = articleTitle;

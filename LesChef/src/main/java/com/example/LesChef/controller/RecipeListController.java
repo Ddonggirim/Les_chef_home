@@ -142,7 +142,7 @@ public class RecipeListController {
         String userNickName = currentUser.getNickname();
         List<CommentForm> comments = allCommentService.getRecipeComment(id);
         for(CommentForm comment : comments){
-            if(comment.getCommenter().equals(userNickName)) {
+            if(comment.getCommenter().getNickname().equals(userNickName)) {
                 //리다이렉트 메시지로 하나의 댓글만 입력할 수 있다 출력
                 return "redirect:/inform/{id}";
             }
@@ -150,7 +150,7 @@ public class RecipeListController {
         Recipe recipe = recipeRepository.findById(id).orElse(null);
         commentForm.setRecipe(recipe);
         commentForm.setArticle(null);
-        commentForm.setCommenter(userNickName);
+        commentForm.setCommenter(currentUser);
         AllComment saveComment = commentForm.toEntity();
         allCommentRepository.save(saveComment);
         recipeService.updateRatingAvg(id);

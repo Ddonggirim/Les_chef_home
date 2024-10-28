@@ -60,13 +60,13 @@ public class NoticeBoardController {
     public String uploadImage(ArticleForm form, @RequestParam("file")MultipartFile file,
                               HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
-        String userNickName = currentUser.getNickname();
+//        String userNickName = currentUser.getNickname();
 //        RecipeArticle article = new RecipeArticle();
 //        article.setUser_nickName(usernickName);
 //        article.setArticle_Title(form.getArticle_Title());
 //        article.setArticle_Sub_Title(form.getArticle_Sub_Title());
 //        article.setContent(form.getContent());
-        form.setUserNickName(userNickName);
+        form.setUserNickName(currentUser);
         log.info("여기까지옴");
         try {
             String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename(); //uploads의 절대경로 (상대경로x)
@@ -87,12 +87,12 @@ public class NoticeBoardController {
     public String addComment(@PathVariable("id") Long id, @ModelAttribute CommentForm commentForm,
                              HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
-        String userNickName = currentUser.getNickname();
+//        String userNickName = currentUser.getNickname();
 
         Article article = articleRepository.findById(id).orElse(null);
         commentForm.setRecipe(null);
         commentForm.setArticle(article);
-        commentForm.setCommenter(userNickName);
+        commentForm.setCommenter(currentUser);
         AllComment comment = commentForm.toEntity();
         allCommentRepository.save(comment);
 

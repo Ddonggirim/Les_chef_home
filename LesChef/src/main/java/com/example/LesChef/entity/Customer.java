@@ -25,18 +25,22 @@ public class Customer implements UserDetails {
     private String password;
     @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "nickname", nullable = false)
+
+    @Column(name = "nickname", nullable = false, unique = true)
     private String nickname;
-    @Column(name = "tel", nullable = false)
+    @Column(name = "tel")
     private String tel;
+    @Column(name = "customerImg", nullable = false)
+    private String customerImg;
 
     @Builder
-    public Customer(String id, String password, String name, String nickname, String tel){
+    public Customer(String id, String password, String name, String nickname, String tel, String customerImg){
         this.id = id;
         this.password = password;
         this.name = name;
         this.nickname = nickname;
         this.tel = tel;
+        this.customerImg = customerImg;
 
     }
 

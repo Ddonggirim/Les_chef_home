@@ -28,6 +28,7 @@ private final BCryptPasswordEncoder bCryptPasswordEncoder;
                 .name(dto.getName())
                 .nickname(dto.getNickname())
                 .tel(dto.getTel())
+                .customerImg("/image1/NoticeIcon/duck.jpg")
                 .build());
     }
     @Transactional

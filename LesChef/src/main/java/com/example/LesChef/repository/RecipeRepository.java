@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     List<Recipe> findByMajorCategory(String majorCategory);
-    @Query(value = "select * from Recipe where user_Id = :userId", nativeQuery = true)
+    @Query(value = "select * from Recipe where nickname = :userId", nativeQuery = true)
     List<Recipe> findMyRecipe(@Param("userId") String userId);
 
     @Query(value = "select * from Recipe where major_Category = :koreanName and sub_Category = :sort", nativeQuery = true)

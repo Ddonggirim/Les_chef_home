@@ -1,5 +1,6 @@
 package com.example.LesChef.dto;
 
+import com.example.LesChef.entity.Customer;
 import com.example.LesChef.entity.Recipe;
 import com.example.LesChef.entity.Article;
 import com.example.LesChef.entity.AllComment;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 public class CommentForm {
     private Long commentId;
     private String commentContent;
-    private String commenter;
+    private Customer commenter;
     private LocalDateTime writeDate;
     private Recipe recipe;
     private Article article;

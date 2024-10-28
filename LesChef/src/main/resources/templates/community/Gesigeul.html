@@ -32,7 +32,7 @@
       <!--gesiWriterNameContent1,2=inline-flex-->
       <span class="gesiWriterNameContent1">
           <img src="/image1/NoticeIcon/duck.jpg">
-          <span th:text="${article.userNickName}"></span>
+          <span th:text="${article.userNickName.nickname}"></span>
         </span>
       <span class="gesiWriterNameContent2">
           <img src="/image1/NoticeIcon/views-black.jpg">
@@ -77,7 +77,7 @@
           <img src="../image1/NoticeIcon/fubao.jpg" class="commentWriterImg">
           <div class="commentContent">
             <p>
-              <span th:text="${comment.commenter}"class="commentWriterName" ></span>
+              <span th:text="${comment.commenter.nickname}"class="commentWriterName" ></span>
               <span th:text="${#temporals.format(comment.writeDate, 'yyyy-MM-dd HH:mm:ss')}" class="commentDate"></span>
             </p>
             <p th:text="${comment.commentContent}" class="commentText"></p>

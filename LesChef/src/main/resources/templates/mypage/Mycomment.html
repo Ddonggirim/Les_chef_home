@@ -37,10 +37,6 @@
                     </a>
                     <div class="buttons">
                         <div class="commentEditdeleteBtn">
-                            <form>
-                                <button class="editButton">수정 </button>
-                            </form>
-                            <span>|</span>
                             <form method="post" th:action="@{/comment/delete/{id}(id=${comment.commentId})}">
                                 <button type="submit" class="deleteBtn"> 삭제</button>
                             </form>
@@ -63,10 +59,6 @@
                     </a>
                     <div class="buttons">
                         <div class="editdeleteBtn">
-                            <form>
-                                <button class="editButton">수정 </button>
-                            </form>
-                            <span>|</span>
                             <form method="post" th:action="@{/comment/delete/{id}(id=${comment.commentId})}">
                                 <button type="submit" class="deleteBtn"> 삭제</button>
                             </form>

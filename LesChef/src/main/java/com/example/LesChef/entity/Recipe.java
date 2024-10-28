@@ -30,7 +30,9 @@ public class Recipe {
     @Column(nullable = false)
     private String cookLevel;
 //    @Column(nullable = false)
-    private String userId;
+    @ManyToOne
+    @JoinColumn(name = "nickname", referencedColumnName = "nickname")
+    private Customer userId;
     @Column(nullable = false)
     private String recipeImg;
     @Column(nullable = false)
@@ -41,7 +43,7 @@ public class Recipe {
     @Builder
     public Recipe(String recipeName, Long viewNum, Date writeDate,
                   String runTime, String portion, String cookLevel,
-                  String userId, String recipeImg, String majorCategory,
+                  Customer userId, String recipeImg, String majorCategory,
                   String subCategory, Double ratingAvg){
         this.recipeName = recipeName;
         this.viewNum = viewNum;
@@ -64,25 +66,6 @@ public class Recipe {
                 this.majorCategory, this.subCategory, this.ratingAvg);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -17,7 +17,9 @@ public class AllComment {
     @SequenceGenerator(name = "all_comment_id_seq", sequenceName = "all_comment_id_seq", initialValue = 1, allocationSize = 1)
     private Long commentId;
     private String commentContent;
-    private String commenter;
+    @ManyToOne
+    @JoinColumn(name = "nickname", referencedColumnName = "nickname")
+    private Customer commenter;
     private LocalDateTime writeDate;
     @ManyToOne
     @JoinColumn(name = "recipe_id")
@@ -28,7 +30,7 @@ public class AllComment {
     private Long rating;
 
     @Builder
-    public AllComment(String commentContent, String commenter, LocalDateTime writeDate,
+    public AllComment(String commentContent, Customer commenter, LocalDateTime writeDate,
                       Recipe recipe, Article article, Long rating){
         this.commentContent = commentContent;
         this.commenter = commenter;

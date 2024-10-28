@@ -93,8 +93,8 @@
   <div id="comentcontainer">
     <div th:each="comment : ${comments}" class="comentbox">
       <div class="coment">
-        <img class="comentimg" src="/image1/ListIcon/사용자.png" />
-        <span class="comentnickname" th:text="${comment.commenter}"></span>
+        <img class="comentimg" th:src="@{${comment.commenter.customerImg}}"/>
+        <span class="comentnickname" th:text="${comment.commenter.nickname}"></span>
         <div class="allstar">
           <span th:each="num : ${#numbers.sequence(1,5)}">
             <img class="comentstar" th:src="${num <= comment.rating} ? '../image1/ListIcon/사용자별.png' : '../image1/ListIcon/사용자빈별.png'" alt="star"/>

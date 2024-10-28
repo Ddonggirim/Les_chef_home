@@ -152,7 +152,7 @@ public class MypageController {
                              @RequestParam("stepFiles[]") List<MultipartFile> stepFile, HttpSession session){ //mutipartfile로 변환할 수 없는데 input의 name을 form의 이름과 똑같게해서 안됨
         log.info("Recipe/create호출");
         Customer currentUser = (Customer)session.getAttribute("customer");
-        String nickname = currentUser.getNickname();
+//        String nickname = currentUser.getNickname();
         List<String> ingredients = registIngredientForm.getIngredients();   //재료이름들
         List<String> quantities = registIngredientForm.getQuantities();     //재료수량들
         List<String> stepImgs = registStepForm.getStepImgs();
@@ -161,7 +161,7 @@ public class MypageController {
 
 
         log.info("레시피등록요청");
-        recipeForm.setUserId(nickname);
+        recipeForm.setUserId(currentUser);
 
         try {
             String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename();

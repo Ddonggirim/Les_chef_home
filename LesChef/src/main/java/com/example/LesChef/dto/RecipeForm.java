@@ -1,5 +1,7 @@
 package com.example.LesChef.dto;
 
+import com.example.LesChef.entity.Customer;
+import com.example.LesChef.entity.Customer;
 import com.example.LesChef.entity.Recipe;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +24,7 @@ public class RecipeForm {
     private String runTime;
     private String portion;/*몇인분*/
     private String cookLevel;
-    private String userId;
+    private Customer userId;
     private String recipeImg;
     private String majorCategory;
     private String subCategory;
