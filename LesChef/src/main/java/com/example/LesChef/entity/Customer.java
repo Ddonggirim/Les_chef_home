@@ -1,6 +1,8 @@
 package com.example.LesChef.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,16 +20,20 @@ import java.util.List;
 @Setter
 public class Customer implements UserDetails {
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE) 오라클은 IDENTITY를 지원 안함
+    @NotBlank(message = "아이디를 입력해주세요")
+//    @Pattern(regexp = )
     @Column(name = "id")
     private String id;
+    @NotBlank(message = "비밀번호를 입력해주세요")
     @Column(name = "password", nullable = false)
     private String password;
+    @NotBlank(message = "이름을 입력해주세요")
     @Column(name = "name", nullable = false)
     private String name;
-
+    @NotBlank(message = "닉네임을 입력해주세요")
     @Column(name = "nickname", nullable = false, unique = true)
     private String nickname;
+    @NotBlank(message = "전화번호를 입력해주세요")
     @Column(name = "tel")
     private String tel;
     @Column(name = "customerImg", nullable = false)

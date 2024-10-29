@@ -163,12 +163,11 @@ public class RecipeService {
         Long ingredientCount = recipeIngredientRepository.findIngredientCount(recipeId);
         log.info("레시피의 메인 이미지는" + file.getOriginalFilename());
         // 레시피 수정
-        String filePath = null;
         try {
             if("".equals(file.getOriginalFilename())) {
 
                 String fileName = editRecipe.getRecipeImg();
-                filePath = "C:/LesChef_note/LesChef/src/main/resources/static" + fileName;
+                String filePath = "C:/LesChef_note/LesChef/src/main/resources/static" + fileName;
                 log.info(filePath);
                 log.info("기존 이미지 사용");
 //                File dest = new File(filePath);
@@ -176,7 +175,7 @@ public class RecipeService {
 //                editRecipe.setRecipeImg(fileName);
 
             }else{
-                filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename();
+                String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename();
                 log.info(filePath);
                 log.info("새로운 이미지로 변경");
                 File dest = new File(filePath);

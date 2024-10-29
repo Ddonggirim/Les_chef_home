@@ -42,6 +42,7 @@ private final BCryptPasswordEncoder bCryptPasswordEncoder;
             customer.setName(dto.getName());
             customer.setNickname(dto.getNickname());
             customer.setTel(dto.getTel());
+            customer.setCustomerImg(dto.getCustomerImg());
             customerRepository.save(customer);
 
         }

@@ -45,11 +45,34 @@ public class MypageController {
 
     // 회원정보 수정
     @PostMapping("/customerRewrite")
-    public String customerEdit(AddCustomerRequest dto, HttpSession session){
+    public String customerEdit(AddCustomerRequest dto, @RequestParam("File") MultipartFile file, HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
         String currentId = currentUser.getId();
         log.info("현재 유저ID:" + currentId);
 
+        try {
+            if("".equals(file.getOriginalFilename())) {
+
+                String fileName = currentUser.getCustomerImg();
+                String filePath = "C:/LesChef_note/LesChef/src/main/resources/static" + fileName;
+                log.info(filePath);
+                log.info("기존 이미지 사용");
+//                File dest = new File(filePath);
+//                file.transferTo(dest);
+//                editRecipe.setRecipeImg(fileName);
+
+            }else{
+                String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename();
+                log.info(filePath);
+                log.info("새로운 이미지로 변경");
+                File dest = new File(filePath);
+                file.transferTo(dest);
+                dto.setCustomerImg("/uploads/" + file.getOriginalFilename());
+            }
+
+        } catch (IOException e) {
+            log.info("레시피 오류발생");
+        }
         customerService.edit(dto, currentId);
 
         session.invalidate();

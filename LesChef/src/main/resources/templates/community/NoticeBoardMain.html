@@ -52,7 +52,7 @@
             <!--작성자 및 조회수/writerName/writerNameContent=inline-flex-->
             <div class="writerName">
                 <span class="writerNameContent">
-                  <img src="/image1/NoticeIcon/duck.jpg">
+                  <img th:src="@{${articles.userNickName.customerImg}}">
                   <span th:text="${articles.userNickName.nickname}"></span>
                 </span>
               <span class="writerNameContent">

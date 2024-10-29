@@ -26,9 +26,9 @@
     <div class="right">
         <div class="profile">
             <h2>회원정보</h2>
-            <img th:src="@{${session.customer.customerImg}}" alt="Click to change image" id="toggleImage" class="clickable-img">
-            <input type="file" id="imageInput" style="display: none;" accept="image/*">
-            <form method="post"><!--action 2개 -->
+            <form method="post" enctype="multipart/form-data"><!--action 2개 -->
+                <img th:src="@{${session.customer.customerImg}}" alt="Click to change image" id="toggleImage" class="clickable-img">
+                <input type="file" id="imageInput" name="File" style="display: none;" accept="image/*">
                 <label>닉네임</label><input type="text" th:value="${session.customer.nickname}" name="nickname" required><br>
                 <label>이름</label><input type="text" th:value="${session.customer.name}" name="name" required><br>
                 <label>비밀번호</label><input type="password" name="password" required><br>

@@ -31,7 +31,7 @@
     <div class="gesiWriterName">
       <!--gesiWriterNameContent1,2=inline-flex-->
       <span class="gesiWriterNameContent1">
-          <img src="/image1/NoticeIcon/duck.jpg">
+          <img th:src="@{${article.userNickName.customerImg}}">
           <span th:text="${article.userNickName.nickname}"></span>
         </span>
       <span class="gesiWriterNameContent2">
@@ -74,7 +74,7 @@
     <div class="commentRepeat">
       <div class="card my-3">
         <div th:each="comment : ${comments}" class="comment">
-          <img src="../image1/NoticeIcon/fubao.jpg" class="commentWriterImg">
+          <img th:src="@{${comment.commenter.customerImg}}" class="commentWriterImg">
           <div class="commentContent">
             <p>
               <span th:text="${comment.commenter.nickname}"class="commentWriterName" ></span>

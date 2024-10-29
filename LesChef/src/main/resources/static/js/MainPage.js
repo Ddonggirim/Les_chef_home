@@ -181,7 +181,13 @@ findToLogin.addEventListener('click', () => {
 
 
 
-
+document.getElementById("signup").addEventListener('submit', function(event) {
+    const id = document.getElementById("id").value;
+    const password = document.getElementById("password").value;
+    const name = document.getElementById("name").value;
+    const nickname = document.getElementById("nickname").value;
+    const tel = document.getElementById("tel").value;
+})
 
 
 

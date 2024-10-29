@@ -11,4 +11,5 @@ public class AddCustomerRequest {
     private String name;
     private String nickname;
     private String tel;
+    private String customerImg;
 }

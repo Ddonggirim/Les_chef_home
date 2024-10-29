@@ -36,7 +36,7 @@
   <span id="sort" th:text="${inform.majorCategory}"></span><br>
   <span id="title" th:text="${inform.recipeName}"></span>
   <div id="user">
-    <img src="/image1/ListIcon/사용자.png" width="40px"/><span id="username" th:text="${inform.userId.nickname}"></span>
+    <img th:src="@{${inform.userId.customerImg}}" class="comentimg"/><span id="username" th:text="${inform.userId.nickname}"></span>
   </div>
   <div>
     <img id="eye" src="/image1/ListIcon/조회수.png"/><p id="eyenum" th:text="${inform.viewNum}"></p>
