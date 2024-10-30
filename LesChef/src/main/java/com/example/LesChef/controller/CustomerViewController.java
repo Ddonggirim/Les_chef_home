@@ -21,7 +21,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CustomerViewController {
 
-    private final CustomerRepository customerRepository;
     private final CustomerService customerService;
 
     @GetMapping("/loginpage")
@@ -29,10 +28,7 @@ public class CustomerViewController {
         return "mainpage";
     }
 
-    @GetMapping("/signup")
-    public String signup() {
-        return "mainpage";
-    }
+
 
 
     @PostMapping("/findId")

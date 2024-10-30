@@ -68,10 +68,66 @@ public class RecipeService {
         return inform.toForm();
     }
 
-    public Recipe createRecipe(RecipeForm form){
+    public Recipe createRecipe(RecipeForm recipeForm, RegistIngredientForm registIngredientForm,
+                               RegistStepForm registStepForm, MultipartFile file,
+                               List<MultipartFile> stepFile, Customer currentUser){
 
-        Recipe recipe = form.toEntity();
+        List<String> ingredients = registIngredientForm.getIngredients();   //재료이름들
+        List<String> quantities = registIngredientForm.getQuantities();     //재료수량들
+
+        List<String> stepWays = registStepForm.getStepWays();               //조리방법들
+        log.info("stepFile의 크기: " + stepFile.get(0).getOriginalFilename());
+
+
+        log.info("레시피등록요청");
+        //전달받은 레시피데이터에 작성자의 데이터를 넣기
+        recipeForm.setUserId(currentUser);
+
+        try {
+            String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename();
+            log.info(filePath);
+            log.info("file비어있지않음");
+            File dest = new File(filePath);
+            //이미지를 파일에 저장
+            file.transferTo(dest);
+            log.info("여기까지옴2");
+            //이미지의 경로 저장
+            recipeForm.setRecipeImg("/uploads/" + file.getOriginalFilename());
+
+        } catch (IOException e) {}
+        Recipe recipe = recipeForm.toEntity();
         recipeRepository.save(recipe);
+        try {
+            for(int i = 0; i < stepWays.size(); i++){
+                RecipeStep recipeStep = new RecipeStep();
+                String stepFilePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + stepFile.get(i).getOriginalFilename();
+                log.info("stepWay의 개수: " + stepWays.size());
+                log.info("step의 이미지 경로: " + stepFilePath);
+                File stepDest = new File(stepFilePath);
+                stepFile.get(i).transferTo(stepDest);
+                recipeStep.setRecipe(recipe);
+//                recipeStep.setStep_Img(stepImgs.get(i));
+                recipeStep.setStepImg("/uploads/" + stepFile.get(i).getOriginalFilename());
+                recipeStep.setStepWay(stepWays.get(i));
+                recipeStep.setStepNum(i+1L);
+                recipeStepRepository.save(recipeStep);
+            }
+        } catch (IOException e) {}
+
+        log.info("재료이름의 수:" + ingredients.size());
+        log.info("재료수량:" + quantities.size());
+
+        // 파일을 지정된 경로에 저장
+        for(int i = 0; i < ingredients.size(); i++){
+            RecipeIngredient recipeIngredient = new RecipeIngredient();
+            log.info("재료 이름:"+ingredients.get(i));
+            recipeIngredient.setRecipe(recipe);
+            recipeIngredient.setIngredientName(ingredients.get(i));
+            recipeIngredient.setIngredientVolume(quantities.get(i));
+            recipeIngredientRepository.save(recipeIngredient);
+        }
+
+
         return recipe;
     }
 

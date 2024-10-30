@@ -9,7 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Optional;
 import java.util.Random;
 
@@ -21,22 +24,53 @@ public class CustomerService {
 private final CustomerRepository customerRepository;
 private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
+
+    //회원가입 시 해당 아이디가 없으면 저장
     public void save(AddCustomerRequest dto){
-        customerRepository.save(Customer.builder()
-                .id(dto.getId())
-                .password(bCryptPasswordEncoder.encode(dto.getPassword()))
-                .name(dto.getName())
-                .nickname(dto.getNickname())
-                .tel(dto.getTel())
-                .customerImg("/image1/NoticeIcon/duck.jpg")
-                .build());
+        if(customerRepository.findById(dto.getId()).orElse(null) != null){
+            log.info("회원가입 실패");
+        }else{
+            customerRepository.save(Customer.builder()
+                    .id(dto.getId())
+                    .password(bCryptPasswordEncoder.encode(dto.getPassword()))
+                    .name(dto.getName())
+                    .nickname(dto.getNickname())
+                    .tel(dto.getTel())
+                    .customerImg("/image1/NoticeIcon/duck.jpg")
+                    .build());
+            log.info("회원가입 성공");
+        }
     }
     @Transactional
-    public void edit(AddCustomerRequest dto, String id){
+    public void edit(AddCustomerRequest dto, MultipartFile file, Customer currentUser){
+        String currentId = currentUser.getId();
+        log.info("현재 유저ID:" + currentId);
+        Customer customer = customerRepository.findById(currentId).orElse(null);
+        if(customer != null) {
+            try {
+                if ("".equals(file.getOriginalFilename())) {
 
-        Customer customer = customerRepository.findById(id).orElse(null);
+                    String fileName = currentUser.getCustomerImg();
+                    String filePath = "C:/LesChef_note/LesChef/src/main/resources/static" + fileName;
+                    log.info(filePath);
+                    log.info("기존 이미지 사용");
+                    //                File dest = new File(filePath);
+                    //                file.transferTo(dest);
+                    //                editRecipe.setRecipeImg(fileName);
 
-        if(customer != null){
+                } else {
+                    String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename();
+                    log.info(filePath);
+                    log.info("새로운 이미지로 변경");
+                    File dest = new File(filePath);
+                    file.transferTo(dest);
+                    dto.setCustomerImg("/uploads/" + file.getOriginalFilename());
+                }
+
+            } catch (IOException e) {
+                log.info("레시피 오류발생");
+            }
             customer.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
             log.info("정보수정됨");
             customer.setName(dto.getName());
@@ -44,10 +78,12 @@ private final BCryptPasswordEncoder bCryptPasswordEncoder;
             customer.setTel(dto.getTel());
             customer.setCustomerImg(dto.getCustomerImg());
             customerRepository.save(customer);
-
         }
-    }
 
+    }
+    public void delete(Customer currentUser){
+        customerRepository.delete(currentUser);
+    }
 
     public String findMyId(String name, String tel){
 

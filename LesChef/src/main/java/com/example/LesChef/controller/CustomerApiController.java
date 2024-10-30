@@ -25,22 +25,19 @@ public class CustomerApiController {
     private final CustomerRepository customerRepository;
     private final CustomerService customerService;
 
+    //회원가입 요청
     @PostMapping("/signup")
     public String signup(AddCustomerRequest request){
-        if(customerRepository.findById(request.getId()).orElse(null) != null){
-            log.info("회원가입 실패");
-            return "redirect:/main";
-        }
         customerService.save(request);
-        log.info("회원가입 성공");
         return "redirect:/main";
     }
 
-    @GetMapping("/logout")
-        public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session){
-         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
-         session.invalidate();
-         log.info("세션 삭제성공");
-         return "redirect:/loginpage";
-    }
+
+//    @GetMapping("/logout")
+//        public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+//         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+//         session.invalidate();
+//         log.info("세션 삭제성공");
+//         return "redirect:/loginpage";
+//    }
 }

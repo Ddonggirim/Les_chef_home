@@ -47,34 +47,7 @@ public class MypageController {
     @PostMapping("/customerRewrite")
     public String customerEdit(AddCustomerRequest dto, @RequestParam("File") MultipartFile file, HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
-        String currentId = currentUser.getId();
-        log.info("현재 유저ID:" + currentId);
-
-        try {
-            if("".equals(file.getOriginalFilename())) {
-
-                String fileName = currentUser.getCustomerImg();
-                String filePath = "C:/LesChef_note/LesChef/src/main/resources/static" + fileName;
-                log.info(filePath);
-                log.info("기존 이미지 사용");
-//                File dest = new File(filePath);
-//                file.transferTo(dest);
-//                editRecipe.setRecipeImg(fileName);
-
-            }else{
-                String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename();
-                log.info(filePath);
-                log.info("새로운 이미지로 변경");
-                File dest = new File(filePath);
-                file.transferTo(dest);
-                dto.setCustomerImg("/uploads/" + file.getOriginalFilename());
-            }
-
-        } catch (IOException e) {
-            log.info("레시피 오류발생");
-        }
-        customerService.edit(dto, currentId);
-
+        customerService.edit(dto, file, currentUser);
         session.invalidate();
         return "redirect:/main";
     }
@@ -83,7 +56,7 @@ public class MypageController {
     @PostMapping("/customerDelete")
     public String customerDelete(HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
-        customerRepository.delete(currentUser);
+        customerService.delete(currentUser);
         session.invalidate();
         return "redirect:/main";
     }
@@ -175,57 +148,7 @@ public class MypageController {
                              @RequestParam("stepFiles[]") List<MultipartFile> stepFile, HttpSession session){ //mutipartfile로 변환할 수 없는데 input의 name을 form의 이름과 똑같게해서 안됨
         log.info("Recipe/create호출");
         Customer currentUser = (Customer)session.getAttribute("customer");
-//        String nickname = currentUser.getNickname();
-        List<String> ingredients = registIngredientForm.getIngredients();   //재료이름들
-        List<String> quantities = registIngredientForm.getQuantities();     //재료수량들
-        List<String> stepImgs = registStepForm.getStepImgs();
-        List<String> stepWays = registStepForm.getStepWays();
-        log.info("stepFile의 크기: " + stepFile.get(0).getOriginalFilename());
-
-
-        log.info("레시피등록요청");
-        recipeForm.setUserId(currentUser);
-
-        try {
-            String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename();
-            log.info(filePath);
-            log.info("file비어있지않음");
-            File dest = new File(filePath);
-            file.transferTo(dest);
-            log.info("여기까지옴2");
-            recipeForm.setRecipeImg("/uploads/" + file.getOriginalFilename());
-
-        } catch (IOException e) {}
-        Recipe recipe = recipeService.createRecipe(recipeForm);
-        try {
-            for(int i = 0; i < stepWays.size(); i++){
-                RecipeStep recipeStep = new RecipeStep();
-                String stepFilePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + stepFile.get(i).getOriginalFilename();
-                log.info("stepWay의 개수: " + stepWays.size());
-                log.info("step의 이미지 경로: " + stepFilePath);
-                File stepDest = new File(stepFilePath);
-                stepFile.get(i).transferTo(stepDest);
-                recipeStep.setRecipe(recipe);
-//                recipeStep.setStep_Img(stepImgs.get(i));
-                recipeStep.setStepImg("/uploads/" + stepFile.get(i).getOriginalFilename());
-                recipeStep.setStepWay(stepWays.get(i));
-                recipeStep.setStepNum(i+1L);
-                recipeStepRepository.save(recipeStep);
-            }
-        } catch (IOException e) {}
-
-        log.info("재료이름의 수:" + ingredients.size());
-        log.info("재료수량:" + quantities.size());
-
-        // 파일을 지정된 경로에 저장
-        for(int i = 0; i < ingredients.size(); i++){
-            RecipeIngredient recipeIngredient = new RecipeIngredient();
-            log.info("재료 이름:"+ingredients.get(i));
-            recipeIngredient.setRecipe(recipe);
-            recipeIngredient.setIngredientName(ingredients.get(i));
-            recipeIngredient.setIngredientVolume(quantities.get(i));
-            recipeIngredientRepository.save(recipeIngredient);
-        }
+        recipeService.createRecipe(recipeForm, registIngredientForm, registStepForm, file, stepFile, currentUser);
         return "redirect:/myrecipe";
 
 
