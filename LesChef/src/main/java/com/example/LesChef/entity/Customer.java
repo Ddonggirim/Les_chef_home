@@ -23,27 +23,27 @@ import java.util.List;
 @Setter
 public class Customer implements UserDetails {
     @Id
-//    @NotBlank(message = "아이디를 입력해주세요")
-//    @Email
+    @NotBlank(message = "아이디를 입력해주세요")
+    @Email
     @Column(name = "id")
     private String id;
-//    @NotBlank(message = "비밀번호를 입력해주세요")
-//    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[!@#$%^&*()]).{8,20}$",
-//            message = "비밀번호를 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 작성해주세요")
+    @NotBlank(message = "비밀번호를 입력해주세요")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[!@#$%^&*()]).{8,20}$",
+            message = "비밀번호를 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 작성해주세요")
     @Column(name = "password", nullable = false)
     private String password;
-//    @NotBlank(message = "이름을 입력해주세요")
-//    @Size(min = 1, max = 50, message = "이름을 1~50자로 작성해주세요")
+    @NotBlank(message = "이름을 입력해주세요")
+    @Size(min = 1, max = 50, message = "이름을 1~50자로 작성해주세요")
     @Column(name = "name", nullable = false)
     private String name;
-//    @NotBlank(message = "닉네임을 입력해주세요")
-//    @Pattern(regexp = "[a-zA-Z가-힣\\\\d]{2,10}",
-//            message = "닉네임을 한글, 영어, 숫자만 포함하여 2~10자로 작성해주세요")
+    @NotBlank(message = "닉네임을 입력해주세요")
+    @Pattern(regexp = "[a-zA-Z가-힣\\\\d]{2,10}",
+            message = "닉네임을 한글, 영어, 숫자만 포함하여 2~10자로 작성해주세요")
     @Column(name = "nickname", nullable = false, unique = true)
     private String nickname;
-//    @NotBlank(message = "전화번호를 입력해주세요")
-//    @Pattern(regexp = "^(\\\\d{2,3})-(\\\\d{3,4})-(\\\\d{4})$",
-//            message = "전화번호는 **-***-****형식으로 작성해주세요")
+    @NotBlank(message = "전화번호를 입력해주세요")
+    @Pattern(regexp = "^(\\\\d{2,3})-(\\\\d{3,4})-(\\\\d{4})$",
+            message = "전화번호는 **-***-****형식으로 작성해주세요")
     @Column(name = "tel")
     private String tel;
     @Column(name = "customerImg", nullable = false)

@@ -50,7 +50,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
 //                        .requestMatchers("/signup", "/findId", "/findPwd").permitAll()
                         .requestMatchers("/signup", "/findId", "/findPwd", "/main", "/List/**",
-                                "/NoticeBoardMain")
+                                "/NoticeBoardMain", "/NoticeBoard/**")
                         .permitAll().anyRequest().authenticated()
                 )
                 .formLogin(login -> login
