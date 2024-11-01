@@ -2,6 +2,7 @@ package com.example.LesChef.service;
 
 import com.example.LesChef.dto.ArticleForm;
 import com.example.LesChef.entity.Article;
+import com.example.LesChef.entity.Customer;
 import com.example.LesChef.repository.ArticleRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -53,7 +54,15 @@ public class ArticleService {
                 .collect(Collectors.toList());
     }
 
-    public void createArticle(ArticleForm form){
+    public void createArticle(ArticleForm form, MultipartFile file, Customer currentUser){
+        form.setUserNickName(currentUser);
+        try {
+            String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename(); //uploads의 절대경로 (상대경로x)
+            File dest = new File(filePath);
+            file.transferTo(dest);
+            form.setArticleImg("/uploads/" + file.getOriginalFilename());
+        } catch (IOException e) {
+        }
         Article article = form.toEntity();
         articleRepository.save(article);
     }

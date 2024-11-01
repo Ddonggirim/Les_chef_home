@@ -29,8 +29,6 @@ public class MypageController {
 
     private final CustomerService customerService;
 
-    private final CustomerRepository customerRepository;
-
     private final RecipeService recipeService;
 
     private final ArticleService articleService;
@@ -38,10 +36,6 @@ public class MypageController {
     private final AllCommentService allCommentService;
 
     private final WishListService wishListService;
-
-    private final RecipeStepRepository recipeStepRepository;
-
-    private final RecipeIngredientRepository recipeIngredientRepository;
 
     // 회원정보 수정
     @PostMapping("/customerRewrite")

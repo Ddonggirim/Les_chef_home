@@ -2,6 +2,8 @@ package com.example.LesChef.service;
 
 import com.example.LesChef.dto.CommentForm;
 import com.example.LesChef.entity.AllComment;
+import com.example.LesChef.entity.Article;
+import com.example.LesChef.entity.Customer;
 import com.example.LesChef.repository.AllCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -110,6 +112,13 @@ public class AllCommentService {
         allCommentRepository.deleteArticleComment(articleId);
     }
 
+    public void insertComment(CommentForm commentForm, Customer currentUser, Article article){
+        commentForm.setRecipe(null);
+        commentForm.setArticle(article);
+        commentForm.setCommenter(currentUser);
+        AllComment comment = commentForm.toEntity();
+        allCommentRepository.save(comment);
+    }
 
 }
 

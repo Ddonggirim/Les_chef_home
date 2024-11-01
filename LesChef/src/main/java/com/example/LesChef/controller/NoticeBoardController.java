@@ -66,20 +66,7 @@ public class NoticeBoardController {
 //        article.setArticle_Title(form.getArticle_Title());
 //        article.setArticle_Sub_Title(form.getArticle_Sub_Title());
 //        article.setContent(form.getContent());
-        form.setUserNickName(currentUser);
-        log.info("여기까지옴");
-        try {
-            String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename(); //uploads의 절대경로 (상대경로x)
-            log.info(filePath);
-            log.info("file비어있지않음");
-            File dest = new File(filePath);
-            file.transferTo(dest);
-            log.info("여기까지옴2");
-            form.setArticleImg("/uploads/" + file.getOriginalFilename());
-            articleService.createArticle(form);
-//            recipeArticleRepository.save(form);
-        } catch (IOException e) {
-        }
+            articleService.createArticle(form, file, currentUser);
         return "redirect:/main";
     }
 
@@ -87,14 +74,11 @@ public class NoticeBoardController {
     public String addComment(@PathVariable("id") Long id, @ModelAttribute CommentForm commentForm,
                              HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
-//        String userNickName = currentUser.getNickname();
 
-        Article article = articleRepository.findById(id).orElse(null);
-        commentForm.setRecipe(null);
-        commentForm.setArticle(article);
-        commentForm.setCommenter(currentUser);
-        AllComment comment = commentForm.toEntity();
-        allCommentRepository.save(comment);
+        ArticleForm articleForm = articleService.getArticle(id);
+        Article article = articleForm.toEntity();
+
+        allCommentService.insertComment(commentForm, currentUser, article);
 
         return "redirect:/article/{id}";
     }
