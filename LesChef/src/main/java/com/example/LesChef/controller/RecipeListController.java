@@ -32,17 +32,7 @@ public class RecipeListController {
 
     private final RecipeService recipeService;
 
-
-
-    private final RecipeIngredientRepository recipeIngredientRepository;
-
-    private final RecipeStepRepository recipeStepRepository;
-
-    private final RecipeRepository recipeRepository;
-
     private final AllCommentService allCommentService;
-
-    private final AllCommentRepository allCommentRepository;
 
     private final WishListService wishListService;
 
@@ -139,20 +129,9 @@ public class RecipeListController {
     public String addComment(@PathVariable("id") Long id, @ModelAttribute CommentForm commentForm,
                              HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
-        String userNickName = currentUser.getNickname();
         List<CommentForm> comments = allCommentService.getRecipeComment(id);
-        for(CommentForm comment : comments){
-            if(comment.getCommenter().getNickname().equals(userNickName)) {
-                //리다이렉트 메시지로 하나의 댓글만 입력할 수 있다 출력
-                return "redirect:/inform/{id}";
-            }
-        }
-        Recipe recipe = recipeRepository.findById(id).orElse(null);
-        commentForm.setRecipe(recipe);
-        commentForm.setArticle(null);
-        commentForm.setCommenter(currentUser);
-        AllComment saveComment = commentForm.toEntity();
-        allCommentRepository.save(saveComment);
+        Recipe recipe = recipeService.getRecipe(id);
+        allCommentService.insertRecipeComment(commentForm, currentUser, comments, recipe);
         recipeService.updateRatingAvg(id);
 
         return "redirect:/inform/{id}";

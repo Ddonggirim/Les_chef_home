@@ -36,7 +36,7 @@ public class CustomerApiController {
             log.info("형식이 맞음");
             customerService.save(request);
         }
-        return "redirect:/NoticeBoardMain";
+        return "redirect:/main";
     }
 
 

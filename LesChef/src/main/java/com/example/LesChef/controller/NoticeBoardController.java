@@ -28,9 +28,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NoticeBoardController {
 
-    private final ArticleRepository articleRepository;
     private final ArticleService articleService;
-    private final AllCommentRepository allCommentRepository;
+
     private final AllCommentService allCommentService;
 
     @GetMapping("/NoticeBoard")
@@ -50,9 +49,10 @@ public class NoticeBoardController {
     public String getArticle(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response, Model model){
         // 쿠키기반 조회수
         articleService.increaseViewNum(id, request, response);
-        ArticleForm form = articleService.getArticle(id);
+        Article article = articleService.getArticle(id);
+        ArticleForm articleForm = article.toForm();
         List<CommentForm> comments = allCommentService.getArticleComment(id);
-        model.addAttribute("article", form);
+        model.addAttribute("article", articleForm);
         model.addAttribute("comments", comments);
         return "community/Gesigeul";
     }
@@ -67,21 +67,18 @@ public class NoticeBoardController {
 //        article.setArticle_Sub_Title(form.getArticle_Sub_Title());
 //        article.setContent(form.getContent());
             articleService.createArticle(form, file, currentUser);
-        return "redirect:/main";
+        return "community/NoticeBoardMain";
     }
 
     @PostMapping("article/{id}/comment")
     public String addComment(@PathVariable("id") Long id, @ModelAttribute CommentForm commentForm,
                              HttpSession session){
         Customer currentUser = (Customer)session.getAttribute("customer");
-
-        ArticleForm articleForm = articleService.getArticle(id);
-        Article article = articleForm.toEntity();
-
-        allCommentService.insertComment(commentForm, currentUser, article);
-
+        Article article = articleService.getArticle(id);
+        allCommentService.insertArticleComment(commentForm, currentUser, article);
         return "redirect:/article/{id}";
     }
+
 
     @PostMapping("/article/editPage/{id}")
     public String articleEditPage(@PathVariable("id") Long id, Model model){

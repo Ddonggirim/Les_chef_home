@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class WishListController {
 
     private final RecipeService recipeService;
+
     private final WishListService wishListService;
 
     @PostMapping("/wishSave")

@@ -49,34 +49,32 @@ private final BCryptPasswordEncoder bCryptPasswordEncoder;
         Customer customer = customerRepository.findById(currentId).orElse(null);
         if(customer != null) {
             try {
+                //회원이 새로운 이미지를 넣었는지 확인
                 if ("".equals(file.getOriginalFilename())) {
-
-                    String fileName = currentUser.getCustomerImg();
-                    String filePath = "C:/LesChef_note/LesChef/src/main/resources/static" + fileName;
-                    log.info(filePath);
+                    //기존의 이미지 사용으로 로그만 출력
                     log.info("기존 이미지 사용");
-                    //                File dest = new File(filePath);
-                    //                file.transferTo(dest);
-                    //                editRecipe.setRecipeImg(fileName);
-
                 } else {
+                    //파일의 저장위처
                     String filePath = "C:/LesChef_note/LesChef/src/main/resources/static/uploads/" + file.getOriginalFilename();
                     log.info(filePath);
                     log.info("새로운 이미지로 변경");
                     File dest = new File(filePath);
+                    // 이미지를 dest에 저장된 경로에 저장
                     file.transferTo(dest);
-                    dto.setCustomerImg("/uploads/" + file.getOriginalFilename());
+                    // 이미지 변경으로 customer의 값을 변경
+                    customer.setCustomerImg("/uploads/" + file.getOriginalFilename());
                 }
 
             } catch (IOException e) {
                 log.info("레시피 오류발생");
             }
+            // 전달받은 dto의 값을 customer에 저장 후 save
             customer.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
             log.info("정보수정됨");
             customer.setName(dto.getName());
             customer.setNickname(dto.getNickname());
             customer.setTel(dto.getTel());
-            customer.setCustomerImg(dto.getCustomerImg());
+            log.info("현재 회원의 이미지는 : " + customer.getCustomerImg());
             customerRepository.save(customer);
         }
 

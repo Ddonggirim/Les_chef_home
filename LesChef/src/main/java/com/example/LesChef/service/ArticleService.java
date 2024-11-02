@@ -42,9 +42,9 @@ public class ArticleService {
 
     }
 
-    public ArticleForm getArticle(Long id){
+    public Article getArticle(Long id){
         Article article = articleRepository.findById(id).orElse(null);
-        return article.toForm();
+        return article;
     }
 
     public List<ArticleForm> getMyArticleList(String userNickName){

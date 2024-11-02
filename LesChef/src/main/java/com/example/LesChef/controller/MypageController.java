@@ -119,9 +119,10 @@ public class MypageController {
         return "redirect:/myarticle";
     }
 
-    // 댓글 삭제 및 삭제 게시글 종류 확인
+    // 댓글 삭제 및 삭제 댓글 종류 확인
     @PostMapping("/comment/delete/{id}")
     public String delComment(@PathVariable("id") Long id){
+        // 삭제 댓글 종류에 따른 리다이렉트
         String postType = allCommentService.deleteComment(id);
         if(postType != "recipeType"){
             return "redirect:/myArticleComment";

@@ -4,8 +4,10 @@ import com.example.LesChef.dto.CommentForm;
 import com.example.LesChef.entity.AllComment;
 import com.example.LesChef.entity.Article;
 import com.example.LesChef.entity.Customer;
+import com.example.LesChef.entity.Recipe;
 import com.example.LesChef.repository.AllCommentRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AllCommentService {
@@ -57,8 +60,8 @@ public class AllCommentService {
 //        }else{
 //            ratingdecimal = 0.0;
 //        }
-        int b[] = {};
-
+//        int b[] = {};
+        // 별점의 기준
         for(int i=0; i < 5; i++){
             if(starAvg >= 0.75+i) {
                 doubleList.add(1.0);
@@ -87,10 +90,11 @@ public class AllCommentService {
                 .collect(Collectors.toList());
     }
 
+
     //마이페이지 댓글 삭제
     public String deleteComment(Long id){
         AllComment comment = allCommentRepository.findById(id).orElse(null);
-        //삭제되는 댓글이 어디의 댓글인지 확인
+        //삭제되는 댓글의 Recipe_Id 유무에 따른 리다이렉트
         String postType;
         if(comment.getRecipe() != null){
             postType = "recipeType";
@@ -112,14 +116,32 @@ public class AllCommentService {
         allCommentRepository.deleteArticleComment(articleId);
     }
 
-    public void insertComment(CommentForm commentForm, Customer currentUser, Article article){
+    // article 댓글 추가
+    public void insertArticleComment(CommentForm commentForm, Customer currentUser, Article article){
         commentForm.setRecipe(null);
         commentForm.setArticle(article);
+        log.info("article은 : " + article.getArticleId());
         commentForm.setCommenter(currentUser);
         AllComment comment = commentForm.toEntity();
         allCommentRepository.save(comment);
     }
 
+    // recipe 댓글 추가
+    public void insertRecipeComment(CommentForm commentForm, Customer currentUser, List<CommentForm> comments, Recipe recipe){
+        String userNickName = currentUser.getNickname();
+        // 평점 중복 방지로 이미 댓글을 쓴 사용자인지 확인
+        for(CommentForm comment : comments){
+            if(comment.getCommenter().getNickname().equals(userNickName)) {
+                //리다이렉트 메시지로 하나의 댓글만 입력할 수 있다 출력
+                return;
+            }
+        }
+        commentForm.setRecipe(recipe);
+        commentForm.setArticle(null);
+        commentForm.setCommenter(currentUser);
+        AllComment saveComment = commentForm.toEntity();
+        allCommentRepository.save(saveComment);
+    }
 }
 
 

@@ -48,7 +48,7 @@ public class Customer implements UserDetails {
             message = "전화번호는 **-***-****형식으로 작성해주세요")
     @Column(name = "tel")
     private String tel;
-    @Column(name = "customerImg", nullable = false)
+    @Column(name = "customerImg")
     private String customerImg;
 
     @Builder
