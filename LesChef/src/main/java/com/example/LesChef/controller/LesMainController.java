@@ -10,8 +10,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Slf4j
 @Controller
 public class LesMainController {
+
+    // findId 요청에서 저장한 데이터가 있는지 확인하고 있으면 보여주기
     @GetMapping("/main")
     public String gotoMain(Model model) {
+
         String name = (String) model.asMap().get("name1");
         String myId = (String) model.asMap().get("myId");
         String message = (String) model.asMap().get("idMessage");
@@ -28,13 +31,14 @@ public class LesMainController {
         return "MainPage";
     }
 
+    // 레시피 페이지 이동
     @GetMapping("/List")
     public String gotoList() {return "redirect:/List/Korean";}
     @GetMapping("/inform")
     public String gotoinform() {return "recipe/inform";}
 
 
-
+    // 게시글 페이지 이동
     @GetMapping("/GesiEdit")
     public String gotoGesiEdit() {return "community/GesiEdit";}
     @GetMapping("/Gesigeul")
@@ -44,6 +48,7 @@ public class LesMainController {
     @GetMapping("/NoticeBoardMain")
     public String gotoNoticeBoardMain() {return "redirect:/NoticeBoard";}
 
+    // 마이페이지 이동
     @GetMapping("/Rewrite")
     public String gotoRewrite() {return "mypage/Rewrite";}
     @GetMapping("/WishList")
@@ -55,7 +60,7 @@ public class LesMainController {
     @GetMapping("/Myrecipe")
     public String gotoMyrecipe() {return "redirect:/myrecipe";}
 
-
+    // 로그인 페이지 이동
     @GetMapping("/Login")
     public String gotoLogin() {return "Mainpage";}
 }
