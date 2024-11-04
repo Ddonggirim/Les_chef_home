@@ -25,11 +25,11 @@
     <div class="rigcontainer">
         <h2>레시피 등록</h2>
         <div class="right">
-            <form action="/recipe/create" method="post" enctype="multipart/form-data">
+            <form action="/recipe/create" onsubmit="return validateForm()" method="post" enctype="multipart/form-data">
                 <div class="info1">
                     <div class="info">
                         <label>레시피 제목</label>
-                        <input type="text" name="recipeName" required><br>
+                        <input type="text" id="recipeName" name="recipeName" required><br>
                         <label>인원</label>
                         <select name="portion">
                             <option>1인분</option>

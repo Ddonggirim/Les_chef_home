@@ -80,6 +80,16 @@ const remove1 = (obj) => {
 };
 
 
+function validateForm(){
+    const recipename = document.getElementById("recipeName").value;
+
+    if(!recipeName){
+        alert("레시피 이름을 입력하세요");
+        return false;
+    }
+}
+
+
 
 
 

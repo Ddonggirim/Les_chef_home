@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,27 +40,27 @@ public class MypageController {
 
     // 회원정보 수정
     @PostMapping("/customerRewrite")
-    public String customerEdit(AddCustomerRequest dto, @RequestParam("File") MultipartFile file, HttpSession session){
+    public String customerEdit(AddCustomerRequest dto, @RequestParam("File") MultipartFile file, HttpSession session, RedirectAttributes reat){
 
         Customer currentUser = (Customer)session.getAttribute("customer");
 
         customerService.edit(dto, file, currentUser);
         // 수정 후 재로그인을 위해 세션 삭제
         session.invalidate();
-
+        reat.addFlashAttribute("customerEdit", "회원정보가 수정되었습니다. 다시 로그인 해주세요");
         return "redirect:/main";
     }
 
     // 회원 탈퇴
     @PostMapping("/customerDelete")
-    public String customerDelete(HttpSession session){
+    public String customerDelete(HttpSession session, RedirectAttributes reat){
 
         Customer currentUser = (Customer)session.getAttribute("customer");
 
         customerService.delete(currentUser);
         // 탈퇴 후 로그인 기록 삭제
         session.invalidate();
-
+        reat.addFlashAttribute("customerDelete", "계정이 성공적으로 삭제되었습니다");
         return "redirect:/main";
     }
 
@@ -135,20 +136,20 @@ public class MypageController {
 
     //레시피, 게시글 삭제
     @PostMapping("/recipe/delete/{id}")
-    public String delRecipe(@PathVariable("id") Long id){
+    public String delRecipe(@PathVariable("id") Long id, RedirectAttributes reat){
 
         allCommentService.deleteRecipeParent(id);
         wishListService.recipeDeleteWish(id);
         recipeService.deleteRecipe(id);
-
+        reat.addFlashAttribute("recipeDelete", "레시피가 삭제되었습니다");
         return "redirect:/myrecipe";
     }
     @PostMapping("/article/delete/{id}")
-    public String delArticle(@PathVariable("id") Long id){
+    public String delArticle(@PathVariable("id") Long id, RedirectAttributes reat){
 
         allCommentService.deleteArticleParent(id);
         articleService.deleteArticle(id);
-
+        reat.addFlashAttribute("recipeDelete", "게시글이 삭제되었습니다.");
         return "redirect:/myarticle";
     }
 

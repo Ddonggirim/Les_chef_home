@@ -3,6 +3,7 @@ package com.example.LesChef.dto;
 import com.example.LesChef.entity.Customer;
 import com.example.LesChef.entity.Customer;
 import com.example.LesChef.entity.Recipe;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 @Setter
 public class RecipeForm {
     private Long recipeId;
+    @NotEmpty(message="레시피의 이름을 입력해 주세요")
     private String recipeName;
     private Long viewNum;
     private Date writeDate; /*Date*/

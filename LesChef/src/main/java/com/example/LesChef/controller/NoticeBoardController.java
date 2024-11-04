@@ -76,7 +76,7 @@ public class NoticeBoardController {
 
         articleService.createArticle(form, file, currentUser);
 
-        return "community/NoticeBoardMain";
+        return "redirect:/NoticeBoard";
     }
 
     // 게시글 댓글 작성

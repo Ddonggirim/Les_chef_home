@@ -27,9 +27,10 @@ private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     //회원가입 시 해당 아이디가 없으면 저장
-    public void save(AddCustomerRequest dto){
+    public String save(AddCustomerRequest dto){
         if(customerRepository.findById(dto.getId()).orElse(null) != null){
             log.info("회원가입 실패");
+            return "";
         }else{
             customerRepository.save(Customer.builder()
                     .id(dto.getId())
@@ -40,6 +41,7 @@ private final BCryptPasswordEncoder bCryptPasswordEncoder;
                     .customerImg("/image1/NoticeIcon/duck.jpg")
                     .build());
             log.info("회원가입 성공");
+            return "save";
         }
     }
     @Transactional
