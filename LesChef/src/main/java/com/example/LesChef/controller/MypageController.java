@@ -141,7 +141,9 @@ public class MypageController {
         allCommentService.deleteRecipeParent(id);
         wishListService.recipeDeleteWish(id);
         recipeService.deleteRecipe(id);
+
         reat.addFlashAttribute("recipeDelete", "레시피가 삭제되었습니다");
+
         return "redirect:/myrecipe";
     }
     @PostMapping("/article/delete/{id}")
@@ -155,10 +157,10 @@ public class MypageController {
 
     // 댓글 삭제 및 삭제 댓글 종류 확인
     @PostMapping("/comment/delete/{id}")
-    public String delComment(@PathVariable("id") Long id){
+    public String delComment(@PathVariable("id") Long id, RedirectAttributes reat){
         // 삭제 댓글 종류에 따른 리다이렉트
         String postType = allCommentService.deleteComment(id);
-
+        reat.addFlashAttribute("commentDelete", "댓글이 삭제되었습니다.");
         if(postType != "recipeType"){
             return "redirect:/myArticleComment";
         }else{
@@ -168,21 +170,26 @@ public class MypageController {
     }
     // 찜목록 삭제
     @PostMapping("/wish/delete/{id}")
-    public String delWish(@PathVariable("id") Long id){
+    public String delWish(@PathVariable("id") Long id, RedirectAttributes reat){
 
         wishListService.deleteWish(id);
+
+        reat.addFlashAttribute("wishDelete", "찜목록이 삭제되었습니다.");
 
         return "redirect:/myWishList";
     }
     // 레시피 작성
     @PostMapping("/recipe/create")
     public String createList(@ModelAttribute RecipeForm recipeForm, @ModelAttribute RegistIngredientForm registIngredientForm, @ModelAttribute RegistStepForm registStepForm, @RequestParam("File") MultipartFile file,
-                             @RequestParam("stepFiles[]") List<MultipartFile> stepFile, HttpSession session){ //mutipartfile로 변환할 수 없는데 input의 name을 form의 이름과 똑같게해서 안됨
+                             @RequestParam("stepFiles[]") List<MultipartFile> stepFile, HttpSession session, RedirectAttributes reat){ //mutipartfile로 변환할 수 없는데 input의 name을 form의 이름과 똑같게해서 안됨
 
         Customer currentUser = (Customer)session.getAttribute("customer");
 
         log.info("레시피 작성");
         recipeService.createRecipe(recipeForm, registIngredientForm, registStepForm, file, stepFile, currentUser);
+
+        reat.addFlashAttribute("recipeCreate", "레시피가 성공적으로 작성되었습니다");
+
         return "redirect:/myrecipe";
 
 
@@ -202,9 +209,11 @@ public class MypageController {
     public String recipeEdit(@PathVariable("id") Long id, RecipeForm recipeForm, RegistIngredientForm registIngredientForm,
                              RegistStepForm registStepForm, @RequestParam("File") MultipartFile file,
                              @RequestParam("stepFiles[]") List<MultipartFile> stepFile,
-                             @RequestParam("firstImage[]") List<String> firstImage){
+                             @RequestParam("firstImage[]") List<String> firstImage, RedirectAttributes reat){
         //레시피 아이디, 레시피 수정 데이터, 재료 수정 데이터, 조리순서 수정 데이터, 레시피 이미지, 조리순서 이미지, 조리순서 수정 전 이미지
         recipeService.editRecipe(id, recipeForm, registIngredientForm, registStepForm, file, stepFile, firstImage);
+
+        reat.addFlashAttribute("recipeEdit", "레시피가 수정되었습니다");
 
         return "redirect:/myrecipe";
     }

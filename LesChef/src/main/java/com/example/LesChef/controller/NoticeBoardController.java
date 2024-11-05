@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
@@ -70,11 +71,13 @@ public class NoticeBoardController {
 
     // 게시글 작성
     @PostMapping("/article/regist")
-    public String uploadImage(ArticleForm form, @RequestParam("file")MultipartFile file, HttpSession session){
+    public String uploadImage(ArticleForm form, @RequestParam("file")MultipartFile file, HttpSession session, RedirectAttributes reat ){
 
         Customer currentUser = (Customer)session.getAttribute("customer");
 
         articleService.createArticle(form, file, currentUser);
+
+        reat.addFlashAttribute("articleCreate", "게시글이 성공적으로 작성되었습니다");
 
         return "redirect:/NoticeBoard";
     }
@@ -102,9 +105,11 @@ public class NoticeBoardController {
 
     //게시글 수정
     @PostMapping("/article/edit/{id}")
-    public String articleEdit(@PathVariable("id") Long id, ArticleForm articleForm, @RequestParam("file")MultipartFile file){
+    public String articleEdit(@PathVariable("id") Long id, ArticleForm articleForm, @RequestParam("file")MultipartFile file, RedirectAttributes reat){
 
         articleService.editArticle(id, articleForm, file);
+
+        reat.addFlashAttribute("articleEdit", "게시글이 수정되었습니다");
 
         return "redirect:/myarticle";
     }

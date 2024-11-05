@@ -136,14 +136,26 @@
 <script src="/js/delete.js"></script>
 <!--<script src="/js/loginModal.js"></script>-->
 <script>
-<!--    window.onload = function() {-->
+    window.onload = function() {
 
-<!--      const recipeDelete = '[[${recipeDelete}]]';-->
+      const recipeDelete = '[[${recipeDelete}]]';
+      const articleEdit = '[[${articleEdit}]]';
+      const recipeCreate = '[[${recipeCreate}]]';
+      const recipeEdit = '[[${recipeEdit}]]';
 
-<!--      if (recipeDelete) {-->
-<!--          alert(recipeDelete);-->
-<!--      }-->
-<!--    };-->
+      setTimeout(function() {
+          if (recipeDelete) {
+              alert(recipeDelete);
+          } else if (articleEdit) {
+              alert(articleEdit);
+          } else if (recipeCreate) {
+              alert(recipeCreate);
+          } else if (recipeEdit) {
+              alert(recipeEdit);
+          }
+      }, 100);
+
+    };
 </script>
 </body>
 </html>

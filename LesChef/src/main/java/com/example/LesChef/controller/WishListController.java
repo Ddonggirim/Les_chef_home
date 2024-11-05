@@ -37,7 +37,7 @@ public class WishListController {
 
         wishListService.wishSave(wishList);
 
-        return ResponseEntity.ok("찜목록 저장");
+        return ResponseEntity.ok("{\"message\":\"찜목록 저장\"}");
     }
 
     @PostMapping("/wishDelete")
@@ -50,7 +50,7 @@ public class WishListController {
 
         wishListService.wishDelete(recipeId, userId);
 
-        return ResponseEntity.ok("찜목록 삭제");
+        return ResponseEntity.ok("{\"message\":\"찜목록 삭제\"}");
     }
 
 }
