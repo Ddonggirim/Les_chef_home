@@ -53,15 +53,25 @@ public class MypageController {
 
     // 회원 탈퇴
     @PostMapping("/customerDelete")
-    public String customerDelete(HttpSession session, RedirectAttributes reat){
+    public String customerDelete(AddCustomerRequest dto, HttpSession session, RedirectAttributes reat){
 
         Customer currentUser = (Customer)session.getAttribute("customer");
 
-        customerService.delete(currentUser);
+        boolean customerCheck = customerService.delete(dto, currentUser);
+        if(customerCheck){
+            // 탈퇴 후 로그인 기록 삭제
+            session.invalidate();
+            reat.addFlashAttribute("customerDelete", "계정이 성공적으로 삭제되었습니다");
+
+            return "redirect:/main";
+        } else{
+            // 회원정보 불일치로 삭제안됨
+            reat.addFlashAttribute("customerDeleteError", "회원정보가 일치하지않습니다");
+
+            return "redirect:/Rewrite";
+        }
         // 탈퇴 후 로그인 기록 삭제
-        session.invalidate();
-        reat.addFlashAttribute("customerDelete", "계정이 성공적으로 삭제되었습니다");
-        return "redirect:/main";
+
     }
 
     // 찜목록 가져오기

@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -138,7 +139,7 @@ public class RecipeListController {
 
     // 레시피 댓글 작성
     @PostMapping("/inform/{id}/comment")
-    public String addComment(@PathVariable("id") Long id, @ModelAttribute CommentForm commentForm, HttpSession session){
+    public String addComment(@PathVariable("id") Long id, @ModelAttribute CommentForm commentForm, HttpSession session, RedirectAttributes reat){
 
         Customer currentUser = (Customer)session.getAttribute("customer");
         // 이미 댓글을 쓴 회원인지 확인하기위해 댓글을 가져오기
@@ -147,30 +148,17 @@ public class RecipeListController {
         Recipe recipe = recipeService.getRecipe(id);
 
         // 레시피 댓글 작성서비스
-        allCommentService.insertRecipeComment(commentForm, currentUser, comments, recipe);
+        boolean commentCreate = allCommentService.insertRecipeComment(commentForm, currentUser, comments, recipe);
+        if(commentCreate){
+            recipeService.updateRatingAvg(id);
+
+            reat.addFlashAttribute("commentCreate", "댓글이 성공적으로 작성되었습니다");
+        } else{
+            reat.addFlashAttribute("commentCreateError", "이미 댓글을 작성하셨습니다");
+        }
         // 작성한 댓글의 별점을 총별점에 더하여 별점 업데이트
-        recipeService.updateRatingAvg(id);
 
         return "redirect:/inform/{id}";
     }
-
-//    @PostMapping("/inform/{id}/wishList")
-//    public ResponseEntity<WishList> wishListOn(@PathVariable("id") Long recipeId, HttpSession session){
-//        Customer currentUser = (Customer)session.getAttribute("customer");
-//        String userId = currentUser.getId();
-//        Recipe recipe = recipeService.getRecipe(recipeId);
-//        String recipeName = recipe.getRecipeName();
-//        WishList wish = wishListService.getWish(recipeId, userId);
-////        if(wish != null){
-////
-////        }else{
-//            WishList wishList = new WishList();
-//            wishList.setCustomer(currentUser);
-//            wishList.setRecipe(recipe);
-//            WishList savedWishlist = wishListService.wishSave(wishList);
-//            return ResponseEntity.status(HttpStatus.CREATED).body(savedWishlist);
-////        }
-//
-//    }
 
 }

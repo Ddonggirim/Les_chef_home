@@ -201,5 +201,21 @@
 </main>
 <script src="../js/inform.js"></script>
 <script src="../js/loginModal.js"></script>
+<script>
+  window.onload = function() {
+
+    const commentCreate = '[[${commentCreate}]]';
+    const commentCreateError = '[[${commentCreateError}]]';
+
+    setTimeout(function() {
+        if (commentCreate) {
+            alert(commentCreate);
+        } else if (commentCreateError) {
+            alert(commentCreateError);
+        }
+    }, 100);
+
+  };
+</script>
 </body>
 </html>

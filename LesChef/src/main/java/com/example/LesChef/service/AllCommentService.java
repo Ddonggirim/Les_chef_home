@@ -127,13 +127,13 @@ public class AllCommentService {
     }
 
     // recipe 댓글 추가
-    public void insertRecipeComment(CommentForm commentForm, Customer currentUser, List<CommentForm> comments, Recipe recipe){
+    public boolean insertRecipeComment(CommentForm commentForm, Customer currentUser, List<CommentForm> comments, Recipe recipe){
         String userNickName = currentUser.getNickname();
         // 평점 중복 방지로 이미 댓글을 쓴 사용자인지 확인
         for(CommentForm comment : comments){
             if(comment.getCommenter().getNickname().equals(userNickName)) {
                 //리다이렉트 메시지로 하나의 댓글만 입력할 수 있다 출력
-                return;
+                return false;
             }
         }
         commentForm.setRecipe(recipe);
@@ -141,6 +141,7 @@ public class AllCommentService {
         commentForm.setCommenter(currentUser);
         AllComment saveComment = commentForm.toEntity();
         allCommentRepository.save(saveComment);
+        return true;
     }
 }
 

@@ -76,7 +76,7 @@ h2 {
 .lock {
   position: absolute;
   top: 1%;
-  right: 1%;
+  right: 0.5%;
 }
 a {
   text-decoration: none;
@@ -143,6 +143,7 @@ input {
   margin-top: 2px;
   width: 448px;
   height: 300px;
+  border: 5px solid;
 }
 .info1 {
   display: flex;
@@ -183,6 +184,7 @@ textarea {
     width: 100px;
     height: auto;
     margin:15px;
+    border: 2px solid;
 }
 
 .form-buttons {

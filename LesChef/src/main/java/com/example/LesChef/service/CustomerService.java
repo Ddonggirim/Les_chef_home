@@ -38,7 +38,7 @@ private final BCryptPasswordEncoder bCryptPasswordEncoder;
                     .name(dto.getName())
                     .nickname(dto.getNickname())
                     .tel(dto.getTel())
-                    .customerImg("/image1/NoticeIcon/duck.jpg")
+                    .customerImg("/image1/MypageIcon/defaultCustomerImg.png")
                     .build());
             log.info("회원가입 성공");
             return "save";
@@ -81,8 +81,20 @@ private final BCryptPasswordEncoder bCryptPasswordEncoder;
         }
 
     }
-    public void delete(Customer currentUser){
-        customerRepository.delete(currentUser);
+    //회원 삭제
+    // 전달받은 회원의 정보를 비교결과에 따라 삭제 후 참 거짓 반환
+    public boolean delete(AddCustomerRequest dto, Customer currentUser){
+
+        boolean nicknameCheck = dto.getNickname().equals(currentUser.getNickname());
+        boolean name = dto.getName().equals(currentUser.getName());
+        boolean tel = dto.getTel().equals(currentUser.getTel());
+        boolean passwordCheck = bCryptPasswordEncoder.matches(dto.getPassword(), currentUser.getPassword());
+
+        if(nicknameCheck && name && tel && passwordCheck){
+            customerRepository.delete(currentUser);
+            return true;
+        }
+        return false;
     }
 
     public String findMyId(String name, String tel){
