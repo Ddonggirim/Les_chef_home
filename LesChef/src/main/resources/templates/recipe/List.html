@@ -17,7 +17,6 @@
     <div id="logo"> <a href="/main"><img src="/image1/ListIcon/로고.png"/></a></div>
     <div id="icon2"> <a href="/Rewrite"><img id="mypageicon"src="/image1/ListIcon/마이페이지.png"/></a>
       <a th:if="${session.customer}" href="/logout"><img src="/image1/ListIcon/Logout.png"></a>
-      <img th:unless="${session.customer}" id="login" src="/image1/ListIcon/자물쇠 1.png" width="55"/>
     </div>
   </div>
   <!-- 빨간 가로바 텍스트 -->

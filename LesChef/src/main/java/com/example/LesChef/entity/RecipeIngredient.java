@@ -15,7 +15,7 @@ import lombok.Setter;
 public class RecipeIngredient {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "recipe_ingredient_id_seq")
-    @SequenceGenerator(name = "recipe_ingredient_id_seq", sequenceName = "recipe_ingredient_id_seq", initialValue = 200, allocationSize = 1)
+    @SequenceGenerator(name = "recipe_ingredient_id_seq", sequenceName = "recipe_ingredient_id_seq", initialValue = 2300, allocationSize = 1)
     private Long recipeIngredientId;
     @ManyToOne
     @JoinColumn(name="recipe_id")
@@ -30,6 +30,7 @@ public class RecipeIngredient {
                 this.ingredientName, this.ingredientVolume);
     }
 }
+
 
 
 

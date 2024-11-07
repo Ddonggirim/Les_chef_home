@@ -10,9 +10,9 @@ a{
   text-align:center;
 }
 .logoBackGround img{
-  width: 12%;
+  width: 10%;
   height: 8%;
-  padding-left:10px;
+  margin: 20px;
 }
 #login{
   position: absolute;
@@ -23,15 +23,23 @@ a{
 }
 #logout{
   position: absolute;
-  top:7%;
-  right:4%;
+  top:8%;
+  right:5%;
   width:3%;
   cursor: pointer;
 }
 #mypageicon{
   position: absolute;
-  top: 7%;
-  right: 8%;
+  top: 8%;
+  right: 9%;
   width: 3%;
+  cursor: pointer;
+}
+
+#recipeIcon{
+  position: absolute;
+  top: 4%;
+  left: 3%;
+  width: 4%;
   cursor: pointer;
 }

@@ -1,98 +1,141 @@
 SELECT 'DROP TABLE "' || TABLE_NAME || '" CASCADE CONSTRAINTS;' FROM user_tables;
+select id from customer where name = '최부용' and tel = 01036153814;
+delete  from WISH_LIST WHERE RECIPE_ID = 1;
+SELECT * FROM Article ORDER BY Write_Date ASC;
+
+SELECT constraint_name, table_name
+FROM user_constraints
+WHERE constraint_type = 'R' AND table_name IN ('RECIPE', 'ARTICLE', 'ALL_COMMENT');
+
+ALTER TABLE ALL_COMMENT DROP CONSTRAINT FK_COMMENT_NICKNAME;
+commit;
+
+SELECT constraint_name, table_name
+FROM user_constraints
+WHERE constraint_type = 'R';
+SELECT *
+FROM user_cons_columns
+WHERE constraint_name = 'FK_NICKNAME';
+
+ALTER TABLE RECIPE DROP CONSTRAINT FK65T4IC5RF85LPQFADHL2HP20F;
+ALTER TABLE RECIPE
+ADD CONSTRAINT fk_nickname FOREIGN KEY (nickname) REFERENCES customer(nickname);
+
+
+DROP TABLE "ALL_COMMENT" CASCADE CONSTRAINTS;
+DROP TABLE "ARTICLE" CASCADE CONSTRAINTS;
+DROP TABLE "CUSTOMER" CASCADE CONSTRAINTS;
+DROP TABLE "RECIPE" CASCADE CONSTRAINTS;
+DROP TABLE "RECIPE_CATEGORY" CASCADE CONSTRAINTS;
+DROP TABLE "RECIPE_INGREDIENT" CASCADE CONSTRAINTS;
+DROP TABLE "RECIPE_STEP" CASCADE CONSTRAINTS;
+DROP TABLE "WISH_LIST" CASCADE CONSTRAINTS;
+
+DROP SEQUENCE recipe_id_seq;
+DROP SEQUENCE recipe_ingredient_id_seq;
+DROP SEQUENCE article_id_seq;
+DROP SEQUENCE recipe_step_id_seq;
+DROP SEQUENCE all_comment_id_seq;
+DROP SEQUENCE wish_list_id_seq;
+CREATE SEQUENCE recipe_id_seq
+  START WITH 500
+  INCREMENT BY 1;
 
 insert into recipe_category (korean_Name, english_Name, head_Img, sort_One, sort_Two, sort_Three)
-values ('한식', 'korean', '../image1/ListIcon/한식가로.png', '국/찌개', '밥/면', '반찬');
+values ('한식', 'Korean', '/image1/ListIcon/한식가로.png', '국/찌개', '밥/면', '반찬');
 insert into recipe_category (korean_Name, english_Name, head_Img, sort_One, sort_Two, sort_Three)
-values ('일식', 'japanese', '../image1/ListIcon/boardmain.jpg', '국/전골', '면', '밥');
+values ('일식', 'Japanese', '/image1/ListIcon/boardmain.jpg', '국/전골', '면', '밥');
 insert into recipe_category (korean_Name, english_Name, head_Img, sort_One, sort_Two, sort_Three)
-values ('중식', 'chinese', '../image1/ListIcon/boardmain.jpg', '튀김/찜', '면', '밥');
+values ('중식', 'Chinese', '/image1/ListIcon/boardmain.jpg', '튀김/찜', '면', '밥');
 insert into recipe_category (korean_Name, english_Name, head_Img, sort_One, sort_Two, sort_Three)
-values ('양식', 'western', '../image1/ListIcon/boardmain.jpg', '스프/스튜', '면', '빵');
+values ('양식', 'Western', '/image1/ListIcon/boardmain.jpg', '스프/스튜', '면', '빵');
+insert into recipe_category (korean_Name, english_Name, head_Img, sort_One, sort_Two, sort_Three)
+values ('공유', 'Share', '/image1/ListIcon/boardmain.jpg', null, null, null);
 
 
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(1, '성게 미역국', 0, '2024-09-20', '30분', '2', '하', null, '/image1/ListIcon/recipePic/1seaweedSoupMain.jpg', '한식', '국/찌개', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(2, '곤드레 전', 0, '2024-09-20', '20분', '2', '하', null, '/image1/ListIcon/recipePic/2GondrejeonMain.jpg', '한식', '기타', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(3, '미역 오이냉국', 0, '2024-09-20', '10분', '2', '하', null, '/image1/ListIcon/recipePic/3ccassMain.jpg', '한식', '국/찌개', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(4, '아욱 된장국', 0, '2024-09-20', '20분', '2', '하', null, '/image1/ListIcon/recipePic/4spswcmMain.jpg', '한식', '국/찌개', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(5, '목살 김치찜', 0, '2024-09-20', '90분', '3', '하', null, '/image1/ListIcon/예시1.png', '한식', '기타', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(6, '김치 비빔국수', 0, '2024-09-20', '25분', '2', '하', null, '/image1/ListIcon/예시1.png', '한식', '밥/면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(7, '꼬막장', 0, '2024-09-20', '20분', '3', '하', null, '/image1/ListIcon/예시1.png', '한식', '반찬', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(8, '파채 불고기', 0, '2024-09-20', '35분', '2', '하', null, '/image1/ListIcon/예시1.png', '한식', '반찬', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(9, '감자채볶음', 0, '2024-09-20', '25분', '4', '하', null, '/image1/ListIcon/예시1.png', '한식', '반찬', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(10, '쇠고기 미역국', 0, '2024-09-20', '50분', '4', '하', null, '/image1/ListIcon/예시1.png', '한식', '국/찌개', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(11, '김치 순두부찌개', 0, '2024-09-20', '35분', '4', '하', null, '/image1/ListIcon/예시1.png', '한식', '국/찌개', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(12, '떡국', 0, '2024-09-20', '25분', '2', '하', null, '/image1/ListIcon/예시1.png', '한식', '국/찌개', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(13, '황태국', 0, '2024-09-20', '35분', '3', '중', null, '/image1/ListIcon/예시1.png', '한식', '국/찌개', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(14, '오징어뭇국', 0, '2024-09-20', '30분', '2', '하', null, '/image1/ListIcon/예시1.png', '한식', '국/찌개', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(15, '콩나물국', 0, '2024-09-20', '20분', '2', '하', null, '/image1/ListIcon/예시1.png', '한식', '국/찌개', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(16, '참치김치찌개', 0, '2024-09-20', '25분', '2', '하', null, '/image1/ListIcon/예시1.png', '한식', '국/찌개', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(17, '표고버섯 덮밥', 0, '2024-09-20', '30분', '2', '하', null, '/image1/ListIcon/예시1.png', '한식', '밥/면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(18, '스팸마요 덮밥', 0, '2024-09-20', '20분', '1', '하', null, '/image1/ListIcon/예시1.png', '한식', '밥/면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(19, '달걀밥', 0, '2024-09-20', '15분', '2', '하', null, '/image1/ListIcon/예시1.png', '한식', '밥/면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(20, '콩나물 쫄면', 0, '2024-09-20', '15분', '2', '하', null, '/image1/ListIcon/예시1.png', '한식', '밥/면', 0.0);
 
 
 
 
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(41, '스키야키', 0, '2024-09-20', '25분', '3', '중', null, '/image1/ListIcon/recipePic/41sukiyakiMain.png', '일식', '국/전골', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(42, '미소 시루', 0, '2024-09-20', '30분', '4', '하', null, '/image1/ListIcon/예시1.png', '일식', '국/전골', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(43, '옥도미 맑은국', 0, '2024-09-20', '80분', '2', '중', null, '/image1/ListIcon/예시1.png', '일식', '국/전골', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(44, '어묵전골', 0, '2024-09-20', '25분', '2', '중', null, '/image1/ListIcon/예시1.png', '일식', '국/전골', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(45, '밀푀유나베', 0, '2024-09-20', '45분', '2', '하', null, '/image1/ListIcon/예시1.png', '일식', '국/전골', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(46, '돈가스 김치나베', 0, '2024-09-20', '30분', '2', '중', null, '/image1/ListIcon/예시1.png', '일식', '국/전골', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(47, '우엉 불고기나베', 0, '2024-09-20', '20분', '2', '하', null, '/image1/ListIcon/예시1.png', '일식', '국/전골', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(48, '야끼소바', 0, '2024-09-20', '40분', '3', '하', null, '/image1/ListIcon/예시1.png', '일식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(49, '붓카케우동', 0, '2024-09-20', '15분', '2', '하', null, '/image1/ListIcon/예시1.png', '일식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(50, '된장 버터 옥수수라면', 0, '2024-09-20', '15분', '2', '하', null, '/image1/ListIcon/예시1.png', '일식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(51, '대파 닭고기우동', 0, '2024-09-20', '20분', '2', '하', null, '/image1/ListIcon/예시1.png', '일식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(52, '야끼스파게티', 0, '2024-09-20', '40분', '2', '중', null, '/image1/ListIcon/예시1.png', '일식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(53, '카레우동', 0, '2024-09-20', '25분', '2', '중', null, '/image1/ListIcon/예시1.png', '일식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(54, '새우튀김냉메밀', 0, '2024-09-20', '50분', '3', '중', null, '/image1/ListIcon/예시1.png', '일식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(55, '나가사키짬뽕', 0, '2024-09-20', '30분', '2', '중', null, '/image1/ListIcon/예시1.png', '일식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(56, '톳 소바', 0, '2024-09-20', '15분', '1', '하', null, '/image1/ListIcon/예시1.png', '일식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(57, '아보카도 비프 소바', 0, '2024-09-20', '40분', '1', '하', null, '/image1/ListIcon/예시1.png', '일식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(58, '참깨 메밀 소바', 0, '2024-09-20', '20분', '2', '하', null, '/image1/ListIcon/예시1.png', '일식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(59, '냉소바', 0, '2024-09-20', '25분', '1', '하', null, '/image1/ListIcon/예시1.png', '일식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(60, '연어 아보카도 덮밥', 0, '2024-09-20', '20분', '2', '하', null, '/image1/ListIcon/예시1.png', '일식', '밥', 0.0);
 
 
@@ -100,256 +143,1246 @@ values(60, '연어 아보카도 덮밥', 0, '2024-09-20', '20분', '2', '하', n
 
 
 
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(81, '마라탕', 0, '2024-09-20', '40분', '2', '하', null, '/image1/ListIcon/예시1.png', '중식', '기타', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(82, '채소 춘권', 0, '2024-09-20', '40분', '1', '중', null, '/image1/ListIcon/예시1.png', '중식', '튀김/찜', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(83, '사천식 고추 새우 덮밥', 0, '2024-09-20', '35분', '2', '중', null, '/image1/ListIcon/예시1.png', '중식', '밥', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(84, '중식 기본 볶음밥', 0, '2024-09-20', '15분', '2', '하', null, '/image1/ListIcon/예시1.png', '중식', '밥', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(85, '매운 해물 쟁반짜장', 0, '2024-09-20', '35분', '2', '중', null, '/image1/ListIcon/예시1.png', '중식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(86, '가위면', 0, '2024-09-20', '30분', '1', '중', null, '/image1/ListIcon/예시1.png', '중식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(87, '중국식 잡채 덮밥', 0, '2024-09-20', '30분', '1', '중', null, '/image1/ListIcon/예시1.png', '중식', '밥', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(88, '어향 가지 덮밥', 0, '2024-09-20', '35분', '2', '하', null, '/image1/ListIcon/예시1.png', '중식', '밥', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(89, '중국식 냉면', 0, '2024-09-20', '30분', '2', '중', null, '/image1/ListIcon/예시1.png', '중식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(90, '게살덮밥', 0, '2024-09-20', '20분', '1', '하', null, '/image1/ListIcon/예시1.png', '중식', '밥', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(91, '짬뽕', 0, '2024-09-20', '30분', '2', '하', null, '/image1/ListIcon/예시1.png', '중식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(92, '채식 짜장면', 0, '2024-09-20', '30분', '3', '중', null, '/image1/ListIcon/예시1.png', '중식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(93, '깐풍 두부 튀김 덮밥', 0, '2024-09-20', '35분', '1', '하', null, '/image1/ListIcon/예시1.png', '중식', '밥', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(94, '어향 육사 덮밥', 0, '2024-09-20', '30분', '1', '하', null, '/image1/ListIcon/예시1.png', '중식', '밥', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(95, '어향 육슬 덮밥', 0, '2024-09-20', '40분', '2', '중', null, '/image1/ListIcon/예시1.png', '중식', '밥', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(96, '유산슬 덮밥', 0, '2024-09-20', '30분', '2', '중', null, '/image1/ListIcon/예시1.png', '중식', '밥', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(97, '마파두부', 0, '2024-09-20', '30분', '2', '중', null, '/image1/ListIcon/예시1.png', '중식', '밥', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(98, '파기름 비빔면', 0, '2024-09-20', '25분', '1', '하', null, '/image1/ListIcon/예시1.png', '중식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(99, '사천탕면', 0, '2024-09-20', '35분', '2', '중', null, '/image1/ListIcon/예시1.png', '중식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(100, '해물 볶음 짬뽕', 0, '2024-09-20', '30분', '2', '중', null, '/image1/ListIcon/예시1.png', '중식', '면', 0.0);
 
 
 
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(121, '달걀 파스타', 0, '2024-09-20', '20분', '2', '하', null, '/image1/ListIcon/예시1.png', '양식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(122, '까르보나라', 0, '2024-09-20', '30분', '1', '하', null, '/image1/ListIcon/예시1.png', '양식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(123, '통삼겹 크림파스타', 0, '2024-09-20', '40분', '2', '하', null, '/image1/ListIcon/예시1.png', '양식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(124, '바지락 크림파스타', 0, '2024-09-20', '30분', '1', '하', null, '/image1/ListIcon/예시1.png', '양식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(125, '날치알 투움바파스타', 0, '2024-09-20', '40분', '1', '중', null, '/image1/ListIcon/예시1.png', '양식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(126, '카치오페페 스파게티', 0, '2024-09-20', '15분', '1', '하', null, '/image1/ListIcon/예시1.png', '양식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(127, '나폴리탄 스파게티', 0, '2024-09-20', '20분', '2', '하', null, '/image1/ListIcon/예시1.png', '양식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(128, '상하이 파스타', 0, '2024-09-20', '25분', '2', '하', null, '/image1/ListIcon/예시1.png', '양식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(129, '케일 크림파스타', 0, '2024-09-20', '30분', '2', '하', null, '/image1/ListIcon/예시1.png', '양식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(130, '새우 오일파스타', 0, '2024-09-20', '30분', '2', '하', null, '/image1/ListIcon/예시1.png', '양식', '면', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(131, '토마토스프', 0, '2024-09-20', '40분', '4', '하', null, '/image1/ListIcon/예시1.png', '양식', '스프/스튜', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(132, '애플 시나몬 스프', 0, '2024-09-20', '35분', '3', '하', null, '/image1/ListIcon/예시1.png', '양식', '스프/스튜', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(133, '브로콜리 스프', 0, '2024-09-20', '40분', '3', '중', null, '/image1/ListIcon/예시1.png', '양식', '스프/스튜', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(134, '소시지 토마토 스튜', 0, '2024-09-20', '25분', '3', '중', null, '/image1/ListIcon/예시1.png', '양식', '스프/스튜', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(135, '프랑스식 치킨스튜', 0, '2024-09-20', '100분', '4', '하', null, '/image1/ListIcon/예시1.png', '양식', '스프/스튜', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(136, '토마토 가스파초', 0, '2024-09-20', '20분', '4', '하', null, '/image1/ListIcon/예시1.png', '양식', '스프/스튜', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(137, '콘스프', 0, '2024-09-20', '35분', '2', '중', null, '/image1/ListIcon/예시1.png', '양식', '스프/스튜', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(138, '클램차우더 스프', 0, '2024-09-20', '35분', '4', '중', null, '/image1/ListIcon/예시1.png', '양식', '스프/스튜', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(139, '토마토 치킨스튜', 0, '2024-09-20', '60분', '2', '중', null, '/image1/ListIcon/예시1.png', '양식', '스프/스튜', 0.0);
-insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, user_Id, recipe_Img, major_Category, sub_Category, rating_Avg)
+insert into recipe (recipe_Id, recipe_Name, view_Num, write_Date, run_Time, portion, cook_Level, nickname, recipe_Img, major_Category, sub_Category, rating_Avg)
 values(140, '단호박스프', 0, '2024-09-20', '45분', '4', '중', null, '/image1/ListIcon/예시1.png', '양식', '스프/스튜', 0.0);
 
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (1, 1, 1, '미역은 물에 담가 10분 정도 불려주세요.', '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (2, 1, 2, '불린 미역은 먹기 좋게 썬 후 물기를 제거해 주세요.', '../image1/ListIcon/recipePic/1seaweedSoup2.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (3, 1, 3, '냄비에 참기름을 두르고 미역을 볶아주세요.', '../image1/ListIcon/recipePic/1seaweedSoup3.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (4, 1, 4, '미역이 부드러워지면 국간장을 넣고 2분정도 더 볶아주세요.', '../image1/ListIcon/recipePic/1seaweedSoup4.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (5, 1, 5, "다시마 육수를 넣고 ⅔ 정도 넣고 10분 정도 끓여주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (6, 1, 6, "나머지 다시마 육수를 모두 넣고 성게알과 액젓을 넣어 5분 정도 더 끓여주세요. 부족한 간은 소금으로 맞춰주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (7, 1, 7, "완성된 성게미역국을 그릇에 담고 밥과 함께 즐겨주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (8, 2, 1, "곤드레는 깨끗이 씻어 4cm 길이로 잘라주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (9, 2, 2, "볼에 반죽 재료와 곤드레를 넣고 섞어주세요.", "(tip. 반죽에 전분을 넣어 만들면 반죽이 투명해져서 곤드레의 색감을 살릴 수 있어요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (10, 2, 3, "볼에 양념장 재료를 넣어 섞어주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (11, 2, 4, "달군 팬에 약간의 기름을 두른 후 반죽을 올려 얇게 펼쳐주세요. 앞뒤로 노릇하게 구워주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (12, 2, 5, "곤드레 전에 양념장을 곁들여 맛있게 즐겨주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (13, 3, 1, "불린 미역은 물에 30초 정도 데친 후 체에 밭쳐 깨끗이 씻어주세요.", "(tip. 미역은 여러 번 헹궈야 비린내가 나지 않아요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (14, 3, 2, "물기를 짠 후 먹기 좋은 크기로 잘라주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (15, 3, 3, "볼에 미역을 담은 후 양념 재료를 넣어 골고루 섞어주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (16, 3, 4, "오이는 얇게 슬라이스로 잘라주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (17, 3, 5, "미역이 들어있는 볼에 오이와 물을 넣어 섞어주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (18, 3, 6, "마지막에 얼음, 통깨를 뿌려 완성해주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (19, 4, 1, "아욱의 줄기 끝 부분은 꺾어내고 껍질을 벗겨주세요.", "(tip. 줄기가 가는 아욱은 껍질을 벗기지 않아도 괜찮아요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (20, 4, 2, "큰 잎은 먹기 좋은 크기로 찢어주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (21, 4, 3, "손질한 아욱은 흐르는 물에 2~3번 씻어주세요. 줄기가 두꺼운 경우 반으로 썰어주세요.", "(tip. 줄기가 억센 경우 씻을 때 굵은 소금을 넣고 박박 문질러주세요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (22, 4, 4, "청양고추와 대파는 어슷 썰어주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (23, 4, 5, "냄비에 멸치다시마육수를 붓고 된장과 고추장을 넣어 센불에서 끓여 주세요. 육수가 끓어 오르면 아욱과 다진마늘, 청양고추를 넣고 끓여주세요. 마지막으로 대파를 넣어 한소끔 끓인 후 맛있게 즐겨주세요.", "(tip. 부족한 간은 소금을 가감해 조절해 주세요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (24, 5, 1, "김치는 꼭지를 붙인 채 3등분하여 썰어주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (25, 5, 2, "볼에 양념 재료를 넣고 섞어 양념장을 만들어주세요.", "(tip 김치의 숙성 정도에 따라 설탕을 가감해주세요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (26, 5, 3, "목살은 큼직하게 잘라주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (27, 5, 4, "양파는 굵게 채썰어주세요. 대파와 고추는 어슷하게 썰어주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (28, 5, 5, "냄비에 김치를 담고 목살과 양파를 올린 후 양념장과 멸치다시마육수, 된장을 넣어주세요.", "(tip. 부족한 간은 김치국물과 소금을 가감해서 조절해주세요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (29, 5, 6, "끓기 시작하면 불을 중간불로 줄여 1시간 20분 정도 끓여주세요.", "(tip. 끓이는 중간 뚜껑을 열어 김치가 바닥에 눌지 않도록 저어가며 끓여주세요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (30, 5, 7, "마지막에 대파와 홍고추, 청양고추를 넣고 한소끔 끓인 후 목살을 먹기 좋은 크기로 잘라 김치와 함께 맛있게 즐겨주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (31, 6, 1, "오이를 가늘게 채 썰어주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (32, 6, 2, "김치는 굵게 다져주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (33, 6, 3, "볼에 다진 김치와 양념재료를 넣고 섞어주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (34, 6, 4, "끓는 물에 중면을 펼쳐 넣고 면끼리 달라붓지 않도록 저어주세요. 물이 끓어오르면 찬물을 2~3회 반복해서 부어 국수를 삶아주세요. 흐르는 찬물에 중면을 여러 번 씻어 전분기를 없애고 체반에 밭쳐 물기를 빼주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (35, 6, 5, "양념장에 삶은 국수를 넣고 버무려주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (36, 6, 6, "접시에 비빔국수를 담고 삶은 달걀과 오이채, 깨를 올려주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (37, 7, 1, "해감한 꼬막은 깨끗이 비벼 씻어주세요. 끓는 물에 청주를 넣어 온도를 떨어뜨린 다음 꼬막을 넣고 한쪽으로 저어주면서 삶다가 입이 벌어지기 시작하면 체로 건져주세요.", "(tip. 꼬막은 삶을 때 한 방향으로 저어가며 삶아야 살이 한쪽으로 쏠려 껍질을 제거하기 편해요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (38, 7, 2, "삶은 꼬막은 살만 발라주세요.", "(tip. 꼬막 삶은 물은 버리지 말고 해감이 덜 된 꼬막살을 씻어주세요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (39, 7, 3, "볼에 양념 재료를 넣어 섞어주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (40, 7, 4, "대파와 청고추는 송송 썰고, 홍고추는 반으로 갈라 씨를 뺀 후 얇게 썰어주세요. 양파는 잘게 다져주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (41, 7, 5, "볼에 양념과 썰어둔 야채, 꼬막살을 넣어 버무려주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (42, 7, 6, "접시에 담아 통깨를 뿌려 맛있게 즐겨주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (43, 8, 1, "소고기는 물에 30분 정도 담가 핏물을 제거해주세요.", "(tip. 불고기용 소고기는 얇아서 오랫동안 핏물을 빼지 않아도 됩니다.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (44, 8, 2, "양파, 당근은 채 썰고 대파는 길이 7~8cm, 두께 0.5cm 크기로 채 썰어주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (45, 8, 3, "배는 껍질을 벗기고 믹서에 곱게 간 뒤 소고기에 넣어주세요.", "(tip. 혹시 배가 없다면 배 음료 80g을 넣어주세요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (46, 8, 4, "진간장, 국간장을 넣고 골고루 섞어주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (47, 8, 5, "순서 4에 올리고당, 후추, 설탕, 마늘, 맛술을 넣고 잘 버무린 뒤 냉장고에서 30분 정도 숙성시키고 꺼내 기름을 두르지 않은 팬에 넣고 센불로 5분 정도 볶아주세요.", "(tip. 센불에서 빠르게 익히는 게 중요하고 너무 자주 뒤섞지 않는 게 좋아요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (48, 8, 6, "양파, 당근을 넣고 당근이 익을 때까지 2분 정도 볶아주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (49, 8, 7, "볶은 불고기 위에 채 썬 대파를 올려서 맛있게 즐겨보세요!", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (50, 9, 1, "감자는 껍질을 벗기고 채칼을 이용해 3mm 정도로 채 썰어주세요.", "(tip. 채칼을 활용하면 일정한 두께로 썰어져 균일하게 익힐 수 있어요.)(tip. 채칼을 사용할 때는 안전에 유의해 주세요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (51, 9, 2, "감자가 부서지지 않도록 찬물에 살살 헹궈 전분질을 빼고 물에 5분 정도 담가주세요.", "(tip. 찬물에 헹궈 충분히 전분질을 빼야 진득하지 않게 완성돼요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (52, 9, 3, "체에 밭쳐 물기를 빼주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (53, 9, 4, "당근은 감자와 같은 두께로 채썰고 양파는 얇게 썰어주세요.", "(tip. 단단한 당근은 슬라이서를 이용해 균일한 두께로 썬 후 칼로 일정한 두께로 썰어주세요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (54, 9, 5, "달군 팬에 기름을 넉넉히 두르고 다진 마늘을 넣고 볶아주세요. 양파, 당근, 감자를 넣어 중간불에서 볶아주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (55, 9, 6, "감자가 투명해지면 소금을 넣어 간을 맞춰주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (56, 9, 7, "마지막에 통깨를 뿌려 완성해 주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (57, 10, 1, "불린 미역은 물에 깨끗하게 헹군 후 체에 밭쳐 물기를 빼주세요.", "(tip. 미역은 미지근한 물이나 뜨거운 물에 불리게 되면 비린내가 올라오게 되니 찬물에 20분 정도 불려주세요.)(tip. 자르지 않은 미역은 불린 후 먹기 좋은 크기로 잘라주세요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (58, 10, 2, "달군 팬에 쇠고기를 넣어 볶다가 참기름을 넣고 쇠고기 겉면의 핏기가 없을 때까지 약불에서 볶아주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (59, 10, 3, "다진 마늘을 넣어 볶다가 국간장과 미역을 넣고 3~4분 정도 볶아주세요.", "(tip. 국간장을 볶을 때 넣으면 쇠고기와 미역에 간이 잘 되면서 기름진 맛을 잡아준답니다.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (60, 10, 4, "물을 넣고 20~30분 정도 충분히 끓여주세요.", "(tip. 20~30분 정도 충분히 끓이면 쇠고기도 더욱 부드럽고 국물의 맛도 진해져요.)", '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (61, 10, 5, "부족한 간은 국간장과 액젓으로 맞춰주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (62, 10, 6, "맛있게 즐겨주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
-insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (63, 11, 1, "돼지고기는 먹기 좋은 크기로 썰고 고기 밑간 재료에 10분 정도 재워주세요.", null, '../image1/ListIcon/recipePic/1seaweedSoup1.jpg');
 
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(1, 1, '성게', '60', 'g');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(2, 1, '건 미역', '15', 'g');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(3, 1, '다시마 육수', '5', '컵');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(4, 1, '국간장', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(5, 1, '참기름', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(6, 1, '멸치액젓', '1/2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(7, 1, '소금', null, '약간');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(8, 2, '생 곤드레', 200, 'g');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(9, 2, '식용유', null, '적당량');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(10, 2, '소금', null, '약간');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(11, 2, '부침가루', '1', '컵');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(12, 2, '물', '1', '컵');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(13, 2, '간장', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(14, 2, '맛술', '1/2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(15, 2, '식초', '1', '작은술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(16, 2, '잘게 썬 양파', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(17, 2, '잘게 썬 홍고추', '1/2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(18, 2, '통깨', null, '약간');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(19, 3, '불린 미역', '100', 'g');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(20, 3, '생수', '2', '컵');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(21, 3, '오이', '1', '개');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(22, 3, '통깨', null, '약간');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(23, 3, '얼음', null, '적당량');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(24, 3, '식초', '1/3', '컵');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(25, 3, '설탕', '2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(26, 3, '국간장', '1/2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(27, 3, '소금', null, '약간');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(28, 3, '다진 마늘', '1/2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(29, 4, '아욱', '150', 'g');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(30, 4, '멸치 다시마 육수', '5', '컵');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(31, 4, '대파', '1/2', '대');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(32, 4, '청양고추', '1', '개');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(33, 4, '된장', '2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(34, 4, '고추장', '1/2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(35, 4, '다진 마늘', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(36, 5, '목살', '1', 'kg');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(37, 5, '신김치', '1/2', '포기');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(38, 5, '양파', '1/2', '개');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(39, 5, '대파', '1', '대');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(40, 5, '홍고추', '1', '개');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(41, 5, '청양고추', '1', '개');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(42, 5, '멸치다시마육수(또는 쌀뜨물)', '500', 'ml');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(43, 5, '된장(생략 가능)', '1/2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(44, 5, '김치국물', '1', '컵');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(45, 5, '국간장', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(46, 5, '맛술', '2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(47, 5, '고춧가루', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(48, 5, '설탕', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(49, 5, '다진 마늘', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(50, 5, '후춧가루', null, '약간');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(51, 6, '신김치', '2', '컵');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(52, 6, '중면', '200', 'g');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(53, 6, '오이', '1/2', '개');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(54, 6, '깨', null, '약간');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(55, 6, '고추장', '2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(56, 6, '식초', '2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(57, 6, '올리고당', '2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(58, 6, '간장', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(59, 6, '설탕', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(60, 6, '맛술', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(61, 6, '참기름', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(62, 6, '후추', null, '약간');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(63, 7, '꼬막', '1', 'kg');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(64, 7, '청주', '2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(65, 7, '대파', '1/2', '대');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(66, 7, '양파', '1/4', '개');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(67, 7, '청양고추', '2', '개');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(68, 7, '홍고추', '1', '개');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(69, 7, '통깨', null, '약갼');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(70, 7, '간장', '4', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(71, 7, '고춧가루', '2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(72, 7, '맛술', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(73, 7, '설탕', '1', '작은술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(74, 7, '올리고당', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(75, 7, '생강즙', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(76, 7, '다진마늘', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(77, 7, '참기름', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(78, 7, '깨소금', '1', '작은술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(79, 7, '후춧가루', null, '약간');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(80, 8, '소고기(설도)', '300', 'g');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(81, 8, '양파', '80', 'g');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(82, 8, '당근', '30', 'g');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(83, 8, '대파', '100', 'g');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(84, 8, '배', '1/2', '개');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(85, 8, '진간장', '5', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(86, 8, '국간장', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(87, 8, '올리고당', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(88, 8, '후추', '1', '작은술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(89, 8, '설탕', '2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(90, 8, '다진 마늘', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(91, 8, '맛술', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(92, 9, '감자', '2', '개');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(93, 9, '당근', '1/3', '개');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(94, 9, '양파', '1/4', '개');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(95, 9, '통깨', null, '약간');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(96, 9, '식용유', null, '적당량');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(97, 9, '다진 마늘', '1/2', '작은술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(98, 9, '소금', '1/4', '작은술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(99, 10, '자른 쇠고기 양지(또는 등심)', '100', 'g');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(100, 10, '자른 미역', '20', 'g');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(101, 10, '참기름(또는 들기름)', '2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(102, 10, '국간장', '2', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(103, 10, '다진 마늘', '1', '큰술');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(104, 10, '물(또는 쌀뜨물)', '7', '컵');
-insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume, ingredient_Unit) values(105, 10, '멸치 액젓(또는 참치액젓)', '1', '큰술');
+
+
+insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (1, 1, 1, '미역은 물에 담가 10분 정도 불려주세요.', '/image1/ListIcon/recipePic/1seaweedSoup1.jpg');
+insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (2, 1, 2, '불린 미역은 먹기 좋게 썬 후 물기를 제거해 주세요.', '/image1/ListIcon/recipePic/1seaweedSoup2.jpg');
+insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (3, 1, 3, '냄비에 참기름을 두르고 미역을 볶아주세요.', '/image1/ListIcon/recipePic/1seaweedSoup3.jpg');
+insert into recipe_Step (recipe_Step_Id, recipe_Id, step_Num, step_Way, step_Img) values (4, 1, 4, '미역이 부드러워지면 국간장을 넣고 2분정도 더 볶아주세요.', '/image1/ListIcon/recipePic/1seaweedSoup4.jpg');
+
+
+
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1, 1, '성게', '60g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2, 1, '건 미역', '15g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(3, 1, '다시마 육수', '5컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(4, 1, '국간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(5, 1, '참기름', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(6, 1, '멸치액젓', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(7, 1, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(8, 2, '생 곤드레', '200g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(9, 2, '식용유', '적당량');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(10, 2, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(11, 2, '부침가루', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(12, 2, '물', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(13, 2, '간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(14, 2, '맛술', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(15, 2, '식초', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(16, 2, '잘게 썬 양파', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(17, 2, '잘게 썬 홍고추', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(18, 2, '통깨', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(19, 3, '불린 미역', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(20, 3, '생수', '2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(21, 3, '오이', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(22, 3, '통깨', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(23, 3, '얼음', '적당량');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(24, 3, '식초', '1/3컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(25, 3, '설탕', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(26, 3, '국간장', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(27, 3, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(28, 3, '다진 마늘', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(29, 4, '아욱', '150g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(30, 4, '멸치 다시마 육수', '5컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(31, 4, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(32, 4, '청양고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(33, 4, '된장', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(34, 4, '고추장', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(35, 4, '다진 마늘', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(36, 5, '목살', '1kg');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(37, 5, '신김치', '1/2포기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(38, 5, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(39, 5, '대파', '1대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(40, 5, '홍고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(41, 5, '청양고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(42, 5, '멸치다시마육수(또는 쌀뜨물)', '500ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(43, 5, '된장(생략 가능)', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(44, 5, '김치국물', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(45, 5, '국간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(46, 5, '맛술', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(47, 5, '고춧가루', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(48, 5, '설탕', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(49, 5, '다진 마늘', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(50, 5, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(51, 6, '신김치', '2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(52, 6, '중면', '200g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(53, 6, '오이', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(54, 6, '깨', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(55, 6, '고추장', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(56, 6, '식초', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(57, 6, '올리고당', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(58, 6, '간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(59, 6, '설탕', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(60, 6, '맛술', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(61, 6, '참기름', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(62, 6, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(63, 7, '꼬막', '1kg');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(64, 7, '청주', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(65, 7, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(66, 7, '양파', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(67, 7, '청양고추', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(68, 7, '홍고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(69, 7, '통깨', '약갼');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(70, 7, '간장', '4큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(71, 7, '고춧가루', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(72, 7, '맛술', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(73, 7, '설탕', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(74, 7, '올리고당', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(75, 7, '생강즙', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(76, 7, '다진마늘', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(77, 7, '참기름', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(78, 7, '깨소금', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(79, 7, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(80, 8, '소고기(설도)', '300g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(81, 8, '양파', '80g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(82, 8, '당근', '30g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(83, 8, '대파', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(84, 8, '배', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(85, 8, '진간장', '5큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(86, 8, '국간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(87, 8, '올리고당', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(88, 8, '후추', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(89, 8, '설탕', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(90, 8, '다진 마늘', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(91, 8, '맛술', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(92, 9, '감자', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(93, 9, '당근', '1/3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(94, 9, '양파', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(95, 9, '통깨', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(96, 9, '식용유', '적당량');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(97, 9, '다진 마늘', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(98, 9, '소금', '1/4작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(99, 10, '자른 쇠고기 양지(또는 등심)', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(100, 10, '자른 미역', '20g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(101, 10, '참기름(또는 들기름)', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(102, 10, '국간장', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(103, 10, '다진 마늘', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(104, 10, '물(또는 쌀뜨물)', '7컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(105, 10, '멸치 액젓(또는 참치액젓)', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(106, 11, '돼지고기(앞다릿살 또는 목살)', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(107, 11, '배추김치(신김치)', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(108, 11, '순두부', '1봉');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(109, 11, '대파', '1/3대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(110, 11, '양파', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(111, 11, '청양고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(112, 11, '홍고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(113, 11, '달걀', '1', '개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(114, 11, '멸치 다시마 육수', '2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(115, 11, '고추기름', '1과1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(116, 11, '맛술', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(117, 11, '참기름', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(118, 11, '다진 마늘', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(119, 11, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(120, 11, '고춧가루', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(121, 11, '맛술', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(122, 11, '국간장', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(123, 11, '다진 마늘',  '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(124, 11, '새우젓', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(125, 11, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(126, 12, '떡국용 떡', '400g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(127, 12, '다진 쇠고기', '130g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(128, 12, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(129, 12, '달걀', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(130, 12, '간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(131, 12, '다진 마늘', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(132, 12, '설탕', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(133, 12, '참기름', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(134, 12, '후추가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(135, 12, '다시마물', '5컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(136, 12, '국간장', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(137, 12, '다진 마늘', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(138, 12, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(139, 12, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(140, 13, '황태채', '50g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(141, 13, '무', '1/6개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(142, 13, '콩나물', '두줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(143, 13, '청양고추', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(144, 13, '홍고추', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(145, 13, '실파', '4대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(146, 13, '달걀', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(147, 13, '들기름', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(148, 13, '다시마멸치육수', '6컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(149, 13, '국간장', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(150, 13, '다진 마늘', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(151, 13, '새우젓', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(152, 13, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(153, 13, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(154, 14, '오징어(작은 사이즈)', '2마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(155, 14, '무', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(156, 14, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(157, 14, '청양고추', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(158, 14, '홍고추', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(159, 14, '다시마멸치육수', '4컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(160, 14, '국간장', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(161, 14, '다진마늘', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(162, 14, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(163, 15, '콩나물', '200g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(164, 15, '쪽파', '1대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(165, 15, '청양고추', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(166, 15, '다진 마늘', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(167, 15, '새우젓', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(168, 15, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(169, 15, '멸치 다시마 육수', '6컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(170, 16, '묵은지', '1/4포기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(171, 16, '참치캔(작은캔)', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(172, 16, '두부', '1/2모');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(173, 16, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(174, 16, '대파', '1/4대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(175, 16, '청양고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(176, 16, '다진 마늘', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(177, 16, '들기름', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(178, 16, '김치국물', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(179, 16, '설탕', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(180, 16, '고춧가루', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(181, 16, '쌀뜨물(또는 멸치육수)',  '200ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(182, 17, '표고버섯', '6개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(183, 17, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(184, 17, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(185, 17, '다진 마늘', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(186, 17, '참기름', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(187, 17, '식용유', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(188, 17, '통깨', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(189, 17, '레드페퍼(또는 청양고추)', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(190, 17, '밥', '2공기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(191, 17, '간장', '1과1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(192, 17, '올리고당', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(193, 17, '맛술', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(194, 17, '설탕', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(195, 17, '참기름', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(196, 17, '후추가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(197, 18, '스팸', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(198, 18, '양파', '1/3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(199, 18, '밥', '1공기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(200, 18, '달걀', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(201, 18, '마요네즈', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(202, 18, '송송 썬 쪽파', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(203, 18, '식용유', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(204, 18, '통깨', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(205, 18, '간장', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(206, 18, '설탕', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(207, 18, '물', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(208, 18, '맛술', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(209, 19, '밥', '2공기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(210, 19, '달걀', '4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(211, 19, '물', '1/3컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(212, 19, '참치캔(작은캔)', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(213, 19, '피자치즈', '150g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(214, 19, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(215, 19, '간장', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(216, 19, '청고추(생략 가능)', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(217, 19, '홍고추(생략 가능)', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(218, 19, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(219, 20, '콩나물', '1봉지');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(220, 20, '삶은 달걀', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(221, 20, '쫄면', '300g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(222, 20, '통깨', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(223, 20, '고추장', '4큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(224, 20, '고춧가루', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(225, 20, '식초', '4큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(226, 20, '설탕', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(227, 20, '올리고당', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(228, 20, '간장', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(229, 20, '다진 마늘', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(230, 20, '참기름', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(231, 20, '후춧가루', '약간');
+
+
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(531, 41, '쇠고기등심', '300g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(532, 41, '두부', '1/3모');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(533, 41, '실곤약', '80g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(534, 41, '표고버섯', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(535, 41, '배추', '3장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(536, 41, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(537, 41, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(538, 41, '쑥갓', '한줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(539, 41, '다시마육수', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(540, 41, '달걀', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(541, 41, '우동면', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(542, 41, '맛술', '2/3컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(543, 41, '간장', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(544, 41, '청주', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(545, 41, '설탕', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(546, 42, '다시마', '2장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(547, 42, '가쓰오부시', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(548, 42, '가쓰오 다시', '5컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(549, 42, '정종', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(550, 42, '미림', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(551, 42, '건미역', '조금');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(552, 42, '연두부', '조금');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(553, 42, '팽이버섯', '조금');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(554, 42, '된장', '1kg');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(555, 42, '일본 미소시루용 된장', '1kg');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(556, 42, '정종', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(557, 42, '미림', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(558, 43, '옥도미', '1마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(559, 43, '무', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(560, 43, '구운 대파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(561, 43, '유자 껍질', '조금');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(562, 43, '물', '5컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(563, 43, '정종', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(564, 43, '다시마', '1장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(565, 43, '육수', '소금조금');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(566, 44, '모듬어묵', '500g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(567, 44, '곤약', '50g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(568, 44, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(569, 44, '마늘', '1톨');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(570, 44, '무', '1/6개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(571, 44, '건고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(572, 44, '연겨자', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(573, 44, '삶은 달걀', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(574, 44, '물', '6컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(575, 44, '멸치', '10개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(576, 44, '다시마', '1장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(577, 44, '국간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(578, 44, '맛술', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(579, 44, '소금', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(580, 44, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(581, 45, '한우 불고기용', '300g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(582, 45, '알배추', '1포기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(583, 45, '깻잎', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(584, 45, '청경채', '200g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(585, 45, '만가닥버섯', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(586, 45, '팽이버섯', '50g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(587, 45, '표고버섯', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(588, 45, '물', '6컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(589, 45, '멸치', '10마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(590, 45, '다시마', '3조각');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(591, 45, '무', '50g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(592, 45, '표고버섯밑둥', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(593, 45, '국간장', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(594, 45, '소금', '두꼬집');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(595, 45, '간장', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(596, 45, '식초', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(597, 45, '올리고당', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(598, 45, '설탕', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(599, 45, '다진양파', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(600, 46, '등심돈가스', '2장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(601, 46, '한 입 크기로 자른 김치', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(602, 46, '달걀', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(603, 46, '양파', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(604, 46, '쪽파(혹은 대파)', '1대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(605, 46, '다진마늘', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(606, 46, '튀김유', '적당량');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(607, 46, '진간장', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(608, 46, '고춧가루', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(609, 46, '멸치다시물', '2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(610, 46, '설탕', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(611, 46, '맛술', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(612, 46, '생강즙', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(613, 46, '김치국물', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(614, 47, '쇠고기', '70g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(615, 47, '우엉', '1/4대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(616, 47, '표고버섯', '1과1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(617, 47, '느타리버섯', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(618, 47, '양파', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(619, 47, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(620, 47, '달걀', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(621, 47, '쇠고기 스톡 큐브', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(622, 47, '따뜻한 물', '1과1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(623, 47, '맛간장', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(624, 47, '국간장', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(625, 47, '맛술', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(626, 47, '꿀', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(627, 47, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(628, 47, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(629, 48, '야끼소바면', '2봉지');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(630, 48, '베이컨', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(631, 48, '새우', '10마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(632, 48, '양배추', '1/6개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(633, 48, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(634, 48, '당근', '1/5개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(635, 48, '숙주', '한줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(636, 48, '쪽파', '3대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(637, 48, '다진 마늘', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(638, 48, '식용유', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(639, 48, '통깨', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(640, 48, '돈가스 소스', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(641, 48, '굴소스', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(642, 48, '간장', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(643, 48, '가쓰오부시', '한줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(644, 49, '우동면', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(645, 49, '쯔유 (우동용)', '6큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(646, 49, '물', '350ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(647, 49, '레몬', '2조각');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(648, 49, '김밥 김', '1/2장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(649, 49, '쪽파', '1줄기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(650, 49, '다진 생강', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(651, 49, '청고추', '5~6개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(652, 49, '튀김가루', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(653, 49, '차가운 물', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(654, 49, '식용유', '1 + 1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(655, 50, '인스턴트 라면(사리곰탕)', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(656, 50, '라면수프', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(657, 50, '미소 된장', '1 + 1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(658, 50, '버터', '2조각');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(659, 50, '슬라이스 햄', '4장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(660, 50, '물', '1L');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(661, 50, '숙주', '한줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(662, 50, '캔 옥수수', '4큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(663, 50, '대파(쪽파로 대체 가능)', '1/4대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(664, 50, '반숙 달걀', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(665, 51, '우동면', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(666, 51, '대파', '1대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(667, 51, '청양고추', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(668, 51, '닭다리살', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(669, 51, '다시마 멸치 육수', '4컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(670, 51, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(671, 51, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(672, 51, '쯔유', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(673, 51, '맛술', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(674, 52, '스파게티면', '130g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(675, 52, '양배추', '3잎');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(676, 52, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(677, 52, '마늘', '3쪽');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(678, 52, '베이컨슬라이스', '4장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(679, 52, '달걀', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(680, 52, '페페론치니', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(681, 52, '가츠오부시', '한줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(682, 52, '올리브유', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(683, 52, '굴소스', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(684, 52, '간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(685, 52, '맛술', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(686, 52, '설탕', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(687, 52, '케첩', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(688, 52, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(689, 53, '쇠고기', '200g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(690, 53, '우동면', '200g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(691, 53, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(692, 53, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(693, 53, '카레가루', '80g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(694, 53, '다진 마늘', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(695, 53, '버터', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(696, 53, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(697, 53, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(698, 53, '물', '1L');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(699, 53, '다시마', '1장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(700, 53, '멸치', '10마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(701, 54, '메밀면', '250g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(702, 54, '실파', '1대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(703, 54, '김', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(704, 54, '무', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(705, 54, '새우', '5마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(706, 54, '튀김가루', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(707, 54, '무순', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(708, 54, '고추냉이', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(709, 54, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(710, 54, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(711, 54, '식용유', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(712, 54, '얼음', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(713, 54, '물', '5컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(714, 54, '다시마', '1장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(715, 54, '멸치', '10마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(716, 54, '가쓰오부시', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(717, 54, '간장', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(718, 54, '맛술', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(719, 54, '설탕', '4큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(720, 54, '튀김가루', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(721, 54, '차가운 물', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(722, 54, '얼음', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(723, 55, '생면', '2인분');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(724, 55, '새우', '6마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(725, 55, '오징어', '1/2마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(726, 55, '바지락', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(727, 55, '홍합', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(728, 55, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(729, 55, '대파', '1대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(730, 55, '통마늘', '2알');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(731, 55, '알배추', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(732, 55, '청양고추', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(733, 55, '청경채', '한줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(734, 55, '숙주', '한줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(735, 55, '청주', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(736, 55, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(737, 55, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(738, 55, '500', 'ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(739, 55, '물', '500ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(740, 55, '굴소스', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(741, 55, '국간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(742, 56, '해조미 톳 국수', '1팩');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(743, 56, '실파', '1대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(744, 56, '김', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(745, 56, '무', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(746, 56, '무순', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(747, 56, '고추냉이', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(748, 56, '얼음', '적당량');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(749, 56, '쯔유', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(750, 56, '물', '2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(751, 57, '소고기 안심(스테이크용)', '500g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(752, 57, '진간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(753, 57, '꿀', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(754, 57, '전분가루', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(755, 57, '소바 면', '170g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(756, 57, '다진 쪽파', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(757, 57, '볶은 통깨', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(758, 57, '올리브유', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(759, 57, '진간장', '1/4컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(760, 57, '꿀', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(761, 57, '레몬즙', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(762, 57, '레몬 제스트', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(763, 57, '참기름', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(764, 57, '생강즙', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(765, 57, '다진 마늘', '1/4큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(766, 58, '메밀면', '200g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(767, 58, '오이', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(768, 58, '깻잎', '3장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(769, 58, '삶은 달걀', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(770, 58, '볶은 참깨', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(771, 58, '쯔유(모밀용)', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(772, 58, '물', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(773, 58, '마요네즈', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(774, 58, '올리고당', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(775, 58, '참기름', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(776, 59, '메밀면', '2줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(777, 59, '생수', '1.2L');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(778, 59, '디포리', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(779, 59, '양파', '1/3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(780, 59, '건표고버섯', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(781, 59, '다시마', '1장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(782, 59, '생강즙', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(783, 59, '가쓰오부시', '2줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(784, 59, '진간장', '4술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(785, 59, '설탕', '1술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(786, 59, '맛술', '1술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(787, 59, '무', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(788, 59, '배', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(789, 59, '쪽파', '4줄기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(790, 59, '김가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(791, 59, '참깨', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(792, 60, '연어 (횟감)', '200g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(793, 60, '아보카도', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(794, 60, '김 가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(795, 60, '통깨', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(796, 60, '송송 썬 쪽파 (생략 가능)', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(797, 60, '밥', '2공기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(798, 60, '달걀 노른자', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(799, 60, '간장', '1 + 1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(800, 60, '설탕', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(801, 60, '맛술', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(802, 60, '고추냉이', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(803, 60, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(804, 60, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(805, 60, '통깨', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(806, 60, '참기름', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1078, 81, '마라소스', '110g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1079, 81, '물', '380ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1080, 81, '사골국물', '350ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1081, 81, '팽이버섯', '30g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1082, 81, '느타리버섯', '30g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1083, 81, '표고버섯', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1084, 81, '소고기 샤브용', '150g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1085, 81, '감자', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1086, 81, '청경채', '20g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1087, 81, '오징어', '110g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1088, 81, '새우', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1089, 81, '납작당면', '80g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1090, 81, '땅콩버터', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1091, 81, '다진 마늘', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1092, 82, '당근', '50g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1093, 82, '샐러리', '40g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1094, 82, '닭가슴살', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1095, 82, '마늘', '20g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1096, 82, '다진마늘', '20g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1097, 82, '굴소스', '30g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1098, 82, '고추기름', '30g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1099, 82, '치킨파우더', '10g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1100, 82, '참기름', '15g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1101, 82, '설탕', '5g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1102, 82, '백후추', '1g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1103, 82, '물전분', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1104, 82, '춘권피', '6장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1105, 82, '밀가루풀(물1:밀가루1)', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1106, 83, '알새우', '25개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1107, 83, '홍고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1108, 83, '대파', '1/4대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1109, 83, '마른 월남고추', '8개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1110, 83, '파프리카', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1111, 83, '양파', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1112, 83, '식용유', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1113, 83, '다진생강', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1114, 83, '다진마늘', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1115, 83, '물', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1116, 83, '설탕', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1117, 83, '간장', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1118, 83, '식초', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1119, 83, '스리라차', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1120, 83, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1121, 83, '옥수수 전분', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1122, 83, '흰자', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1123, 83, '소금', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1124, 83, '식용유', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1125, 83, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1126, 84, '밥', '2공기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1127, 84, '달걀', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1128, 84, '대파', '1/4대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1129, 84, '식용유', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1130, 84, '치킨파우더', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1131, 84, '소금', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1132, 84, '참기름', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1133, 84, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1134, 85, '생면', '두줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1135, 85, '다진 돼지고기', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1136, 85, '오징어', '1/2마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1137, 85, '알새우', '8마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1138, 85, '부추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1139, 85, '다진생강', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1140, 85, '청양고추', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1141, 85, '양파', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1142, 85, '애호박', '1/5개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1143, 85, '춘장', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1144, 85, '물전분', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1145, 85, '물', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1146, 85, '간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1147, 85, '설탕', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1148, 85, '치킨파우더', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1149, 85, '연두 청양초', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1150, 86, '표고버섯', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1151, 86, '양파', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1152, 86, '청경채', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1153, 86, '죽순', '40g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1154, 86, '마늘', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1155, 86, '생강', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1156, 86, '쪽파', '3뿌리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1157, 86, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1158, 86, '팔각', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1159, 86, '간장', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1160, 86, '청주', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1161, 86, '고수', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1162, 86, '아롱사태', '200g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1163, 86, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1164, 86, '마늘', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1165, 86, '생강', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1166, 86, '물', '7컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1167, 86, '면 반죽밀가루(중력분)', '2 + 1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1168, 86, '미지근한 물', '2/3컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1169, 86, '소금', '한꼬집');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1170, 86, '산초기름', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1171, 86, '고추기름', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1172, 86, '치킨파우더', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1173, 86, '연두 청양초', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1174, 86, '두반장', '1 + 1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1175, 86, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1176, 86, '백후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1177, 87, '밥', '1공기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1178, 87, '중국 당면', '반줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1179, 87, '돼지고기 등심', '50g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1180, 87, '표고버섯', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1181, 87, '양파', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1182, 87, '당근', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1183, 87, '죽순', '20g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1184, 87, '불린 목이버섯', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1185, 87, '대파', '1/3대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1186, 87, '마늘', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1187, 87, '전분', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1188, 87, '식용유', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1189, 87, '노두유', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1190, 87, '굴소스', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1191, 87, '백후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1192, 87, '설탕', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1193, 87, '참기름', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1194, 87, '간장', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1195, 87, '청주', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1196, 87, '닭 육수', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1197, 88, '밥', '1공기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1198, 88, '다진 돼지고기', '50g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1199, 88, '가지', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1200, 88, '샐러리', '1/3대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1201, 88, '홍고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1202, 88, '청피망', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1203, 88, '양파', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1204, 88, '대파', '1/4대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1205, 88, '다진 생강', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1206, 88, '다진 마늘', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1207, 88, '감자 전분', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1208, 88, '식용유', '5컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1209, 88, '물전분', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1210, 88, '육수', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1211, 88, '두반장', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1212, 88, '고추기름', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1213, 88, '치킨파우더', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1214, 88, '설탕', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1215, 88, '식초', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1216, 88, '참기름', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1217, 88, '청주', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1218, 88, '간장', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1219, 88, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1220, 89, '생면', '한줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1221, 89, '해파리', '60g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1222, 89, '알새우', '5마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1223, 89, '오징어', '1/4마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1224, 89, '당근', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1225, 89, '오이', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1226, 89, '달걀', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1227, 89, '불린 목이버섯', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1228, 89, '닭 육수', '3컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1229, 89, '치킨파우더', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1230, 89, '간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1231, 89, '설탕', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1232, 89, '식초', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1233, 89, '소금', '1/4작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1234, 89, '땅콩 버터', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1235, 89, '물', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1236, 90, '게맛살', '80g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1237, 90, '달걀', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1238, 90, '밥', '1공기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1239, 90, '대파 흰 부분', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1240, 90, '팽이버섯', '50g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1241, 90, '물', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1242, 90, '설탕', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1243, 90, '맛술', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1244, 90, '간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1245, 90, '굴소스', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1246, 90, '식초', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1247, 90, '전분', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1248, 90, '물', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1249, 91, '오징어', '1/2마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1250, 91, '알새우', '6~8마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1251, 91, '바지락', '한줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1252, 91, '돼지고기', '60g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1253, 91, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1254, 91, '대파', '1대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1255, 91, '청경채', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1256, 91, '배추', '2장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1257, 91, '목이버섯', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1258, 91, '표고버섯', '2~3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1259, 91, '홍고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1260, 91, '당근', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1261, 91, '호박', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1262, 91, '다진 마늘', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1263, 91, '다진 생강', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1264, 91, '물', '4컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1265, 91, '고춧가루', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1266, 91, '간장', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1267, 91, '치킨파우더', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1268, 91, '소금', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1269, 91, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1270, 91, '생 중화면', '2인분');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1271, 92, '양파', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1272, 92, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1273, 92, '다진 마늘', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1274, 92, '춘장', '6큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1275, 92, '생강가루', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1276, 92, '식용유', '6큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1277, 92, '중화면', '3~4인분');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1278, 92, '설탕', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1279, 92, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1280, 92, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1281, 92, '표고버섯 불린 물', '2/3컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1282, 92, '오이', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1283, 92, '물', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1284, 92, '전분', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1285, 93, '밥', '1공기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1286, 93, '두부', '1/2모');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1287, 93, '청피망', '1/3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1288, 93, '홍피망', '1/3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1289, 93, '브로콜리', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1290, 93, '마늘', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1291, 93, '대파', '1/3대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1292, 93, '사천고추', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1293, 93, '감자전분(튀김용)', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1294, 93, '식용유', '3컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1295, 93, '간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1296, 93, '식초', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1297, 93, '물', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1298, 93, '청주', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1299, 93, '설탕', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1300, 93, '굴소스', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1301, 93, '고추기름', '1 + 1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1302, 93, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1303, 93, '참기름', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1304, 94, '밥', '1공기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1305, 94, '돼지고기 등심', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1306, 94, '죽순', '20g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1307, 94, '표고버섯', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1308, 94, '양파', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1309, 94, '당근', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1310, 94, '불린 목이버섯', '4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1311, 94, '대파', '1/4대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1312, 94, '마늘', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1313, 94, '고추기름', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1314, 94, '갈릭 칠리 페이스트', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1315, 94, '소금', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1316, 94, '후추', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1317, 94, '청주', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1318, 94, '설탕', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1319, 94, '식초', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1320, 94, '참기름', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1321, 94, '간장', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1322, 94, '굴소스', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1323, 94, '백후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1324, 94, '옥수수 전분', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1325, 94, '흰자', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1326, 94, '소금', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1327, 94, '식용유', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1328, 94, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1329, 95, '돼지고기(잡채용)', '300g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1330, 95, '청고추', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1331, 95, '홍고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1332, 95, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1333, 95, '당근', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1334, 95, '표고버섯', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1335, 95, '대파', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1336, 95, '실파', '2줄기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1337, 95, '밥', '2공기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1338, 95, '치킨육수(또는 물)', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1339, 95, '참기름', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1340, 95, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1341, 95, '통깨', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1342, 95, '식용유', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1343, 95, '고추기름', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1344, 95, '달걀 흰자', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1345, 95, '간장', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1346, 95, '다진마늘', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1347, 95, '전분가루', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1348, 95, '두반장', '1 + 1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1349, 95, '굴소스', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1350, 95, '맛술', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1351, 95, '간장', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1352, 95, '설탕', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1353, 95, '다진 마늘', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1354, 95, '생강가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1355, 95, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1356, 95, '전분가루', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1357, 95, '물', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1358, 96, '채썬 돼지고기', '70g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1359, 96, '새우', '6마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1360, 96, '오징어', '1/2마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1361, 96, '표고버섯', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1362, 96, '팽이버섯', '1/3봉지');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1363, 96, '마늘', '2톨');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1364, 96, '대파(흰부분)', '1/4대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1365, 96, '죽순(캔)', '80g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1366, 96, '부추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1367, 96, '참기름', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1368, 96, '다시마 육수', '2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1369, 96, '식용유', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1370, 96, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1371, 96, '밥', '2공기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1372, 96, '달걀 흰자', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1373, 96, '녹말가루', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1374, 96, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1375, 96, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1376, 96, '굴소스', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1377, 96, '간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1378, 96, '소금', '두꼬집');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1379, 96, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1380, 96, '녹말가루', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1381, 96, '물', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1382, 97, '두부(부침용)', '1모');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1383, 97, '다진 돼지고기', '150g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1384, 97, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1385, 97, '홍고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1386, 97, '청고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1387, 97, '대파', '1/3대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1388, 97, '실파', '1대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1389, 97, '고추기름', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1390, 97, '물', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1391, 97, '참기름', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1392, 97, '맛술', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1393, 97, '두반장', '1 + 1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1394, 97, '간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1395, 97, '고춧가루', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1396, 97, '설탕', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1397, 97, '다진마늘', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1398, 97, '생강가루', '1/4작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1399, 97, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1400, 97, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1401, 97, '전분가루', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1402, 97, '물', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1403, 98, '중국 당면', '반줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1404, 98, '오이', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1405, 98, '쪽파', '3뿌리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1406, 98, '팔각', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1407, 98, '생강', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1408, 98, '청양고추', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1409, 98, '파기름', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1410, 98, '참기름', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1411, 98, '치킨파우더', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1412, 98, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1413, 98, '간장', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1414, 98, '설탕', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1415, 98, '마른 고추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1416, 98, '후레이크', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1417, 99, '생면', '한줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1418, 99, '모시조개', '6개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1419, 99, '오징어', '1/3마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1420, 99, '알새우', '6마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1421, 99, '양파', '1/3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1422, 99, '배추잎', '1장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1423, 99, '애호박', '1/5개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1424, 99, '죽순', '30g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1425, 99, '불린 목이버섯', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1426, 99, '식용유', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1427, 99, '다진마늘', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1428, 99, '다진생강', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1429, 99, '청양고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1430, 99, '마른 고추', '6개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1431, 99, '물', '2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1432, 99, '치킨파우더', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1433, 99, '소금', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1434, 99, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1435, 99, '참기름', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1436, 100, '생면', '한줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1437, 100, '청경채', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1438, 100, '양파', '1/3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1439, 100, '애호박', '1/5개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1440, 100, '죽순', '30g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1441, 100, '목이버섯', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1442, 100, '대파', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1443, 100, '오징어', '1/3마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1444, 100, '중새우', '4마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1445, 100, '홍합', '6개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1446, 100, '식용유', '1 + 1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1447, 100, '다진마늘', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1448, 100, '다진생강', '1/4작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1449, 100, '두반장', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1450, 100, '고운 고춧가루', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1451, 100, '물전분', '1 + 1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1452, 100, '물', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1453, 100, '치킨파우더', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1454, 100, '설탕', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1455, 100, '굴소스', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1456, 100, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1457, 100, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1458, 100, '참기름', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1772, 121, '파스타 면', '180g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1773, 121, '달걀', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1774, 121, '슬라이스 치즈', '2장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1775, 121, '올리브오일', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1776, 121, '다진 마늘', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1777, 121, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1778, 121, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1779, 121, '고형 치킨스톡', '1/3조각');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1780, 121, '면수', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1781, 121, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1782, 122, '스파게티면', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1783, 122, '양파', '30g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1784, 122, '마늘', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1785, 122, '베이컨', '70g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1786, 122, '치킨스톡(채소스톡으로 변경 가능)', '200ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1787, 122, '이태리 파슬리', '5줄기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1788, 122, '달걀', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1789, 122, '꽃소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1790, 122, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1791, 122, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1792, 122, '그라나 파다노 치즈', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1793, 122, '올리브유', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1794, 123, '스파게티 면', '160g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1795, 123, '통삼겹살', '600g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1796, 123, '양송이버섯', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1797, 123, '아스파라거스', '4대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1798, 123, '양파', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1799, 123, '마늘', '4쪽');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1800, 123, '버터', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1801, 123, '올리브유', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1802, 123, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1803, 123, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1804, 123, '파슬리 가루(생략 가능)', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1805, 123, '우유', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1806, 123, '생크림', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1807, 123, '파마산 치즈 가루', '4큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1808, 123, '치킨스톡(고형)', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1809, 123, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1810, 123, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1811, 123, '소금', '한꼬집');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1812, 123, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1813, 123, '허브 가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1814, 124, '바지락', '150g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1815, 124, '양파', '40g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1816, 124, '햄(또는 베이컨)', '60g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1817, 124, '양송이버섯', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1818, 124, '청양고추', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1819, 124, '스파게티(또는 푸실리)', '65g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1820, 124, '마늘', '5쪽');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1821, 124, '우유', '200ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1822, 124, '생크림', '100ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1823, 124, '버터', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1824, 124, '체다치즈', '1장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1825, 124, '파마산 치즈 가루', '3큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1826, 124, '후추', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1827, 124, '물', '500ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1828, 124, '소금', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1829, 125, '스파게티면', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1830, 125, '펜네', '80g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1831, 125, '카놀라유', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1832, 125, '베이컨', '3줄');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1833, 125, '마늘', '3쪽');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1834, 125, '날치알', '10g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1835, 125, '피망', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1836, 125, '대파(10cm)', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1837, 125, '양파', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1838, 125, '양송이', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1839, 125, '고운 고춧가루', '1/3술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1840, 125, '휘핑크림', '100ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1841, 125, '우유', '200ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1842, 125, '파마산 치즈 가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1843, 125, '체다치즈', '4장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1844, 125, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1845, 126, '스파게티면', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1846, 126, '양파', '30g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1847, 126, '마늘', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1848, 126, '송로오일', '2티스푼');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1849, 126, '치킨스톡(채소스톡으로 변경 가능)', '200ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1850, 126, '이태리 파슬리', '5줄기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1851, 126, '꽃소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1852, 126, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1853, 126, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1854, 126, '그라나 파다노 치즈', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1855, 126, '올리브유', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1856, 127, '스파게티 면', '200g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1857, 127, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1858, 127, '피망', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1859, 127, '소시지', '100g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1860, 127, '올리브오일', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1861, 127, '소금', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1862, 127, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1863, 127, '파마산 치즈 가루(생략 가능)', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1864, 127, '다진 파슬리(생략 가능)', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1865, 127, '간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1866, 127, '우유', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1867, 127, '케첩', '150g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1868, 127, '설탕', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1869, 128, '파스타면', '2인분');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1870, 128, '새우', '6마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1871, 128, '오징어', '1마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1872, 128, '마늘', '3알');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1873, 128, '대파', '1/2대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1874, 128, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1875, 128, '청경채', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1876, 128, '면수', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1877, 128, '간장', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1878, 128, '고춧가루', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1879, 128, '식용유', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1880, 128, '치킨스톡', '1/2큐브');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1881, 129, '파스타 면', '130g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1882, 129, '케일', '12장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1883, 129, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1884, 129, '마늘', '3쪽');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1885, 129, '파마산 치즈', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1886, 129, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1887, 129, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1888, 129, '생크림', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1889, 129, '치킨스톡', '2/3큐브');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1890, 130, '스파게티', '170g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1891, 130, '마늘', '6쪽');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1892, 130, '흰다리새우', '5마리');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1893, 130, '루꼴라(생략 가능)', '한줌');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1894, 130, '페페론치노', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1895, 130, '이태리파슬리(생략 가능)', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1896, 130, '올리브오일', '5큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1897, 130, '치킨스톡(고형)', '1/4조각');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1898, 130, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1899, 130, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1900, 131, '완숙토마토', '4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1901, 131, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1902, 131, '당근', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1903, 131, '다진마늘', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1904, 131, '바질가루(생략가능)', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1905, 131, '월계수잎(생략가능)', '1장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1906, 131, '버터', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1907, 131, '치킨스톡(고형)', '1조각');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1908, 131, '물', '400ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1909, 131, '파슬리(생략가능)', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1910, 131, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1911, 131, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1912, 131, '파르메산 치즈(생략가능)', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1913, 131, '올리브오일', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1914, 132, '사과', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1915, 132, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1916, 132, '우유', '500ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1917, 132, '생크림', '400ml');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1918, 132, '타임', '5줄기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1919, 132, '시나몬 스틱', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1920, 132, '차이브', '1줄기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1921, 132, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1922, 132, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1923, 132, '올리브유', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1924, 133, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1925, 133, '감자', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1926, 133, '브로콜리', '1송이');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1927, 133, '물', '2 + 1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1928, 133, '생크림', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1929, 133, '파마산치즈가루', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1930, 133, '버터', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1931, 133, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1932, 133, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1933, 134, '소시지', '6~8개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1934, 134, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1935, 134, '양배추', '1/4통');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1936, 134, '마늘', '5개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1937, 134, '통조림 콩', '1병');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1938, 134, '토마토소스', '2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1939, 134, '슈레드치즈', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1940, 134, '레드 와인(생략 가능)', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1941, 134, '파프리카 가루', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1942, 134, '올리브 오일', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1943, 134, '월계수 잎', '2~3장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1944, 134, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1945, 134, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1946, 134, '파슬리(생략 가능)', '2줄기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1947, 134, '물', '2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1948, 135, '닭다리살', '500g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1949, 135, '레드와인', '1병');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1950, 135, '샬롯', '8개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1951, 135, '양송이버섯', '300g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1952, 135, '통베이컨', '200g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1953, 135, '토마토 페이스트', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1954, 135, '버터', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1955, 135, '월계수잎', '2장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1956, 135, '타임', '2줄기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1957, 135, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1958, 135, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1959, 136, '토마토', '3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1960, 136, '오이', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1961, 136, '파프리카(빨간색)', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1962, 136, '샐러리', '1대');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1963, 136, '마늘', '1/2쪽');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1964, 136, '올리브유', '1/2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1965, 136, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1966, 136, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1967, 136, '올리브유', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1968, 136, '레몬즙', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1969, 136, '소금', '두꼬집');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1970, 136, '후춧가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1971, 137, '옥수수', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1972, 137, '감자', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1973, 137, '양파', '1/3개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1974, 137, '우유', '3컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1975, 137, '생크림', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1976, 137, '버터', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1977, 137, '올리고당', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1978, 137, '소금', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1979, 137, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1980, 137, '파슬리', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1981, 138, '모시조개', '600g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1982, 138, '베이컨', '4줄');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1983, 138, '감자', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1984, 138, '샐러리', '1줄기');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1985, 138, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1986, 138, '마늘', '1쪽');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1987, 138, '버터', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1988, 138, '밀가루', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1989, 138, '우유', '2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1990, 138, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1991, 138, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1992, 138, '파슬리가루', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1993, 138, '물', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1994, 138, '청주', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1995, 138, '샐러리줄기', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1996, 138, '마늘', '2쪽');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1997, 139, '닭가슴살(또는 닭다리살)', '500g');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1998, 139, '방울토마토', '10개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(1999, 139, '양송이버섯', '5개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2000, 139, '양파', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2001, 139, '파프리카', '1/2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2002, 139, '마늘', '3쪽');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2003, 139, '블랙올리브', '5개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2004, 139, '우유', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2005, 139, '건고추(또는 페페론치노 6개)', '2개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2006, 139, '파슬리', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2007, 139, '올리브유', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2008, 139, '맛술', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2009, 139, '올리브유', '1큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2010, 139, '소금', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2011, 139, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2012, 139, '로즈마리', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2013, 139, '물', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2014, 139, '시판 토마토소스', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2015, 139, '월계수잎', '3장');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2016, 139, '소금', '1/2작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2017, 139, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2018, 140, '단호박(작은 크기)', '1통');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2019, 140, '감자', '1개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2020, 140, '양파', '1/4개');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2021, 140, '버터', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2022, 140, '물', '3컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2023, 140, '우유', '1컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2024, 140, '생크림', '1/2컵');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2025, 140, '올리고당', '2큰술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2026, 140, '소금', '1작은술');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2027, 140, '후추', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2028, 140, '파슬리', '약간');
+insert into recipe_Ingredient(recipe_Ingredient_Id, recipe_Id, ingredient_Name, ingredient_Volume) values(2029, 140, '휘핑 생크림', '약간');
+commit;

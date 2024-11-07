@@ -67,6 +67,7 @@ public class Customer implements UserDetails {
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
 //        return Collections.singleton(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
 //    }
+    //권한
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_CUSTOMER"));

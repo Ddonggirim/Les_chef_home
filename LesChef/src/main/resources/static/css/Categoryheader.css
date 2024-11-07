@@ -53,9 +53,6 @@ header{
 .name span{
   cursor: pointer;
 }
-#logo{
-  padding-left: 85px;
-}
 .categorybox:hover{
   border-bottom: 1px solid #fff;
 
