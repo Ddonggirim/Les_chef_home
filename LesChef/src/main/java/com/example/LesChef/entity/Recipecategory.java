@@ -33,3 +33,17 @@ public class Recipecategory {
         return new RecipecategoryForm(this.koreanName, this.englishName, this.headImg, this.sortOne, this.sortTwo, this.sortThree);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
