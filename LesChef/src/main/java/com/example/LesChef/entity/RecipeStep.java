@@ -15,7 +15,7 @@ import lombok.Setter;
 public class RecipeStep {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "recipe_step_id_seq")
-    @SequenceGenerator(name = "recipe_step_id_seq", sequenceName = "recipe_step_id_seq", initialValue = 10, allocationSize = 1)
+    @SequenceGenerator(name = "recipe_step_id_seq", sequenceName = "recipe_step_id_seq", initialValue = 700, allocationSize = 1)
     @Column(name = "recipeStepId")
     private Long recipeStepId;
     @ManyToOne
