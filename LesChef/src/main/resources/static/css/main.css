@@ -276,7 +276,7 @@ input:focus{
 
 .Login-box button{
   display: block;
-  margin: 0 auto;
+  margin: 20px auto 0;
   font-size: 19px;
   color:white;
   background-color: #79AE84;
