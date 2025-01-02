@@ -1,58 +1,81 @@
 # Les Chef
 레시피 공유 사이트
 
+## 목차
+- [프로젝트 개요](#프로젝트-개요)
+- [기술 스택](#프로젝트-기술-스택)
+- [페이지별 기능](#페이지별-기능)
+  - [메인페이지](#메인페이지)
+  - [레시피페이지](#레시피페이지)
+  - [마이페이지](#마이페이지)
+  - [게시판](#게시판)
+- [시연 영상](#시연-영상)
+  
 ## 프로젝트 개요
 * 이 사이트는 다양한 요리 레시피를 공유할 수 있는 사이트입니다.
 * 회원은 원하는 레시피나 인기있는 레시피를 찾아볼 수 있고 직접 레시피를 작성해서 공유 레시피에 공유할 수 있습니다.
 * 게시판을 통해 회원들끼리 레시피에 대한 의견을 나누며 서로 소통할 수 있습니다
 ## 프로젝트 기술 스택
-* Frontend : HTML, CSS, JavaScript, Thymeleaf
-* Backend : Spring Boot, Spring Security, Spring Data JPA
-* Database : Oracle
-* IDE : IntelliJ, VS Code, SQL Developer
-* 버전 관리 : GitHub
+- **Frontend**: HTML, CSS, JavaScript, Thymeleaf
+- **Backend**: Spring Boot, Spring Security, Spring Data JPA
+- **Database**: Oracle
+- **IDE**: IntelliJ, VS Code, SQL Developer
+- **버전 관리**: GitHub
 
 ## 페이지별 기능
-메인페이지
-![스크린샷 2024-12-29 161227](https://github.com/user-attachments/assets/ac896807-5df3-4a8c-bed6-84826a0d21e6)
-회원가입
-![스크린샷 2024-12-29 161246](https://github.com/user-attachments/assets/cecb87ca-a3e4-4a15-84b8-1a661d980275)
-로그인
-아이디, 비밀번호 찾기
-![스크린샷 2024-12-29 161340](https://github.com/user-attachments/assets/16df8d84-55a6-4e9c-aa68-0ad72cd3e0c1)
-![스크린샷 2024-12-29 161347](https://github.com/user-attachments/assets/6d20dd23-dc79-4bd6-822c-d1a01b262441)
+
+### 메인페이지
+- **메인페이지**
+![메인페이지](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EB%A9%94%EC%9D%B8%ED%99%94%EB%A9%B4.png)
+
+- **회원가입 및 로그인**
+ ![회원가입, 로그인](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%20%EB%B0%8F%20%EB%A1%9C%EA%B7%B8%EC%9D%B8.png)
+- **아이디, 비밀번호 찾기**
+ ![아이디, 비밀번호 찾기](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%95%84%EC%9D%B4%EB%94%94%20%EB%B0%8F%20%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8%20%EC%B0%BE%EA%B8%B0.png)
 
 
-마이페이지
-회원정보
-![스크린샷 2024-12-29 164134](https://github.com/user-attachments/assets/bf8b1328-a38e-481b-b99e-b51fc6e519cb)
-찜목록
-![스크린샷 2024-12-29 164207](https://github.com/user-attachments/assets/5f8b4079-555d-474d-8be6-2d7ad6065efa)
-나의 댓글
-![스크린샷 2024-12-29 164247](https://github.com/user-attachments/assets/adfe5fcb-1cdb-481b-b73d-52dc5f066875)
-레시피 등록
-![스크린샷 2024-12-29 164513](https://github.com/user-attachments/assets/d39a7e19-7582-48c3-acf5-35909a96949e)
-나의 레시피
-![스크린샷 2024-12-29 170235](https://github.com/user-attachments/assets/924632b7-2dc3-4139-8f0e-5920ab19e170)
+### 마이페이지
 
-레시피페이지
-![스크린샷 2024-12-29 170257](https://github.com/user-attachments/assets/16dd7ab3-f6ff-4609-a248-38219416da9c)
-상세정보
-![스크린샷 2024-12-29 170313](https://github.com/user-attachments/assets/f4c57317-5af2-4ced-b4b9-54da0f2f2576)
-찜하기
+- **회원정보 및 탈퇴**
+![회원정보](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%ED%9A%8C%EC%9B%90%EC%A0%95%EB%B3%B4.png)
 
-조회수
+- **찜목록**
+![찜목록](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%B0%9C%EB%AA%A9%EB%A1%9D.png)
+- **나의 댓글**
+![나의 댓글](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EB%82%98%EC%9D%98%20%EB%8C%93%EA%B8%80.png)
 
-평점 및 댓글
-![스크린샷 2024-12-29 171050](https://github.com/user-attachments/assets/7c640535-643c-42b1-acaf-e7cd25c3e538)
+- **레시피 작성**
+![레시피 작](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EB%A0%88%EC%8B%9C%ED%94%BC%EC%9E%91%EC%84%B1.png)
+
+- **나의 레시피**
+![나의 레시피](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EB%82%98%EC%9D%98%EB%A0%88%EC%8B%9C%ED%94%BC.png)
+
+### 레시피페이지
+
+- **레시피목록**
+![레시피페이지](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EB%A0%88%EC%8B%9C%ED%94%BC.png)
+
+- **상세정보**
+![상세정보](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%83%81%EC%84%B8%EC%A0%95%EB%B3%B4.png)
+
+- **찜하기 및 조회수**
+![찜하기 및 조회수](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%B0%9C.png)
+
+- **평점 및 댓글**
+![평점 및 댓글](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EB%8C%93%EA%B8%80%2C%20%ED%8F%89%EC%A0%90.png)
 
 
-게시판
-![스크린샷 2024-12-29 170431](https://github.com/user-attachments/assets/ca774ae6-6138-4503-9069-b40b121da970)
-게시글 작성
-![스크린샷 2024-12-29 171650](https://github.com/user-attachments/assets/f5228037-1015-4e2d-903e-3302d3484bec)
-댓글 
-![스크린샷 2024-12-29 171751](https://github.com/user-attachments/assets/432e2fcd-ccec-4ad9-9724-0b3638b7e1e5)
-조회수
+### 게시판
 
+- **게시글 목록**
+![게시판페이지](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EA%B2%8C%EC%8B%9C%EA%B8%80%20%EB%AA%A9%EB%A1%9D.png)
+
+- **게시글 작성**
+![게시글 작성](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EA%B2%8C%EC%8B%9C%EA%B8%80%EC%9E%91%EC%84%B1.png)
+
+- **조회수 및 댓글**
+![조회수 및 댓글](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%A1%B0%ED%9A%8C%EC%88%98%20%EB%B0%8F%20%EB%8C%93%EA%B8%80.png)
+
+
+  
 ## 시연 영상
