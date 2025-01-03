@@ -76,6 +76,3 @@
 - **조회수 및 댓글**
 ![조회수 및 댓글](https://github.com/Ddonggirim/Les_chef_home/blob/master/README%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%A1%B0%ED%9A%8C%EC%88%98%20%EB%B0%8F%20%EB%8C%93%EA%B8%80.png)
 
-
-  
-## 시연 영상
